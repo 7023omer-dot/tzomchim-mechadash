@@ -22,8 +22,8 @@
       --white:#FFFFFF;
       --ink:#2B2622;          /* טקסט ראשי */
       --muted:#6E665E;        /* טקסט משני */
-      --terracotta:#C76B49;   /* אקצנט חם ראשי */
-      --terracotta-dark:#A9542F;
+      --terracotta:#C62828;   /* אדום המוצר — אקצנט ראשי */
+      --terracotta-dark:#9E1B1B;
       --gold:#D9A441;         /* זהב רך */
       --line:#ECE3D8;
       --ok:#2E8B57;
@@ -64,11 +64,11 @@
       background:var(--terracotta);color:#fff;border:none;cursor:pointer;
       font-family:inherit;font-weight:800;font-size:19px;
       padding:18px 30px;border-radius:999px;width:100%;max-width:420px;
-      box-shadow:0 8px 22px rgba(199,107,73,.35);
+      box-shadow:0 8px 22px rgba(198,40,40,.35);
       transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
       text-decoration:none;
     }
-    .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(199,107,73,.45)}
+    .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(198,40,40,.45)}
     .cta:active{transform:translateY(0)}
     .cta .arrow{font-size:22px;line-height:1}
 
@@ -98,6 +98,11 @@
       background:repeating-linear-gradient(45deg,#F2E9DD,#F2E9DD 12px,#EFE3D3 12px,#EFE3D3 24px);
       color:#9b8f7f;font-weight:600;font-size:14px;padding:24px;min-height:220px;
     }
+
+    /* ציור מוצר (SVG) במקום placeholder */
+    .pimg{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 36%,#ffffff,#F7EDE8);padding:16px;min-height:220px}
+    .pimg svg{width:auto;height:100%;max-height:240px;max-width:100%;display:block}
+    .addon .pimg{width:96px;height:96px;min-height:0;padding:8px;border-radius:12px;flex:0 0 auto}
 
     /* ============ PROBLEM ============ */
     .problem{background:var(--white)}
@@ -136,7 +141,7 @@
     }
     .benefit .bic{
       flex:0 0 auto;width:42px;height:42px;border-radius:12px;
-      background:#FBEFE3;color:var(--terracotta);display:flex;
+      background:#FDEAEA;color:var(--terracotta);display:flex;
       align-items:center;justify-content:center;
     }
     .benefit h3{font-size:17px;margin-bottom:2px}
@@ -160,7 +165,7 @@
     }
     .review .who{display:flex;align-items:center;gap:12px;margin-bottom:10px}
     .review .av{
-      width:44px;height:44px;border-radius:50%;background:#FBEFE3;color:var(--terracotta);
+      width:44px;height:44px;border-radius:50%;background:#FDEAEA;color:var(--terracotta);
       font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
     }
     .review .name{font-weight:700;font-size:15px}
@@ -175,7 +180,7 @@
     table.cmp thead th{background:var(--ink);color:#fff;font-weight:700}
     table.cmp thead th.us{background:var(--terracotta)}
     table.cmp td:first-child,table.cmp th:first-child{text-align:right;font-weight:600;background:var(--cream)}
-    table.cmp td.us{background:#FBEFE3;font-weight:700;color:var(--terracotta-dark)}
+    table.cmp td.us{background:#FDEAEA;font-weight:700;color:var(--terracotta-dark)}
     .yes{color:var(--ok);font-weight:800}
     .no{color:#C0392B;font-weight:800}
 
@@ -220,7 +225,7 @@
       padding:30px 24px;margin-top:18px;text-align:center;border:1px dashed var(--gold);
     }
     .g-seal{
-      width:84px;height:84px;border-radius:50%;background:#FBEFE3;color:var(--terracotta);
+      width:84px;height:84px;border-radius:50%;background:#FDEAEA;color:var(--terracotta);
       display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
       font-weight:900;font-size:15px;text-align:center;line-height:1.1;border:2px solid var(--gold);
     }
@@ -312,7 +317,7 @@
     .addon .buy{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:0 0 auto}
     .addon .ap{font-weight:800;color:var(--terracotta);font-size:18px;white-space:nowrap}
     .addon .add-btn{
-      background:#FBEFE3;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
+      background:#FDEAEA;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
       border-radius:999px;padding:8px 16px;font-weight:700;font-family:inherit;cursor:pointer;font-size:14px;
       transition:background .15s ease;white-space:nowrap;
     }
@@ -390,8 +395,31 @@
       </div>
 
       <div class="hero-img">
-        <!-- החלף ב: <img src="assets/regrow-main.jpg" alt="מסרק ReGrow אדום לקרקפת — אור אדום, עיסוי ואפליקטור סרום" loading="eager"> -->
-        <div class="ph">תמונת מוצר ראשית<br>(מסרק ReGrow האדום)</div>
+        <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק ReGrow אדום לקרקפת" loading="eager"> -->
+        <div class="pimg">
+          <svg viewBox="0 0 260 260" role="img" aria-label="מסרק ReGrow האדום — אור אדום, עיסוי ואפליקטור סרום">
+            <defs>
+              <linearGradient id="rgRed" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/>
+              </linearGradient>
+              <radialGradient id="rgGlow" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FF7A6B"/><stop offset=".7" stop-color="#C62828"/><stop offset="1" stop-color="#6E0F0F"/>
+              </radialGradient>
+            </defs>
+            <rect x="116" y="118" width="36" height="128" rx="18" fill="url(#rgRed)"/>
+            <rect x="127" y="152" width="14" height="30" rx="7" fill="#E8C46B"/>
+            <circle cx="134" cy="90" r="78" fill="url(#rgRed)"/>
+            <circle cx="134" cy="90" r="78" fill="none" stroke="#7E140F" stroke-width="2" stroke-dasharray="2 7"/>
+            <circle cx="134" cy="90" r="58" fill="#241f1d"/>
+            <circle cx="134" cy="90" r="58" fill="none" stroke="#C62828" stroke-width="3" stroke-dasharray="3 9"/>
+            <circle cx="134" cy="90" r="36" fill="url(#rgGlow)"/>
+            <g fill="#FF8A7A">
+              <circle cx="134" cy="60" r="3"/><circle cx="160" cy="78" r="3"/><circle cx="160" cy="104" r="3"/>
+              <circle cx="134" cy="120" r="3"/><circle cx="108" cy="104" r="3"/><circle cx="108" cy="78" r="3"/>
+            </g>
+            <circle cx="134" cy="90" r="12" fill="#1b1816"/>
+          </svg>
+        </div>
       </div>
     </div>
   </header>
@@ -623,7 +651,17 @@
       <div class="addon-grid">
         <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער ReGrow"> -->
         <div class="addon">
-          <div class="ph">תמונת<br>סרום</div>
+          <div class="pimg" title="סרום לצמיחת שיער">
+            <svg viewBox="0 0 200 240" role="img" aria-label="סרום לצמיחת שיער">
+              <defs><linearGradient id="serLiq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8584B"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <rect x="86" y="6" width="28" height="44" rx="6" fill="#241f1d"/>
+              <rect x="96" y="48" width="8" height="58" fill="#cfcabf"/>
+              <rect x="62" y="92" width="76" height="134" rx="16" fill="#fff" stroke="#E2D8CC" stroke-width="3"/>
+              <path d="M62 168 h76 v42 a16 16 0 0 1-16 16 H78 a16 16 0 0 1-16-16 Z" fill="url(#serLiq)"/>
+              <rect x="74" y="104" width="52" height="50" rx="6" fill="#FBF1EA"/>
+              <text x="100" y="135" text-anchor="middle" font-size="17" font-weight="800" fill="#C62828" font-family="Heebo,Arial">סרום</text>
+            </svg>
+          </div>
           <div class="meta">
             <h3>סרום לצמיחת שיער</h3>
             <p>תרכובת מרוכזת להחדרה עם האפליקטור — מזין את הקרקפת ותומך בזקיקים.</p>
@@ -636,7 +674,18 @@
         </div>
 
         <div class="addon">
-          <div class="ph">תמונת<br>שמפו</div>
+          <div class="pimg" title="שמפו / מרכך מחזק">
+            <svg viewBox="0 0 200 240" role="img" aria-label="שמפו / מרכך מחזק">
+              <defs><linearGradient id="shRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <rect x="92" y="8" width="16" height="28" rx="4" fill="#241f1d"/>
+              <rect x="78" y="30" width="44" height="14" rx="6" fill="#3a3431"/>
+              <rect x="108" y="14" width="36" height="8" rx="4" fill="#241f1d"/>
+              <rect x="58" y="46" width="84" height="188" rx="22" fill="url(#shRed)"/>
+              <rect x="72" y="116" width="56" height="84" rx="10" fill="#FBF1EA"/>
+              <text x="100" y="152" text-anchor="middle" font-size="15" font-weight="800" fill="#C62828" font-family="Heebo,Arial">שמפו</text>
+              <text x="100" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#9E1B1B" font-family="Heebo,Arial">מחזק</text>
+            </svg>
+          </div>
           <div class="meta">
             <h3>שמפו / מרכך מחזק</h3>
             <p>שגרת רחצה מחזקת עם ביוטין וקפאין, לשיער שמרגיש מלא יותר.</p>
@@ -649,7 +698,20 @@
         </div>
 
         <div class="addon">
-          <div class="ph">תמונת<br>מברשת</div>
+          <div class="pimg" title="מברשת עיסוי קרקפת">
+            <svg viewBox="0 0 220 220" role="img" aria-label="מברשת עיסוי קרקפת">
+              <defs><linearGradient id="brRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <ellipse cx="110" cy="150" rx="44" ry="58" fill="url(#brRed)"/>
+              <ellipse cx="110" cy="168" rx="15" ry="22" fill="#fff"/>
+              <ellipse cx="110" cy="88" rx="76" ry="66" fill="url(#brRed)"/>
+              <ellipse cx="110" cy="88" rx="60" ry="50" fill="#241f1d"/>
+              <g fill="#E8584B">
+                <circle cx="110" cy="62" r="5"/><circle cx="84" cy="74" r="5"/><circle cx="136" cy="74" r="5"/>
+                <circle cx="72" cy="96" r="5"/><circle cx="98" cy="90" r="5"/><circle cx="122" cy="90" r="5"/><circle cx="148" cy="96" r="5"/>
+                <circle cx="84" cy="114" r="5"/><circle cx="110" cy="110" r="5"/><circle cx="136" cy="114" r="5"/>
+              </g>
+            </svg>
+          </div>
           <div class="meta">
             <h3>מברשת עיסוי קרקפת</h3>
             <p>מברשת סיליקון לעיסוי יומי שמגביר זרימת דם וחדירת הסרום.</p>
