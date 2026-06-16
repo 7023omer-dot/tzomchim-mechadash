@@ -247,6 +247,23 @@
     .sticky-cta .sp s{color:var(--muted);font-size:13px}
     .sticky-cta .cta{margin:0;flex:1;max-width:none;padding:14px 18px;font-size:17px}
 
+    /* ============ בס"ד + בר הכרזה עליון ============ */
+    .besd{text-align:center;font-size:13px;color:var(--muted);padding:5px 0 0;letter-spacing:.02em}
+    .announce{
+      background:var(--ink);color:#fff;text-align:center;font-size:13.5px;font-weight:600;
+      padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
+    }
+    .announce span{display:inline-flex;align-items:center;gap:6px}
+    .announce .hot{color:var(--gold)}
+
+    /* ============ אמצעי תשלום ============ */
+    .pay{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:16px}
+    .pay .chip{
+      background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;
+      font-size:12px;font-weight:700;color:var(--muted);box-shadow:0 1px 3px rgba(0,0,0,.04);
+    }
+    .pay .lbl{width:100%;text-align:center;color:var(--muted);font-size:12px;margin-bottom:2px}
+
     /* ============ סליידר לפני/אחרי ============ */
     .ba-slider{
       position:relative;max-width:520px;margin:26px auto 8px;border-radius:var(--radius);
@@ -260,8 +277,8 @@
       position:absolute;top:12px;background:rgba(43,38,34,.78);color:#fff;
       font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;z-index:4;
     }
-    .ba-slider .tag.b{inset-inline-start:12px}
-    .ba-slider .tag.a{inset-inline-end:12px;background:var(--terracotta)}
+    .ba-slider .tag.b{left:12px}
+    .ba-slider .tag.a{right:12px;background:var(--terracotta)}
     .ba-slider .divider{
       position:absolute;top:0;bottom:0;left:calc(var(--pos)*1%);width:3px;
       background:#fff;transform:translateX(-50%);z-index:3;box-shadow:0 0 0 1px rgba(0,0,0,.06);
@@ -335,18 +352,34 @@
       .review-grid{grid-template-columns:1fr 1fr}
       .steps{grid-template-columns:1fr 1fr 1fr;gap:28px}
       .step{flex-direction:column;text-align:center;align-items:center}
+      .addon-grid{grid-template-columns:1fr 1fr 1fr}
+      .addon{flex-direction:column;text-align:center}
+      .addon .ph{width:120px;height:120px}
+      .addon .buy{align-items:center}
+      .ba-extra{grid-template-columns:1fr 1fr}
+      .video-wrap{aspect-ratio:16/9;max-width:760px}
       .sticky-cta{display:none}      /* דביק רק במובייל */
     }
   </style>
 </head>
 <body>
 
+  <!-- בס"ד -->
+  <div class="besd">בס״ד</div>
+
+  <!-- ===================== בר הכרזה עליון ===================== -->
+  <div class="announce" role="region" aria-label="הטבות">
+    <span>🚚 משלוח חינם לכל הארץ</span>
+    <span>🛡️ 30 יום ניסיון</span>
+    <span class="hot">🔥 מבצע השקה — רק ₪99</span>
+  </div>
+
   <!-- ===================== HERO ===================== -->
   <header class="hero">
     <div class="wrap center">
-      <span class="eyebrow">טכנולוגיית אור אדום ביתית · ReGrow <!-- BRAND --></span>
+      <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · ReGrow <!-- BRAND --></span>
       <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
-      <p class="lead">מסרק ReGrow משלב אור אדום בעוצמה נמוכה — אותה טכנולוגיה שמשמשת שנים בקליניקות — ומביא אותה אליך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
+      <p class="lead">מסרק ReGrow משלב <strong>אור אדום</strong>, <strong>עיסוי קרקפת</strong> ו<strong>אפליקטור סרום מובנה</strong> — הכול במכשיר אחד. אותה גישה שמשמשת שנים בקליניקות, עכשיו אצלך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
 
       <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
 
@@ -357,8 +390,8 @@
       </div>
 
       <div class="hero-img">
-        <!-- החלף ב: <img src="תמונת-מוצר-ראשית.jpg" alt="מסרק לייזר ReGrow לצמיחת שיער"> -->
-        <div class="ph">תמונת מוצר ראשית<br>(מסרק ReGrow)</div>
+        <!-- החלף ב: <img src="assets/regrow-main.jpg" alt="מסרק ReGrow אדום לקרקפת — אור אדום, עיסוי ואפליקטור סרום" loading="eager"> -->
+        <div class="ph">תמונת מוצר ראשית<br>(מסרק ReGrow האדום)</div>
       </div>
     </div>
   </header>
@@ -381,9 +414,24 @@
   <section class="solution">
     <div class="wrap">
       <span class="eyebrow">הפתרון</span>
-      <h2>אור אדום שעובד עם הקרקפת שלך — לא נגדה</h2>
+      <h2>שלוש פעולות שעובדות יחד על הקרקפת שלך</h2>
       <div class="card">
-        <p>מסרק <strong>ReGrow</strong> מקרין אור אדום בעוצמה נמוכה (LLLT) ישירות אל הקרקפת. הטכנולוגיה הזו משמשת שנים בקליניקות ונחקרת בהקשר של עידוד זקיקי השיער ושיפור תחושת המלאות. את/ה פשוט מעביר/ה את המסרק על הקרקפת — והוא עושה את העבודה ברקע, בלי כאב ובלי כימיקלים.</p>
+        <p>מסרק <strong>ReGrow</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEO (סלוט — הסרטון יוטמע כאן בהמשך) ===================== -->
+  <section class="how">
+    <div class="wrap center">
+      <span class="eyebrow">בוידאו</span>
+      <h2>ראו את ReGrow בפעולה</h2>
+      <p class="lead">דמו קצר של השימוש במכשיר — אור אדום, עיסוי והחדרת הסרום.</p>
+      <!-- כשתשלח את הסרטון, החלף את ה-.ph באחד מאלה:
+           <video controls playsinline poster="assets/video-poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
+           או iframe (יוטיוב/טיקטוק). הסאונד בעברית יתנגן בלחיצה. -->
+      <div class="video-wrap" aria-label="סרטון הדגמה">
+        <div class="ph">סלוט לסרטון<br>(יוטמע בהמשך)</div>
       </div>
     </div>
   </section>
@@ -396,11 +444,11 @@
       <div class="steps">
         <div class="step">
           <div class="num">1</div>
-          <div><h3>מעבירים על הקרקפת</h3><p>תנועות איטיות באזורים הדלילים, 10 דקות.</p></div>
+          <div><h3>מטפטפים סרום ומפעילים</h3><p>כמה טיפות לאפליקטור המובנה, ולוחצים על כפתור ההפעלה.</p></div>
         </div>
         <div class="step">
           <div class="num">2</div>
-          <div><h3>3 פעמים בשבוע</h3><p>בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
+          <div><h3>מעבירים על הקרקפת 10 דק'</h3><p>3 פעמים בשבוע, בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
         </div>
         <div class="step">
           <div class="num">3</div>
@@ -419,6 +467,7 @@
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h3>ללא כאב, לא פולשני</h3><p>בלי מחטים, בלי ניתוח, בלי תופעות לוואי אגרסיביות.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><h3>שימוש ביתי נוח</h3><p>10 דקות מהספה. בלי תורים ובלי נסיעות.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><h3>חוסך אלפי שקלים</h3><p>תשלום חד-פעמי במקום סדרת טיפולים יקרה.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3v6a3 3 0 01-6 0V5a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></div><div><h3>3-ב-1 במכשיר אחד</h3><p>אור אדום, עיסוי קרקפת ואפליקטור סרום — בלי שלושה מכשירים נפרדים.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><h3>מתאים לכל סוגי השיער</h3><p>לנשים ולגברים, לכל גוון ומרקם.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div><div><h3>נטען ואלחוטי</h3><p>סוללה נטענת ב-USB, להשתמש בכל מקום בבית.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div><div><h3>אחריות ותמיכה</h3><p>30 יום ניסיון וכספך בחזרה אם זה לא בשבילך.</p></div></div>
@@ -429,15 +478,42 @@
   <!-- ===================== BEFORE / AFTER ===================== -->
   <section class="ba">
     <div class="wrap center">
-      <span class="eyebrow">תוצאות אמיתיות</span>
-      <h2>ההבדל שאפשר לראות</h2>
-      <div class="ba-grid">
-        <!-- החלף כל אחת ב: <img src="..." alt="לפני ואחרי X שבועות שימוש ב-ReGrow"> -->
-        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 1</div><div class="cap">תוצאות לאחר 12 שבועות שימוש</div></div>
-        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 2</div><div class="cap">תוצאות לאחר 16 שבועות שימוש</div></div>
-        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 3</div><div class="cap">תוצאות לאחר 10 שבועות שימוש</div></div>
+      <span class="eyebrow">לפני / אחרי</span>
+      <h2>גרור/י את הסליידר וראה/י את ההבדל</h2>
+      <p class="lead">החלק/י את הידית ימינה ושמאלה כדי להשוות בין "לפני" ל"אחרי".</p>
+
+      <!-- סליידר אינטראקטיבי. החלף את שני ה-.ph ב:
+           <img class="layer after" src="assets/after.jpg" alt="הקרקפת לאחר X שבועות שימוש ב-ReGrow">
+           <img class="layer before" src="assets/before.jpg" alt="הקרקפת לפני השימוש ב-ReGrow"> -->
+      <div class="ba-slider" aria-label="השוואת לפני ואחרי">
+        <div class="layer after"><div class="ph">תמונת "אחרי"</div></div>
+        <div class="layer before"><div class="ph">תמונת "לפני"</div></div>
+        <span class="tag b">לפני</span>
+        <span class="tag a">אחרי</span>
+        <div class="divider"></div>
+        <div class="knob">⇆</div>
+        <input type="range" min="0" max="100" value="50" aria-label="גרור להשוואה בין לפני לאחרי">
       </div>
-      <p class="disclaimer">תוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+
+      <!-- מסגרות נוספות (סטטיות) — החלף כל .ph בתמונה אמיתית -->
+      <div class="ba-extra">
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ph before-mini">לפני</div>
+            <div class="ph">אחרי</div>
+          </div>
+          <div class="cap">תוצאות לאחר 12 שבועות שימוש</div>
+        </div>
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ph before-mini">לפני</div>
+            <div class="ph">אחרי</div>
+          </div>
+          <div class="cap">תוצאות לאחר 16 שבועות שימוש</div>
+        </div>
+      </div>
+
+      <p class="disclaimer">התמונות להמחשה בלבד עד להעלאת תמונות אמיתיות. תוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
     </div>
   </section>
 
@@ -524,6 +600,85 @@
           <span>🛡️ 30 יום ניסיון</span>
           <span>🔒 תשלום מאובטח</span>
         </div>
+        <div class="pay" aria-label="אמצעי תשלום">
+          <span class="lbl">תשלום מאובטח באמצעות</span>
+          <span class="chip">VISA</span>
+          <span class="chip">Mastercard</span>
+          <span class="chip">American Express</span>
+          <span class="chip">bit</span>
+          <span class="chip">PayPal</span>
+          <span class="chip">Apple&nbsp;Pay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== מוצרים משלימים + באנדל ===================== -->
+  <section class="addons">
+    <div class="wrap">
+      <span class="eyebrow">שדרגו את התוצאות</span>
+      <h2>מוצרים משלימים שמשלימים את הטיפול</h2>
+      <p class="lead">הוסף/י לטיפול ב-ReGrow — יחד הם עובדים טוב יותר.</p>
+
+      <div class="addon-grid">
+        <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער ReGrow"> -->
+        <div class="addon">
+          <div class="ph">תמונת<br>סרום</div>
+          <div class="meta">
+            <h3>סרום לצמיחת שיער</h3>
+            <p>תרכובת מרוכזת להחדרה עם האפליקטור — מזין את הקרקפת ותומך בזקיקים.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪79</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            <button class="add-btn" type="button">הוסף/י</button>
+          </div>
+        </div>
+
+        <div class="addon">
+          <div class="ph">תמונת<br>שמפו</div>
+          <div class="meta">
+            <h3>שמפו / מרכך מחזק</h3>
+            <p>שגרת רחצה מחזקת עם ביוטין וקפאין, לשיער שמרגיש מלא יותר.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪59</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            <button class="add-btn" type="button">הוסף/י</button>
+          </div>
+        </div>
+
+        <div class="addon">
+          <div class="ph">תמונת<br>מברשת</div>
+          <div class="meta">
+            <h3>מברשת עיסוי קרקפת</h3>
+            <p>מברשת סיליקון לעיסוי יומי שמגביר זרימת דם וחדירת הסרום.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪29</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            <button class="add-btn" type="button">הוסף/י</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- באנדל / דיל משתלם -->
+      <div class="bundle">
+        <span class="badge">הדיל המשתלם ביותר 🔥</span>
+        <h3 style="font-size:22px;margin:10px 0 4px">ערכת ReGrow המלאה</h3>
+        <div class="items">
+          <span>מסרק ReGrow</span><span class="plus">+</span>
+          <span>סרום</span><span class="plus">+</span>
+          <span>שמפו/מרכך</span><span class="plus">+</span>
+          <span>מברשת עיסוי</span>
+        </div>
+        <div class="price-row">
+          <span class="price-old">₪266</span>   <!-- // PRICE — סכום פריטים בנפרד -->
+          <span class="price-now">₪169</span>   <!-- // PRICE — מחיר הערכה -->
+        </div>
+        <div class="save">חוסך/ת ₪97 לעומת קנייה בנפרד</div>
+        <!-- // ADD-TO-CART — בשלב 2 יחובר ל-variant/מוצר הערכה בשופיפיי -->
+        <a href="#" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — ₪169 <span class="arrow">←</span></a>
       </div>
     </div>
   </section>
@@ -610,6 +765,15 @@
   <script>
     // שנה נוכחית ב-footer (ללא localStorage/sessionStorage)
     document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // סליידר לפני/אחרי — מעדכן את משתנה --pos לפי הגרירה
+    document.querySelectorAll('.ba-slider').forEach(function(slider){
+      var range = slider.querySelector('input[type=range]');
+      if(!range) return;
+      var update = function(){ slider.style.setProperty('--pos', range.value); };
+      range.addEventListener('input', update);
+      update();
+    });
   </script>
 </body>
 </html>
