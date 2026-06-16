@@ -247,6 +247,80 @@
     .sticky-cta .sp s{color:var(--muted);font-size:13px}
     .sticky-cta .cta{margin:0;flex:1;max-width:none;padding:14px 18px;font-size:17px}
 
+    /* ============ סליידר לפני/אחרי ============ */
+    .ba-slider{
+      position:relative;max-width:520px;margin:26px auto 8px;border-radius:var(--radius);
+      overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5;background:#fff;
+      --pos:50;user-select:none;touch-action:none;
+    }
+    .ba-slider .layer{position:absolute;inset:0}
+    .ba-slider .layer .ph{height:100%;min-height:0;border-radius:0}
+    .ba-slider .before{clip-path:inset(0 calc((100 - var(--pos)) * 1%) 0 0)}
+    .ba-slider .tag{
+      position:absolute;top:12px;background:rgba(43,38,34,.78);color:#fff;
+      font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;z-index:4;
+    }
+    .ba-slider .tag.b{inset-inline-start:12px}
+    .ba-slider .tag.a{inset-inline-end:12px;background:var(--terracotta)}
+    .ba-slider .divider{
+      position:absolute;top:0;bottom:0;left:calc(var(--pos)*1%);width:3px;
+      background:#fff;transform:translateX(-50%);z-index:3;box-shadow:0 0 0 1px rgba(0,0,0,.06);
+    }
+    .ba-slider .knob{
+      position:absolute;top:50%;left:calc(var(--pos)*1%);transform:translate(-50%,-50%);
+      width:42px;height:42px;border-radius:50%;background:#fff;z-index:3;
+      display:flex;align-items:center;justify-content:center;color:var(--terracotta);
+      font-weight:900;box-shadow:var(--shadow);pointer-events:none;
+    }
+    .ba-slider input[type=range]{
+      position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:5;
+    }
+    .ba-extra{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    .ba-split{border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .ba-split .pair{display:grid;grid-template-columns:1fr 1fr}
+    .ba-split .pair .ph{min-height:150px;border-radius:0}
+    .ba-split .pair .ph.before-mini{border-inline-end:2px solid #fff}
+
+    /* ============ מוצרים משלימים ============ */
+    .addons{background:var(--cream)}
+    .addon-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+    .addon{
+      background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow);
+      padding:16px;display:flex;gap:14px;align-items:center;
+    }
+    .addon .ph{width:88px;height:88px;min-height:0;border-radius:12px;flex:0 0 auto;font-size:12px}
+    .addon .meta{flex:1;min-width:0}
+    .addon .meta h3{font-size:17px;margin-bottom:2px}
+    .addon .meta p{color:var(--muted);font-size:14px}
+    .addon .buy{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:0 0 auto}
+    .addon .ap{font-weight:800;color:var(--terracotta);font-size:18px;white-space:nowrap}
+    .addon .add-btn{
+      background:#FBEFE3;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
+      border-radius:999px;padding:8px 16px;font-weight:700;font-family:inherit;cursor:pointer;font-size:14px;
+      transition:background .15s ease;white-space:nowrap;
+    }
+    .addon .add-btn:hover{background:var(--terracotta);color:#fff}
+
+    /* ============ באנדל / דיל ============ */
+    .bundle{
+      background:linear-gradient(180deg,#FFFDFB,#fff);border:2px dashed var(--gold);
+      border-radius:var(--radius);padding:26px 22px;margin-top:26px;text-align:center;box-shadow:var(--shadow);
+    }
+    .bundle .items{
+      display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;
+      margin:14px 0;color:var(--ink);font-weight:600;font-size:15px;
+    }
+    .bundle .plus{color:var(--gold);font-weight:900;font-size:20px}
+    .bundle .price-row{margin-top:6px}
+
+    /* ============ סרטון ============ */
+    .video-wrap{
+      position:relative;max-width:520px;margin:22px auto 0;border-radius:var(--radius);
+      overflow:hidden;box-shadow:var(--shadow-lg);background:#000;aspect-ratio:9/16;
+    }
+    .video-wrap video,.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+    .video-wrap .ph{height:100%;min-height:0;aspect-ratio:9/16}
+
     /* ============ דסקטופ ============ */
     @media(min-width:760px){
       :root{--maxw:920px}
