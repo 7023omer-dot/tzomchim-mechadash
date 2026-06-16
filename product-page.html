@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     ReGrow — דף מוצר ממיר למסרק לייזר לצמיחת שיער
+     שלב 1: גרסה עצמאית HTML+CSS לליטוש בדפדפן (לא שופיפיי עדיין)
+     <!-- BRAND --> = ReGrow  |  // PRICE = מחירים  |  // ADD-TO-CART = כפתור עגלה
+     ============================================================ -->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReGrow — שיער שמרגיש מלא יותר, בבית שלך</title>
+
+  <!-- פונט עברי קריא -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============ משתני מותג (פלטה חמה ונקייה) ============ */
+    :root{
+      --cream:#FBF7F2;        /* רקע נקי חם */
+      --white:#FFFFFF;
+      --ink:#2B2622;          /* טקסט ראשי */
+      --muted:#6E665E;        /* טקסט משני */
+      --terracotta:#C76B49;   /* אקצנט חם ראשי */
+      --terracotta-dark:#A9542F;
+      --gold:#D9A441;         /* זהב רך */
+      --line:#ECE3D8;
+      --ok:#2E8B57;
+      --star:#E8A317;
+      --shadow:0 8px 30px rgba(43,38,34,.08);
+      --shadow-lg:0 16px 48px rgba(43,38,34,.14);
+      --radius:18px;
+      --radius-sm:12px;
+      --maxw:680px;           /* mobile-first; דסקטופ מתרחב למטה */
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Heebo',system-ui,Arial,sans-serif;
+      background:var(--cream);
+      color:var(--ink);
+      line-height:1.6;
+      font-size:17px;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:84px; /* מקום ל-CTA דביק במובייל */
+    }
+    img{max-width:100%;display:block}
+    section{padding:48px 20px}
+    .wrap{max-width:var(--maxw);margin:0 auto}
+    h1,h2,h3{line-height:1.2;font-weight:800;letter-spacing:-.01em}
+    h2{font-size:28px;margin-bottom:10px}
+    .lead{color:var(--muted);font-size:18px}
+    .center{text-align:center}
+    .eyebrow{
+      display:inline-block;color:var(--terracotta);font-weight:700;
+      font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:10px;
+    }
+
+    /* ============ כפתורי CTA ============ */
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      background:var(--terracotta);color:#fff;border:none;cursor:pointer;
+      font-family:inherit;font-weight:800;font-size:19px;
+      padding:18px 30px;border-radius:999px;width:100%;max-width:420px;
+      box-shadow:0 8px 22px rgba(199,107,73,.35);
+      transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+      text-decoration:none;
+    }
+    .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(199,107,73,.45)}
+    .cta:active{transform:translateY(0)}
+    .cta .arrow{font-size:22px;line-height:1}
+
+    /* ============ שורת אמון ============ */
+    .trustbar{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:18px;
+      margin-top:18px;color:var(--muted);font-size:14px;font-weight:500;
+    }
+    .trustbar span{display:inline-flex;align-items:center;gap:6px}
+    .ic{width:20px;height:20px;flex:0 0 auto;color:var(--terracotta)}
+
+    /* ============ HERO ============ */
+    .hero{
+      background:linear-gradient(180deg,#FFFDFB 0%,var(--cream) 100%);
+      padding-top:40px;
+    }
+    .hero h1{font-size:34px;font-weight:900;margin-bottom:14px}
+    .hero h1 em{font-style:normal;color:var(--terracotta)}
+    .hero .lead{margin-bottom:26px}
+    .hero-img{
+      margin:26px auto 0;max-width:340px;border-radius:var(--radius);
+      background:#fff;box-shadow:var(--shadow-lg);overflow:hidden;
+    }
+    /* placeholder תמונה — החלף ב-<img src="..."> */
+    .ph{
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      background:repeating-linear-gradient(45deg,#F2E9DD,#F2E9DD 12px,#EFE3D3 12px,#EFE3D3 24px);
+      color:#9b8f7f;font-weight:600;font-size:14px;padding:24px;min-height:220px;
+    }
+
+    /* ============ PROBLEM ============ */
+    .problem{background:var(--white)}
+    .pain-list{list-style:none;margin-top:20px;display:grid;gap:14px}
+    .pain-list li{
+      display:flex;gap:12px;align-items:flex-start;background:var(--cream);
+      border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;
+    }
+    .pain-list .dot{color:var(--terracotta);font-size:22px;line-height:1.3;flex:0 0 auto}
+
+    /* ============ SOLUTION ============ */
+    .solution{background:var(--cream)}
+    .solution .card{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:26px;margin-top:18px;
+    }
+
+    /* ============ HOW IT WORKS ============ */
+    .how{background:var(--white)}
+    .steps{display:grid;gap:18px;margin-top:24px}
+    .step{display:flex;gap:16px;align-items:flex-start}
+    .step .num{
+      flex:0 0 auto;width:46px;height:46px;border-radius:50%;
+      background:var(--terracotta);color:#fff;font-weight:800;font-size:20px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .step h3{font-size:19px;margin-bottom:2px}
+    .step p{color:var(--muted);font-size:16px}
+
+    /* ============ BENEFITS ============ */
+    .benefits{background:var(--cream)}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+    .benefit{
+      background:#fff;border-radius:var(--radius-sm);padding:20px;
+      box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start;
+    }
+    .benefit .bic{
+      flex:0 0 auto;width:42px;height:42px;border-radius:12px;
+      background:#FBEFE3;color:var(--terracotta);display:flex;
+      align-items:center;justify-content:center;
+    }
+    .benefit h3{font-size:17px;margin-bottom:2px}
+    .benefit p{color:var(--muted);font-size:15px}
+
+    /* ============ BEFORE / AFTER ============ */
+    .ba{background:var(--white)}
+    .ba-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:24px}
+    .ba-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .ba-card .cap{padding:12px 16px;font-weight:600;color:var(--ink);text-align:center}
+    .disclaimer{color:var(--muted);font-size:13px;text-align:center;margin-top:16px;font-style:italic}
+
+    /* ============ SOCIAL PROOF ============ */
+    .reviews{background:var(--cream)}
+    .rating-top{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 6px}
+    .rating-top .big{font-size:34px;font-weight:900}
+    .stars{color:var(--star);font-size:20px;letter-spacing:2px}
+    .review-grid{display:grid;gap:16px;margin-top:24px}
+    .review{
+      background:#fff;border-radius:var(--radius-sm);padding:20px;box-shadow:var(--shadow);
+    }
+    .review .who{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .review .av{
+      width:44px;height:44px;border-radius:50%;background:#FBEFE3;color:var(--terracotta);
+      font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+    }
+    .review .name{font-weight:700;font-size:15px}
+    .review .stars{font-size:15px;letter-spacing:1px}
+    .verified{color:var(--ok);font-size:12px;font-weight:600;display:inline-flex;gap:4px;align-items:center}
+
+    /* ============ COMPARISON ============ */
+    .compare{background:var(--white)}
+    .table-scroll{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+    table.cmp{width:100%;border-collapse:collapse;min-width:480px;background:#fff;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
+    table.cmp th,table.cmp td{padding:14px 12px;text-align:center;border-bottom:1px solid var(--line);font-size:15px}
+    table.cmp thead th{background:var(--ink);color:#fff;font-weight:700}
+    table.cmp thead th.us{background:var(--terracotta)}
+    table.cmp td:first-child,table.cmp th:first-child{text-align:right;font-weight:600;background:var(--cream)}
+    table.cmp td.us{background:#FBEFE3;font-weight:700;color:var(--terracotta-dark)}
+    .yes{color:var(--ok);font-weight:800}
+    .no{color:#C0392B;font-weight:800}
+
+    /* ============ OFFER / PRICING ============ */
+    .offer{background:linear-gradient(180deg,var(--cream),#FFFDFB)}
+    .price-card{
+      background:#fff;border:2px solid var(--terracotta);border-radius:var(--radius);
+      padding:30px 24px;margin-top:20px;box-shadow:var(--shadow-lg);text-align:center;
+    }
+    .badge{
+      display:inline-block;background:var(--gold);color:#3a2a00;font-weight:800;
+      font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:14px;
+    }
+    .price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin:8px 0}
+    .price-old{color:var(--muted);text-decoration:line-through;font-size:22px}      /* // PRICE */
+    .price-now{color:var(--terracotta);font-size:46px;font-weight:900}              /* // PRICE */
+    .save{color:var(--ok);font-weight:700;font-size:15px;margin-bottom:8px}
+    .urgency{
+      color:var(--terracotta-dark);font-weight:600;font-size:14px;margin:14px 0 18px;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+
+    /* ============ FAQ ============ */
+    .faq{background:var(--white)}
+    .faq details{
+      background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);
+      margin-top:12px;overflow:hidden;
+    }
+    .faq summary{
+      cursor:pointer;list-style:none;padding:18px 20px;font-weight:700;font-size:16px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+    }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";color:var(--terracotta);font-size:24px;font-weight:800;line-height:1}
+    .faq details[open] summary::after{content:"−"}
+    .faq .ans{padding:0 20px 18px;color:var(--muted);font-size:16px}
+
+    /* ============ GUARANTEE ============ */
+    .guarantee{background:var(--cream)}
+    .g-card{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:30px 24px;margin-top:18px;text-align:center;border:1px dashed var(--gold);
+    }
+    .g-seal{
+      width:84px;height:84px;border-radius:50%;background:#FBEFE3;color:var(--terracotta);
+      display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+      font-weight:900;font-size:15px;text-align:center;line-height:1.1;border:2px solid var(--gold);
+    }
+
+    /* ============ FINAL CTA ============ */
+    .final{background:var(--ink);color:#fff;text-align:center}
+    .final h2{color:#fff}
+    .final .lead{color:#D7CFC6}
+    .final .price-now{color:var(--gold)}
+    .final .price-old{color:#9c948b}
+
+    footer{background:var(--ink);color:#9c948b;text-align:center;padding:26px 20px;font-size:13px}
+
+    /* ============ CTA דביק במובייל ============ */
+    .sticky-cta{
+      position:fixed;inset-inline:0;bottom:0;z-index:50;
+      background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+      box-shadow:0 -6px 20px rgba(43,38,34,.10);
+      padding:10px 16px;display:flex;align-items:center;gap:12px;
+      backdrop-filter:blur(6px);
+    }
+    .sticky-cta .sp{display:flex;flex-direction:column;line-height:1.1}
+    .sticky-cta .sp b{color:var(--terracotta);font-size:20px}
+    .sticky-cta .sp s{color:var(--muted);font-size:13px}
+    .sticky-cta .cta{margin:0;flex:1;max-width:none;padding:14px 18px;font-size:17px}
+
+    /* ============ דסקטופ ============ */
+    @media(min-width:760px){
+      :root{--maxw:920px}
+      body{padding-bottom:0;font-size:18px}
+      section{padding:72px 24px}
+      .hero h1{font-size:50px}
+      .hero .lead{font-size:21px}
+      .hero-img{max-width:440px}
+      h2{font-size:36px}
+      .grid{grid-template-columns:1fr 1fr}
+      .ba-grid{grid-template-columns:1fr 1fr 1fr}
+      .review-grid{grid-template-columns:1fr 1fr}
+      .steps{grid-template-columns:1fr 1fr 1fr;gap:28px}
+      .step{flex-direction:column;text-align:center;align-items:center}
+      .sticky-cta{display:none}      /* דביק רק במובייל */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="wrap center">
+      <span class="eyebrow">טכנולוגיית אור אדום ביתית · ReGrow <!-- BRAND --></span>
+      <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
+      <p class="lead">מסרק ReGrow משלב אור אדום בעוצמה נמוכה — אותה טכנולוגיה שמשמשת שנים בקליניקות — ומביא אותה אליך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
+
+      <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
+
+      <div class="trustbar">
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם תוך 2-4 ימים</span>
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> 30 יום ניסיון או כספך בחזרה</span>
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
+      </div>
+
+      <div class="hero-img">
+        <!-- החלף ב: <img src="תמונת-מוצר-ראשית.jpg" alt="מסרק לייזר ReGrow לצמיחת שיער"> -->
+        <div class="ph">תמונת מוצר ראשית<br>(מסרק ReGrow)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PROBLEM / AGITATE ===================== -->
+  <section class="problem">
+    <div class="wrap">
+      <span class="eyebrow">מוכר/ת לך?</span>
+      <h2>השיער כבר לא מה שהיה — ואת/ה מרגיש/ה את זה כל בוקר</h2>
+      <p class="lead">זה לא רק "אסתטיקה". זו הדרך שבה את/ה מרגיש/ה מול המראה, בעבודה, בתמונות.</p>
+      <ul class="pain-list">
+        <li><span class="dot">●</span><div>שערות נושרות על הכרית ובמקלחת, והקרקפת מציצה יותר מבעבר.</div></li>
+        <li><span class="dot">●</span><div>מסרקים, שמפו "מעבה" ותוספים — הוצאת הון, וההבדל בקושי נראה.</div></li>
+        <li><span class="dot">●</span><div>טיפול בקליניקה נשמע מפתה, אבל אלפי שקלים וזמן שאין לך פשוט לא מסתדרים.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== SOLUTION ===================== -->
+  <section class="solution">
+    <div class="wrap">
+      <span class="eyebrow">הפתרון</span>
+      <h2>אור אדום שעובד עם הקרקפת שלך — לא נגדה</h2>
+      <div class="card">
+        <p>מסרק <strong>ReGrow</strong> מקרין אור אדום בעוצמה נמוכה (LLLT) ישירות אל הקרקפת. הטכנולוגיה הזו משמשת שנים בקליניקות ונחקרת בהקשר של עידוד זקיקי השיער ושיפור תחושת המלאות. את/ה פשוט מעביר/ה את המסרק על הקרקפת — והוא עושה את העבודה ברקע, בלי כאב ובלי כימיקלים.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="how">
+    <div class="wrap center">
+      <span class="eyebrow">פשוט עד כדי גיחוך</span>
+      <h2>שלושה צעדים, 10 דקות ביום</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div><h3>מעבירים על הקרקפת</h3><p>תנועות איטיות באזורים הדלילים, 10 דקות.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div><h3>3 פעמים בשבוע</h3><p>בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div><h3>עוקבים אחרי ההבדל</h3><p>רוב המשתמשים מתחילים לשים לב לשינוי תוך מספר שבועות.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BENEFITS ===================== -->
+  <section class="benefits">
+    <div class="wrap">
+      <span class="eyebrow">למה ReGrow</span>
+      <h2>כל מה שחיפשת — בלי מה שהבריח אותך</h2>
+      <div class="grid">
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h3>ללא כאב, לא פולשני</h3><p>בלי מחטים, בלי ניתוח, בלי תופעות לוואי אגרסיביות.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><h3>שימוש ביתי נוח</h3><p>10 דקות מהספה. בלי תורים ובלי נסיעות.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><h3>חוסך אלפי שקלים</h3><p>תשלום חד-פעמי במקום סדרת טיפולים יקרה.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><h3>מתאים לכל סוגי השיער</h3><p>לנשים ולגברים, לכל גוון ומרקם.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div><div><h3>נטען ואלחוטי</h3><p>סוללה נטענת ב-USB, להשתמש בכל מקום בבית.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div><div><h3>אחריות ותמיכה</h3><p>30 יום ניסיון וכספך בחזרה אם זה לא בשבילך.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEFORE / AFTER ===================== -->
+  <section class="ba">
+    <div class="wrap center">
+      <span class="eyebrow">תוצאות אמיתיות</span>
+      <h2>ההבדל שאפשר לראות</h2>
+      <div class="ba-grid">
+        <!-- החלף כל אחת ב: <img src="..." alt="לפני ואחרי X שבועות שימוש ב-ReGrow"> -->
+        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 1</div><div class="cap">תוצאות לאחר 12 שבועות שימוש</div></div>
+        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 2</div><div class="cap">תוצאות לאחר 16 שבועות שימוש</div></div>
+        <div class="ba-card"><div class="ph">תמונת לפני/אחרי 3</div><div class="cap">תוצאות לאחר 10 שבועות שימוש</div></div>
+      </div>
+      <p class="disclaimer">תוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+    </div>
+  </section>
+
+  <!-- ===================== SOCIAL PROOF ===================== -->
+  <section class="reviews">
+    <div class="wrap center">
+      <span class="eyebrow">מה אומרים הלקוחות</span>
+      <div class="rating-top">
+        <span class="big">4.8</span>
+        <span class="stars" aria-label="דירוג 4.8 מתוך 5">★★★★★</span>
+      </div>
+      <p class="lead">מתוך 1,300+ ביקורות <!-- החלף במספר אמיתי --></p>
+
+      <div class="review-grid">
+        <!-- החלף בטקסט ביקורות אמיתי בלבד -->
+        <div class="review">
+          <div class="who"><div class="av">מ</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
+          <p>"[טקסט ביקורת אמיתי כאן — אל תמציא. החלף לפני העלאה.]"</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">ד</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
+          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">י</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★☆</div></div></div>
+          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">ר</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
+          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPARISON ===================== -->
+  <section class="compare">
+    <div class="wrap">
+      <span class="eyebrow">השוואה הוגנת</span>
+      <h2>ReGrow מול שאר האפשרויות</h2>
+      <div class="table-scroll">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="us">ReGrow</th>
+              <th>טיפול בקליניקה</th>
+              <th>תרופות / תוספים</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td>אלפי ₪</td><td>הוצאה חודשית מתמשכת</td></tr>
+            <tr><td>כאב</td><td class="us"><span class="yes">ללא</span></td><td>אפשרי</td><td><span class="yes">ללא</span></td></tr>
+            <tr><td>נוחות</td><td class="us">מהבית, 10 דק'</td><td>תורים ונסיעות</td><td>נטילה יומית קבועה</td></tr>
+            <tr><td>תופעות לוואי</td><td class="us"><span class="yes">מינימליות</span></td><td>אפשריות</td><td>אפשריות</td></tr>
+            <tr><td>מתאים לכולם</td><td class="us"><span class="yes">כן</span></td><td>לא תמיד</td><td>לא תמיד</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OFFER / PRICING ===================== -->
+  <section class="offer" id="offer">
+    <div class="wrap center">
+      <span class="eyebrow">ההצעה שלך</span>
+      <h2>התחל/י את המסע לשיער מלא יותר היום</h2>
+      <div class="price-card">
+        <span class="badge">מבצע השקה</span>
+        <div class="price-row">
+          <span class="price-old">₪199</span>   <!-- // PRICE — מחיר "לפני" מחוק -->
+          <span class="price-now">₪99</span>   <!-- // PRICE — מחיר מבצע -->
+        </div>
+        <div class="save">חוסך/ת ₪100 (50% הנחה)</div>
+        <div class="urgency">⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי</div>
+        <!-- // ADD-TO-CART — בשלב 2 יוחלף בכפתור submit בתוך טופס המוצר של שופיפיי -->
+        <a href="#" class="cta">הוסף/י לעגלה — ₪99 <span class="arrow">←</span></a>
+        <div class="trustbar">
+          <span>🚚 משלוח חינם</span>
+          <span>🛡️ 30 יום ניסיון</span>
+          <span>🔒 תשלום מאובטח</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="faq">
+    <div class="wrap">
+      <span class="eyebrow">שאלות נפוצות</span>
+      <h2>כל מה שרצית לשאול</h2>
+
+      <details>
+        <summary>תוך כמה זמן רואים תוצאות?</summary>
+        <div class="ans">רוב המשתמשים מתחילים לשים לב לשינוי בתחושת המלאות תוך מספר שבועות של שימוש עקבי. התוצאות משתנות מאדם לאדם, ולכן אנחנו ממליצים על שימוש רציף לאורך זמן.</div>
+      </details>
+      <details>
+        <summary>האם השימוש כואב?</summary>
+        <div class="ans">לא. האור האדום בעוצמה נמוכה אינו מחמם ואינו כואב — רוב האנשים מתארים תחושה נעימה ורגועה.</div>
+      </details>
+      <details>
+        <summary>מתאים גם לגברים וגם לנשים?</summary>
+        <div class="ans">בהחלט. ReGrow מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
+      </details>
+      <details>
+        <summary>איך מנקים את המסרק?</summary>
+        <div class="ans">פשוט מנגבים את שיני המסרק במטלית יבשה או לחה מעט. אין לשטוף תחת מים זורמים.</div>
+      </details>
+      <details>
+        <summary>מה כוללת האחריות?</summary>
+        <div class="ans">כל מסרק מגיע עם 30 יום ניסיון — אם זה לא בשבילך, מחזירים ומקבלים את הכסף בחזרה, וכן אחריות יצרן על המוצר.</div>
+      </details>
+      <details>
+        <summary>כמה זמן לוקח המשלוח?</summary>
+        <div class="ans">המשלוח חינם ומגיע בדרך כלל תוך 2-4 ימי עסקים לכל הארץ.</div>
+      </details>
+      <details>
+        <summary>מה מדיניות ההחזרות?</summary>
+        <div class="ans">ניתן להחזיר את המוצר תוך 30 יום מקבלתו ולקבל החזר כספי מלא, כל עוד הוא במצב תקין.</div>
+      </details>
+      <details>
+        <summary>האם זה בטוח לשימוש יומיומי?</summary>
+        <div class="ans">כן. השימוש המומלץ הוא כ-3 פעמים בשבוע, 10 דקות בכל פעם. מומלץ להיוועץ ברופא אם יש לך מצב רפואי רלוונטי.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== GUARANTEE ===================== -->
+  <section class="guarantee">
+    <div class="wrap center">
+      <div class="g-card">
+        <div class="g-seal">30 יום<br>ניסיון</div>
+        <h2>נסה/י ללא סיכון</h2>
+        <p class="lead">תן/י ל-ReGrow 30 יום. אם לא הרגשת הבדל — פנה/י אלינו ונחזיר לך את מלוא הסכום. הסיכון כולו עלינו.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="final">
+    <div class="wrap center">
+      <h2>השיער שלך מחכה — בוא/י נתחיל</h2>
+      <p class="lead">מבצע השקה לזמן מוגבל. הצטרף/י לאלפי לקוחות מרוצים.</p>
+      <div class="price-row">
+        <span class="price-old">₪199</span>   <!-- // PRICE -->
+        <span class="price-now">₪99</span>   <!-- // PRICE -->
+      </div>
+      <a href="#offer" class="cta" style="margin-top:14px">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="yr"></span> ReGrow <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
+  </footer>
+
+  <!-- ===================== CTA דביק במובייל ===================== -->
+  <div class="sticky-cta" aria-label="קנייה מהירה">
+    <div class="sp">
+      <b>₪99</b>            <!-- // PRICE -->
+      <s>₪199</s>            <!-- // PRICE -->
+    </div>
+    <!-- // ADD-TO-CART -->
+    <a href="#offer" class="cta">הוסף/י לעגלה <span class="arrow">←</span></a>
+  </div>
+
+  <script>
+    // שנה נוכחית ב-footer (ללא localStorage/sessionStorage)
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
