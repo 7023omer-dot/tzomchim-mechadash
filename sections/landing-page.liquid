@@ -1,0 +1,851 @@
+{% comment %}
+  ReGrow — section דף מוצר לשופיפיי (גרסה רזה, ללא base64)
+  • תמונת HERO נמשכת מתמונת המוצר; תמונת האפליקטור מהגדרות הסקשן.
+  • מחיר + כל כפתורי 'הוסף לעגלה' מחוברים למוצרים אמיתיים (צ'קאאוט אמיתי).
+{% endcomment %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+    /* ============ משתני מותג (פלטה חמה ונקייה) ============ */
+    .regrow-page{
+      --cream:#FBF7F2;        /* רקע נקי חם */
+      --white:#FFFFFF;
+      --ink:#2B2622;          /* טקסט ראשי */
+      --muted:#6E665E;        /* טקסט משני */
+      --terracotta:#C62828;   /* אדום המוצר — אקצנט ראשי */
+      --terracotta-dark:#9E1B1B;
+      --gold:#D9A441;         /* זהב רך */
+      --line:#ECE3D8;
+      --ok:#2E8B57;
+      --star:#E8A317;
+      --shadow:0 8px 30px rgba(43,38,34,.08);
+      --shadow-lg:0 16px 48px rgba(43,38,34,.14);
+      --radius:18px;
+      --radius-sm:12px;
+      --maxw:680px;           /* mobile-first; דסקטופ מתרחב למטה */
+    }
+
+    .regrow-page *{box-sizing:border-box;margin:0;padding:0}
+    .regrow-page{scroll-behavior:smooth}
+    .regrow-page{
+      font-family:'Heebo',system-ui,Arial,sans-serif;
+      background:var(--cream);
+      color:var(--ink);
+      line-height:1.6;
+      font-size:17px;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:84px; /* מקום ל-CTA דביק במובייל */
+    }
+    .regrow-page img{max-width:100%;display:block}
+    .regrow-page section{padding:48px 20px}
+    .regrow-page .wrap{max-width:var(--maxw);margin:0 auto}
+    .regrow-page h1, .regrow-page h2, .regrow-page h3{line-height:1.2;font-weight:800;letter-spacing:-.01em}
+    .regrow-page h2{font-size:28px;margin-bottom:10px}
+    .regrow-page .lead{color:var(--muted);font-size:18px}
+    .regrow-page .center{text-align:center}
+    .regrow-page .eyebrow{
+      display:inline-block;color:var(--terracotta);font-weight:700;
+      font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:10px;
+    }
+
+    /* ============ כפתורי CTA ============ */
+    .regrow-page .cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      background:var(--terracotta);color:#fff;border:none;cursor:pointer;
+      font-family:inherit;font-weight:800;font-size:19px;
+      padding:18px 30px;border-radius:999px;width:100%;max-width:420px;
+      box-shadow:0 8px 22px rgba(198,40,40,.35);
+      transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+      text-decoration:none;
+    }
+    .regrow-page .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(198,40,40,.45)}
+    .regrow-page .cta:active{transform:translateY(0)}
+    .regrow-page .cta .arrow{font-size:22px;line-height:1}
+
+    /* ============ שורת אמון ============ */
+    .regrow-page .trustbar{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:18px;
+      margin-top:18px;color:var(--muted);font-size:14px;font-weight:500;
+    }
+    .regrow-page .trustbar span{display:inline-flex;align-items:center;gap:6px}
+    .regrow-page .ic{width:20px;height:20px;flex:0 0 auto;color:var(--terracotta)}
+
+    /* ============ HERO ============ */
+    .regrow-page .hero{
+      background:linear-gradient(180deg,#FFFDFB 0%,var(--cream) 100%);
+      padding-top:40px;
+    }
+    .regrow-page .hero h1{font-size:34px;font-weight:900;margin-bottom:14px}
+    .regrow-page .hero h1 em{font-style:normal;color:var(--terracotta)}
+    .regrow-page .hero .lead{margin-bottom:26px}
+    .regrow-page .hero-img{
+      margin:26px auto 0;max-width:340px;border-radius:var(--radius);
+      background:#fff;box-shadow:var(--shadow-lg);overflow:hidden;
+    }
+    /* placeholder תמונה — החלף ב-<img src="..."> */
+    .regrow-page .ph{
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      background:repeating-linear-gradient(45deg,#F2E9DD,#F2E9DD 12px,#EFE3D3 12px,#EFE3D3 24px);
+      color:#9b8f7f;font-weight:600;font-size:14px;padding:24px;min-height:220px;
+    }
+
+    /* ציור מוצר (SVG) במקום placeholder */
+    .regrow-page .pimg{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 36%,#ffffff,#F7EDE8);padding:16px;min-height:220px}
+    .regrow-page .pimg svg{width:auto;height:100%;max-height:240px;max-width:100%;display:block}
+    .regrow-page .addon .pimg{width:96px;height:96px;min-height:0;padding:8px;border-radius:12px;flex:0 0 auto}
+
+    .regrow-page .hero-img img{width:100%;height:auto;display:block}
+    .regrow-page .solution .card .solpic{width:100%;border-radius:12px;margin-bottom:16px;display:block}
+
+    /* ============ PROBLEM ============ */
+    .regrow-page .problem{background:var(--white)}
+    .regrow-page .pain-list{list-style:none;margin-top:20px;display:grid;gap:14px}
+    .regrow-page .pain-list li{
+      display:flex;gap:12px;align-items:flex-start;background:var(--cream);
+      border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;
+    }
+    .regrow-page .pain-list .dot{color:var(--terracotta);font-size:22px;line-height:1.3;flex:0 0 auto}
+
+    /* ============ SOLUTION ============ */
+    .regrow-page .solution{background:var(--cream)}
+    .regrow-page .solution .card{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:26px;margin-top:18px;
+    }
+
+    /* ============ HOW IT WORKS ============ */
+    .regrow-page .how{background:var(--white)}
+    .regrow-page .steps{display:grid;gap:18px;margin-top:24px}
+    .regrow-page .step{display:flex;gap:16px;align-items:flex-start}
+    .regrow-page .step .num{
+      flex:0 0 auto;width:46px;height:46px;border-radius:50%;
+      background:var(--terracotta);color:#fff;font-weight:800;font-size:20px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .regrow-page .step h3{font-size:19px;margin-bottom:2px}
+    .regrow-page .step p{color:var(--muted);font-size:16px}
+
+    /* ============ BENEFITS ============ */
+    .regrow-page .benefits{background:var(--cream)}
+    .regrow-page .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+    .regrow-page .benefit{
+      background:#fff;border-radius:var(--radius-sm);padding:20px;
+      box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start;
+    }
+    .regrow-page .benefit .bic{
+      flex:0 0 auto;width:42px;height:42px;border-radius:12px;
+      background:#FDEAEA;color:var(--terracotta);display:flex;
+      align-items:center;justify-content:center;
+    }
+    .regrow-page .benefit h3{font-size:17px;margin-bottom:2px}
+    .regrow-page .benefit p{color:var(--muted);font-size:15px}
+
+    /* ============ BEFORE / AFTER ============ */
+    .regrow-page .ba{background:var(--white)}
+    .regrow-page .ba-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:24px}
+    .regrow-page .ba-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .regrow-page .ba-card .cap{padding:12px 16px;font-weight:600;color:var(--ink);text-align:center}
+    .regrow-page .disclaimer{color:var(--muted);font-size:13px;text-align:center;margin-top:16px;font-style:italic}
+
+    /* ============ SOCIAL PROOF ============ */
+    .regrow-page .reviews{background:var(--cream)}
+    .regrow-page .rating-top{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 6px}
+    .regrow-page .rating-top .big{font-size:34px;font-weight:900}
+    .regrow-page .stars{color:var(--star);font-size:20px;letter-spacing:2px}
+    .regrow-page .review-grid{display:grid;gap:16px;margin-top:24px}
+    .regrow-page .review{
+      background:#fff;border-radius:var(--radius-sm);padding:20px;box-shadow:var(--shadow);
+    }
+    .regrow-page .review .who{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .regrow-page .review .av{
+      width:44px;height:44px;border-radius:50%;background:#FDEAEA;color:var(--terracotta);
+      font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+    }
+    .regrow-page .review .name{font-weight:700;font-size:15px}
+    .regrow-page .review .stars{font-size:15px;letter-spacing:1px}
+    .regrow-page .verified{color:var(--ok);font-size:12px;font-weight:600;display:inline-flex;gap:4px;align-items:center}
+
+    /* ============ COMPARISON ============ */
+    .regrow-page .compare{background:var(--white)}
+    .regrow-page .table-scroll{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+    .regrow-page table.cmp{width:100%;border-collapse:collapse;min-width:480px;background:#fff;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
+    .regrow-page table.cmp th, .regrow-page table.cmp td{padding:14px 12px;text-align:center;border-bottom:1px solid var(--line);font-size:15px}
+    .regrow-page table.cmp thead th{background:var(--ink);color:#fff;font-weight:700}
+    .regrow-page table.cmp thead th.us{background:var(--terracotta)}
+    .regrow-page table.cmp td:first-child, .regrow-page table.cmp th:first-child{text-align:right;font-weight:600;background:var(--cream)}
+    .regrow-page table.cmp td.us{background:#FDEAEA;font-weight:700;color:var(--terracotta-dark)}
+    .regrow-page .yes{color:var(--ok);font-weight:800}
+    .regrow-page .no{color:#C0392B;font-weight:800}
+
+    /* ============ OFFER / PRICING ============ */
+    .regrow-page .offer{background:linear-gradient(180deg,var(--cream),#FFFDFB)}
+    .regrow-page .price-card{
+      background:#fff;border:2px solid var(--terracotta);border-radius:var(--radius);
+      padding:30px 24px;margin-top:20px;box-shadow:var(--shadow-lg);text-align:center;
+    }
+    .regrow-page .badge{
+      display:inline-block;background:var(--gold);color:#3a2a00;font-weight:800;
+      font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:14px;
+    }
+    .regrow-page .price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin:8px 0}
+    .regrow-page .price-old{color:var(--muted);text-decoration:line-through;font-size:22px}      /* // PRICE */
+    .regrow-page .price-now{color:var(--terracotta);font-size:46px;font-weight:900}              /* // PRICE */
+    .regrow-page .save{color:var(--ok);font-weight:700;font-size:15px;margin-bottom:8px}
+    .regrow-page .urgency{
+      color:var(--terracotta-dark);font-weight:600;font-size:14px;margin:14px 0 18px;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+
+    /* ============ FAQ ============ */
+    .regrow-page .faq{background:var(--white)}
+    .regrow-page .faq details{
+      background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);
+      margin-top:12px;overflow:hidden;
+    }
+    .regrow-page .faq summary{
+      cursor:pointer;list-style:none;padding:18px 20px;font-weight:700;font-size:16px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+    }
+    .regrow-page .faq summary::-webkit-details-marker{display:none}
+    .regrow-page .faq summary::after{content:"+";color:var(--terracotta);font-size:24px;font-weight:800;line-height:1}
+    .regrow-page .faq details[open] summary::after{content:"−"}
+    .regrow-page .faq .ans{padding:0 20px 18px;color:var(--muted);font-size:16px}
+
+    /* ============ GUARANTEE ============ */
+    .regrow-page .guarantee{background:var(--cream)}
+    .regrow-page .g-card{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:30px 24px;margin-top:18px;text-align:center;border:1px dashed var(--gold);
+    }
+    .regrow-page .g-seal{
+      width:84px;height:84px;border-radius:50%;background:#FDEAEA;color:var(--terracotta);
+      display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+      font-weight:900;font-size:15px;text-align:center;line-height:1.1;border:2px solid var(--gold);
+    }
+
+    /* ============ FINAL CTA ============ */
+    .regrow-page .final{background:var(--ink);color:#fff;text-align:center}
+    .regrow-page .final h2{color:#fff}
+    .regrow-page .final .lead{color:#D7CFC6}
+    .regrow-page .final .price-now{color:var(--gold)}
+    .regrow-page .final .price-old{color:#9c948b}
+
+    .regrow-page footer{background:var(--ink);color:#9c948b;text-align:center;padding:26px 20px;font-size:13px}
+
+    /* ============ CTA דביק במובייל ============ */
+    .regrow-page .sticky-cta{
+      position:fixed;inset-inline:0;bottom:0;z-index:50;
+      background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+      box-shadow:0 -6px 20px rgba(43,38,34,.10);
+      padding:10px 16px;display:flex;align-items:center;gap:12px;
+      backdrop-filter:blur(6px);
+    }
+    .regrow-page .sticky-cta .sp{display:flex;flex-direction:column;line-height:1.1}
+    .regrow-page .sticky-cta .sp b{color:var(--terracotta);font-size:20px}
+    .regrow-page .sticky-cta .sp s{color:var(--muted);font-size:13px}
+    .regrow-page .sticky-cta .cta{margin:0;flex:1;max-width:none;padding:14px 18px;font-size:17px}
+
+    /* ============ בס"ד + בר הכרזה עליון ============ */
+    .regrow-page .besd{text-align:center;font-size:13px;color:var(--muted);padding:5px 0 0;letter-spacing:.02em}
+    .regrow-page .announce{
+      background:var(--ink);color:#fff;text-align:center;font-size:13.5px;font-weight:600;
+      padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
+    }
+    .regrow-page .announce span{display:inline-flex;align-items:center;gap:6px}
+    .regrow-page .announce .hot{color:var(--gold)}
+
+    /* ============ אמצעי תשלום ============ */
+    .regrow-page .pay{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:16px}
+    .regrow-page .pay .chip{
+      background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;
+      font-size:12px;font-weight:700;color:var(--muted);box-shadow:0 1px 3px rgba(0,0,0,.04);
+    }
+    .regrow-page .pay .lbl{width:100%;text-align:center;color:var(--muted);font-size:12px;margin-bottom:2px}
+
+    /* ============ סליידר לפני/אחרי ============ */
+    .regrow-page .ba-slider{
+      position:relative;max-width:520px;margin:26px auto 8px;border-radius:var(--radius);
+      overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5;background:#fff;
+      --pos:50;user-select:none;touch-action:none;
+    }
+    .regrow-page .ba-slider .layer{position:absolute;inset:0}
+    .regrow-page .ba-slider .layer .ph{height:100%;min-height:0;border-radius:0}
+    .regrow-page .ba-slider .before{clip-path:inset(0 calc((100 - var(--pos)) * 1%) 0 0)}
+    .regrow-page .ba-slider .tag{
+      position:absolute;top:12px;background:rgba(43,38,34,.78);color:#fff;
+      font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;z-index:4;
+    }
+    .regrow-page .ba-slider .tag.b{left:12px}
+    .regrow-page .ba-slider .tag.a{right:12px;background:var(--terracotta)}
+    .regrow-page .ba-slider .divider{
+      position:absolute;top:0;bottom:0;left:calc(var(--pos)*1%);width:3px;
+      background:#fff;transform:translateX(-50%);z-index:3;box-shadow:0 0 0 1px rgba(0,0,0,.06);
+    }
+    .regrow-page .ba-slider .knob{
+      position:absolute;top:50%;left:calc(var(--pos)*1%);transform:translate(-50%,-50%);
+      width:42px;height:42px;border-radius:50%;background:#fff;z-index:3;
+      display:flex;align-items:center;justify-content:center;color:var(--terracotta);
+      font-weight:900;box-shadow:var(--shadow);pointer-events:none;
+    }
+    .regrow-page .ba-slider input[type=range]{
+      position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:5;
+    }
+    .regrow-page .ba-extra{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    .regrow-page .ba-split{border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .regrow-page .ba-split .pair{display:grid;grid-template-columns:1fr 1fr}
+    .regrow-page .ba-split .pair .ph{min-height:150px;border-radius:0}
+    .regrow-page .ba-split .pair .ph.before-mini{border-inline-end:2px solid #fff}
+
+    /* ============ מוצרים משלימים ============ */
+    .regrow-page .addons{background:var(--cream)}
+    .regrow-page .addon-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+    .regrow-page .addon{
+      background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow);
+      padding:16px;display:flex;gap:14px;align-items:center;
+    }
+    .regrow-page .addon .ph{width:88px;height:88px;min-height:0;border-radius:12px;flex:0 0 auto;font-size:12px}
+    .regrow-page .addon .meta{flex:1;min-width:0}
+    .regrow-page .addon .meta h3{font-size:17px;margin-bottom:2px}
+    .regrow-page .addon .meta p{color:var(--muted);font-size:14px}
+    .regrow-page .addon .buy{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:0 0 auto}
+    .regrow-page .addon .ap{font-weight:800;color:var(--terracotta);font-size:18px;white-space:nowrap}
+    .regrow-page .addon .add-btn{
+      background:#FDEAEA;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
+      border-radius:999px;padding:8px 16px;font-weight:700;font-family:inherit;cursor:pointer;font-size:14px;
+      transition:background .15s ease;white-space:nowrap;
+    }
+    .regrow-page .addon .add-btn:hover{background:var(--terracotta);color:#fff}
+
+    /* ============ באנדל / דיל ============ */
+    .regrow-page .bundle{
+      background:linear-gradient(180deg,#FFFDFB,#fff);border:2px dashed var(--gold);
+      border-radius:var(--radius);padding:26px 22px;margin-top:26px;text-align:center;box-shadow:var(--shadow);
+    }
+    .regrow-page .bundle .items{
+      display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;
+      margin:14px 0;color:var(--ink);font-weight:600;font-size:15px;
+    }
+    .regrow-page .bundle .plus{color:var(--gold);font-weight:900;font-size:20px}
+    .regrow-page .bundle .price-row{margin-top:6px}
+
+    /* ============ סרטון ============ */
+    .regrow-page .video-wrap{
+      position:relative;max-width:520px;margin:22px auto 0;border-radius:var(--radius);
+      overflow:hidden;box-shadow:var(--shadow-lg);background:#000;aspect-ratio:9/16;
+    }
+    .regrow-page .video-wrap video, .regrow-page .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+    .regrow-page .video-wrap .ph{height:100%;min-height:0;aspect-ratio:9/16}
+
+    /* ============ דסקטופ ============ */
+    @media(min-width:760px){
+      .regrow-page{--maxw:920px}
+      .regrow-page{padding-bottom:0;font-size:18px}
+      .regrow-page{padding-bottom:0}
+      .regrow-page section{padding:72px 24px}
+      .regrow-page .hero h1{font-size:50px}
+      .regrow-page .hero .lead{font-size:21px}
+      .regrow-page .hero-img{max-width:440px}
+      .regrow-page h2{font-size:36px}
+      .regrow-page .grid{grid-template-columns:1fr 1fr}
+      .regrow-page .ba-grid{grid-template-columns:1fr 1fr 1fr}
+      .regrow-page .review-grid{grid-template-columns:1fr 1fr}
+      .regrow-page .steps{grid-template-columns:1fr 1fr 1fr;gap:28px}
+      .regrow-page .step{flex-direction:column;text-align:center;align-items:center}
+      .regrow-page .addon-grid{grid-template-columns:1fr 1fr 1fr}
+      .regrow-page .addon{flex-direction:column;text-align:center}
+      .regrow-page .addon .ph{width:120px;height:120px}
+      .regrow-page .addon .buy{align-items:center}
+      .regrow-page .ba-extra{grid-template-columns:1fr 1fr}
+      .regrow-page .video-wrap{aspect-ratio:16/9;max-width:760px}
+      .regrow-page .sticky-cta{display:none}      /* דביק רק במובייל */
+    }
+  
+    /* ---- תוספות לגרסת שופיפיי ---- */
+    .regrow-page{padding-bottom:84px}
+    .regrow-page .variant-select{width:100%;max-width:420px;margin:0 auto 12px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:#fff}
+    .regrow-page .addon form, .regrow-page .bundle form{margin:0}
+    .regrow-page .hero-img img, .regrow-page .solution .card .solpic{width:100%;height:auto;display:block}
+  </style>
+<div dir="rtl" class="regrow-page">
+
+
+  <!-- בס"ד -->
+  <div class="besd">בס״ד</div>
+
+  <!-- ===================== בר הכרזה עליון ===================== -->
+  <div class="announce" role="region" aria-label="הטבות">
+    <span>🚚 משלוח חינם לכל הארץ</span>
+    <span>🛡️ 30 יום ניסיון</span>
+    <span class="hot">🔥 רק ₪129</span>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="wrap center">
+      <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · ReGrow <!-- BRAND --></span>
+      <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
+      <p class="lead">מסרק ReGrow משלב <strong>אור אדום</strong>, <strong>עיסוי קרקפת</strong> ו<strong>אפליקטור סרום מובנה</strong> — הכול במכשיר אחד. אותה גישה שמשמשת שנים בקליניקות, עכשיו אצלך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
+
+      <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
+
+      <div class="trustbar">
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם תוך 2-4 ימים</span>
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> 30 יום ניסיון או כספך בחזרה</span>
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
+      </div>
+
+      <div class="hero-img">
+        <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק ReGrow אדום לקרקפת" loading="eager"> -->
+        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="ReGrow" width="700" loading="eager">{%- else -%}<div class="ph">העלה/י תמונת מוצר למוצר בשופיפיי</div>{%- endif -%}</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PROBLEM / AGITATE ===================== -->
+  <section class="problem">
+    <div class="wrap">
+      <span class="eyebrow">מוכר/ת לך?</span>
+      <h2>השיער כבר לא מה שהיה — ואת/ה מרגיש/ה את זה כל בוקר</h2>
+      <p class="lead">זה לא רק "אסתטיקה". זו הדרך שבה את/ה מרגיש/ה מול המראה, בעבודה, בתמונות.</p>
+      <ul class="pain-list">
+        <li><span class="dot">●</span><div>שערות נושרות על הכרית ובמקלחת, והקרקפת מציצה יותר מבעבר.</div></li>
+        <li><span class="dot">●</span><div>מסרקים, שמפו "מעבה" ותוספים — הוצאת הון, וההבדל בקושי נראה.</div></li>
+        <li><span class="dot">●</span><div>טיפול בקליניקה נשמע מפתה, אבל אלפי שקלים וזמן שאין לך פשוט לא מסתדרים.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== SOLUTION ===================== -->
+  <section class="solution">
+    <div class="wrap">
+      <span class="eyebrow">הפתרון</span>
+      <h2>שלוש פעולות שעובדות יחד על הקרקפת שלך</h2>
+      <div class="card">
+        {%- if section.settings.applicator_image != blank -%}<img class="solpic" src="{{ section.settings.applicator_image | image_url: width: 700 }}" alt="אפליקטור הסרום של ReGrow" loading="lazy">{%- endif -%}
+        <p>מסרק <strong>ReGrow</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEO (סלוט — הסרטון יוטמע כאן בהמשך) ===================== -->
+  <section class="how">
+    <div class="wrap center">
+      <span class="eyebrow">בוידאו</span>
+      <h2>ראו את ReGrow בפעולה</h2>
+      <p class="lead">דמו קצר של השימוש במכשיר — אור אדום, עיסוי והחדרת הסרום.</p>
+      <!-- כשתשלח את הסרטון, החלף את ה-.ph באחד מאלה:
+           <video controls playsinline poster="assets/video-poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
+           או iframe (יוטיוב/טיקטוק). הסאונד בעברית יתנגן בלחיצה. -->
+      <div class="video-wrap" aria-label="סרטון הדגמה">
+        <div class="ph">סלוט לסרטון<br>(יוטמע בהמשך)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="how">
+    <div class="wrap center">
+      <span class="eyebrow">פשוט עד כדי גיחוך</span>
+      <h2>שלושה צעדים, 10 דקות ביום</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div><h3>מטפטפים סרום ומפעילים</h3><p>כמה טיפות לאפליקטור המובנה, ולוחצים על כפתור ההפעלה.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div><h3>מעבירים על הקרקפת 10 דק'</h3><p>3 פעמים בשבוע, בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div><h3>עוקבים אחרי ההבדל</h3><p>רוב המשתמשים מתחילים לשים לב לשינוי תוך מספר שבועות.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BENEFITS ===================== -->
+  <section class="benefits">
+    <div class="wrap">
+      <span class="eyebrow">למה ReGrow</span>
+      <h2>כל מה שחיפשת — בלי מה שהבריח אותך</h2>
+      <div class="grid">
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h3>ללא כאב, לא פולשני</h3><p>בלי מחטים, בלי ניתוח, בלי תופעות לוואי אגרסיביות.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><h3>שימוש ביתי נוח</h3><p>10 דקות מהספה. בלי תורים ובלי נסיעות.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><h3>חוסך אלפי שקלים</h3><p>תשלום חד-פעמי במקום סדרת טיפולים יקרה.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3v6a3 3 0 01-6 0V5a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></div><div><h3>3-ב-1 במכשיר אחד</h3><p>אור אדום, עיסוי קרקפת ואפליקטור סרום — בלי שלושה מכשירים נפרדים.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><h3>מתאים לכל סוגי השיער</h3><p>לנשים ולגברים, לכל גוון ומרקם.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div><div><h3>נטען ואלחוטי</h3><p>סוללה נטענת ב-USB, להשתמש בכל מקום בבית.</p></div></div>
+        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div><div><h3>אחריות ותמיכה</h3><p>30 יום ניסיון וכספך בחזרה אם זה לא בשבילך.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEFORE / AFTER ===================== -->
+  <section class="ba">
+    <div class="wrap center">
+      <span class="eyebrow">לפני / אחרי</span>
+      <h2>גרור/י את הסליידר וראה/י את ההבדל</h2>
+      <p class="lead">החלק/י את הידית ימינה ושמאלה כדי להשוות בין "לפני" ל"אחרי".</p>
+
+      <!-- סליידר אינטראקטיבי. החלף את שני ה-.ph ב:
+           <img class="layer after" src="assets/after.jpg" alt="הקרקפת לאחר X שבועות שימוש ב-ReGrow">
+           <img class="layer before" src="assets/before.jpg" alt="הקרקפת לפני השימוש ב-ReGrow"> -->
+      <div class="ba-slider" aria-label="השוואת לפני ואחרי">
+        <div class="layer after"><div class="ph">תמונת "אחרי"</div></div>
+        <div class="layer before"><div class="ph">תמונת "לפני"</div></div>
+        <span class="tag b">לפני</span>
+        <span class="tag a">אחרי</span>
+        <div class="divider"></div>
+        <div class="knob">⇆</div>
+        <input type="range" min="0" max="100" value="50" aria-label="גרור להשוואה בין לפני לאחרי">
+      </div>
+
+      <!-- מסגרות נוספות (סטטיות) — החלף כל .ph בתמונה אמיתית -->
+      <div class="ba-extra">
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ph before-mini">לפני</div>
+            <div class="ph">אחרי</div>
+          </div>
+          <div class="cap">תוצאות לאחר 12 שבועות שימוש</div>
+        </div>
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ph before-mini">לפני</div>
+            <div class="ph">אחרי</div>
+          </div>
+          <div class="cap">תוצאות לאחר 16 שבועות שימוש</div>
+        </div>
+      </div>
+
+      <p class="disclaimer">התמונות להמחשה בלבד עד להעלאת תמונות אמיתיות. תוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+    </div>
+  </section>
+
+  <!-- ===================== SOCIAL PROOF ===================== -->
+  <section class="reviews">
+    <div class="wrap center">
+      <span class="eyebrow">מה אומרים הלקוחות</span>
+      <div class="rating-top">
+        <span class="big">4.8</span>
+        <span class="stars" aria-label="דירוג 4.8 מתוך 5">★★★★★</span>
+      </div>
+      <p class="lead">מתוך 1,300+ ביקורות <!-- החלף במספר אמיתי --></p>
+
+      <div class="review-grid">
+        <!-- ⚠️ ביקורות לדוגמה — החלף בביקורות אמיתיות לפני העלייה לאוויר (פרסום מטעה אסור בחוק) -->
+        <div class="review">
+          <div class="who"><div class="av">מ</div><div><div class="name">מיכל ל.</div><div class="stars">★★★★★</div></div></div>
+          <p>"אחרי כמה שבועות של שימוש קבוע הרגשתי שהשיער נראה מלא יותר באזורים שהדאיגו אותי. נעים לשימוש וקל להתמיד — 10 דקות וזהו."</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">ד</div><div><div class="name">דנה כ.</div><div class="stars">★★★★★</div></div></div>
+          <p>"קניתי בעיקר בשביל הנוחות — 10 דקות מול הטלוויזיה. העיסוי מרגיש מצוין והקרקפת פחות יבשה. שמחה שהזמנתי."</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">י</div><div><div class="name">יוסי א.</div><div class="stars">★★★★☆</div></div></div>
+          <p>"התחלתי בספקנות, אבל ההתמדה השתלמה — קו השיער מרגיש מאוזן יותר. לקח כמה שבועות לראות שינוי, אז כדאי להיות סבלני."</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+        <div class="review">
+          <div class="who"><div class="av">ר</div><div><div class="name">רונית ש.</div><div class="stars">★★★★★</div></div></div>
+          <p>"האפליקטור לסרום פשוט גאוני, לא מבזבזת טיפה. המשלוח הגיע מהר והשירות היה אדיב. ממליצה בחום."</p>
+          <span class="verified">✓ רכישה מאומתת</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPARISON ===================== -->
+  <section class="compare">
+    <div class="wrap">
+      <span class="eyebrow">השוואה הוגנת</span>
+      <h2>ReGrow מול שאר האפשרויות</h2>
+      <div class="table-scroll">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="us">ReGrow</th>
+              <th>טיפול בקליניקה</th>
+              <th>תרופות / תוספים</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td>אלפי ₪</td><td>הוצאה חודשית מתמשכת</td></tr>
+            <tr><td>כאב</td><td class="us"><span class="yes">ללא</span></td><td>אפשרי</td><td><span class="yes">ללא</span></td></tr>
+            <tr><td>נוחות</td><td class="us">מהבית, 10 דק'</td><td>תורים ונסיעות</td><td>נטילה יומית קבועה</td></tr>
+            <tr><td>תופעות לוואי</td><td class="us"><span class="yes">מינימליות</span></td><td>אפשריות</td><td>אפשריות</td></tr>
+            <tr><td>מתאים לכולם</td><td class="us"><span class="yes">כן</span></td><td>לא תמיד</td><td>לא תמיד</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OFFER / PRICING ===================== -->
+  <section class="offer" id="offer">
+    <div class="wrap center">
+      <span class="eyebrow">ההצעה שלך</span>
+      <h2>התחל/י את המסע לשיער מלא יותר היום</h2>
+      <div class="price-card">
+        <div class="price-row">
+          {%- if product.compare_at_price > product.price -%}<span class="price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
+          <span class="price-now">{{ product.price | money }}</span>
+        </div>
+        {%- if product.compare_at_price > product.price -%}<div class="save">חוסך/ת {{ product.compare_at_price | minus: product.price | money }}</div>{%- endif -%}
+        <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
+        {%- form 'product', product -%}
+          {%- unless product.has_only_default_variant -%}
+            <select name="id" class="variant-select" aria-label="בחר/י אפשרות">
+              {%- for v in product.variants -%}
+                <option value="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- endunless -%}
+          <button type="submit" name="add" class="cta" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} — {{ product.price | money }}{%- else -%}אזל מהמלאי{%- endif -%}
+            <span class="arrow">←</span>
+          </button>
+        {%- endform -%}
+        <div class="trustbar">
+          <span>🚚 משלוח חינם</span>
+          <span>🛡️ 30 יום ניסיון</span>
+          <span>🔒 תשלום מאובטח</span>
+        </div>
+        <div class="pay" aria-label="אמצעי תשלום">
+          <span class="lbl">תשלום מאובטח באמצעות</span>
+          <span class="chip">VISA</span>
+          <span class="chip">Mastercard</span>
+          <span class="chip">American Express</span>
+          <span class="chip">bit</span>
+          <span class="chip">PayPal</span>
+          <span class="chip">Apple&nbsp;Pay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== מוצרים משלימים + באנדל ===================== -->
+  <section class="addons">
+    <div class="wrap">
+      <span class="eyebrow">שדרגו את התוצאות</span>
+      <h2>מוצרים משלימים שמשלימים את הטיפול</h2>
+      <p class="lead">הוסף/י לטיפול ב-ReGrow — יחד הם עובדים טוב יותר.</p>
+
+      <div class="addon-grid">
+        <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער ReGrow"> -->
+        <div class="addon">
+          <div class="pimg" title="סרום לצמיחת שיער">
+            <svg viewBox="0 0 200 240" role="img" aria-label="סרום לצמיחת שיער">
+              <defs><linearGradient id="serLiq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8584B"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <rect x="86" y="6" width="28" height="44" rx="6" fill="#241f1d"/>
+              <rect x="96" y="48" width="8" height="58" fill="#cfcabf"/>
+              <rect x="62" y="92" width="76" height="134" rx="16" fill="#fff" stroke="#E2D8CC" stroke-width="3"/>
+              <path d="M62 168 h76 v42 a16 16 0 0 1-16 16 H78 a16 16 0 0 1-16-16 Z" fill="url(#serLiq)"/>
+              <rect x="74" y="104" width="52" height="50" rx="6" fill="#FBF1EA"/>
+              <text x="100" y="135" text-anchor="middle" font-size="17" font-weight="800" fill="#C62828" font-family="Heebo,Arial">סרום</text>
+            </svg>
+          </div>
+          <div class="meta">
+            <h3>סרום לצמיחת שיער</h3>
+            <p>תרכובת מרוכזת להחדרה עם האפליקטור — מזין את הקרקפת ותומך בזקיקים.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪89</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            {%- if section.settings.addon_serum != blank -%}{%- assign ap = section.settings.addon_serum -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
+          </div>
+        </div>
+
+        <div class="addon">
+          <div class="pimg" title="שמפו / מרכך מחזק">
+            <svg viewBox="0 0 200 240" role="img" aria-label="שמפו / מרכך מחזק">
+              <defs><linearGradient id="shRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <rect x="92" y="8" width="16" height="28" rx="4" fill="#241f1d"/>
+              <rect x="78" y="30" width="44" height="14" rx="6" fill="#3a3431"/>
+              <rect x="108" y="14" width="36" height="8" rx="4" fill="#241f1d"/>
+              <rect x="58" y="46" width="84" height="188" rx="22" fill="url(#shRed)"/>
+              <rect x="72" y="116" width="56" height="84" rx="10" fill="#FBF1EA"/>
+              <text x="100" y="152" text-anchor="middle" font-size="15" font-weight="800" fill="#C62828" font-family="Heebo,Arial">שמפו</text>
+              <text x="100" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#9E1B1B" font-family="Heebo,Arial">מחזק</text>
+            </svg>
+          </div>
+          <div class="meta">
+            <h3>שמפו / מרכך מחזק</h3>
+            <p>שגרת רחצה מחזקת עם ביוטין וקפאין, לשיער שמרגיש מלא יותר.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪69</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            {%- if section.settings.addon_shampoo != blank -%}{%- assign ap = section.settings.addon_shampoo -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
+          </div>
+        </div>
+
+        <div class="addon">
+          <div class="pimg" title="מברשת עיסוי קרקפת">
+            <svg viewBox="0 0 220 220" role="img" aria-label="מברשת עיסוי קרקפת">
+              <defs><linearGradient id="brRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
+              <ellipse cx="110" cy="150" rx="44" ry="58" fill="url(#brRed)"/>
+              <ellipse cx="110" cy="168" rx="15" ry="22" fill="#fff"/>
+              <ellipse cx="110" cy="88" rx="76" ry="66" fill="url(#brRed)"/>
+              <ellipse cx="110" cy="88" rx="60" ry="50" fill="#241f1d"/>
+              <g fill="#E8584B">
+                <circle cx="110" cy="62" r="5"/><circle cx="84" cy="74" r="5"/><circle cx="136" cy="74" r="5"/>
+                <circle cx="72" cy="96" r="5"/><circle cx="98" cy="90" r="5"/><circle cx="122" cy="90" r="5"/><circle cx="148" cy="96" r="5"/>
+                <circle cx="84" cy="114" r="5"/><circle cx="110" cy="110" r="5"/><circle cx="136" cy="114" r="5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="meta">
+            <h3>מברשת עיסוי קרקפת</h3>
+            <p>מברשת סיליקון לעיסוי יומי שמגביר זרימת דם וחדירת הסרום.</p>
+          </div>
+          <div class="buy">
+            <span class="ap">₪39</span>   <!-- // PRICE -->
+            <!-- // ADD-TO-CART -->
+            {%- if section.settings.addon_brush != blank -%}{%- assign ap = section.settings.addon_brush -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- באנדל / דיל משתלם -->
+      <div class="bundle">
+        <span class="badge">הדיל המשתלם ביותר 🔥</span>
+        <h3 style="font-size:22px;margin:10px 0 4px">ערכת ReGrow המלאה</h3>
+        <div class="items">
+          <span>מסרק ReGrow</span><span class="plus">+</span>
+          <span>סרום</span><span class="plus">+</span>
+          <span>שמפו/מרכך</span><span class="plus">+</span>
+          <span>מברשת עיסוי</span>
+        </div>
+        <div class="price-row">
+          <span class="price-old">₪326</span>   <!-- // PRICE — סכום פריטים בנפרד -->
+          <span class="price-now">₪229</span>   <!-- // PRICE — מחיר הערכה -->
+        </div>
+        <div class="save">חוסך/ת ₪97 לעומת קנייה בנפרד</div>
+        <!-- // ADD-TO-CART — בשלב 2 יחובר ל-variant/מוצר הערכה בשופיפיי -->
+        {%- if section.settings.bundle_product != blank -%}{%- assign bp = section.settings.bundle_product -%}{%- form 'product', bp -%}<input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — {{ bp.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — ₪229 <span class="arrow">←</span></a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="faq">
+    <div class="wrap">
+      <span class="eyebrow">שאלות נפוצות</span>
+      <h2>כל מה שרצית לשאול</h2>
+
+      <details>
+        <summary>תוך כמה זמן רואים תוצאות?</summary>
+        <div class="ans">רוב המשתמשים מתחילים לשים לב לשינוי בתחושת המלאות תוך מספר שבועות של שימוש עקבי. התוצאות משתנות מאדם לאדם, ולכן אנחנו ממליצים על שימוש רציף לאורך זמן.</div>
+      </details>
+      <details>
+        <summary>האם השימוש כואב?</summary>
+        <div class="ans">לא. האור האדום בעוצמה נמוכה אינו מחמם ואינו כואב — רוב האנשים מתארים תחושה נעימה ורגועה.</div>
+      </details>
+      <details>
+        <summary>מתאים גם לגברים וגם לנשים?</summary>
+        <div class="ans">בהחלט. ReGrow מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
+      </details>
+      <details>
+        <summary>איך מנקים את המסרק?</summary>
+        <div class="ans">פשוט מנגבים את שיני המסרק במטלית יבשה או לחה מעט. אין לשטוף תחת מים זורמים.</div>
+      </details>
+      <details>
+        <summary>מה כוללת האחריות?</summary>
+        <div class="ans">כל מסרק מגיע עם 30 יום ניסיון — אם זה לא בשבילך, מחזירים ומקבלים את הכסף בחזרה, וכן אחריות יצרן על המוצר.</div>
+      </details>
+      <details>
+        <summary>כמה זמן לוקח המשלוח?</summary>
+        <div class="ans">המשלוח חינם ומגיע בדרך כלל תוך 2-4 ימי עסקים לכל הארץ.</div>
+      </details>
+      <details>
+        <summary>מה מדיניות ההחזרות?</summary>
+        <div class="ans">ניתן להחזיר את המוצר תוך 30 יום מקבלתו ולקבל החזר כספי מלא, כל עוד הוא במצב תקין.</div>
+      </details>
+      <details>
+        <summary>האם זה בטוח לשימוש יומיומי?</summary>
+        <div class="ans">כן. השימוש המומלץ הוא כ-3 פעמים בשבוע, 10 דקות בכל פעם. מומלץ להיוועץ ברופא אם יש לך מצב רפואי רלוונטי.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== GUARANTEE ===================== -->
+  <section class="guarantee">
+    <div class="wrap center">
+      <div class="g-card">
+        <div class="g-seal">30 יום<br>ניסיון</div>
+        <h2>נסה/י ללא סיכון</h2>
+        <p class="lead">תן/י ל-ReGrow 30 יום. אם לא הרגשת הבדל — פנה/י אלינו ונחזיר לך את מלוא הסכום. הסיכון כולו עלינו.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="final">
+    <div class="wrap center">
+      <h2>השיער שלך מחכה — בוא/י נתחיל</h2>
+      <p class="lead">מבצע לזמן מוגבל. הצטרף/י לאלפי לקוחות מרוצים.</p>
+      <div class="price-row">
+        {%- if product.compare_at_price > product.price -%}<span class="price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
+        <span class="price-now">{{ product.price | money }}</span>
+      </div>
+      <a href="#offer" class="cta" style="margin-top:14px">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="yr"></span> ReGrow <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
+  </footer>
+
+  <!-- ===================== CTA דביק במובייל ===================== -->
+  <div class="sticky-cta" aria-label="קנייה מהירה">
+    <div class="sp">
+      <b>{{ product.price | money }}</b>
+      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
+    </div>
+    <!-- // ADD-TO-CART -->
+    <a href="#offer" class="cta">הוסף/י לעגלה <span class="arrow">←</span></a>
+  </div>
+
+  <script>
+    // שנה נוכחית ב-footer (ללא localStorage/sessionStorage)
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // סליידר לפני/אחרי — מעדכן את משתנה --pos לפי הגרירה
+    document.querySelectorAll('.ba-slider').forEach(function(slider){
+      var range = slider.querySelector('input[type=range]');
+      if(!range) return;
+      var update = function(){ slider.style.setProperty('--pos', range.value); };
+      range.addEventListener('input', update);
+      update();
+    });
+  </script>
+</div>
+{% schema %}
+{
+  "name": "ReGrow — דף מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "תמונות" },
+    { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
+    { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
+    { "type": "header", "content": "טקסטים" },
+    { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
+    { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
+    { "type": "header", "content": "מוצרים משלימים — קישור לעגלה" },
+    { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
+    { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
+    { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
+    { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת ReGrow המלאה (באנדל)" }
+  ],
+  "presets": [ { "name": "ReGrow — דף מוצר" } ]
+}
+{% endschema %}
