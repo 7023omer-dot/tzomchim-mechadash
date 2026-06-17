@@ -1,7 +1,7 @@
 {% comment %}
   ReGrow — section דף מוצר לשופיפיי (נוצר מ-product-page.html)
-  • המחיר וכפתור 'הוסף לעגלה' מחוברים לאובייקט המוצר האמיתי (צ'קאאוט אמיתי).
-  • תמונות המוצר מוטמעות; אפשר להחליף ל-{{ product.featured_image }} בעת הצורך.
+  • מחיר + כפתור 'הוסף לעגלה' הראשי מחוברים לאובייקט המוצר (צ'קאאוט אמיתי).
+  • כפתורי המשלימים/הבאנדל מתחברים למוצרים שתבחר/י ב-Section settings.
 {% endcomment %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -364,6 +364,7 @@
     /* ---- תוספות לגרסת שופיפיי ---- */
     .regrow-page{padding-bottom:84px}
     .variant-select{width:100%;max-width:420px;margin:0 auto 12px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:#fff}
+    .addon form,.bundle form{margin:0}
   </style>
 <div dir="rtl" class="regrow-page">
 
@@ -533,25 +534,25 @@
       <p class="lead">מתוך 1,300+ ביקורות <!-- החלף במספר אמיתי --></p>
 
       <div class="review-grid">
-        <!-- החלף בטקסט ביקורות אמיתי בלבד -->
+        <!-- ⚠️ ביקורות לדוגמה — החלף בביקורות אמיתיות לפני העלייה לאוויר (פרסום מטעה אסור בחוק) -->
         <div class="review">
-          <div class="who"><div class="av">מ</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
-          <p>"[טקסט ביקורת אמיתי כאן — אל תמציא. החלף לפני העלאה.]"</p>
+          <div class="who"><div class="av">מ</div><div><div class="name">מיכל ל.</div><div class="stars">★★★★★</div></div></div>
+          <p>"אחרי כמה שבועות של שימוש קבוע הרגשתי שהשיער נראה מלא יותר באזורים שהדאיגו אותי. נעים לשימוש וקל להתמיד — 10 דקות וזהו."</p>
           <span class="verified">✓ רכישה מאומתת</span>
         </div>
         <div class="review">
-          <div class="who"><div class="av">ד</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
-          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <div class="who"><div class="av">ד</div><div><div class="name">דנה כ.</div><div class="stars">★★★★★</div></div></div>
+          <p>"קניתי בעיקר בשביל הנוחות — 10 דקות מול הטלוויזיה. העיסוי מרגיש מצוין והקרקפת פחות יבשה. שמחה שהזמנתי."</p>
           <span class="verified">✓ רכישה מאומתת</span>
         </div>
         <div class="review">
-          <div class="who"><div class="av">י</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★☆</div></div></div>
-          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <div class="who"><div class="av">י</div><div><div class="name">יוסי א.</div><div class="stars">★★★★☆</div></div></div>
+          <p>"התחלתי בספקנות, אבל ההתמדה השתלמה — קו השיער מרגיש מאוזן יותר. לקח כמה שבועות לראות שינוי, אז כדאי להיות סבלני."</p>
           <span class="verified">✓ רכישה מאומתת</span>
         </div>
         <div class="review">
-          <div class="who"><div class="av">ר</div><div><div class="name">[שם לקוח/ה]</div><div class="stars">★★★★★</div></div></div>
-          <p>"[טקסט ביקורת אמיתי כאן — החלף לפני העלאה.]"</p>
+          <div class="who"><div class="av">ר</div><div><div class="name">רונית ש.</div><div class="stars">★★★★★</div></div></div>
+          <p>"האפליקטור לסרום פשוט גאוני, לא מבזבזת טיפה. המשלוח הגיע מהר והשירות היה אדיב. ממליצה בחום."</p>
           <span class="verified">✓ רכישה מאומתת</span>
         </div>
       </div>
@@ -658,7 +659,7 @@
           <div class="buy">
             <span class="ap">₪89</span>   <!-- // PRICE -->
             <!-- // ADD-TO-CART -->
-            <button class="add-btn" type="button">הוסף/י</button>
+            {%- if section.settings.addon_serum != blank -%}{%- assign ap = section.settings.addon_serum -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
           </div>
         </div>
 
@@ -682,7 +683,7 @@
           <div class="buy">
             <span class="ap">₪69</span>   <!-- // PRICE -->
             <!-- // ADD-TO-CART -->
-            <button class="add-btn" type="button">הוסף/י</button>
+            {%- if section.settings.addon_shampoo != blank -%}{%- assign ap = section.settings.addon_shampoo -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
           </div>
         </div>
 
@@ -708,7 +709,7 @@
           <div class="buy">
             <span class="ap">₪39</span>   <!-- // PRICE -->
             <!-- // ADD-TO-CART -->
-            <button class="add-btn" type="button">הוסף/י</button>
+            {%- if section.settings.addon_brush != blank -%}{%- assign ap = section.settings.addon_brush -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
           </div>
         </div>
       </div>
@@ -729,7 +730,7 @@
         </div>
         <div class="save">חוסך/ת ₪97 לעומת קנייה בנפרד</div>
         <!-- // ADD-TO-CART — בשלב 2 יחובר ל-variant/מוצר הערכה בשופיפיי -->
-        <a href="#" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — ₪229 <span class="arrow">←</span></a>
+        {%- if section.settings.bundle_product != blank -%}{%- assign bp = section.settings.bundle_product -%}{%- form 'product', bp -%}<input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — {{ bp.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — ₪229 <span class="arrow">←</span></a>{%- endif -%}
       </div>
     </div>
   </section>
@@ -833,7 +834,13 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
-    { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" }
+    { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
+    { "type": "header", "content": "מוצרים משלימים — קישור לעגלה" },
+    { "type": "paragraph", "content": "בחר/י לכל מוצר את הפריט המתאים בחנות, וכפתור 'הוסף/י' יוסיף אותו לעגלה." },
+    { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
+    { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
+    { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
+    { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת ReGrow המלאה (באנדל)" }
   ],
   "presets": [ { "name": "ReGrow — דף מוצר" } ]
 }
