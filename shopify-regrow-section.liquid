@@ -1,5 +1,5 @@
 {% comment %}
-  ReGrow — section דף מוצר לשופיפיי (גרסה רזה, ללא base64)
+  צומחים מחדש — section דף מוצר לשופיפיי (גרסה רזה, ללא base64)
   • תמונת HERO נמשכת מתמונת המוצר; תמונת האפליקטור מהגדרות הסקשן.
   • מחיר + כל כפתורי 'הוסף לעגלה' מחוברים למוצרים אמיתיים (צ'קאאוט אמיתי).
 {% endcomment %}
@@ -38,7 +38,7 @@
       padding-bottom:84px; /* מקום ל-CTA דביק במובייל */
     }
     .regrow-page img{max-width:100%;display:block}
-    .regrow-page section{padding:48px 20px}
+    .regrow-page section{padding:56px 20px}
     .regrow-page .wrap{max-width:var(--maxw);margin:0 auto}
     .regrow-page h1, .regrow-page h2, .regrow-page h3{line-height:1.2;font-weight:800;letter-spacing:-.01em}
     .regrow-page h2{font-size:28px;margin-bottom:10px}
@@ -76,9 +76,9 @@
       background:linear-gradient(180deg,#FFFDFB 0%,var(--cream) 100%);
       padding-top:40px;
     }
-    .regrow-page .hero h1{font-size:34px;font-weight:900;margin-bottom:14px}
+    .regrow-page .hero h1{font-size:30px;font-weight:900;margin-bottom:16px}
     .regrow-page .hero h1 em{font-style:normal;color:var(--terracotta)}
-    .regrow-page .hero .lead{margin-bottom:26px}
+    .regrow-page .hero .lead{margin-bottom:30px}
     .regrow-page .hero-img{
       margin:26px auto 0;max-width:340px;border-radius:var(--radius);
       background:#fff;box-shadow:var(--shadow-lg);overflow:hidden;
@@ -342,8 +342,8 @@
       .regrow-page{--maxw:920px}
       .regrow-page{padding-bottom:0;font-size:18px}
       .regrow-page{padding-bottom:0}
-      .regrow-page section{padding:72px 24px}
-      .regrow-page .hero h1{font-size:50px}
+      .regrow-page section{padding:84px 24px}
+      .regrow-page .hero h1{font-size:42px}
       .regrow-page .hero .lead{font-size:21px}
       .regrow-page .hero-img{max-width:440px}
       .regrow-page h2{font-size:36px}
@@ -370,22 +370,20 @@
 <div dir="rtl" class="regrow-page">
 
 
-  <!-- בס"ד -->
-  <div class="besd">בס״ד</div>
 
   <!-- ===================== בר הכרזה עליון ===================== -->
   <div class="announce" role="region" aria-label="הטבות">
     <span>🚚 משלוח חינם לכל הארץ</span>
-    <span>🛡️ 30 יום ניסיון</span>
-    <span class="hot">🔥 רק ₪129</span>
+    <span>🛡️ 30 יום ניסיון או כספך חזרה</span>
+    <span>🔒 תשלום מאובטח</span>
   </div>
 
   <!-- ===================== HERO ===================== -->
   <header class="hero">
     <div class="wrap center">
-      <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · ReGrow <!-- BRAND --></span>
+      <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · צומחים מחדש <!-- BRAND --></span>
       <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
-      <p class="lead">מסרק ReGrow משלב <strong>אור אדום</strong>, <strong>עיסוי קרקפת</strong> ו<strong>אפליקטור סרום מובנה</strong> — הכול במכשיר אחד. אותה גישה שמשמשת שנים בקליניקות, עכשיו אצלך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
+      <p class="lead">מסרק צומחים מחדש משלב <strong>אור אדום</strong>, <strong>עיסוי קרקפת</strong> ו<strong>אפליקטור סרום מובנה</strong> — הכול במכשיר אחד. אותה גישה שמשמשת שנים בקליניקות, עכשיו אצלך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
 
       <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
 
@@ -396,8 +394,8 @@
       </div>
 
       <div class="hero-img">
-        <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק ReGrow אדום לקרקפת" loading="eager"> -->
-        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="ReGrow" width="700" loading="eager">{%- else -%}<div class="ph">העלה/י תמונת מוצר למוצר בשופיפיי</div>{%- endif -%}</div>
+        <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק צומחים מחדש אדום לקרקפת" loading="eager"> -->
+        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<div class="ph">העלה/י תמונת מוצר למוצר בשופיפיי</div>{%- endif -%}</div>
       </div>
     </div>
   </header>
@@ -422,8 +420,8 @@
       <span class="eyebrow">הפתרון</span>
       <h2>שלוש פעולות שעובדות יחד על הקרקפת שלך</h2>
       <div class="card">
-        {%- if section.settings.applicator_image != blank -%}<img class="solpic" src="{{ section.settings.applicator_image | image_url: width: 700 }}" alt="אפליקטור הסרום של ReGrow" loading="lazy">{%- endif -%}
-        <p>מסרק <strong>ReGrow</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
+        {%- if section.settings.applicator_image != blank -%}<img class="solpic" src="{{ section.settings.applicator_image | image_url: width: 700 }}" alt="אפליקטור הסרום של צומחים מחדש" loading="lazy">{%- endif -%}
+        <p>מסרק <strong>צומחים מחדש</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
       </div>
     </div>
   </section>
@@ -432,7 +430,7 @@
   <section class="how">
     <div class="wrap center">
       <span class="eyebrow">בוידאו</span>
-      <h2>ראו את ReGrow בפעולה</h2>
+      <h2>ראו את צומחים מחדש בפעולה</h2>
       <p class="lead">דמו קצר של השימוש במכשיר — אור אדום, עיסוי והחדרת הסרום.</p>
       <!-- כשתשלח את הסרטון, החלף את ה-.ph באחד מאלה:
            <video controls playsinline poster="assets/video-poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
@@ -468,7 +466,7 @@
   <!-- ===================== BENEFITS ===================== -->
   <section class="benefits">
     <div class="wrap">
-      <span class="eyebrow">למה ReGrow</span>
+      <span class="eyebrow">למה צומחים מחדש</span>
       <h2>כל מה שחיפשת — בלי מה שהבריח אותך</h2>
       <div class="grid">
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h3>ללא כאב, לא פולשני</h3><p>בלי מחטים, בלי ניתוח, בלי תופעות לוואי אגרסיביות.</p></div></div>
@@ -490,8 +488,8 @@
       <p class="lead">החלק/י את הידית ימינה ושמאלה כדי להשוות בין "לפני" ל"אחרי".</p>
 
       <!-- סליידר אינטראקטיבי. החלף את שני ה-.ph ב:
-           <img class="layer after" src="assets/after.jpg" alt="הקרקפת לאחר X שבועות שימוש ב-ReGrow">
-           <img class="layer before" src="assets/before.jpg" alt="הקרקפת לפני השימוש ב-ReGrow"> -->
+           <img class="layer after" src="assets/after.jpg" alt="הקרקפת לאחר X שבועות שימוש ב-צומחים מחדש">
+           <img class="layer before" src="assets/before.jpg" alt="הקרקפת לפני השימוש ב-צומחים מחדש"> -->
       <div class="ba-slider" aria-label="השוואת לפני ואחרי">
         <div class="layer after"><div class="ph">תמונת "אחרי"</div></div>
         <div class="layer before"><div class="ph">תמונת "לפני"</div></div>
@@ -564,13 +562,13 @@
   <section class="compare">
     <div class="wrap">
       <span class="eyebrow">השוואה הוגנת</span>
-      <h2>ReGrow מול שאר האפשרויות</h2>
+      <h2>צומחים מחדש מול שאר האפשרויות</h2>
       <div class="table-scroll">
         <table class="cmp">
           <thead>
             <tr>
               <th></th>
-              <th class="us">ReGrow</th>
+              <th class="us">צומחים מחדש</th>
               <th>טיפול בקליניקה</th>
               <th>תרופות / תוספים</th>
             </tr>
@@ -637,10 +635,10 @@
     <div class="wrap">
       <span class="eyebrow">שדרגו את התוצאות</span>
       <h2>מוצרים משלימים שמשלימים את הטיפול</h2>
-      <p class="lead">הוסף/י לטיפול ב-ReGrow — יחד הם עובדים טוב יותר.</p>
+      <p class="lead">הוסף/י לטיפול ב-צומחים מחדש — יחד הם עובדים טוב יותר.</p>
 
       <div class="addon-grid">
-        <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער ReGrow"> -->
+        <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער צומחים מחדש"> -->
         <div class="addon">
           <div class="pimg" title="סרום לצמיחת שיער">
             <svg viewBox="0 0 200 240" role="img" aria-label="סרום לצמיחת שיער">
@@ -718,9 +716,9 @@
       <!-- באנדל / דיל משתלם -->
       <div class="bundle">
         <span class="badge">הדיל המשתלם ביותר 🔥</span>
-        <h3 style="font-size:22px;margin:10px 0 4px">ערכת ReGrow המלאה</h3>
+        <h3 style="font-size:22px;margin:10px 0 4px">ערכת צומחים מחדש המלאה</h3>
         <div class="items">
-          <span>מסרק ReGrow</span><span class="plus">+</span>
+          <span>מסרק צומחים מחדש</span><span class="plus">+</span>
           <span>סרום</span><span class="plus">+</span>
           <span>שמפו/מרכך</span><span class="plus">+</span>
           <span>מברשת עיסוי</span>
@@ -752,7 +750,7 @@
       </details>
       <details>
         <summary>מתאים גם לגברים וגם לנשים?</summary>
-        <div class="ans">בהחלט. ReGrow מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
+        <div class="ans">בהחלט. צומחים מחדש מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
       </details>
       <details>
         <summary>איך מנקים את המסרק?</summary>
@@ -783,7 +781,7 @@
       <div class="g-card">
         <div class="g-seal">30 יום<br>ניסיון</div>
         <h2>נסה/י ללא סיכון</h2>
-        <p class="lead">תן/י ל-ReGrow 30 יום. אם לא הרגשת הבדל — פנה/י אלינו ונחזיר לך את מלוא הסכום. הסיכון כולו עלינו.</p>
+        <p class="lead">תן/י ל-צומחים מחדש 30 יום. אם לא הרגשת הבדל — פנה/י אלינו ונחזיר לך את מלוא הסכום. הסיכון כולו עלינו.</p>
       </div>
     </div>
   </section>
@@ -802,7 +800,7 @@
   </section>
 
   <footer>
-    © <span id="yr"></span> ReGrow <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
+    © <span id="yr"></span> צומחים מחדש <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
   </footer>
 
   <!-- ===================== CTA דביק במובייל ===================== -->
@@ -831,7 +829,7 @@
 </div>
 {% schema %}
 {
-  "name": "ReGrow — דף מוצר",
+  "name": "צומחים מחדש — דף מוצר",
   "tag": "section",
   "settings": [
     { "type": "header", "content": "תמונות" },
@@ -844,8 +842,8 @@
     { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
-    { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת ReGrow המלאה (באנדל)" }
+    { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת צומחים מחדש המלאה (באנדל)" }
   ],
-  "presets": [ { "name": "ReGrow — דף מוצר" } ]
+  "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
 }
 {% endschema %}
