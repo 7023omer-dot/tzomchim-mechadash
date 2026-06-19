@@ -702,6 +702,25 @@
         </div>
       </div>
 
+      <!-- מבצעי חבילות (upsell) -->
+      <div class="bundle">
+        <span class="badge">מבצע חבילה 🔥</span>
+        <h3 style="font-size:20px;margin:10px 0 4px">מסרק + סרום</h3>
+        <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום לצמיחה</span></div>
+        <div class="price-row"><span class="price-old">₪218</span><span class="price-now">₪199</span></div>
+        <div class="save">חוסך/ת ₪19</div>
+        {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י מסרק + סרום — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י מסרק + סרום — ₪199 <span class="arrow">←</span></a>{%- endif -%}
+      </div>
+
+      <div class="bundle">
+        <span class="badge">מבצע חבילה 🔥</span>
+        <h3 style="font-size:20px;margin:10px 0 4px">מסרק + מברשת עיסוי</h3>
+        <div class="items"><span>מסרק</span><span class="plus">+</span><span>מברשת עיסוי</span></div>
+        <div class="price-row"><span class="price-old">₪168</span><span class="price-now">₪149</span></div>
+        <div class="save">חוסך/ת ₪19</div>
+        {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י מסרק + מברשת — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י מסרק + מברשת — ₪149 <span class="arrow">←</span></a>{%- endif -%}
+      </div>
+
       <!-- באנדל / דיל משתלם -->
       <div class="bundle">
         <span class="badge">הדיל המשתלם ביותר 🔥</span>
@@ -831,6 +850,8 @@
     { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
+    { "type": "product", "id": "combo_serum", "label": "מוצר: חבילת מסרק + סרום (₪199)" },
+    { "type": "product", "id": "combo_brush", "label": "מוצר: חבילת מסרק + מברשת (₪149)" },
     { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת צומחים מחדש המלאה (באנדל)" }
   ],
   "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
