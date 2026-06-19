@@ -493,7 +493,7 @@
                 alt: logo_alt
               }}
             {%- else -%}
-              <span class="h2">צומחים מחדש</span>
+              <img src="{{ 'brand-logo.png' | asset_url }}" alt="צומחים מחדש" class="header__heading-logo motion-reduce" style="width:100px;height:auto;border-radius:50%" width="100" height="100">
             {%- endif -%}
           </{% if section.settings.logo_link != blank %}a{% else %}div{% endif %}>
       {%- if request.page_type == 'index' -%}
@@ -616,7 +616,7 @@
                 alt: logo_alt
               }}
             {%- else -%}
-              <span class="h2">צומחים מחדש</span>
+              <img src="{{ 'brand-logo.png' | asset_url }}" alt="צומחים מחדש" class="header__heading-logo motion-reduce" style="width:100px;height:auto;border-radius:50%" width="100" height="100">
             {%- endif -%}
           </{% if section.settings.logo_link != blank %}a{% else %}div{% endif %}>
       {%- if request.page_type == 'index' -%}
