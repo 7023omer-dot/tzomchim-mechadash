@@ -11,10 +11,10 @@
     .regrow-page{
       --cream:#FBF7F2;        /* רקע נקי חם */
       --white:#FFFFFF;
-      --ink:#0F0F0F;          /* טקסט ראשי */
-      --muted:#6E665E;        /* טקסט משני */
-      --terracotta:#ED1C24;   /* אדום המוצר — אקצנט ראשי */
-      --terracotta-dark:#B3000C;
+      --ink:#111111;          /* טקסט ראשי */
+      --muted:#4A4A4A;        /* טקסט משני */
+      --terracotta:#E8112D;   /* אדום המוצר — אקצנט ראשי */
+      --terracotta-dark:#C20E26;
       --gold:#D9A441;         /* זהב רך */
       --line:#ECE3D8;
       --ok:#2E8B57;
@@ -362,7 +362,7 @@
       .regrow-page .addon .buy{align-items:center}
       .regrow-page .ba-extra{grid-template-columns:1fr 1fr}
       .regrow-page .video-wrap{aspect-ratio:16/9;max-width:760px}
-      .regrow-page .sticky-cta{display:none}      /* דביק רק במובייל */
+      .regrow-page .sticky-cta{max-width:780px;margin:0 auto;border-radius:14px 14px 0 0}      /* גם בדסקטופ */
     }
   
     /* ---- תוספות לגרסת שופיפיי ---- */
@@ -387,19 +387,19 @@
     <div class="wrap center">
       <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · צומחים מחדש <!-- BRAND --></span>
       <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
-      <p class="lead">מסרק צומחים מחדש משלב <strong>אור אדום</strong>, <strong>עיסוי קרקפת</strong> ו<strong>אפליקטור סרום מובנה</strong> — הכול במכשיר אחד. אותה גישה שמשמשת שנים בקליניקות, עכשיו אצלך הביתה. 10 דקות ביום, בנוחות מהספה.</p>
+      <p class="lead">מכשיר 3-ב-1 לקרקפת: אור אדום, עיסוי ואפליקטור סרום. 10 דקות ביום, מהבית — הטכנולוגיה מהקליניקות, עכשיו אצלך.</p>
 
       <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
 
       <div class="trustbar">
-        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם תוך 2-4 ימים</span>
+        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם לכל הארץ</span>
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> 30 יום ניסיון או כספך בחזרה</span>
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
       </div>
 
       <div class="hero-img">
         <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק צומחים מחדש אדום לקרקפת" loading="eager"> -->
-        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<div class="ph">העלה/י תמונת מוצר למוצר בשופיפיי</div>{%- endif -%}</div>
+        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<div class="ph" style="min-height:320px">תמונת המוצר תופיע כאן — העלה/י תמונה למוצר בשופיפיי</div>{%- endif -%}</div>
       </div>
     </div>
   </header>
@@ -426,6 +426,7 @@
       <div class="card">
         {%- if section.settings.applicator_image != blank -%}<img class="solpic" src="{{ section.settings.applicator_image | image_url: width: 700 }}" alt="אפליקטור הסרום של צומחים מחדש" loading="lazy">{%- endif -%}
         <p>מסרק <strong>צומחים מחדש</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
+        <p style="margin-top:12px;color:var(--muted);font-size:15px">אור אדום בעוצמה נמוכה (LLLT) הוא טיפול לא-פולשני שנחקר במחקרים בהקשר של עידוד פעילות זקיקי השיער. התוצאות משתנות מאדם לאדם.</p>
       </div>
     </div>
   </section>
@@ -586,6 +587,7 @@
         </div>
         {%- if product.compare_at_price > product.price -%}<div class="save">חוסך/ת {{ product.compare_at_price | minus: product.price | money }}</div>{%- endif -%}
         <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
+        <div style="font-weight:800;color:#111111;margin:8px 0 2px;font-size:15px">🛡️ 30 יום ניסיון — לא הרגשת הבדל? כספך בחזרה</div>
         {%- form 'product', product -%}
           {%- unless product.has_only_default_variant -%}
             <select name="id" class="variant-select" aria-label="בחר/י אפשרות">
@@ -600,6 +602,7 @@
             {%- if product.available -%}{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} — {{ product.price | money }}{%- else -%}אזל מהמלאי{%- endif -%}
             <span class="arrow">←</span>
           </button>
+          {{ form | payment_button }}
         {%- endform -%}
         <div class="trustbar">
           <span>🚚 משלוח חינם</span>
@@ -761,6 +764,10 @@
         <div class="ans">בהחלט. צומחים מחדש מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
       </details>
       <details>
+        <summary>מתאים גם לקרחת מתקדמת?</summary>
+        <div class="ans">המכשיר עובד הכי טוב כשיש עדיין זקיקים פעילים — כלומר בדילול ובהקלשה. במצב של קרחת מתקדמת לאורך שנים התוצאות מוגבלות יותר, ומומלץ להיוועץ עם איש מקצוע לפני רכישה.</div>
+      </details>
+      <details>
         <summary>איך מנקים את המסרק?</summary>
         <div class="ans">פשוט מנגבים את שיני המסרק במטלית יבשה או לחה מעט. אין לשטוף תחת מים זורמים.</div>
       </details>
@@ -814,6 +821,7 @@
   <!-- ===================== CTA דביק במובייל ===================== -->
   <div class="sticky-cta" aria-label="קנייה מהירה">
     <div class="sp">
+      <span style="font-size:13px;font-weight:700;color:#111">מסרק צומחים מחדש</span>
       <b>{{ product.price | money }}</b>
       {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
     </div>
