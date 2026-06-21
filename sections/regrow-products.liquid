@@ -1,0 +1,271 @@
+{%- comment -%}
+  צומחים מחדש — גלריית מוצרים + חבילות
+  עיצוב ספא בהיר, RTL מלא, Mobile-First. כל ה-CSS מתוחם תחת .regrow-products.
+  תמונות נטענות מבורר-תמונה בכל בלוק; אם אין תמונה — placeholder נקי.
+{%- endcomment -%}
+
+<section class="regrow-products" dir="rtl">
+  <style>
+    .regrow-products{
+      --rp-cream:#FBF7F2;
+      --rp-card:#FFFDF9;
+      --rp-ink:#111111;
+      --rp-muted:#4A4A4A;
+      --rp-accent:#E8112D;
+      --rp-accent-dark:#C20E26;
+      --rp-line:#ECE3D8;
+      --rp-gold:#D9A441;
+      background:var(--rp-cream);
+      color:var(--rp-ink);
+      padding:clamp(40px,7vw,80px) clamp(16px,4vw,40px);
+      direction:rtl;
+      text-align:right;
+    }
+    .regrow-products *{box-sizing:border-box}
+    .regrow-products .rp-wrap{max-width:1240px;margin:0 auto}
+    .regrow-products .rp-head{text-align:center;margin-bottom:clamp(26px,4vw,44px)}
+    .regrow-products .rp-head h2{
+      font-size:clamp(26px,4.4vw,40px);line-height:1.15;margin:0 0 10px;font-weight:800;color:var(--rp-ink)
+    }
+    .regrow-products .rp-head p{font-size:clamp(15px,2.2vw,18px);color:var(--rp-muted);margin:0 auto;max-width:640px}
+
+    /* ---------- גריד מוצרים ---------- */
+    .regrow-products .rp-grid{
+      display:grid;grid-template-columns:1fr;gap:clamp(14px,2.4vw,24px)
+    }
+    @media(min-width:600px){.regrow-products .rp-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.regrow-products .rp-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1200px){.regrow-products .rp-grid{grid-template-columns:repeat(4,1fr)}}
+
+    .regrow-products .rp-card{
+      position:relative;display:flex;flex-direction:column;background:var(--rp-card);
+      border:1px solid var(--rp-line);border-radius:18px;overflow:hidden;
+      box-shadow:0 6px 18px rgba(40,30,20,.06);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .regrow-products .rp-card:hover{transform:scale(1.03);box-shadow:0 14px 34px rgba(40,30,20,.14)}
+    @media(hover:none){.regrow-products .rp-card:hover{transform:none}}
+
+    .regrow-products .rp-imgbox{
+      position:relative;aspect-ratio:1/1;background:#fff;
+      display:flex;align-items:center;justify-content:center;overflow:hidden
+    }
+    .regrow-products .rp-imgbox img{width:100%;height:100%;object-fit:contain;padding:14px}
+    .regrow-products .rp-ph{
+      width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:6px;background:repeating-linear-gradient(45deg,#fff,#fff 12px,#fbf7f2 12px,#fbf7f2 24px);
+      color:var(--rp-muted);text-align:center;padding:18px
+    }
+    .regrow-products .rp-ph span{font-weight:700;color:var(--rp-ink);font-size:15px}
+    .regrow-products .rp-ph small{font-size:12px;opacity:.75}
+
+    /* באדג'ים */
+    .regrow-products .rp-badge{
+      position:absolute;top:12px;z-index:2;font-size:12px;font-weight:800;line-height:1;
+      padding:6px 10px;border-radius:999px;white-space:nowrap
+    }
+    .regrow-products .rp-badge.flag{inset-inline-start:12px;background:var(--rp-accent);color:#fff}
+    .regrow-products .rp-badge.save{inset-inline-end:12px;background:#111;color:#fff}
+
+    .regrow-products .rp-body{display:flex;flex-direction:column;gap:8px;padding:16px 16px 18px;flex:1}
+    .regrow-products .rp-title{font-size:17px;font-weight:800;margin:0;color:var(--rp-ink)}
+    .regrow-products .rp-desc{font-size:13.5px;color:var(--rp-muted);margin:0;line-height:1.5;flex:1}
+
+    .regrow-products .rp-price{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+    .regrow-products .rp-price .now{font-size:22px;font-weight:900;color:var(--rp-accent)}
+    .regrow-products .rp-price .was{font-size:14px;color:#9a9a9a;text-decoration:line-through}
+
+    .regrow-products .rp-cta{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;min-height:48px;margin-top:6px;border:0;border-radius:12px;cursor:pointer;
+      background:var(--rp-accent);color:#fff;font-size:15px;font-weight:800;text-decoration:none;
+      transition:background .2s ease
+    }
+    .regrow-products .rp-cta:hover{background:var(--rp-accent-dark)}
+    .regrow-products form.rp-form{margin:0}
+
+    /* ---------- חבילות ---------- */
+    .regrow-products .rp-bundles{margin-top:clamp(40px,6vw,68px)}
+    .regrow-products .rp-bundles h3{
+      text-align:center;font-size:clamp(22px,3.4vw,30px);font-weight:800;margin:0 0 6px
+    }
+    .regrow-products .rp-bundles .rp-sub{text-align:center;color:var(--rp-muted);margin:0 0 26px}
+    .regrow-products .rp-bgrid{display:grid;grid-template-columns:1fr;gap:clamp(14px,2.4vw,22px)}
+    @media(min-width:760px){.regrow-products .rp-bgrid{grid-template-columns:repeat(3,1fr)}}
+
+    .regrow-products .rp-bundle{
+      position:relative;display:flex;flex-direction:column;gap:10px;background:#fff;
+      border:1px solid var(--rp-line);border-radius:18px;padding:24px 20px 22px;text-align:center;
+      box-shadow:0 6px 18px rgba(40,30,20,.06);transition:transform .25s ease, box-shadow .25s ease
+    }
+    .regrow-products .rp-bundle:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(40,30,20,.13)}
+    .regrow-products .rp-bundle.hot{border:2px solid var(--rp-accent);box-shadow:0 16px 36px rgba(232,17,45,.18)}
+    .regrow-products .rp-bundle .rp-bname{font-size:20px;font-weight:900;margin:0}
+    .regrow-products .rp-bundle .rp-binc{font-size:14px;color:var(--rp-muted);margin:0;line-height:1.55;min-height:44px}
+    .regrow-products .rp-bundle .rp-bprice{font-size:30px;font-weight:900;color:var(--rp-ink);margin:4px 0}
+    .regrow-products .rp-bundle .rp-hot-tag{
+      position:absolute;top:-13px;inset-inline-start:50%;transform:translateX(50%);
+      background:var(--rp-accent);color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px
+    }
+
+    /* ---------- Fade-In בגלילה ---------- */
+    .regrow-products .rp-fade{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+    .regrow-products .rp-fade.in{opacity:1;transform:none}
+    @media(prefers-reduced-motion:reduce){
+      .regrow-products .rp-fade{opacity:1;transform:none;transition:none}
+      .regrow-products .rp-card,.regrow-products .rp-bundle{transition:none}
+    }
+  </style>
+
+  <div class="rp-wrap">
+    <div class="rp-head rp-fade">
+      <h2>{{ section.settings.heading | default: 'המוצרים שלנו' }}</h2>
+      {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+
+    {%- assign product_blocks = section.blocks | where: 'type', 'product' -%}
+    {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle' -%}
+
+    {%- if product_blocks.size > 0 -%}
+    <div class="rp-grid">
+      {%- for block in product_blocks -%}
+        <article class="rp-card rp-fade" {{ block.shopify_attributes }}>
+          {%- if block.settings.flagship -%}<span class="rp-badge flag">מוצר דגל</span>{%- endif -%}
+          {%- if block.settings.badge != blank -%}<span class="rp-badge save">{{ block.settings.badge }}</span>{%- endif -%}
+
+          <div class="rp-imgbox">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="600" height="600" loading="lazy">
+            {%- else -%}
+              <div class="rp-ph"><span>{{ block.settings.title }}</span><small>תמונה תועלה בקרוב</small></div>
+            {%- endif -%}
+          </div>
+
+          <div class="rp-body">
+            <h3 class="rp-title">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}<p class="rp-desc">{{ block.settings.description }}</p>{%- endif -%}
+
+            <div class="rp-price">
+              <span class="now">{{ block.settings.price }}</span>
+              {%- if block.settings.compare_price != blank -%}<span class="was">{{ block.settings.compare_price }}</span>{%- endif -%}
+            </div>
+
+            {%- if block.settings.product != blank -%}
+              {%- assign p = block.settings.product -%}
+              <form method="post" action="{{ routes.cart_add_url }}" class="rp-form" accept-charset="UTF-8">
+                <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="rp-cta">הוספה לסל</button>
+              </form>
+            {%- else -%}
+              <a class="rp-cta" href="{{ routes.all_products_collection_url }}">הוספה לסל</a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if bundle_blocks.size > 0 -%}
+    <div class="rp-bundles">
+      <h3 class="rp-fade">{{ section.settings.bundles_heading | default: 'חבילות משתלמות' }}</h3>
+      {%- if section.settings.bundles_sub != blank -%}<p class="rp-sub rp-fade">{{ section.settings.bundles_sub }}</p>{%- endif -%}
+      <div class="rp-bgrid">
+        {%- for block in bundle_blocks -%}
+          <div class="rp-bundle rp-fade{% if block.settings.highlight %} hot{% endif %}" {{ block.shopify_attributes }}>
+            {%- if block.settings.highlight -%}<span class="rp-hot-tag">{{ block.settings.badge | default: 'הכי משתלם' }}</span>{%- endif -%}
+            <p class="rp-bname">{{ block.settings.title }}</p>
+            {%- if block.settings.includes != blank -%}<p class="rp-binc">{{ block.settings.includes }}</p>{%- endif -%}
+            <p class="rp-bprice">{{ block.settings.price }}</p>
+            {%- if block.settings.product != blank -%}
+              {%- assign bp = block.settings.product -%}
+              <form method="post" action="{{ routes.cart_add_url }}" class="rp-form" accept-charset="UTF-8">
+                <input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="rp-cta">הוספה לסל</button>
+              </form>
+            {%- else -%}
+              <a class="rp-cta" href="{{ routes.all_products_collection_url }}">הוספה לסל</a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+
+  <script>
+    (function(){
+      var root=document.currentScript.closest('.regrow-products');
+      if(!root)return;
+      var items=root.querySelectorAll('.rp-fade');
+      if(!('IntersectionObserver'in window)){items.forEach(function(el){el.classList.add('in')});return;}
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+      },{threshold:.12});
+      items.forEach(function(el){io.observe(el)});
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "צומחים — גלריית מוצרים",
+  "tag": "section",
+  "class": "regrow-products-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "המוצרים שלנו" },
+    { "type": "textarea", "id": "subheading", "label": "תת-כותרת", "default": "כל מה שצריך לשיער מלא ובריא — במקום אחד." },
+    { "type": "header", "content": "חבילות" },
+    { "type": "text", "id": "bundles_heading", "label": "כותרת חבילות", "default": "חבילות משתלמות" },
+    { "type": "textarea", "id": "bundles_sub", "label": "תת-כותרת חבילות", "default": "חוסכים יותר כשמשלבים." }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "כרטיס מוצר",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "תמונת מוצר" },
+        { "type": "text", "id": "title", "label": "שם מוצר", "default": "מוצר" },
+        { "type": "textarea", "id": "description", "label": "תיאור קצר" },
+        { "type": "text", "id": "price", "label": "מחיר תצוגה", "default": "49 ₪" },
+        { "type": "text", "id": "compare_price", "label": "מחיר רגיל (מחוק) — אופציונלי" },
+        { "type": "text", "id": "badge", "label": "באדג' (למשל: חיסכון 71 ₪) — אופציונלי" },
+        { "type": "checkbox", "id": "flagship", "label": "מוצר דגל (באדג' אדום)", "default": false },
+        { "type": "product", "id": "product", "label": "מוצר Shopify (להוספה לסל) — אופציונלי" }
+      ]
+    },
+    {
+      "type": "bundle",
+      "name": "כרטיס חבילה",
+      "settings": [
+        { "type": "text", "id": "title", "label": "שם החבילה", "default": "חבילה" },
+        { "type": "textarea", "id": "includes", "label": "מה כולל" },
+        { "type": "text", "id": "price", "label": "מחיר", "default": "199 ₪" },
+        { "type": "checkbox", "id": "highlight", "label": "הדגש כ\"הכי משתלם\"", "default": false },
+        { "type": "text", "id": "badge", "label": "טקסט באדג' (לחבילה מודגשת)", "default": "הכי משתלם" },
+        { "type": "product", "id": "product", "label": "מוצר Shopify (להוספה לסל) — אופציונלי" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "צומחים — גלריית מוצרים",
+      "blocks": [
+        { "type": "product", "settings": { "title": "מסרק אינפרא אדום לצמיחת שיער", "description": "טכנולוגיית אור אדום + עיסוי ורטט שמעוררת את זקיקי השיער, מחזקת שורשים ומשיבה ברק וחיוניות.", "price": "148 ₪", "compare_price": "219 ₪", "badge": "חיסכון 71 ₪", "flagship": true } },
+        { "type": "product", "settings": { "title": "Spartan — שמפו מפעיל שורשים", "description": "שמפו מפעיל שורשים לחיזוק השיער מהבסיס, מעניק נפח ותחושת קרקפת בריאה.", "price": "49 ₪" } },
+        { "type": "product", "settings": { "title": "שמפו רוזמרין + קרטין Hoegoa", "description": "רוזמרין וקרטין לחיזוק שיער דליל, שיקום והגנה מפני נזקים.", "price": "49 ₪" } },
+        { "type": "product", "settings": { "title": "שמפו רוזמרין מנט Hoegoa", "description": "רוזמרין ומנטה לקרקפת רעננה, ניקוי עמוק וחיזוק השיער.", "price": "49 ₪" } },
+        { "type": "product", "settings": { "title": "שמן רוזמרין לצמיחת שיער", "description": "שמן טבעי שמחזק את השורשים, משפר זרימת דם ומסייע לצמיחה בריאה.", "price": "49 ₪" } },
+        { "type": "product", "settings": { "title": "שמן בטאנה (Batana Oil)", "description": "שמן טבעי לשיקום שיער, הזנה עמוקה וחיזוק השורשים — ברק וחיוניות.", "price": "59 ₪" } },
+        { "type": "product", "settings": { "title": "סרום GHK-CU", "description": "סרום פפטיד נחושת לחידוש השיער, עידוד צמיחה מחודשת ושיפור מראה השיער.", "price": "59 ₪" } },
+        { "type": "product", "settings": { "title": "Fast Hair Essence", "description": "פורמולה טבעית לחיזוק השיער, מעניקה נפח ועידוד צמיחה בריאה ומלאה.", "price": "69 ₪" } },
+        { "type": "product", "settings": { "title": "7 Days — סרום צמיחה (ג'ינג'ר, 10ml)", "description": "סרום ג'ינג'ר מרוכז לעידוד צמיחה ושיפור צפיפות — מוצר כניסה מושלם.", "price": "39 ₪" } },
+        { "type": "bundle", "settings": { "title": "Starter", "includes": "מסרק + סרום GHK-CU", "price": "179 ₪" } },
+        { "type": "bundle", "settings": { "title": "Premium", "includes": "מסרק + שמן Batana + Spartan + שמפו", "price": "249 ₪", "highlight": true, "badge": "הכי משתלם" } },
+        { "type": "bundle", "settings": { "title": "Ultimate", "includes": "מסרק + סרום + שמן + שמפו", "price": "299 ₪" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
