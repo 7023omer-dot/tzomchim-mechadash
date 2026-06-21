@@ -28,6 +28,8 @@
       font-size:clamp(26px,4.4vw,40px);line-height:1.15;margin:0 0 10px;font-weight:800;color:var(--rp-ink)
     }
     .regrow-products .rp-head p{font-size:clamp(15px,2.2vw,18px);color:var(--rp-muted);margin:0 auto;max-width:640px}
+    .regrow-products .rp-collage{max-width:1100px;margin:0 auto clamp(28px,4vw,46px);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(40,30,20,.10);border:1px solid var(--rp-line)}
+    .regrow-products .rp-collage img{display:block;width:100%;height:auto}
 
     /* ---------- גריד מוצרים ---------- */
     .regrow-products .rp-grid{
@@ -122,6 +124,16 @@
       <h2>{{ section.settings.heading | default: 'המוצרים שלנו' }}</h2>
       {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading }}</p>{%- endif -%}
     </div>
+
+    {%- if section.settings.collage_image != blank or section.settings.collage_asset != blank -%}
+    <div class="rp-collage rp-fade">
+      {%- if section.settings.collage_image != blank -%}
+        <img src="{{ section.settings.collage_image | image_url: width: 1400 }}" alt="כל מוצרי צומחים מחדש" loading="lazy">
+      {%- else -%}
+        <img src="{{ section.settings.collage_asset | asset_url }}" alt="כל מוצרי צומחים מחדש" loading="lazy">
+      {%- endif -%}
+    </div>
+    {%- endif -%}
 
     {%- assign product_blocks = section.blocks | where: 'type', 'product' -%}
     {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle' -%}
@@ -218,6 +230,9 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "כותרת", "default": "המוצרים שלנו" },
     { "type": "textarea", "id": "subheading", "label": "תת-כותרת", "default": "כל מה שצריך לשיער מלא ובריא — במקום אחד." },
+    { "type": "header", "content": "באנר קולאז'" },
+    { "type": "image_picker", "id": "collage_image", "label": "תמונת קולאז' (באנר עליון)" },
+    { "type": "text", "id": "collage_asset", "label": "חלופה: שם קובץ קולאז' ב-assets (למשל tz-collage.webp)" },
     { "type": "header", "content": "חבילות" },
     { "type": "text", "id": "bundles_heading", "label": "כותרת חבילות", "default": "חבילות משתלמות" },
     { "type": "textarea", "id": "bundles_sub", "label": "תת-כותרת חבילות", "default": "חוסכים יותר כשמשלבים." }

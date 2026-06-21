@@ -9,19 +9,20 @@
       "settings": {
         "heading": "המוצרים שלנו",
         "subheading": "כל מה שצריך לשיער מלא ובריא — במקום אחד.",
+        "collage_asset": "tz-collage.webp",
         "bundles_heading": "חבילות משתלמות",
         "bundles_sub": "חוסכים יותר כשמשלבים."
       },
       "blocks": {
-        "comb": { "type": "product", "settings": { "image_asset": "regrow-main.jpg", "title": "מסרק אינפרא אדום לצמיחת שיער", "description": "טכנולוגיית אור אדום + עיסוי ורטט שמעוררת את זקיקי השיער, מחזקת שורשים ומשיבה ברק וחיוניות.", "price": "148 ₪", "compare_price": "219 ₪", "badge": "חיסכון 71 ₪", "flagship": true } },
-        "spartan": { "type": "product", "settings": { "title": "Spartan — שמפו מפעיל שורשים", "description": "שמפו מפעיל שורשים לחיזוק השיער מהבסיס, מעניק נפח ותחושת קרקפת בריאה.", "price": "49 ₪" } },
-        "hoegoa_black": { "type": "product", "settings": { "title": "שמפו רוזמרין + קרטין Hoegoa", "description": "רוזמרין וקרטין לחיזוק שיער דליל, שיקום והגנה מפני נזקים.", "price": "49 ₪" } },
-        "hoegoa_green": { "type": "product", "settings": { "title": "שמפו רוזמרין מנט Hoegoa", "description": "רוזמרין ומנטה לקרקפת רעננה, ניקוי עמוק וחיזוק השיער.", "price": "49 ₪" } },
+        "comb": { "type": "product", "settings": { "image_asset": "tz-comb.webp", "title": "מסרק אינפרא אדום לצמיחת שיער", "description": "טכנולוגיית אור אדום + עיסוי ורטט שמעוררת את זקיקי השיער, מחזקת שורשים ומשיבה ברק וחיוניות.", "price": "148 ₪", "compare_price": "219 ₪", "badge": "חיסכון 71 ₪", "flagship": true } },
+        "spartan": { "type": "product", "settings": { "image_asset": "tz-spartan.webp", "title": "Spartan — שמפו מפעיל שורשים", "description": "שמפו מפעיל שורשים לחיזוק השיער מהבסיס, מעניק נפח ותחושת קרקפת בריאה.", "price": "49 ₪" } },
+        "hoegoa_black": { "type": "product", "settings": { "image_asset": "tz-hoegoa-black.webp", "title": "שמפו רוזמרין + קרטין Hoegoa", "description": "רוזמרין וקרטין לחיזוק שיער דליל, שיקום והגנה מפני נזקים.", "price": "49 ₪" } },
+        "hoegoa_green": { "type": "product", "settings": { "image_asset": "tz-hoegoa-green.webp", "title": "שמפו רוזמרין מנט Hoegoa", "description": "רוזמרין ומנטה לקרקפת רעננה, ניקוי עמוק וחיזוק השיער.", "price": "49 ₪" } },
         "rosemary_oil": { "type": "product", "settings": { "title": "שמן רוזמרין לצמיחת שיער", "description": "שמן טבעי שמחזק את השורשים, משפר זרימת דם ומסייע לצמיחה בריאה.", "price": "49 ₪" } },
-        "batana": { "type": "product", "settings": { "title": "שמן בטאנה (Batana Oil)", "description": "שמן טבעי לשיקום שיער, הזנה עמוקה וחיזוק השורשים — ברק וחיוניות.", "price": "59 ₪" } },
-        "ghkcu": { "type": "product", "settings": { "title": "סרום GHK-CU", "description": "סרום פפטיד נחושת לחידוש השיער, עידוד צמיחה מחודשת ושיפור מראה השיער.", "price": "59 ₪" } },
-        "fasthair": { "type": "product", "settings": { "title": "Fast Hair Essence", "description": "פורמולה טבעית לחיזוק השיער, מעניקה נפח ועידוד צמיחה בריאה ומלאה.", "price": "69 ₪" } },
-        "sevendays": { "type": "product", "settings": { "title": "7 Days — סרום צמיחה (ג'ינג'ר, 10ml)", "description": "סרום ג'ינג'ר מרוכז לעידוד צמיחה ושיפור צפיפות — מוצר כניסה מושלם.", "price": "39 ₪" } },
+        "batana": { "type": "product", "settings": { "image_asset": "tz-batana.webp", "title": "שמן בטאנה (Batana Oil)", "description": "שמן טבעי לשיקום שיער, הזנה עמוקה וחיזוק השורשים — ברק וחיוניות.", "price": "59 ₪" } },
+        "ghkcu": { "type": "product", "settings": { "image_asset": "tz-ghkcu.webp", "title": "סרום GHK-CU", "description": "סרום פפטיד נחושת לחידוש השיער, עידוד צמיחה מחודשת ושיפור מראה השיער.", "price": "59 ₪" } },
+        "fasthair": { "type": "product", "settings": { "image_asset": "tz-fasthair.webp", "title": "Fast Hair Essence", "description": "פורמולה טבעית לחיזוק השיער, מעניקה נפח ועידוד צמיחה בריאה ומלאה.", "price": "69 ₪" } },
+        "sevendays": { "type": "product", "settings": { "image_asset": "tz-7days.webp", "title": "7 Days — סרום צמיחה (ג'ינג'ר, 10ml)", "description": "סרום ג'ינג'ר מרוכז לעידוד צמיחה ושיפור צפיפות — מוצר כניסה מושלם.", "price": "39 ₪" } },
         "bundle_starter": { "type": "bundle", "settings": { "title": "Starter", "includes": "מסרק + סרום GHK-CU", "price": "179 ₪" } },
         "bundle_premium": { "type": "bundle", "settings": { "title": "Premium", "includes": "מסרק + שמן Batana + Spartan + שמפו", "price": "249 ₪", "highlight": true, "badge": "הכי משתלם" } },
         "bundle_ultimate": { "type": "bundle", "settings": { "title": "Ultimate", "includes": "מסרק + סרום + שמן + שמפו", "price": "299 ₪" } }
