@@ -13,7 +13,7 @@
         "bundles_sub": "חוסכים יותר כשמשלבים."
       },
       "blocks": {
-        "comb": { "type": "product", "settings": { "title": "מסרק אינפרא אדום לצמיחת שיער", "description": "טכנולוגיית אור אדום + עיסוי ורטט שמעוררת את זקיקי השיער, מחזקת שורשים ומשיבה ברק וחיוניות.", "price": "148 ₪", "compare_price": "219 ₪", "badge": "חיסכון 71 ₪", "flagship": true } },
+        "comb": { "type": "product", "settings": { "image_asset": "regrow-main.jpg", "title": "מסרק אינפרא אדום לצמיחת שיער", "description": "טכנולוגיית אור אדום + עיסוי ורטט שמעוררת את זקיקי השיער, מחזקת שורשים ומשיבה ברק וחיוניות.", "price": "148 ₪", "compare_price": "219 ₪", "badge": "חיסכון 71 ₪", "flagship": true } },
         "spartan": { "type": "product", "settings": { "title": "Spartan — שמפו מפעיל שורשים", "description": "שמפו מפעיל שורשים לחיזוק השיער מהבסיס, מעניק נפח ותחושת קרקפת בריאה.", "price": "49 ₪" } },
         "hoegoa_black": { "type": "product", "settings": { "title": "שמפו רוזמרין + קרטין Hoegoa", "description": "רוזמרין וקרטין לחיזוק שיער דליל, שיקום והגנה מפני נזקים.", "price": "49 ₪" } },
         "hoegoa_green": { "type": "product", "settings": { "title": "שמפו רוזמרין מנט Hoegoa", "description": "רוזמרין ומנטה לקרקפת רעננה, ניקוי עמוק וחיזוק השיער.", "price": "49 ₪" } },

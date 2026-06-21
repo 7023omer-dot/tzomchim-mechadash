@@ -136,6 +136,8 @@
           <div class="rp-imgbox">
             {%- if block.settings.image != blank -%}
               <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="600" height="600" loading="lazy">
+            {%- elsif block.settings.image_asset != blank -%}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy">
             {%- else -%}
               <div class="rp-ph"><span>{{ block.settings.title }}</span><small>תמונה תועלה בקרוב</small></div>
             {%- endif -%}
@@ -226,6 +228,7 @@
       "name": "כרטיס מוצר",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "תמונת מוצר" },
+        { "type": "text", "id": "image_asset", "label": "חלופה: שם קובץ תמונה ב-assets (למשל regrow-main.jpg)" },
         { "type": "text", "id": "title", "label": "שם מוצר", "default": "מוצר" },
         { "type": "textarea", "id": "description", "label": "תיאור קצר" },
         { "type": "text", "id": "price", "label": "מחיר תצוגה", "default": "49 ₪" },
