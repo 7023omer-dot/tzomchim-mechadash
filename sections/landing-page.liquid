@@ -341,6 +341,36 @@
     .regrow-page .video-wrap video, .regrow-page .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
     .regrow-page .video-wrap .ph{height:100%;min-height:0;aspect-ratio:9/16}
 
+    /* ===== תמונה+סרטון בהירו · כפתור Play · לפני/אחרי · קומבו ===== */
+    .regrow-page .media-duo{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;margin-top:8px}
+    .regrow-page .video-wrap.rg-hero-video{margin:0 auto;max-width:330px;aspect-ratio:9/16;background:#000}
+    .regrow-page .video-wrap.rg-hero-video video{object-fit:contain}
+    .regrow-page .rg-play{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;border:0;background:rgba(20,30,22,.30);cursor:pointer;transition:opacity .2s ease}
+    .regrow-page .rg-play:hover{background:rgba(20,30,22,.42)}
+    .regrow-page .rg-play .pcirc{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+    .regrow-page .rg-play svg{width:30px;height:30px;margin-inline-start:4px;fill:var(--ink)}
+    .regrow-page .rg-play[hidden]{display:none}
+    .regrow-page .rg-vlabel{position:absolute;bottom:12px;inset-inline:0;z-index:6;text-align:center;color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.55);pointer-events:none}
+    .regrow-page .ba-slider .ba-img{width:100%;height:100%;object-fit:cover;display:block}
+    .regrow-page .ba-split .pair .ba-cell{position:relative;overflow:hidden}
+    .regrow-page .ba-split .pair .ba-cell img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5}
+    .regrow-page .ba-split .pair .ba-cell.before-mini{border-inline-end:2px solid #fff}
+    .regrow-page .ba-tag{position:absolute;top:10px;font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;z-index:2}
+    .regrow-page .ba-tag.before{inset-inline-start:10px;background:rgba(47,79,53,.92);color:#fff}
+    .regrow-page .ba-tag.after{inset-inline-end:10px;background:var(--gold);color:#2F4F35}
+    .regrow-page .combo-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+    .regrow-page .bundle.combo{margin-top:0;text-align:center}
+    .regrow-page .bundle.best{border-style:solid;border-color:var(--gold);box-shadow:0 12px 30px rgba(217,164,65,.30)}
+    .regrow-page .combo-imgs{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 2px;flex-wrap:wrap}
+    .regrow-page .combo-imgs img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:12px;border:1px solid var(--line);padding:6px}
+    .regrow-page .badge.gold{background:var(--gold);color:#3a2a00}
+    .regrow-page .ba-col .ba-slider{margin:0 auto 6px}
+    .regrow-page .ba-cap{text-align:center;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:6px}
+    @media(min-width:760px){
+      .regrow-page .media-duo{grid-template-columns:1.05fr .95fr;max-width:880px;margin-inline:auto;gap:28px}
+      .regrow-page .combo-grid{grid-template-columns:1fr 1fr;align-items:start}
+    }
+
     /* ============ דסקטופ ============ */
     @media(min-width:760px){
       .regrow-page{--maxw:920px}
@@ -395,9 +425,23 @@
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
       </div>
 
-      <div class="hero-img">
-        <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק צומחים מחדש אדום לקרקפת" loading="eager"> -->
-        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
+      <div class="media-duo">
+        <div class="hero-img">
+          <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
+        </div>
+
+        <!-- סרטון תדמית — לא מתנגן אוטומטית; בלחיצה מתנגן עם קול מלא -->
+        {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+        <div class="video-wrap rg-hero-video" data-rg-video>
+          <video controls preload="metadata" playsinline poster="{{ section.settings.video_poster | image_url: width: 700 }}">
+            <source src="{{ video_src | asset_url }}" type="video/mp4">
+            הדפדפן שלך אינו תומך בהצגת וידאו.
+          </video>
+          <button type="button" class="rg-play" aria-label="נגן/י את הסרטון">
+            <span class="pcirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+          <span class="rg-vlabel">▶ צפו בסרטון — עם קול</span>
+        </div>
       </div>
     </div>
   </header>
@@ -471,41 +515,38 @@
   <section class="ba">
     <div class="wrap center">
       <span class="eyebrow">לפני / אחרי</span>
-      <h2>גרור/י את הסליידר וראה/י את ההבדל</h2>
-      <p class="lead">החלק/י את הידית ימינה ושמאלה כדי להשוות בין "לפני" ל"אחרי".</p>
+      <h2>תוצאות אמיתיות — גברים ונשים</h2>
+      <p class="lead">גרור/י את הידית בכל תמונה כדי להשוות בין "לפני" ל"אחרי".</p>
 
-      <!-- סליידר אינטראקטיבי. החלף את שני ה-.ph ב:
-           <img class="layer after" src="assets/after.jpg" alt="הקרקפת לאחר X שבועות שימוש ב-צומחים מחדש">
-           <img class="layer before" src="assets/before.jpg" alt="הקרקפת לפני השימוש ב-צומחים מחדש"> -->
-      <div class="ba-slider" aria-label="השוואת לפני ואחרי">
-        <div class="layer after"><div class="ph">תמונת "אחרי"</div></div>
-        <div class="layer before"><div class="ph">תמונת "לפני"</div></div>
-        <span class="tag b">לפני</span>
-        <span class="tag a">אחרי</span>
-        <div class="divider"></div>
-        <div class="knob">⇆</div>
-        <input type="range" min="0" max="100" value="50" aria-label="גרור להשוואה בין לפני לאחרי">
-      </div>
-
-      <!-- מסגרות נוספות (סטטיות) — החלף כל .ph בתמונה אמיתית -->
+      <!-- שתי השוואות לפני/אחרי — גבר ואישה, זו לצד זו (במובייל אחת מתחת לשנייה) -->
       <div class="ba-extra">
-        <div class="ba-split">
-          <div class="pair">
-            <div class="ph before-mini">לפני</div>
-            <div class="ph">אחרי</div>
+        <div class="ba-col">
+          <div class="ba-slider" aria-label="השוואת לפני ואחרי — גבר">
+            <div class="layer after"><img class="ba-img" src="{{ 'ba-after-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לאחר השימוש בצומחים מחדש" loading="lazy"></div>
+            <div class="layer before"><img class="ba-img" src="{{ 'ba-before-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לפני השימוש בצומחים מחדש" loading="lazy"></div>
+            <span class="tag b">לפני</span>
+            <span class="tag a">אחרי</span>
+            <div class="divider"></div>
+            <div class="knob">⇆</div>
+            <input type="range" min="0" max="100" value="50" aria-label="גרור/י להשוואה — גבר">
           </div>
-          <div class="cap">תוצאות לאחר 12 שבועות שימוש</div>
+          <div class="ba-cap">גבר · גרור/י את הידית</div>
         </div>
-        <div class="ba-split">
-          <div class="pair">
-            <div class="ph before-mini">לפני</div>
-            <div class="ph">אחרי</div>
+        <div class="ba-col">
+          <div class="ba-slider" aria-label="השוואת לפני ואחרי — אישה">
+            <div class="layer after"><img class="ba-img" src="{{ 'ba-after-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לאחר השימוש בצומחים מחדש" loading="lazy"></div>
+            <div class="layer before"><img class="ba-img" src="{{ 'ba-before-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לפני השימוש בצומחים מחדש" loading="lazy"></div>
+            <span class="tag b">לפני</span>
+            <span class="tag a">אחרי</span>
+            <div class="divider"></div>
+            <div class="knob">⇆</div>
+            <input type="range" min="0" max="100" value="50" aria-label="גרור/י להשוואה — אישה">
           </div>
-          <div class="cap">תוצאות לאחר 16 שבועות שימוש</div>
+          <div class="ba-cap">אישה · גרור/י את הידית</div>
         </div>
       </div>
 
-      <p class="disclaimer">התמונות להמחשה בלבד עד להעלאת תמונות אמיתיות. תוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+      <p class="disclaimer">התוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
     </div>
   </section>
 
@@ -629,46 +670,42 @@
   <!-- ===================== מוצרים משלימים + באנדל ===================== -->
   <section class="addons">
     <div class="wrap">
-      <span class="eyebrow">חבילות משתלמות</span>
-      <h2>חבילות מבצע — חוסכים יותר</h2>
-      <p class="lead">שלוש חבילות שמשלבות את המוצרים שלנו במחיר משתלם — ככל שמשלבים יותר, חוסכים יותר.</p>
+      <span class="eyebrow">מבצעי קומבו</span>
+      <h2>המסרק לבד — או חוסכים עם קומבו</h2>
+      <p class="lead">המסרק לבד נשאר ב-219 ₪. ההנחה נפתחת ברגע שמוסיפים מוצר — ככל שמשלבים יותר, חוסכים יותר.</p>
 
-      <!-- מבצעי חבילות (upsell) -->
-      <div class="bundle">
-        <span class="badge">מבצע חבילה 🔥</span>
-        <h3 style="font-size:20px;margin:10px 0 4px">Starter — מסרק + סרום</h3>
-        <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
-        <div class="price-row"><span class="price-old">₪207</span><span class="price-now">₪179</span></div>
-        <div class="save">חוסך/ת ₪28</div>
-        {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Starter — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Starter — ₪179 <span class="arrow">←</span></a>{%- endif -%}
-      </div>
-
-      <div class="bundle">
-        <span class="badge">מבצע חבילה 🔥</span>
-        <h3 style="font-size:20px;margin:10px 0 4px">Premium — הכי משתלם</h3>
-        <div class="items"><span>מסרק</span><span class="plus">+</span><span>שמן Batana</span><span class="plus">+</span><span>Spartan</span><span class="plus">+</span><span>שמפו</span></div>
-        <div class="price-row"><span class="price-old">₪305</span><span class="price-now">₪249</span></div>
-        <div class="save">חוסך/ת ₪56</div>
-        {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Premium — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Premium — ₪249 <span class="arrow">←</span></a>{%- endif -%}
-      </div>
-
-      <!-- באנדל / דיל משתלם -->
-      <div class="bundle">
-        <span class="badge">הדיל המשתלם ביותר 🔥</span>
-        <h3 style="font-size:22px;margin:10px 0 4px">Ultimate — ערכה מלאה</h3>
-        <div class="items">
-          <span>מסרק צומחים מחדש</span><span class="plus">+</span>
-          <span>סרום</span><span class="plus">+</span>
-          <span>שמן</span><span class="plus">+</span>
-          <span>שמפו</span>
+      <div class="combo-grid">
+        <!-- מבצע 1 — מסרק + סרום -->
+        <div class="bundle combo">
+          <span class="badge">הקומבו המנצח 🔥</span>
+          <div class="combo-imgs">
+            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
+          </div>
+          <h3 style="font-size:20px;margin:8px 0 4px">מסרק + סרום</h3>
+          <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
+          <div class="price-row"><span class="price-old">₪278</span><span class="price-now">₪207</span></div>
+          <div class="save">חוסך/ת 71 ₪ · 26%</div>
+          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></a>{%- endif -%}
         </div>
-        <div class="price-row">
-          <span class="price-old">₪315</span>   <!-- // PRICE — סכום פריטים בנפרד -->
-          <span class="price-now">₪299</span>   <!-- // PRICE — מחיר הערכה -->
+
+        <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
+        <div class="bundle combo best">
+          <span class="badge gold">הכי משתלם ⭐</span>
+          <div class="combo-imgs">
+            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-spartan.webp' | asset_url }}" alt="שמפו Spartan" loading="lazy">
+          </div>
+          <h3 style="font-size:20px;margin:8px 0 4px">הערכה המלאה — מסרק + סרום + שמפו</h3>
+          <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
+          <div class="price-row"><span class="price-old">₪327</span><span class="price-now">₪239</span></div>
+          <div class="save">חוסך/ת 88 ₪ · 27%</div>
+          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></a>{%- endif -%}
         </div>
-        <div class="save">חוסך/ת ₪16 לעומת קנייה בנפרד</div>
-        <!-- // ADD-TO-CART — בשלב 2 יחובר ל-variant/מוצר הערכה בשופיפיי -->
-        {%- if section.settings.bundle_product != blank -%}{%- assign bp = section.settings.bundle_product -%}{%- form 'product', bp -%}<input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Ultimate — {{ bp.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Ultimate — ₪299 <span class="arrow">←</span></a>{%- endif -%}
       </div>
     </div>
   </section>
@@ -758,6 +795,17 @@
       range.addEventListener('input', update);
       update();
     });
+
+    // סרטון — כפתור Play מפעיל עם קול מלא (לא מושתק); הכפתור נעלם בזמן ניגון
+    document.querySelectorAll('[data-rg-video]').forEach(function(w){
+      var v = w.querySelector('video');
+      var b = w.querySelector('.rg-play');
+      var lbl = w.querySelector('.rg-vlabel');
+      if(!v || !b) return;
+      b.addEventListener('click', function(){ v.play(); });
+      v.addEventListener('play', function(){ b.hidden = true; if(lbl) lbl.hidden = true; });
+      v.addEventListener('ended', function(){ b.hidden = false; if(lbl) lbl.hidden = false; });
+    });
   </script>
 </div>
 {% schema %}
@@ -768,6 +816,9 @@
     { "type": "header", "content": "תמונות" },
     { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
     { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
+    { "type": "header", "content": "סרטון תדמית (ליד תמונת המוצר)" },
+    { "type": "text", "id": "video_asset", "label": "שם קובץ הסרטון ב-assets", "default": "tz-video.mp4", "info": "ברירת מחדל: tz-video.mp4 שכבר הועלה. הסרטון מתנגן בלחיצה, עם קול." },
+    { "type": "image_picker", "id": "video_poster", "label": "תמונת תצוגה לסרטון (poster) — אופציונלי" },
     { "type": "header", "content": "טקסטים" },
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
     { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
@@ -775,9 +826,9 @@
     { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
-    { "type": "product", "id": "combo_serum", "label": "מוצר: חבילת Starter — מסרק + סרום (₪179)" },
-    { "type": "product", "id": "combo_brush", "label": "מוצר: חבילת Premium — מסרק+Batana+Spartan+שמפו (₪249)" },
-    { "type": "product", "id": "bundle_product", "label": "מוצר: חבילת Ultimate — ערכה מלאה (₪299)" }
+    { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "אם ריק — הכפתור מפנה למעלה אל ההצעה הראשית (ללא שגיאה). חברו מוצר 'ערכה' אמיתי או הגדירו Automatic Discount כדי שהמחיר המוזל יחול בעגלה." },
+    { "type": "product", "id": "combo_serum", "label": "מבצע 1: מסרק + סרום (₪207)" },
+    { "type": "product", "id": "combo_brush", "label": "מבצע 2: מסרק + סרום + שמפו (₪239)" }
   ],
   "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
 }

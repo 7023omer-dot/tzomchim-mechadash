@@ -109,6 +109,8 @@
     .regrow-products .rp-bundle .rp-bname{font-size:20px;font-weight:900;margin:0}
     .regrow-products .rp-bundle .rp-binc{font-size:14px;color:var(--rp-muted);margin:0;line-height:1.55;min-height:44px}
     .regrow-products .rp-bundle .rp-bprice{font-size:30px;font-weight:900;color:var(--rp-ink);margin:4px 0}
+    .regrow-products .rp-bundle .rp-bwas{font-size:16px;color:#9a9a9a;text-decoration:line-through;font-weight:600;margin-inline-start:8px}
+    .regrow-products .rp-bundle .rp-save{margin:0 auto 4px}
     .regrow-products .rp-bundle .rp-hot-tag{
       position:absolute;top:-13px;inset-inline-start:50%;transform:translateX(50%);
       background:var(--rp-accent);color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px
@@ -202,7 +204,8 @@
             {%- if block.settings.highlight -%}<span class="rp-hot-tag">{{ block.settings.badge | default: 'הכי משתלם' }}</span>{%- endif -%}
             <p class="rp-bname">{{ block.settings.title }}</p>
             {%- if block.settings.includes != blank -%}<p class="rp-binc">{{ block.settings.includes }}</p>{%- endif -%}
-            <p class="rp-bprice">{{ block.settings.price }}</p>
+            <p class="rp-bprice">{{ block.settings.price }}{% if block.settings.compare_price != blank %}<span class="rp-bwas">{{ block.settings.compare_price }}</span>{% endif %}</p>
+            {%- if block.settings.save_badge != blank -%}<span class="rp-save">{{ block.settings.save_badge }}</span>{%- endif -%}
             {%- if block.settings.product != blank -%}
               {%- assign bp = block.settings.product -%}
               <form method="post" action="{{ routes.cart_add_url }}" class="rp-form" accept-charset="UTF-8">
@@ -276,7 +279,9 @@
       "settings": [
         { "type": "text", "id": "title", "label": "שם החבילה", "default": "חבילה" },
         { "type": "textarea", "id": "includes", "label": "מה כולל" },
-        { "type": "text", "id": "price", "label": "מחיר", "default": "199 ₪" },
+        { "type": "text", "id": "price", "label": "מחיר מבצע", "default": "199 ₪" },
+        { "type": "text", "id": "compare_price", "label": "מחיר בנפרד (מחוק) — אופציונלי" },
+        { "type": "text", "id": "save_badge", "label": "באדג' חיסכון (למשל: חוסך 71 ₪ · 26%) — אופציונלי" },
         { "type": "checkbox", "id": "highlight", "label": "הדגש כ\"הכי משתלם\"", "default": false },
         { "type": "text", "id": "badge", "label": "טקסט באדג' (לחבילה מודגשת)", "default": "הכי משתלם" },
         { "type": "product", "id": "product", "label": "מוצר Shopify (להוספה לסל) — אופציונלי" }
