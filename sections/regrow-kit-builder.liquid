@@ -1,0 +1,339 @@
+{%- comment -%}
+  בונה הערכה (Kit Builder) — צומחים מחדש
+  -------------------------------------------------
+  מציג את המוצר הנוכחי כבסיס קבוע + מוצרים משלימים לבחירה (בלוקים).
+  בכל בחירה מתעדכן הסכום בזמן אמת לפי מדרגות הנחה (2 פריטים / 3 פריטים).
+  ההנחה בפועל מיושמת ע"י Automatic Discount שמוגדר בניהול שופיפיי
+  (לפי כמות פריטים בעגלה) — הסקשן רק מציג ומוסיף לסל את הפריטים הנבחרים.
+{%- endcomment -%}
+
+{%- liquid
+  assign base = product
+  assign tier2 = section.settings.discount_2 | default: 10
+  assign tier3 = section.settings.discount_3 | default: 15
+-%}
+
+{%- style -%}
+  .rkit-{{ section.id }} {
+    --rkit-green: {{ section.settings.color_text }};
+    --rkit-green-soft: {{ section.settings.color_text_soft }};
+    --rkit-cream: {{ section.settings.color_bg }};
+    --rkit-cream-deep: {{ section.settings.color_bg_deep }};
+    --rkit-gold: {{ section.settings.color_accent }};
+    --rkit-btn: {{ section.settings.color_button }};
+    --rkit-btn-text: {{ section.settings.color_button_text }};
+    direction: rtl;
+    text-align: right;
+  }
+  .rkit-{{ section.id }} .rkit-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--rkit-cream);
+    border: 1px solid var(--rkit-cream-deep);
+    border-radius: 18px;
+    padding: 22px 22px 24px;
+    box-shadow: 0 10px 30px rgba(47,79,53,0.08);
+    font-family: inherit;
+    color: var(--rkit-green);
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rkitFade-{{ section.id }} 0.6s ease forwards;
+  }
+  @keyframes rkitFade-{{ section.id }} { to { opacity: 1; transform: none; } }
+  .rkit-{{ section.id }} .rkit-head { text-align: center; margin-bottom: 16px; }
+  .rkit-{{ section.id }} .rkit-title {
+    font-size: 1.45rem; font-weight: 800; line-height: 1.2; margin: 0 0 6px;
+    color: var(--rkit-green);
+  }
+  .rkit-{{ section.id }} .rkit-sub { font-size: 0.95rem; color: var(--rkit-green-soft); margin: 0; }
+  .rkit-{{ section.id }} .rkit-rows { display: flex; flex-direction: column; gap: 10px; }
+  .rkit-{{ section.id }} .rkit-row {
+    display: flex; align-items: center; gap: 12px;
+    background: #fff; border: 1.5px solid var(--rkit-cream-deep);
+    border-radius: 14px; padding: 10px 12px; transition: border-color .2s, box-shadow .2s;
+  }
+  .rkit-{{ section.id }} .rkit-row.is-on { border-color: var(--rkit-gold); box-shadow: 0 0 0 2px rgba(0,0,0,0.02); }
+  .rkit-{{ section.id }} .rkit-row.is-base { background: var(--rkit-cream); }
+  .rkit-{{ section.id }} .rkit-check {
+    width: 24px; height: 24px; flex: 0 0 24px; border-radius: 7px;
+    border: 2px solid var(--rkit-green-soft); display: grid; place-items: center;
+    background: #fff; cursor: pointer; transition: background .15s, border-color .15s;
+  }
+  .rkit-{{ section.id }} .rkit-row.is-on .rkit-check { background: var(--rkit-green); border-color: var(--rkit-green); }
+  .rkit-{{ section.id }} .rkit-check svg { width: 14px; height: 14px; opacity: 0; transition: opacity .15s; }
+  .rkit-{{ section.id }} .rkit-row.is-on .rkit-check svg { opacity: 1; }
+  .rkit-{{ section.id }} .rkit-row.is-locked .rkit-check { cursor: default; background: var(--rkit-green); border-color: var(--rkit-green); }
+  .rkit-{{ section.id }} .rkit-thumb {
+    width: 52px; height: 52px; flex: 0 0 52px; border-radius: 10px; overflow: hidden;
+    background: var(--rkit-cream-deep); display: grid; place-items: center;
+  }
+  .rkit-{{ section.id }} .rkit-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .rkit-{{ section.id }} .rkit-info { flex: 1 1 auto; min-width: 0; }
+  .rkit-{{ section.id }} .rkit-name { font-weight: 700; font-size: 0.98rem; margin: 0; }
+  .rkit-{{ section.id }} .rkit-badge {
+    display: inline-block; margin-top: 3px; font-size: 0.72rem; font-weight: 700;
+    color: var(--rkit-green); background: var(--rkit-gold); border-radius: 999px; padding: 2px 9px;
+  }
+  .rkit-{{ section.id }} .rkit-base-tag { font-size: 0.72rem; color: var(--rkit-green-soft); font-weight: 600; }
+  .rkit-{{ section.id }} .rkit-price { font-weight: 800; font-size: 1rem; white-space: nowrap; }
+  .rkit-{{ section.id }} .rkit-summary {
+    margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--rkit-cream-deep);
+    display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+  }
+  .rkit-{{ section.id }} .rkit-totals { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .rkit-{{ section.id }} .rkit-total-now { font-size: 1.6rem; font-weight: 900; color: var(--rkit-green); }
+  .rkit-{{ section.id }} .rkit-total-was { font-size: 1.05rem; color: var(--rkit-green-soft); text-decoration: line-through; }
+  .rkit-{{ section.id }} .rkit-saved {
+    font-size: 0.9rem; font-weight: 800; color: #fff; background: var(--rkit-green);
+    border-radius: 999px; padding: 4px 12px;
+  }
+  .rkit-{{ section.id }} .rkit-saved[hidden] { display: none; }
+  .rkit-{{ section.id }} .rkit-btn {
+    margin-top: 16px; width: 100%; border: none; cursor: pointer;
+    background: var(--rkit-btn); color: var(--rkit-btn-text);
+    font-size: 1.08rem; font-weight: 800; padding: 15px 18px; border-radius: 12px;
+    transition: transform .12s ease, filter .2s ease;
+  }
+  .rkit-{{ section.id }} .rkit-btn:hover { filter: brightness(1.07); }
+  .rkit-{{ section.id }} .rkit-btn:active { transform: translateY(1px); }
+  .rkit-{{ section.id }} .rkit-btn[aria-busy="true"] { opacity: .7; pointer-events: none; }
+  .rkit-{{ section.id }} .rkit-note { margin: 10px 2px 0; font-size: 0.78rem; color: var(--rkit-green-soft); text-align: center; }
+  .rkit-{{ section.id }} .rkit-section-pad { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+{%- endstyle -%}
+
+<div class="rkit-{{ section.id }}">
+  <div class="page-width rkit-section-pad">
+    <div
+      class="rkit-wrap"
+      data-rkit
+      data-tier2="{{ tier2 }}"
+      data-tier3="{{ tier3 }}"
+      data-currency="{{ shop.currency }}"
+      data-cart-url="{{ routes.cart_url }}"
+      data-add-url="{{ routes.cart_add_url }}"
+    >
+      <div class="rkit-head">
+        <h2 class="rkit-title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="rkit-sub">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="rkit-rows">
+        {%- comment -%} שורת הבסיס — המוצר הנוכחי, תמיד נבחר {%- endcomment -%}
+        {%- assign base_variant = base.selected_or_first_available_variant -%}
+        <div class="rkit-row is-base is-on is-locked" data-rkit-item data-locked="true"
+             data-variant="{{ base_variant.id }}" data-price="{{ base_variant.price }}">
+          <span class="rkit-check" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="rkit-thumb">
+            {%- if base.featured_image -%}
+              <img src="{{ base.featured_image | image_url: width: 120 }}" alt="{{ base.title | escape }}" loading="lazy" width="52" height="52">
+            {%- endif -%}
+          </span>
+          <span class="rkit-info">
+            <p class="rkit-name">{{ base.title | escape }}</p>
+            <span class="rkit-base-tag">{{ section.settings.base_tag | escape }}</span>
+          </span>
+          <span class="rkit-price">{{ base_variant.price | money }}</span>
+        </div>
+
+        {%- comment -%} מוצרים משלימים — מהבלוקים {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'addon' and block.settings.product != blank -%}
+            {%- assign ap = block.settings.product -%}
+            {%- assign av = ap.selected_or_first_available_variant -%}
+            <div class="rkit-row{% if block.settings.preselected %} is-on{% endif %}" {{ block.shopify_attributes }}
+                 data-rkit-item data-toggle="true"
+                 data-variant="{{ av.id }}" data-price="{{ av.price }}"
+                 {% if av.available == false %}data-soldout="true"{% endif %}
+                 role="button" tabindex="0" aria-pressed="{% if block.settings.preselected %}true{% else %}false{% endif %}">
+              <span class="rkit-check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="rkit-thumb">
+                {%- if ap.featured_image -%}
+                  <img src="{{ ap.featured_image | image_url: width: 120 }}" alt="{{ ap.title | escape }}" loading="lazy" width="52" height="52">
+                {%- endif -%}
+              </span>
+              <span class="rkit-info">
+                <p class="rkit-name">{{ block.settings.label | default: ap.title | escape }}</p>
+                {%- if block.settings.badge != blank -%}
+                  <span class="rkit-badge">{{ block.settings.badge | escape }}</span>
+                {%- endif -%}
+              </span>
+              <span class="rkit-price">{{ av.price | money }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="rkit-summary">
+        <div class="rkit-totals">
+          <span class="rkit-total-now" data-rkit-now>{{ base_variant.price | money }}</span>
+          <span class="rkit-total-was" data-rkit-was hidden></span>
+        </div>
+        <span class="rkit-saved" data-rkit-saved hidden></span>
+      </div>
+
+      <button type="button" class="rkit-btn" data-rkit-add>
+        {{ section.settings.button_label | escape }}
+      </button>
+
+      {%- if section.settings.note != blank -%}
+        <p class="rkit-note">{{ section.settings.note | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  if (!root) return;
+  var wrap = root.querySelector('[data-rkit]');
+  if (!wrap || wrap.dataset.rkitInit) return;
+  wrap.dataset.rkitInit = '1';
+
+  var tier2 = parseFloat(wrap.dataset.tier2) || 0;
+  var tier3 = parseFloat(wrap.dataset.tier3) || 0;
+  var addUrl = wrap.dataset.addUrl || '/cart/add';
+  var cartUrl = wrap.dataset.cartUrl || '/cart';
+  var rows = Array.prototype.slice.call(wrap.querySelectorAll('[data-rkit-item]'));
+  var nowEl = wrap.querySelector('[data-rkit-now]');
+  var wasEl = wrap.querySelector('[data-rkit-was]');
+  var savedEl = wrap.querySelector('[data-rkit-saved]');
+  var addBtn = wrap.querySelector('[data-rkit-add]');
+
+  function fmt(cents) {
+    var n = (cents / 100);
+    var s = (Math.round(n * 100) % 100 === 0) ? n.toLocaleString('he-IL') : n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return '₪' + s;
+  }
+
+  // אחוז ההנחה לפי מספר הפריטים שנבחרו (תואם ל-Automatic Discount בניהול)
+  function discountFor(count) {
+    if (count >= 3) return tier3;
+    if (count === 2) return tier2;
+    return 0;
+  }
+
+  function selected() {
+    return rows.filter(function (r) {
+      return r.dataset.locked === 'true' || r.classList.contains('is-on');
+    });
+  }
+
+  function update() {
+    var sel = selected();
+    var subtotal = sel.reduce(function (sum, r) { return sum + (parseInt(r.dataset.price, 10) || 0); }, 0);
+    var pct = discountFor(sel.length);
+    var saved = Math.round(subtotal * pct / 100);
+    var total = subtotal - saved;
+
+    nowEl.textContent = fmt(total);
+    if (saved > 0) {
+      wasEl.textContent = fmt(subtotal);
+      wasEl.hidden = false;
+      savedEl.textContent = 'חסכתם ' + fmt(saved) + ' (' + pct + '%-)';
+      savedEl.hidden = false;
+    } else {
+      wasEl.hidden = true;
+      savedEl.hidden = true;
+    }
+  }
+
+  function toggle(r) {
+    if (r.dataset.locked === 'true') return;
+    var on = r.classList.toggle('is-on');
+    r.setAttribute('aria-pressed', on ? 'true' : 'false');
+    update();
+  }
+
+  rows.forEach(function (r) {
+    if (r.dataset.toggle !== 'true') return;
+    r.addEventListener('click', function () { toggle(r); });
+    r.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(r); }
+    });
+  });
+
+  addBtn.addEventListener('click', function () {
+    var items = selected().map(function (r) {
+      return { id: parseInt(r.dataset.variant, 10), quantity: 1 };
+    }).filter(function (i) { return i.id; });
+    if (!items.length) return;
+
+    addBtn.setAttribute('aria-busy', 'true');
+    fetch(addUrl + '.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: items })
+    })
+      .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, d: d }; }); })
+      .then(function (r) {
+        if (!r.ok) { throw new Error((r.d && r.d.description) || 'cart error'); }
+        window.location.href = cartUrl;
+      })
+      .catch(function () {
+        addBtn.removeAttribute('aria-busy');
+        window.location.href = cartUrl;
+      });
+  });
+
+  update();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "בונה הערכה",
+  "tag": "section",
+  "class": "section regrow-kit-builder",
+  "settings": [
+    { "type": "header", "content": "תוכן" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "בנו את הערכה שלכם — וחסכו יותר" },
+    { "type": "text", "id": "subheading", "label": "כותרת משנה", "default": "הוסיפו מוצרים משלימים וההנחה תיושם אוטומטית" },
+    { "type": "text", "id": "base_tag", "label": "תגית המוצר הקבוע", "default": "כלול בערכה" },
+    { "type": "text", "id": "button_label", "label": "טקסט הכפתור", "default": "הוסיפו את הערכה לסל" },
+    { "type": "text", "id": "note", "label": "הערה מתחת לכפתור", "default": "ההנחה מחושבת ומיושמת אוטומטית בעגלה ובתשלום." },
+    { "type": "header", "content": "מדרגות הנחה (להצגה בלבד)", "info": "התאימו לערכי ה-Automatic Discount שהגדרתם בניהול שופיפיי לפי כמות פריטים." },
+    { "type": "range", "id": "discount_2", "min": 0, "max": 50, "step": 1, "unit": "%", "label": "הנחה ל-2 פריטים", "default": 10 },
+    { "type": "range", "id": "discount_3", "min": 0, "max": 50, "step": 1, "unit": "%", "label": "הנחה ל-3 פריטים ומעלה", "default": 15 },
+    { "type": "header", "content": "צבעים" },
+    { "type": "color", "id": "color_bg", "label": "רקע", "default": "#F3E8D8" },
+    { "type": "color", "id": "color_bg_deep", "label": "רקע משני / גבול", "default": "#E8D8C4" },
+    { "type": "color", "id": "color_text", "label": "טקסט ראשי", "default": "#2F4F35" },
+    { "type": "color", "id": "color_text_soft", "label": "טקסט משני", "default": "#4F6F52" },
+    { "type": "color", "id": "color_accent", "label": "אקסנט (זהב)", "default": "#C2A24A" },
+    { "type": "color", "id": "color_button", "label": "רקע כפתור", "default": "#2F4F35" },
+    { "type": "color", "id": "color_button_text", "label": "טקסט כפתור", "default": "#FFFFFF" },
+    { "type": "header", "content": "ריווח" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "ריווח עליון", "default": 28 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "ריווח תחתון", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "addon",
+      "name": "מוצר משלים",
+      "settings": [
+        { "type": "product", "id": "product", "label": "מוצר" },
+        { "type": "text", "id": "label", "label": "שם להצגה (אופציונלי)" },
+        { "type": "text", "id": "badge", "label": "תגית/באדג'", "default": "מומלץ" },
+        { "type": "checkbox", "id": "preselected", "label": "מסומן כברירת מחדל", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "בונה הערכה",
+      "blocks": [
+        { "type": "addon" },
+        { "type": "addon" }
+      ]
+    }
+  ]
+}
+{% endschema %}
