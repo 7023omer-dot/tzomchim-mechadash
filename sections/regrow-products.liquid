@@ -87,6 +87,8 @@
     }
     .regrow-products .rp-cta:hover{background:var(--rp-accent-dark)}
     .regrow-products form.rp-form{margin:0}
+    .regrow-products .rp-catalog-cta{text-align:center;margin-top:clamp(26px,4vw,40px)}
+    .regrow-products .rp-cta-lg{display:inline-flex;width:auto;padding:0 34px;min-height:56px;font-size:17px;gap:10px}
 
     /* ---------- חבילות ---------- */
     .regrow-products .rp-bundles{margin-top:clamp(40px,6vw,68px)}
@@ -140,9 +142,12 @@
     {%- assign product_blocks = section.blocks | where: 'type', 'product' -%}
     {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle' -%}
 
+    {%- assign show_count = 9999 -%}
+    {%- if section.settings.max_products > 0 -%}{%- assign show_count = section.settings.max_products -%}{%- endif -%}
+
     {%- if product_blocks.size > 0 -%}
     <div class="rp-grid">
-      {%- for block in product_blocks -%}
+      {%- for block in product_blocks limit: show_count -%}
         <article class="rp-card rp-fade" {{ block.shopify_attributes }}>
           {%- if block.settings.flagship -%}<span class="rp-badge flag">מוצר דגל</span>{%- endif -%}
 
@@ -180,6 +185,11 @@
         </article>
       {%- endfor -%}
     </div>
+    {%- if section.settings.show_catalog_button and section.settings.catalog_url != blank -%}
+    <div class="rp-catalog-cta rp-fade">
+      <a href="{{ section.settings.catalog_url }}" class="rp-cta rp-cta-lg">{{ section.settings.catalog_button_text | default: 'מעבר לקטלוג המלא' }} <span aria-hidden="true">←</span></a>
+    </div>
+    {%- endif -%}
     {%- endif -%}
 
     {%- if bundle_blocks.size > 0 -%}
@@ -237,7 +247,12 @@
     { "type": "text", "id": "collage_asset", "label": "חלופה: שם קובץ קולאז' ב-assets (למשל tz-collage.webp)" },
     { "type": "header", "content": "חבילות" },
     { "type": "text", "id": "bundles_heading", "label": "כותרת חבילות", "default": "חבילות משתלמות" },
-    { "type": "textarea", "id": "bundles_sub", "label": "תת-כותרת חבילות", "default": "חוסכים יותר כשמשלבים." }
+    { "type": "textarea", "id": "bundles_sub", "label": "תת-כותרת חבילות", "default": "חוסכים יותר כשמשלבים." },
+    { "type": "header", "content": "מצב תצוגה / קטלוג" },
+    { "type": "range", "id": "max_products", "min": 0, "max": 12, "step": 1, "label": "מקס' מוצרים להצגה (0 = הכל)", "default": 0 },
+    { "type": "checkbox", "id": "show_catalog_button", "label": "הצג כפתור 'מעבר לקטלוג'", "default": false },
+    { "type": "text", "id": "catalog_button_text", "label": "טקסט כפתור הקטלוג", "default": "מעבר לקטלוג המלא" },
+    { "type": "url", "id": "catalog_url", "label": "קישור לעמוד הקטלוג" }
   ],
   "blocks": [
     {
