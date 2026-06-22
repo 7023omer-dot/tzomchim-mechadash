@@ -9,10 +9,10 @@
 <style>
     /* ============ משתני מותג (פלטה חמה ונקייה) ============ */
     .regrow-page{
-      --cream:#FBF7F2;        /* רקע נקי חם */
+      --cream:#F5EFE6;        /* רקע שמנת חם */
       --white:#FFFFFF;
-      --ink:#111111;          /* טקסט ראשי */
-      --muted:#4A4A4A;        /* טקסט משני */
+      --ink:#5A1B2E;          /* טקסט ראשי — בורדו */
+      --muted:#6E5560;        /* טקסט משני */
       --terracotta:#E8112D;   /* אדום המוצר — אקצנט ראשי */
       --terracotta-dark:#C20E26;
       --gold:#D9A441;         /* זהב רך */
@@ -73,13 +73,13 @@
 
     /* ============ HERO ============ */
     .regrow-page .hero{
-      background:linear-gradient(180deg,#000000 0%,#161616 100%);
+      background:linear-gradient(180deg,#F5EFE6 0%,#FBF7F2 100%);
       padding-top:40px;
     }
-    .regrow-page .hero h1{color:#ffffff}
-    .regrow-page .hero .lead{color:#DCDCDC}
-    .regrow-page .hero .lead strong{color:#ffffff}
-    .regrow-page .hero .trustbar{color:#CFCFCF}
+    .regrow-page .hero h1{color:var(--ink)}
+    .regrow-page .hero .lead{color:var(--muted)}
+    .regrow-page .hero .lead strong{color:var(--ink)}
+    .regrow-page .hero .trustbar{color:var(--muted)}
     .regrow-page .hero h1{font-size:30px;font-weight:900;margin-bottom:16px}
     .regrow-page .hero h1 em{font-style:normal;color:var(--terracotta)}
     .regrow-page .hero .lead{margin-bottom:30px}
@@ -229,13 +229,13 @@
     }
 
     /* ============ FINAL CTA ============ */
-    .regrow-page .final{background:var(--ink);color:#fff;text-align:center}
-    .regrow-page .final h2{color:#fff}
-    .regrow-page .final .lead{color:#D7CFC6}
-    .regrow-page .final .price-now{color:var(--gold)}
-    .regrow-page .final .price-old{color:#9c948b}
+    .regrow-page .final{background:linear-gradient(180deg,#FBF7F2,#F5EFE6);color:var(--ink);text-align:center}
+    .regrow-page .final h2{color:var(--ink)}
+    .regrow-page .final .lead{color:var(--muted)}
+    .regrow-page .final .price-now{color:var(--ink)}
+    .regrow-page .final .price-old{color:var(--muted)}
 
-    .regrow-page footer{background:var(--ink);color:#9c948b;text-align:center;padding:26px 20px;font-size:13px}
+    .regrow-page footer{background:#EFE7DA;color:var(--muted);text-align:center;padding:26px 20px;font-size:13px}
 
     /* ============ CTA דביק במובייל ============ */
     .regrow-page .sticky-cta{
@@ -253,11 +253,11 @@
     /* ============ בס"ד + בר הכרזה עליון ============ */
     .regrow-page .besd{text-align:center;font-size:13px;color:var(--muted);padding:5px 0 0;letter-spacing:.02em}
     .regrow-page .announce{
-      background:var(--ink);color:#fff;text-align:center;font-size:13.5px;font-weight:600;
+      background:#EFE7DA;color:var(--ink);text-align:center;font-size:13.5px;font-weight:700;
       padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
     }
     .regrow-page .announce span{display:inline-flex;align-items:center;gap:6px}
-    .regrow-page .announce .hot{color:var(--gold)}
+    .regrow-page .announce .hot{color:var(--terracotta)}
 
     /* ============ אמצעי תשלום ============ */
     .regrow-page .pay{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:16px}
@@ -378,7 +378,6 @@
   <!-- ===================== בר הכרזה עליון ===================== -->
   <div class="announce" role="region" aria-label="הטבות">
     <span>🚚 משלוח חינם לכל הארץ</span>
-    <span>🛡️ 30 יום ניסיון או כספך חזרה</span>
     <span>🔒 תשלום מאובטח</span>
   </div>
 
@@ -393,13 +392,12 @@
 
       <div class="trustbar">
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם לכל הארץ</span>
-        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> 30 יום ניסיון או כספך בחזרה</span>
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
       </div>
 
       <div class="hero-img">
         <!-- ציור המוצר (SVG). החלף בתמונה אמיתית: <img src="assets/regrow-main.jpg" alt="מסרק צומחים מחדש אדום לקרקפת" loading="eager"> -->
-        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<div class="ph" style="min-height:320px">תמונת המוצר תופיע כאן — העלה/י תמונה למוצר בשופיפיי</div>{%- endif -%}</div>
+        <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
       </div>
     </div>
   </header>
@@ -465,7 +463,6 @@
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3v6a3 3 0 01-6 0V5a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></div><div><h3>3-ב-1 במכשיר אחד</h3><p>אור אדום, עיסוי קרקפת ואפליקטור סרום — בלי שלושה מכשירים נפרדים.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><h3>מתאים לכל סוגי השיער</h3><p>לנשים ולגברים, לכל גוון ומרקם.</p></div></div>
         <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div><div><h3>נטען ואלחוטי</h3><p>סוללה נטענת ב-USB, להשתמש בכל מקום בבית.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div><div><h3>אחריות ותמיכה</h3><p>30 יום ניסיון וכספך בחזרה אם זה לא בשבילך.</p></div></div>
       </div>
     </div>
   </section>
@@ -587,7 +584,6 @@
         </div>
         {%- if product.compare_at_price > product.price -%}<div class="save">חוסך/ת {{ product.compare_at_price | minus: product.price | money }}</div>{%- endif -%}
         <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
-        <div style="font-weight:800;color:#111111;margin:8px 0 2px;font-size:15px">🛡️ 30 יום ניסיון — לא הרגשת הבדל? כספך בחזרה</div>
         {%- form 'product', product -%}
           {%- unless product.has_only_default_variant -%}
             <select name="id" class="variant-select" aria-label="בחר/י אפשרות">
@@ -606,7 +602,6 @@
         {%- endform -%}
         <div class="trustbar">
           <span>🚚 משלוח חינם</span>
-          <span>🛡️ 30 יום ניסיון</span>
           <span>🔒 תשלום מאובטח</span>
         </div>
         <div class="pay" aria-label="אמצעי תשלום">
@@ -625,85 +620,9 @@
   <!-- ===================== מוצרים משלימים + באנדל ===================== -->
   <section class="addons">
     <div class="wrap">
-      <span class="eyebrow">שדרגו את התוצאות</span>
-      <h2>מוצרים משלימים שמשלימים את הטיפול</h2>
-      <p class="lead">הוסף/י לטיפול ב-צומחים מחדש — יחד הם עובדים טוב יותר.</p>
-
-      <div class="addon-grid">
-        <!-- כל .ph — החלף ב: <img src="assets/serum.jpg" alt="סרום לצמיחת שיער צומחים מחדש"> -->
-        <div class="addon">
-          <div class="pimg" title="סרום לצמיחת שיער">
-            <svg viewBox="0 0 200 240" role="img" aria-label="סרום לצמיחת שיער">
-              <defs><linearGradient id="serLiq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8584B"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
-              <rect x="86" y="6" width="28" height="44" rx="6" fill="#241f1d"/>
-              <rect x="96" y="48" width="8" height="58" fill="#cfcabf"/>
-              <rect x="62" y="92" width="76" height="134" rx="16" fill="#fff" stroke="#E2D8CC" stroke-width="3"/>
-              <path d="M62 168 h76 v42 a16 16 0 0 1-16 16 H78 a16 16 0 0 1-16-16 Z" fill="url(#serLiq)"/>
-              <rect x="74" y="104" width="52" height="50" rx="6" fill="#FBF1EA"/>
-              <text x="100" y="135" text-anchor="middle" font-size="17" font-weight="800" fill="#C62828" font-family="Heebo,Arial">סרום</text>
-            </svg>
-          </div>
-          <div class="meta">
-            <h3>סרום לצמיחת שיער</h3>
-            <p>תרכובת מרוכזת להחדרה עם האפליקטור — מזין את הקרקפת ותומך בזקיקים.</p>
-          </div>
-          <div class="buy">
-            <span class="ap">₪59</span>   <!-- // PRICE -->
-            <!-- // ADD-TO-CART -->
-            {%- if section.settings.addon_serum != blank -%}{%- assign ap = section.settings.addon_serum -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
-          </div>
-        </div>
-
-        <div class="addon">
-          <div class="pimg" title="שמפו / מרכך מחזק">
-            <svg viewBox="0 0 200 240" role="img" aria-label="שמפו / מרכך מחזק">
-              <defs><linearGradient id="shRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
-              <rect x="92" y="8" width="16" height="28" rx="4" fill="#241f1d"/>
-              <rect x="78" y="30" width="44" height="14" rx="6" fill="#3a3431"/>
-              <rect x="108" y="14" width="36" height="8" rx="4" fill="#241f1d"/>
-              <rect x="58" y="46" width="84" height="188" rx="22" fill="url(#shRed)"/>
-              <rect x="72" y="116" width="56" height="84" rx="10" fill="#FBF1EA"/>
-              <text x="100" y="152" text-anchor="middle" font-size="15" font-weight="800" fill="#C62828" font-family="Heebo,Arial">שמפו</text>
-              <text x="100" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#9E1B1B" font-family="Heebo,Arial">מחזק</text>
-            </svg>
-          </div>
-          <div class="meta">
-            <h3>שמפו / מרכך מחזק</h3>
-            <p>שגרת רחצה מחזקת עם ביוטין וקפאין, לשיער שמרגיש מלא יותר.</p>
-          </div>
-          <div class="buy">
-            <span class="ap">₪49</span>   <!-- // PRICE -->
-            <!-- // ADD-TO-CART -->
-            {%- if section.settings.addon_shampoo != blank -%}{%- assign ap = section.settings.addon_shampoo -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
-          </div>
-        </div>
-
-        <div class="addon">
-          <div class="pimg" title="מברשת עיסוי קרקפת">
-            <svg viewBox="0 0 220 220" role="img" aria-label="מברשת עיסוי קרקפת">
-              <defs><linearGradient id="brRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64B3E"/><stop offset="1" stop-color="#9E1B1B"/></linearGradient></defs>
-              <ellipse cx="110" cy="150" rx="44" ry="58" fill="url(#brRed)"/>
-              <ellipse cx="110" cy="168" rx="15" ry="22" fill="#fff"/>
-              <ellipse cx="110" cy="88" rx="76" ry="66" fill="url(#brRed)"/>
-              <ellipse cx="110" cy="88" rx="60" ry="50" fill="#241f1d"/>
-              <g fill="#E8584B">
-                <circle cx="110" cy="62" r="5"/><circle cx="84" cy="74" r="5"/><circle cx="136" cy="74" r="5"/>
-                <circle cx="72" cy="96" r="5"/><circle cx="98" cy="90" r="5"/><circle cx="122" cy="90" r="5"/><circle cx="148" cy="96" r="5"/>
-                <circle cx="84" cy="114" r="5"/><circle cx="110" cy="110" r="5"/><circle cx="136" cy="114" r="5"/>
-              </g>
-            </svg>
-          </div>
-          <div class="meta">
-            <h3>מברשת עיסוי קרקפת</h3>
-            <p>מברשת סיליקון לעיסוי יומי שמגביר זרימת דם וחדירת הסרום.</p>
-          </div>
-          <div class="buy">
-            <span class="ap">₪39</span>   <!-- // PRICE -->
-            <!-- // ADD-TO-CART -->
-            {%- if section.settings.addon_brush != blank -%}{%- assign ap = section.settings.addon_brush -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
-          </div>
-        </div>
-      </div>
+      <span class="eyebrow">חבילות משתלמות</span>
+      <h2>חבילות מבצע — חוסכים יותר</h2>
+      <p class="lead">שלוש חבילות שמשלבות את המוצרים שלנו במחיר משתלם — ככל שמשלבים יותר, חוסכים יותר.</p>
 
       <!-- מבצעי חבילות (upsell) -->
       <div class="bundle">
@@ -773,7 +692,7 @@
       </details>
       <details>
         <summary>מה כוללת האחריות?</summary>
-        <div class="ans">כל מסרק מגיע עם 30 יום ניסיון — אם זה לא בשבילך, מחזירים ומקבלים את הכסף בחזרה, וכן אחריות יצרן על המוצר.</div>
+        <div class="ans">כל מסרק מגיע עם אחריות יצרן, וניתן להחזיר בהתאם למדיניות ההחזרות שלנו.</div>
       </details>
       <details>
         <summary>כמה זמן לוקח המשלוח?</summary>
@@ -781,23 +700,12 @@
       </details>
       <details>
         <summary>מה מדיניות ההחזרות?</summary>
-        <div class="ans">ניתן להחזיר את המוצר תוך 30 יום מקבלתו ולקבל החזר כספי מלא, כל עוד הוא במצב תקין.</div>
+        <div class="ans">ניתן להחזיר את המוצר בהתאם למדיניות ההחזרות שלנו, כל עוד הוא במצב תקין.</div>
       </details>
       <details>
         <summary>האם זה בטוח לשימוש יומיומי?</summary>
         <div class="ans">כן. השימוש המומלץ הוא כ-3 פעמים בשבוע, 10 דקות בכל פעם. מומלץ להיוועץ ברופא אם יש לך מצב רפואי רלוונטי.</div>
       </details>
-    </div>
-  </section>
-
-  <!-- ===================== GUARANTEE ===================== -->
-  <section class="guarantee">
-    <div class="wrap center">
-      <div class="g-card">
-        <div class="g-seal">30 יום<br>ניסיון</div>
-        <h2>נסה/י ללא סיכון</h2>
-        <p class="lead">תן/י ל-צומחים מחדש 30 יום. אם לא הרגשת הבדל — פנה/י אלינו ונחזיר לך את מלוא הסכום. הסיכון כולו עלינו.</p>
-      </div>
     </div>
   </section>
 
