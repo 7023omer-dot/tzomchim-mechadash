@@ -648,7 +648,7 @@
             <p>תרכובת מרוכזת להחדרה עם האפליקטור — מזין את הקרקפת ותומך בזקיקים.</p>
           </div>
           <div class="buy">
-            <span class="ap">₪89</span>   <!-- // PRICE -->
+            <span class="ap">₪59</span>   <!-- // PRICE -->
             <!-- // ADD-TO-CART -->
             {%- if section.settings.addon_serum != blank -%}{%- assign ap = section.settings.addon_serum -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
           </div>
@@ -672,7 +672,7 @@
             <p>שגרת רחצה מחזקת עם ביוטין וקפאין, לשיער שמרגיש מלא יותר.</p>
           </div>
           <div class="buy">
-            <span class="ap">₪69</span>   <!-- // PRICE -->
+            <span class="ap">₪49</span>   <!-- // PRICE -->
             <!-- // ADD-TO-CART -->
             {%- if section.settings.addon_shampoo != blank -%}{%- assign ap = section.settings.addon_shampoo -%}{%- form 'product', ap -%}<input type="hidden" name="id" value="{{ ap.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="add-btn">הוסף/י</button>{%- endform -%}{%- else -%}<button class="add-btn" type="button" title="בחר/י מוצר ב-Section settings">הוסף/י</button>{%- endif -%}
           </div>
@@ -708,39 +708,39 @@
       <!-- מבצעי חבילות (upsell) -->
       <div class="bundle">
         <span class="badge">מבצע חבילה 🔥</span>
-        <h3 style="font-size:20px;margin:10px 0 4px">מסרק + סרום</h3>
-        <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום לצמיחה</span></div>
-        <div class="price-row"><span class="price-old">₪218</span><span class="price-now">₪199</span></div>
-        <div class="save">חוסך/ת ₪19</div>
-        {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י מסרק + סרום — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י מסרק + סרום — ₪199 <span class="arrow">←</span></a>{%- endif -%}
+        <h3 style="font-size:20px;margin:10px 0 4px">Starter — מסרק + סרום</h3>
+        <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
+        <div class="price-row"><span class="price-old">₪207</span><span class="price-now">₪179</span></div>
+        <div class="save">חוסך/ת ₪28</div>
+        {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Starter — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Starter — ₪179 <span class="arrow">←</span></a>{%- endif -%}
       </div>
 
       <div class="bundle">
         <span class="badge">מבצע חבילה 🔥</span>
-        <h3 style="font-size:20px;margin:10px 0 4px">מסרק + מברשת עיסוי</h3>
-        <div class="items"><span>מסרק</span><span class="plus">+</span><span>מברשת עיסוי</span></div>
-        <div class="price-row"><span class="price-old">₪168</span><span class="price-now">₪149</span></div>
-        <div class="save">חוסך/ת ₪19</div>
-        {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י מסרק + מברשת — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י מסרק + מברשת — ₪149 <span class="arrow">←</span></a>{%- endif -%}
+        <h3 style="font-size:20px;margin:10px 0 4px">Premium — הכי משתלם</h3>
+        <div class="items"><span>מסרק</span><span class="plus">+</span><span>שמן Batana</span><span class="plus">+</span><span>Spartan</span><span class="plus">+</span><span>שמפו</span></div>
+        <div class="price-row"><span class="price-old">₪305</span><span class="price-now">₪249</span></div>
+        <div class="save">חוסך/ת ₪56</div>
+        {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Premium — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Premium — ₪249 <span class="arrow">←</span></a>{%- endif -%}
       </div>
 
       <!-- באנדל / דיל משתלם -->
       <div class="bundle">
         <span class="badge">הדיל המשתלם ביותר 🔥</span>
-        <h3 style="font-size:22px;margin:10px 0 4px">ערכת צומחים מחדש המלאה</h3>
+        <h3 style="font-size:22px;margin:10px 0 4px">Ultimate — ערכה מלאה</h3>
         <div class="items">
           <span>מסרק צומחים מחדש</span><span class="plus">+</span>
           <span>סרום</span><span class="plus">+</span>
-          <span>שמפו/מרכך</span><span class="plus">+</span>
-          <span>מברשת עיסוי</span>
+          <span>שמן</span><span class="plus">+</span>
+          <span>שמפו</span>
         </div>
         <div class="price-row">
-          <span class="price-old">₪326</span>   <!-- // PRICE — סכום פריטים בנפרד -->
-          <span class="price-now">₪229</span>   <!-- // PRICE — מחיר הערכה -->
+          <span class="price-old">₪315</span>   <!-- // PRICE — סכום פריטים בנפרד -->
+          <span class="price-now">₪299</span>   <!-- // PRICE — מחיר הערכה -->
         </div>
-        <div class="save">חוסך/ת ₪97 לעומת קנייה בנפרד</div>
+        <div class="save">חוסך/ת ₪16 לעומת קנייה בנפרד</div>
         <!-- // ADD-TO-CART — בשלב 2 יחובר ל-variant/מוצר הערכה בשופיפיי -->
-        {%- if section.settings.bundle_product != blank -%}{%- assign bp = section.settings.bundle_product -%}{%- form 'product', bp -%}<input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — {{ bp.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את הערכה המלאה — ₪229 <span class="arrow">←</span></a>{%- endif -%}
+        {%- if section.settings.bundle_product != blank -%}{%- assign bp = section.settings.bundle_product -%}{%- form 'product', bp -%}<input type="hidden" name="id" value="{{ bp.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">קח/י את חבילת Ultimate — {{ bp.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#" class="cta" style="margin-top:14px">קח/י את חבילת Ultimate — ₪299 <span class="arrow">←</span></a>{%- endif -%}
       </div>
     </div>
   </section>
@@ -858,9 +858,9 @@
     { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
-    { "type": "product", "id": "combo_serum", "label": "מוצר: חבילת מסרק + סרום (₪199)" },
-    { "type": "product", "id": "combo_brush", "label": "מוצר: חבילת מסרק + מברשת (₪149)" },
-    { "type": "product", "id": "bundle_product", "label": "מוצר: ערכת צומחים מחדש המלאה (באנדל)" }
+    { "type": "product", "id": "combo_serum", "label": "מוצר: חבילת Starter — מסרק + סרום (₪179)" },
+    { "type": "product", "id": "combo_brush", "label": "מוצר: חבילת Premium — מסרק+Batana+Spartan+שמפו (₪249)" },
+    { "type": "product", "id": "bundle_product", "label": "מוצר: חבילת Ultimate — ערכה מלאה (₪299)" }
   ],
   "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
 }
