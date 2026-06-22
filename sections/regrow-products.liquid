@@ -7,13 +7,14 @@
 <section class="regrow-products" dir="rtl">
   <style>
     .regrow-products{
-      --rp-cream:#FBF7F2;
-      --rp-card:#FFFDF9;
-      --rp-ink:#111111;
-      --rp-muted:#4A4A4A;
+      --rp-cream:#F3ECE0;
+      --rp-card:#FBF7F2;
+      --rp-ink:#5A1B2E;
+      --rp-muted:#6E5560;
+      --rp-burgundy:#5A1B2E;
       --rp-accent:#E8112D;
       --rp-accent-dark:#C20E26;
-      --rp-line:#ECE3D8;
+      --rp-line:#E7DCCB;
       --rp-gold:#D9A441;
       background:var(--rp-cream);
       color:var(--rp-ink);
@@ -73,9 +74,10 @@
     .regrow-products .rp-title{font-size:17px;font-weight:800;margin:0;color:var(--rp-ink)}
     .regrow-products .rp-desc{font-size:13.5px;color:var(--rp-muted);margin:0;line-height:1.5;flex:1}
 
-    .regrow-products .rp-price{display:flex;align-items:baseline;gap:8px;margin-top:4px}
-    .regrow-products .rp-price .now{font-size:22px;font-weight:900;color:var(--rp-accent)}
+    .regrow-products .rp-price{display:flex;align-items:baseline;gap:8px;margin-top:4px;flex-wrap:wrap}
+    .regrow-products .rp-price .now{font-size:24px;font-weight:900;color:var(--rp-burgundy)}
     .regrow-products .rp-price .was{font-size:14px;color:#9a9a9a;text-decoration:line-through}
+    .regrow-products .rp-save{display:inline-block;margin-top:4px;font-size:12.5px;font-weight:800;color:#fff;background:var(--rp-burgundy);padding:4px 9px;border-radius:999px;width:fit-content}
 
     .regrow-products .rp-cta{
       display:flex;align-items:center;justify-content:center;gap:8px;
@@ -143,7 +145,6 @@
       {%- for block in product_blocks -%}
         <article class="rp-card rp-fade" {{ block.shopify_attributes }}>
           {%- if block.settings.flagship -%}<span class="rp-badge flag">מוצר דגל</span>{%- endif -%}
-          {%- if block.settings.badge != blank -%}<span class="rp-badge save">{{ block.settings.badge }}</span>{%- endif -%}
 
           <div class="rp-imgbox">
             {%- if block.settings.image != blank -%}
@@ -163,6 +164,7 @@
               <span class="now">{{ block.settings.price }}</span>
               {%- if block.settings.compare_price != blank -%}<span class="was">{{ block.settings.compare_price }}</span>{%- endif -%}
             </div>
+            {%- if block.settings.badge != blank -%}<span class="rp-save">חיסכון {{ block.settings.badge }}</span>{%- endif -%}
 
             {%- if block.settings.product != blank -%}
               {%- assign p = block.settings.product -%}
