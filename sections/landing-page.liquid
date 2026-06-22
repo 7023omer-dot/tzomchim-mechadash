@@ -687,7 +687,10 @@
           <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
           <div class="price-row"><span class="price-old">₪278</span><span class="price-now">₪207</span></div>
           <div class="save">חוסך/ת 71 ₪ · 26%</div>
-          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></a>{%- endif -%}
+          {%- assign cc = section.settings.combo_comb -%}
+          {%- assign cse = section.settings.addon_serum -%}
+          {%- assign csh = section.settings.addon_shampoo -%}
+          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></a>{%- endif -%}
         </div>
 
         <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
@@ -704,7 +707,7 @@
           <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
           <div class="price-row"><span class="price-old">₪327</span><span class="price-now">₪239</span></div>
           <div class="save">חוסך/ת 88 ₪ · 27%</div>
-          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></a>{%- endif -%}
+          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></a>{%- endif -%}
         </div>
       </div>
     </div>
@@ -806,6 +809,23 @@
       v.addEventListener('play', function(){ b.hidden = true; if(lbl) lbl.hidden = true; });
       v.addEventListener('ended', function(){ b.hidden = false; if(lbl) lbl.hidden = false; });
     });
+
+    // קומבו — הוספת רכיבים לסל; ה-Automatic Discount מחיל את מחיר הקומבו
+    document.querySelectorAll('[data-combo-add]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var items = btn.getAttribute('data-combo-add').split(',').map(function(x){
+          return { id: parseInt(x, 10), quantity: 1 };
+        }).filter(function(i){ return i.id; });
+        if(!items.length) return;
+        btn.setAttribute('aria-busy', 'true');
+        fetch('{{ routes.cart_add_url }}.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        }).then(function(){ window.location.href = '{{ routes.cart_url }}'; })
+          .catch(function(){ window.location.href = '{{ routes.cart_url }}'; });
+      });
+    });
   </script>
 </div>
 {% schema %}
@@ -826,9 +846,11 @@
     { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
-    { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "אם ריק — הכפתור מפנה למעלה אל ההצעה הראשית (ללא שגיאה). חברו מוצר 'ערכה' אמיתי או הגדירו Automatic Discount כדי שהמחיר המוזל יחול בעגלה." },
-    { "type": "product", "id": "combo_serum", "label": "מבצע 1: מסרק + סרום (₪207)" },
-    { "type": "product", "id": "combo_brush", "label": "מבצע 2: מסרק + סרום + שמפו (₪239)" }
+    { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "שתי דרכים: (א) חברו מוצר 'ערכה' ייעודי במחיר המבצע למטה; או (ב) חברו את מוצרי הרכיבים (מסרק/סרום/שמפו) — הכפתור יוסיף את כולם לסל וה-Automatic Discount יחיל את מחיר הקומבו. אם ריק — הכפתור מפנה בבטחה אל ההצעה הראשית." },
+    { "type": "product", "id": "combo_serum", "label": "מבצע 1 — מוצר 'ערכה' ייעודי (₪207), אופציונלי" },
+    { "type": "product", "id": "combo_brush", "label": "מבצע 2 — מוצר 'ערכה' ייעודי (₪239), אופציונלי" },
+    { "type": "paragraph", "content": "או — חיבור לפי רכיבים (עם Automatic Discount):" },
+    { "type": "product", "id": "combo_comb", "label": "רכיב: מסרק (מוצר הדגל)" }
   ],
   "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
 }
