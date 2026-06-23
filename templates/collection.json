@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -11,32 +20,6 @@
     },
     "collage_yPMAfk": {
       "type": "collage",
-      "blocks": {
-        "image_cttfjB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/homepage3.jpg"
-          }
-        },
-        "product_phAw7N": {
-          "type": "product",
-          "settings": {
-            "product": "4-in-1-electric-pet-grooming-kit-hair-trimmer-clippers-nail-grinder-for-cats-dogs",
-            "second_image": true
-          }
-        },
-        "collection_xkndMB": {
-          "type": "collection",
-          "settings": {
-            "collection": "frontpage"
-          }
-        }
-      },
-      "block_order": [
-        "image_cttfjB",
-        "product_phAw7N",
-        "collection_xkndMB"
-      ],
       "settings": {
         "heading": "This season Best Seller",
         "heading_size": "h2",
@@ -55,7 +38,7 @@
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 20,
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "color_scheme": "scheme-1",
         "product_cards_stretch": true,
         "image_ratio": "square",
@@ -67,7 +50,7 @@
         "enable_filtering": true,
         "filter_type": "horizontal",
         "enable_sorting": true,
-        "columns_mobile": "1",
+        "columns_mobile": "2",
         "padding_top": 24,
         "padding_bottom": 24
       }
@@ -90,6 +73,9 @@
     }
   },
   "order": [
-    "product-grid"
+    "banner",
+    "collage_yPMAfk",
+    "product-grid",
+    "wd_section_divider_k4Uejy"
   ]
 }
