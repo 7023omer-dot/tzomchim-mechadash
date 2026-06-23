@@ -430,13 +430,18 @@
           <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
         </div>
 
-        <!-- סרטון תדמית — לא מתנגן אוטומטית; בלחיצה מתנגן עם קול מלא -->
-        {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+        <!-- סרטון תדמית — אם הועלה דרך שופיפיי (video_file) משתמשים בו; אחרת קובץ מ-assets -->
         <div class="video-wrap rg-hero-video" data-rg-video>
-          <video controls preload="metadata" playsinline poster="{{ section.settings.video_poster | image_url: width: 700 }}">
-            <source src="{{ video_src | asset_url }}" type="video/mp4">
-            הדפדפן שלך אינו תומך בהצגת וידאו.
-          </video>
+          {%- if section.settings.video_file != blank -%}
+            {{ section.settings.video_file | video_tag: controls: true, playsinline: true, muted: false, autoplay: false, loop: false, preload: 'metadata' }}
+          {%- else -%}
+            {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+            <video controls preload="metadata" playsinline{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
+              <source src="{{ video_src | asset_url }}" type="video/mp4">
+              <source src="{{ video_src | asset_url }}" type="video/quicktime">
+              הדפדפן שלך אינו תומך בהצגת וידאו.
+            </video>
+          {%- endif -%}
           <button type="button" class="rg-play" aria-label="נגן/י את הסרטון">
             <span class="pcirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </button>
@@ -836,8 +841,9 @@
     { "type": "header", "content": "תמונות" },
     { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
     { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
-    { "type": "header", "content": "סרטון תדמית (ליד תמונת המוצר)" },
-    { "type": "text", "id": "video_asset", "label": "שם קובץ הסרטון ב-assets", "default": "tz-video.mp4", "info": "ברירת מחדל: tz-video.mp4 שכבר הועלה. הסרטון מתנגן בלחיצה, עם קול." },
+    { "type": "header", "content": "סרטון תדמית (ליד תמונת המוצר)", "info": "מומלץ: העלו את הסרטון ב-'סרטון (העלאה לשופיפיי)' למטה — שופיפיי ממיר אותו לפורמט שמתנגן בכל הדפדפנים." },
+    { "type": "video", "id": "video_file", "label": "סרטון (העלאה לשופיפיי) — מומלץ" },
+    { "type": "text", "id": "video_asset", "label": "חלופה: שם קובץ סרטון ב-assets", "default": "tz-video.mp4", "info": "משמש רק אם לא נבחר סרטון למעלה." },
     { "type": "image_picker", "id": "video_poster", "label": "תמונת תצוגה לסרטון (poster) — אופציונלי" },
     { "type": "header", "content": "טקסטים" },
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
