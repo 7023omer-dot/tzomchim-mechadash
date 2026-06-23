@@ -13,7 +13,7 @@
       "type": "landing-page",
       "settings": {
         "video_file": "shopify://files/videos/סרטון תדמית מוצר 2.0.mov",
-        "video_asset": "tz-video.mp4",
+        "video_asset": "",
         "cta_text": "הוסף/י לעגלה",
         "urgency_text": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי",
         "addon_serum": "",
