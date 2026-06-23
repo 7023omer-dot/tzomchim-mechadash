@@ -70,10 +70,19 @@
         "max_height_desktop": 100,
         "max_height_mobile": 100
       }
+    },
+    "regrow_video": {
+      "type": "regrow-video",
+      "settings": {
+        "heading": "צפו בסרטון התדמית",
+        "video_asset": "tz-video.mp4",
+        "max_width": 380
+      }
     }
   },
   "order": [
     "banner",
+    "regrow_video",
     "collage_yPMAfk",
     "product-grid",
     "wd_section_divider_k4Uejy"
