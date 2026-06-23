@@ -351,6 +351,11 @@
     .regrow-page .rg-play svg{width:30px;height:30px;margin-inline-start:4px;fill:var(--ink)}
     .regrow-page .rg-play[hidden]{display:none}
     .regrow-page .rg-vlabel{position:absolute;bottom:12px;inset-inline:0;z-index:6;text-align:center;color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.55);pointer-events:none}
+    .regrow-page .media-duo.media-duo--solo{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+    .regrow-page .rg-unmute{position:absolute;bottom:10px;inset-inline-start:10px;z-index:6;display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;background:rgba(20,30,22,.62);color:#fff;border-radius:999px;padding:7px 12px 7px 9px;font-family:inherit;font-size:13px;font-weight:700;transition:background .2s ease}
+    .regrow-page .rg-unmute:hover{background:rgba(20,30,22,.82)}
+    .regrow-page .rg-unmute.is-on{background:rgba(47,79,53,.92)}
+    .regrow-page .rg-unmute svg{width:18px;height:18px;fill:#fff}
     .regrow-page .ba-slider .ba-img{width:100%;height:100%;object-fit:cover;display:block}
     .regrow-page .ba-split .pair .ba-cell{position:relative;overflow:hidden}
     .regrow-page .ba-split .pair .ba-cell img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5}
@@ -425,27 +430,32 @@
         <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
       </div>
 
-      <div class="media-duo">
+      {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+      {%- assign has_video = false -%}
+      {%- if video_src != blank or section.settings.video_file != blank -%}{%- assign has_video = true -%}{%- endif -%}
+      <div class="media-duo{% unless has_video %} media-duo--solo{% endunless %}">
         <div class="hero-img">
           <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
         </div>
 
-        <!-- סרטון תדמית — קובץ ה-MP4 התקין מ-assets קודם (מתנגן בכל הדפדפנים); video_file כגיבוי -->
+        {%- if has_video -%}
+        <!-- סרטון תדמית — מתנגן אוטומטית מושתק (autoplay+muted+loop+playsinline); הקש/י לקול -->
         <div class="video-wrap rg-hero-video" data-rg-video>
-          {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
           {%- if video_src != blank -%}
-            <video controls preload="metadata" playsinline{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
+            <video autoplay muted loop playsinline preload="auto"{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
               <source src="{{ video_src | asset_url }}" type="video/mp4">
               הדפדפן שלך אינו תומך בהצגת וידאו.
             </video>
-          {%- elsif section.settings.video_file != blank -%}
-            {{ section.settings.video_file | video_tag: controls: true, playsinline: true, muted: false, autoplay: false, loop: false, preload: 'metadata' }}
+          {%- else -%}
+            {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
           {%- endif -%}
-          <button type="button" class="rg-play" aria-label="נגן/י את הסרטון">
-            <span class="pcirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <button type="button" class="rg-unmute" data-rg-unmute aria-label="הפעל/י קול">
+            <span class="ucirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg></span>
+            <span class="utext">הקש/י לקול</span>
           </button>
-          <span class="rg-vlabel">▶ צפו בסרטון — עם קול</span>
         </div>
+        {%- endif -%}
+      </div>
       </div>
     </div>
   </header>
@@ -803,15 +813,20 @@
       update();
     });
 
-    // סרטון — כפתור Play מפעיל עם קול מלא (לא מושתק); הכפתור נעלם בזמן ניגון
+    // סרטון — מתנגן אוטומטית מושתק; כפתור 'הקש/י לקול' מפעיל סאונד
     document.querySelectorAll('[data-rg-video]').forEach(function(w){
       var v = w.querySelector('video');
-      var b = w.querySelector('.rg-play');
-      var lbl = w.querySelector('.rg-vlabel');
-      if(!v || !b) return;
-      b.addEventListener('click', function(){ v.play(); });
-      v.addEventListener('play', function(){ b.hidden = true; if(lbl) lbl.hidden = true; });
-      v.addEventListener('ended', function(){ b.hidden = false; if(lbl) lbl.hidden = false; });
+      var u = w.querySelector('[data-rg-unmute]');
+      if(!v) return;
+      var p = v.play(); if(p && p.catch){ p.catch(function(){}); }
+      if(u){
+        u.addEventListener('click', function(){
+          v.muted = !v.muted;
+          u.classList.toggle('is-on', !v.muted);
+          var t = u.querySelector('.utext'); if(t){ t.textContent = v.muted ? 'הקש/י לקול' : 'קול פעיל'; }
+          if(!v.muted){ v.play(); }
+        });
+      }
     });
 
     // קומבו — הוספת רכיבים לסל; ה-Automatic Discount מחיל את מחיר הקומבו
