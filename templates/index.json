@@ -9,9 +9,26 @@
  */
 {
   "sections": {
+    "video_iX6aeF": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "Video",
+        "heading_size": "h2",
+        "enable_video_looping": true,
+        "video": "shopify://files/videos/סרטון תדמית מוצר 2.0.mov",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 24
+      }
+    },
     "landing-page": {
       "type": "landing-page",
       "settings": {
+        "hero_image": "shopify://shop_images/340c074556474d6593db5203f3e5f955.webp",
         "video_file": "shopify://files/videos/סרטון תדמית מוצר 2.0.mov",
         "video_asset": "",
         "cta_text": "הוסף/י לעגלה",
@@ -26,6 +43,7 @@
     }
   },
   "order": [
+    "video_iX6aeF",
     "landing-page"
   ]
 }
