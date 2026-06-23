@@ -430,17 +430,16 @@
           <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
         </div>
 
-        <!-- סרטון תדמית — אם הועלה דרך שופיפיי (video_file) משתמשים בו; אחרת קובץ מ-assets -->
+        <!-- סרטון תדמית — קובץ ה-MP4 התקין מ-assets קודם (מתנגן בכל הדפדפנים); video_file כגיבוי -->
         <div class="video-wrap rg-hero-video" data-rg-video>
-          {%- if section.settings.video_file != blank -%}
-            {{ section.settings.video_file | video_tag: controls: true, playsinline: true, muted: false, autoplay: false, loop: false, preload: 'metadata' }}
-          {%- else -%}
-            {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+          {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
+          {%- if video_src != blank -%}
             <video controls preload="metadata" playsinline{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
               <source src="{{ video_src | asset_url }}" type="video/mp4">
-              <source src="{{ video_src | asset_url }}" type="video/quicktime">
               הדפדפן שלך אינו תומך בהצגת וידאו.
             </video>
+          {%- elsif section.settings.video_file != blank -%}
+            {{ section.settings.video_file | video_tag: controls: true, playsinline: true, muted: false, autoplay: false, loop: false, preload: 'metadata' }}
           {%- endif -%}
           <button type="button" class="rg-play" aria-label="נגן/י את הסרטון">
             <span class="pcirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
