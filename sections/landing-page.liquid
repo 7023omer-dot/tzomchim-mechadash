@@ -9,19 +9,20 @@
 <style>
     /* ============ משתני מותג (פלטה חמה ונקייה) ============ */
     .regrow-page{
-      --cream:#F6F6F4;        /* רקע בהיר לסקשנים מתחלפים */
+      --cream:#F4EBDD;        /* רקע שמנת פרימיום */
+      --cream-soft:#FBF6EE;   /* שמנת בהיר יותר */
       --white:#FFFFFF;
-      --ink:#171717;          /* טקסט ראשי — כמעט-שחור */
-      --muted:#555555;        /* טקסט משני — ניגודיות טובה */
-      --terracotta:#E8112D;   /* אדום מותג — CTA/באדג'ים/אקסנט */
+      --ink:#2B2B2B;          /* טקסט ראשי — חום-שחור רך */
+      --muted:#6B6B6B;        /* טקסט משני — ניגודיות טובה */
+      --terracotta:#E8112D;   /* אדום מותג — CTA/מבצע/אקסנט */
       --terracotta-dark:#C20E26;
-      --black:#121212;        /* שחור להירו/פוטר/בלוקים כהים */
+      --black:#1E1A17;        /* כהה רך לפוטר */
       --gold:#E8112D;         /* באדג'ים — אדום מותג */
-      --line:#E6E6E6;
+      --line:#E7DECF;
       --ok:#1E9E57;
       --star:#F5A623;
-      --shadow:0 8px 30px rgba(0,0,0,.07);
-      --shadow-lg:0 16px 48px rgba(0,0,0,.12);
+      --shadow:0 8px 30px rgba(60,45,30,.08);
+      --shadow-lg:0 16px 48px rgba(60,45,30,.14);
       --radius:18px;
       --radius-sm:12px;
       --maxw:680px;           /* mobile-first; דסקטופ מתרחב למטה */
@@ -75,22 +76,22 @@
     .regrow-page .ic{width:20px;height:20px;flex:0 0 auto;color:var(--terracotta)}
 
     /* ============ HERO ============ */
-    .regrow-page .hero{
-      background:var(--black);
-      padding-top:40px;
-    }
-    .regrow-page .hero .eyebrow{color:#fff}
-    .regrow-page .hero h1{color:#fff}
-    .regrow-page .hero .lead{color:rgba(255,255,255,.82)}
-    .regrow-page .hero .lead strong{color:#fff}
-    .regrow-page .hero .trustbar{color:rgba(255,255,255,.82)}
-    .regrow-page .hero h1{font-size:30px;font-weight:900;margin-bottom:16px}
+    .regrow-page .hero{background:var(--cream);padding:30px 20px 40px}
+    .regrow-page .hero .eyebrow{color:var(--terracotta)}
+    .regrow-page .hero h1{color:var(--ink);font-size:30px;font-weight:900;margin-bottom:14px;line-height:1.16}
     .regrow-page .hero h1 em{font-style:normal;color:var(--terracotta)}
-    .regrow-page .hero .lead{margin-bottom:30px}
-    .regrow-page .hero-img{
-      margin:26px auto 0;max-width:340px;border-radius:var(--radius);
-      background:#fff;box-shadow:var(--shadow-lg);overflow:hidden;
-    }
+    .regrow-page .hero .lead{color:var(--muted);font-size:17px;margin-bottom:20px}
+    /* פריסת שני טורים: תמונה | כותרת+יתרונות (מובייל: תמונה למעלה) */
+    .regrow-page .hero-duo{display:flex;flex-direction:column;gap:22px;align-items:center}
+    .regrow-page .hero-media{width:100%;max-width:360px}
+    .regrow-page .hero-media .pimg{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:14px;min-height:0}
+    .regrow-page .hero-media .pimg img{width:100%;height:auto;display:block}
+    .regrow-page .hero-copy{width:100%}
+    .regrow-page .hero .trustbar{color:var(--muted)}
+    /* רשימת יתרונות — כרטיסים מסודרים, אייקון ✓ אדום */
+    .regrow-page .hero-benefits{list-style:none;display:grid;grid-template-columns:1fr;gap:9px;margin:0 0 22px;text-align:right}
+    .regrow-page .hero-benefits li{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;box-shadow:var(--shadow)}
+    .regrow-page .hero-benefits .hb-ic{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--terracotta);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
     /* placeholder תמונה — החלף ב-<img src="..."> */
     .regrow-page .ph{
       display:flex;align-items:center;justify-content:center;text-align:center;
@@ -189,9 +190,10 @@
     /* ============ OFFER / PRICING ============ */
     .regrow-page .offer{background:linear-gradient(180deg,var(--cream),#FFFDFB)}
     .regrow-page .price-card{
-      background:#fff;border:2px solid var(--terracotta);border-radius:var(--radius);
-      padding:30px 24px;margin-top:20px;box-shadow:var(--shadow-lg);text-align:center;
+      position:relative;background:#fff;border:2px solid var(--terracotta);border-radius:var(--radius);
+      padding:48px 24px 28px;margin:20px auto 0;max-width:460px;box-shadow:var(--shadow-lg);text-align:center;overflow:hidden;
     }
+    .regrow-page .offer-head{position:absolute;top:0;inset-inline:0;background:var(--terracotta);color:#fff;font-weight:800;font-size:15px;padding:9px 12px;letter-spacing:.02em}
     .regrow-page .badge{
       display:inline-block;background:var(--gold);color:#fff;font-weight:800;
       font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:14px;
@@ -250,11 +252,11 @@
     }
 
     /* ============ FINAL CTA ============ */
-    .regrow-page .final{background:var(--black);color:#fff;text-align:center}
-    .regrow-page .final h2{color:#fff}
-    .regrow-page .final .lead{color:rgba(255,255,255,.82)}
-    .regrow-page .final .price-now{color:#fff}
-    .regrow-page .final .price-old{color:rgba(255,255,255,.6)}
+    .regrow-page .final{background:linear-gradient(180deg,var(--cream-soft),var(--cream));color:var(--ink);text-align:center}
+    .regrow-page .final h2{color:var(--ink)}
+    .regrow-page .final .lead{color:var(--muted)}
+    .regrow-page .final .price-now{color:var(--terracotta)}
+    .regrow-page .final .price-old{color:var(--muted)}
 
     .regrow-page footer{background:var(--black);color:rgba(255,255,255,.7);text-align:center;padding:26px 20px;font-size:13px}
 
@@ -274,8 +276,8 @@
     /* ============ בס"ד + בר הכרזה עליון ============ */
     .regrow-page .besd{text-align:center;font-size:13px;color:var(--muted);padding:5px 0 0;letter-spacing:.02em}
     .regrow-page .announce{
-      background:var(--black);color:#fff;text-align:center;font-size:13.5px;font-weight:700;
-      padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
+      background:var(--cream-soft);color:var(--ink);text-align:center;font-size:13.5px;font-weight:700;
+      padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;border-bottom:1px solid var(--line);
     }
     .regrow-page .announce span{display:inline-flex;align-items:center;gap:6px}
     .regrow-page .announce .hot{color:var(--terracotta)}
@@ -316,7 +318,7 @@
     .regrow-page .ba-slider input[type=range]{
       position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:5;
     }
-    .regrow-page .ba-extra{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    .regrow-page .ba-extra{display:grid;grid-template-columns:1fr;gap:14px;margin:18px auto 0;max-width:540px}
     .regrow-page .ba-split{border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow);background:#fff}
     .regrow-page .ba-split .pair{display:grid;grid-template-columns:1fr 1fr}
     .regrow-page .ba-split .pair .ph{min-height:150px;border-radius:0}
@@ -379,7 +381,7 @@
     .regrow-page .rg-unmute svg{width:18px;height:18px;fill:#fff}
     .regrow-page .ba-slider .ba-img{width:100%;height:100%;object-fit:cover;display:block}
     .regrow-page .ba-split .pair .ba-cell{position:relative;overflow:hidden}
-    .regrow-page .ba-split .pair .ba-cell img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5}
+    .regrow-page .ba-split .pair .ba-cell img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:1/1}
     .regrow-page .ba-split .pair .ba-cell.before-mini{border-inline-end:3px solid #fff}
     .regrow-page .ba-split .cap{padding:11px 14px;font-weight:700;color:var(--ink);text-align:center;font-size:14px}
     .regrow-page .ba-tag{position:absolute;top:10px;font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;z-index:2}
@@ -404,9 +406,13 @@
       .regrow-page{padding-bottom:0;font-size:18px}
       .regrow-page{padding-bottom:0}
       .regrow-page section{padding:64px 24px}
-      .regrow-page .hero h1{font-size:42px}
-      .regrow-page .hero .lead{font-size:21px}
-      .regrow-page .hero-img{max-width:440px}
+      .regrow-page .hero h1{font-size:44px}
+      .regrow-page .hero .lead{font-size:19px}
+      .regrow-page .hero-duo{flex-direction:row;align-items:center;max-width:1040px;margin-inline:auto;gap:40px}
+      .regrow-page .hero-media{flex:0 0 42%;max-width:420px}
+      .regrow-page .hero-copy{flex:1;text-align:right}
+      .regrow-page .hero-benefits{grid-template-columns:1fr 1fr}
+      .regrow-page .hero .trustbar{justify-content:flex-start}
       .regrow-page h2{font-size:36px}
       .regrow-page .grid{grid-template-columns:1fr 1fr}
       .regrow-page .ba-grid{grid-template-columns:1fr 1fr 1fr}
@@ -417,7 +423,7 @@
       .regrow-page .addon{flex-direction:column;text-align:center}
       .regrow-page .addon .ph{width:120px;height:120px}
       .regrow-page .addon .buy{align-items:center}
-      .regrow-page .ba-extra{grid-template-columns:1fr 1fr}
+      .regrow-page .ba-extra{grid-template-columns:1fr 1fr;max-width:720px}
       .regrow-page .video-wrap{aspect-ratio:16/9;max-width:760px}
       .regrow-page .sticky-cta{max-width:780px;margin:0 auto;border-radius:14px 14px 0 0}      /* גם בדסקטופ */
     }
@@ -440,44 +446,30 @@
 
   <!-- ===================== HERO ===================== -->
   <header class="hero">
-    <div class="wrap center">
-      <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · צומחים מחדש <!-- BRAND --></span>
-      <h1>שוב מסתכל/ת במראה <em>ורואה שיער דליל?</em><br>בוא/י נחזיר לו תחושת מלאות.</h1>
-      <p class="lead">מכשיר 3-ב-1 לקרקפת: אור אדום, עיסוי ואפליקטור סרום. 10 דקות ביום, מהבית — הטכנולוגיה מהקליניקות, עכשיו אצלך.</p>
-
-      <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
-
-      <div class="trustbar">
-        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/></svg> משלוח חינם לכל הארץ</span>
-        <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0110 0v3"/></svg> תשלום מאובטח</span>
-      </div>
-
-      {%- assign video_src = section.settings.video_asset | default: 'tz-video.mp4' -%}
-      {%- assign has_video = false -%}
-      {%- if video_src != blank or section.settings.video_file != blank -%}{%- assign has_video = true -%}{%- endif -%}
-      <div class="media-duo{% unless has_video %} media-duo--solo{% endunless %}">
-        <div class="hero-img">
-          <div class="pimg" style="padding:0;background:#fff">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" width="700" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="צומחים מחדש" width="700" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש אדום לקרקפת" width="700" loading="eager">{%- endif -%}</div>
+    <div class="wrap">
+      <div class="hero-duo">
+        <div class="hero-media">
+          <div class="pimg">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 760 }}" alt="{{ product.title | escape }}" width="760" loading="eager">{%- elsif section.settings.hero_image != blank -%}<img src="{{ section.settings.hero_image | image_url: width: 760 }}" alt="צומחים מחדש" width="760" loading="eager">{%- else -%}<img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק צומחים מחדש לקרקפת" width="760" loading="eager">{%- endif -%}</div>
         </div>
-
-        {%- if has_video -%}
-        <!-- סרטון תדמית — מתנגן אוטומטית מושתק (autoplay+muted+loop+playsinline); הקש/י לקול -->
-        <div class="video-wrap rg-hero-video" data-rg-video>
-          {%- if video_src != blank -%}
-            <video autoplay muted loop playsinline preload="auto"{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
-              <source src="{{ video_src | asset_url }}" type="video/mp4">
-              הדפדפן שלך אינו תומך בהצגת וידאו.
-            </video>
-          {%- elsif section.settings.video_file != blank -%}
-            {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
-          {%- endif -%}
-          <button type="button" class="rg-unmute" data-rg-unmute aria-label="הפעל/י קול">
-            <span class="ucirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg></span>
-            <span class="utext">הקש/י לקול</span>
-          </button>
+        <div class="hero-copy">
+          <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · צומחים מחדש</span>
+          <h1>שיער מלא יותר <em>מתחיל בקרקפת בריאה</em></h1>
+          <p class="lead">מכשיר 3-ב-1: אור אדום, עיסוי ואפליקטור סרום. 10 דקות ביום, מהבית — הטכנולוגיה מהקליניקות, עכשיו אצלך.</p>
+          <ul class="hero-benefits">
+            <li><span class="hb-ic">✓</span>חוסך אלפי שקלים בטיפולים</li>
+            <li><span class="hb-ic">✓</span>שימוש ביתי פשוט ונוח</li>
+            <li><span class="hb-ic">✓</span>ללא כאבים</li>
+            <li><span class="hb-ic">✓</span>ללא פולשנות</li>
+            <li><span class="hb-ic">✓</span>10 דקות ביום בלבד</li>
+            <li><span class="hb-ic">✓</span>מתאים לגברים ונשים</li>
+            <li><span class="hb-ic">✓</span>אור אדום + עיסוי + סרום</li>
+          </ul>
+          <a href="#offer" class="cta">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
+          <div class="trustbar">
+            <span>🚚 משלוח חינם לכל הארץ</span>
+            <span>🔒 תשלום מאובטח</span>
+          </div>
         </div>
-        {%- endif -%}
-      </div>
       </div>
     </div>
   </header>
@@ -531,21 +523,7 @@
     </div>
   </section>
 
-  <!-- ===================== BENEFITS ===================== -->
-  <section class="benefits">
-    <div class="wrap">
-      <span class="eyebrow">למה צומחים מחדש</span>
-      <h2>כל מה שחיפשת — בלי מה שהבריח אותך</h2>
-      <div class="grid">
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h3>ללא כאב, לא פולשני</h3><p>בלי מחטים, בלי ניתוח, בלי תופעות לוואי אגרסיביות.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><h3>שימוש ביתי נוח</h3><p>10 דקות מהספה. בלי תורים ובלי נסיעות.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><h3>חוסך אלפי שקלים</h3><p>תשלום חד-פעמי במקום סדרת טיפולים יקרה.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3v6a3 3 0 01-6 0V5a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3"/></svg></div><div><h3>3-ב-1 במכשיר אחד</h3><p>אור אדום, עיסוי קרקפת ואפליקטור סרום — בלי שלושה מכשירים נפרדים.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><div><h3>מתאים לכל סוגי השיער</h3><p>לנשים ולגברים, לכל גוון ומרקם.</p></div></div>
-        <div class="benefit"><div class="bic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div><div><h3>נטען ואלחוטי</h3><p>סוללה נטענת ב-USB, להשתמש בכל מקום בבית.</p></div></div>
-      </div>
-    </div>
-  </section>
+  <!-- BENEFITS הוסרו מכאן — עברו לאזור הפתיחה (הירו) כרשימת יתרונות -->
 
   <!-- ===================== BEFORE / AFTER ===================== -->
   <section class="ba">
@@ -645,6 +623,7 @@
       <span class="eyebrow">ההצעה שלך</span>
       <h2>התחל/י את המסע לשיער מלא יותר היום</h2>
       <div class="price-card">
+        <div class="offer-head">🔥 מבצע מיוחד — מחיר השקה</div>
         {%- if product -%}
         <div class="price-row">
           {%- if product.compare_at_price > product.price -%}<span class="price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
