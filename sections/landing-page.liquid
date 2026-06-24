@@ -441,13 +441,13 @@
         {%- if has_video -%}
         <!-- סרטון תדמית — מתנגן אוטומטית מושתק (autoplay+muted+loop+playsinline); הקש/י לקול -->
         <div class="video-wrap rg-hero-video" data-rg-video>
-          {%- if section.settings.video_file != blank -%}
-            {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
-          {%- elsif video_src != blank -%}
+          {%- if video_src != blank -%}
             <video autoplay muted loop playsinline preload="auto"{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
               <source src="{{ video_src | asset_url }}" type="video/mp4">
               הדפדפן שלך אינו תומך בהצגת וידאו.
             </video>
+          {%- elsif section.settings.video_file != blank -%}
+            {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
           {%- endif -%}
           <button type="button" class="rg-unmute" data-rg-unmute aria-label="הפעל/י קול">
             <span class="ucirc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg></span>
