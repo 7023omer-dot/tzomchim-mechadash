@@ -9,18 +9,19 @@
 <style>
     /* ============ משתני מותג (פלטה חמה ונקייה) ============ */
     .regrow-page{
-      --cream:#F3E8D8;        /* רקע שמנת חם */
+      --cream:#F6F6F4;        /* רקע בהיר לסקשנים מתחלפים */
       --white:#FFFFFF;
-      --ink:#2F4F35;          /* טקסט ראשי — בורדו */
-      --muted:#4F6F52;        /* טקסט משני */
-      --terracotta:#2F4F35;   /* אדום המוצר — אקצנט ראשי */
-      --terracotta-dark:#243D29;
-      --gold:#D9A441;         /* זהב רך */
-      --line:#ECE3D8;
-      --ok:#2E8B57;
-      --star:#E8A317;
-      --shadow:0 8px 30px rgba(43,38,34,.08);
-      --shadow-lg:0 16px 48px rgba(43,38,34,.14);
+      --ink:#171717;          /* טקסט ראשי — כמעט-שחור */
+      --muted:#555555;        /* טקסט משני — ניגודיות טובה */
+      --terracotta:#E8112D;   /* אדום מותג — CTA/באדג'ים/אקסנט */
+      --terracotta-dark:#C20E26;
+      --black:#121212;        /* שחור להירו/פוטר/בלוקים כהים */
+      --gold:#E8112D;         /* באדג'ים — אדום מותג */
+      --line:#E6E6E6;
+      --ok:#1E9E57;
+      --star:#F5A623;
+      --shadow:0 8px 30px rgba(0,0,0,.07);
+      --shadow-lg:0 16px 48px rgba(0,0,0,.12);
       --radius:18px;
       --radius-sm:12px;
       --maxw:680px;           /* mobile-first; דסקטופ מתרחב למטה */
@@ -38,7 +39,9 @@
       padding-bottom:84px; /* מקום ל-CTA דביק במובייל */
     }
     .regrow-page img{max-width:100%;display:block}
-    .regrow-page section{padding:56px 20px}
+    .regrow-page svg{max-width:100%;max-height:44px}            /* בטיחות: מונע אייקונים ענקיים */
+    .regrow-page .benefit .bic svg,.regrow-page .trustbar svg{width:22px;height:22px}
+    .regrow-page section{padding:46px 20px}
     .regrow-page .wrap{max-width:var(--maxw);margin:0 auto}
     .regrow-page h1, .regrow-page h2, .regrow-page h3{line-height:1.2;font-weight:800;letter-spacing:-.01em}
     .regrow-page h2{font-size:28px;margin-bottom:10px}
@@ -54,12 +57,12 @@
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
       background:var(--terracotta);color:#fff;border:none;cursor:pointer;
       font-family:inherit;font-weight:800;font-size:19px;
-      padding:18px 30px;border-radius:999px;width:100%;max-width:420px;
-      box-shadow:0 8px 22px rgba(47,79,53,.30);
+      padding:17px 30px;border-radius:999px;width:100%;max-width:420px;
+      box-shadow:0 8px 22px rgba(232,17,45,.28);
       transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
       text-decoration:none;
     }
-    .regrow-page .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(47,79,53,.42)}
+    .regrow-page .cta:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(232,17,45,.40)}
     .regrow-page .cta:active{transform:translateY(0)}
     .regrow-page .cta .arrow{font-size:22px;line-height:1}
 
@@ -73,15 +76,16 @@
 
     /* ============ HERO ============ */
     .regrow-page .hero{
-      background:linear-gradient(180deg,#F3E8D8 0%,#FBF5EA 100%);
+      background:var(--black);
       padding-top:40px;
     }
-    .regrow-page .hero h1{color:var(--ink)}
-    .regrow-page .hero .lead{color:var(--muted)}
-    .regrow-page .hero .lead strong{color:var(--ink)}
-    .regrow-page .hero .trustbar{color:var(--muted)}
+    .regrow-page .hero .eyebrow{color:#fff}
+    .regrow-page .hero h1{color:#fff}
+    .regrow-page .hero .lead{color:rgba(255,255,255,.82)}
+    .regrow-page .hero .lead strong{color:#fff}
+    .regrow-page .hero .trustbar{color:rgba(255,255,255,.82)}
     .regrow-page .hero h1{font-size:30px;font-weight:900;margin-bottom:16px}
-    .regrow-page .hero h1 em{font-style:normal;color:#4F6F52}
+    .regrow-page .hero h1 em{font-style:normal;color:var(--terracotta)}
     .regrow-page .hero .lead{margin-bottom:30px}
     .regrow-page .hero-img{
       margin:26px auto 0;max-width:340px;border-radius:var(--radius);
@@ -90,12 +94,12 @@
     /* placeholder תמונה — החלף ב-<img src="..."> */
     .regrow-page .ph{
       display:flex;align-items:center;justify-content:center;text-align:center;
-      background:repeating-linear-gradient(45deg,#F2E9DD,#F2E9DD 12px,#EFE3D3 12px,#EFE3D3 24px);
-      color:#9b8f7f;font-weight:600;font-size:14px;padding:24px;min-height:220px;
+      background:repeating-linear-gradient(45deg,#F2F2F2,#F2F2F2 12px,#E8E8E8 12px,#E8E8E8 24px);
+      color:#999999;font-weight:600;font-size:14px;padding:24px;min-height:220px;
     }
 
     /* ציור מוצר (SVG) במקום placeholder */
-    .regrow-page .pimg{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 36%,#ffffff,#F7EDE8);padding:16px;min-height:220px}
+    .regrow-page .pimg{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 36%,#ffffff,#F5F5F5);padding:16px;min-height:220px}
     .regrow-page .pimg svg{width:auto;height:100%;max-height:240px;max-width:100%;display:block}
     .regrow-page .addon .pimg{width:96px;height:96px;min-height:0;padding:8px;border-radius:12px;flex:0 0 auto}
 
@@ -139,7 +143,7 @@
     }
     .regrow-page .benefit .bic{
       flex:0 0 auto;width:42px;height:42px;border-radius:12px;
-      background:#E3EDE2;color:var(--terracotta);display:flex;
+      background:#FDE7E9;color:var(--terracotta);display:flex;
       align-items:center;justify-content:center;
     }
     .regrow-page .benefit h3{font-size:17px;margin-bottom:2px}
@@ -163,7 +167,7 @@
     }
     .regrow-page .review .who{display:flex;align-items:center;gap:12px;margin-bottom:10px}
     .regrow-page .review .av{
-      width:44px;height:44px;border-radius:50%;background:#E3EDE2;color:var(--terracotta);
+      width:44px;height:44px;border-radius:50%;background:#FDE7E9;color:var(--terracotta);
       font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
     }
     .regrow-page .review .name{font-weight:700;font-size:15px}
@@ -178,7 +182,7 @@
     .regrow-page table.cmp thead th{background:var(--ink);color:#fff;font-weight:700}
     .regrow-page table.cmp thead th.us{background:var(--terracotta)}
     .regrow-page table.cmp td:first-child, .regrow-page table.cmp th:first-child{text-align:right;font-weight:600;background:var(--cream)}
-    .regrow-page table.cmp td.us{background:#E3EDE2;font-weight:700;color:var(--terracotta-dark)}
+    .regrow-page table.cmp td.us{background:#FDE7E9;font-weight:700;color:var(--terracotta-dark)}
     .regrow-page .yes{color:var(--ok);font-weight:800}
     .regrow-page .no{color:#C0392B;font-weight:800}
 
@@ -189,7 +193,7 @@
       padding:30px 24px;margin-top:20px;box-shadow:var(--shadow-lg);text-align:center;
     }
     .regrow-page .badge{
-      display:inline-block;background:var(--gold);color:#3a2a00;font-weight:800;
+      display:inline-block;background:var(--gold);color:#fff;font-weight:800;
       font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:14px;
     }
     .regrow-page .price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin:8px 0}
@@ -200,6 +204,23 @@
       color:var(--terracotta-dark);font-weight:600;font-size:14px;margin:14px 0 18px;
       display:inline-flex;align-items:center;gap:6px;
     }
+    /* ============ טיימר ספירה לאחור ============ */
+    .regrow-page .rg-timer{margin:16px 0 18px}
+    .regrow-page .rg-timer-label{font-size:14px;font-weight:800;color:var(--terracotta);margin-bottom:10px}
+    .regrow-page .rg-timer-clock{display:flex;align-items:center;justify-content:center;gap:7px;direction:ltr}
+    .regrow-page .rg-tbox{background:var(--black);color:#fff;border-radius:12px;padding:9px 8px;min-width:58px;display:flex;flex-direction:column;align-items:center}
+    .regrow-page .rg-tbox span{font-size:26px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+    .regrow-page .rg-tbox small{font-size:10px;opacity:.82;margin-top:4px;font-weight:600}
+    .regrow-page .rg-tsep{font-size:22px;font-weight:900;color:var(--terracotta);line-height:1}
+    /* ============ חותם אחריות ============ */
+    .regrow-page .guarantee-row{display:flex;align-items:center;gap:12px;justify-content:center;text-align:right;
+      background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;margin:16px auto 4px;max-width:420px}
+    .regrow-page .gr-seal{flex:0 0 auto;width:54px;height:54px;border-radius:50%;background:var(--terracotta);color:#fff;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:20px;line-height:.9}
+    .regrow-page .gr-seal small{font-size:10px;font-weight:700;margin-top:2px}
+    .regrow-page .gr-text{display:flex;flex-direction:column;line-height:1.3}
+    .regrow-page .gr-text b{font-size:15px;color:var(--ink)}
+    .regrow-page .gr-text span{font-size:12.5px;color:var(--muted)}
 
     /* ============ FAQ ============ */
     .regrow-page .faq{background:var(--white)}
@@ -223,19 +244,19 @@
       padding:30px 24px;margin-top:18px;text-align:center;border:1px dashed var(--gold);
     }
     .regrow-page .g-seal{
-      width:84px;height:84px;border-radius:50%;background:#E3EDE2;color:var(--terracotta);
+      width:84px;height:84px;border-radius:50%;background:#FDE7E9;color:var(--terracotta);
       display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
       font-weight:900;font-size:15px;text-align:center;line-height:1.1;border:2px solid var(--gold);
     }
 
     /* ============ FINAL CTA ============ */
-    .regrow-page .final{background:linear-gradient(180deg,#FBF5EA,#F3E8D8);color:var(--ink);text-align:center}
-    .regrow-page .final h2{color:var(--ink)}
-    .regrow-page .final .lead{color:var(--muted)}
-    .regrow-page .final .price-now{color:var(--ink)}
-    .regrow-page .final .price-old{color:var(--muted)}
+    .regrow-page .final{background:var(--black);color:#fff;text-align:center}
+    .regrow-page .final h2{color:#fff}
+    .regrow-page .final .lead{color:rgba(255,255,255,.82)}
+    .regrow-page .final .price-now{color:#fff}
+    .regrow-page .final .price-old{color:rgba(255,255,255,.6)}
 
-    .regrow-page footer{background:#E8D8C4;color:var(--muted);text-align:center;padding:26px 20px;font-size:13px}
+    .regrow-page footer{background:var(--black);color:rgba(255,255,255,.7);text-align:center;padding:26px 20px;font-size:13px}
 
     /* ============ CTA דביק במובייל ============ */
     .regrow-page .sticky-cta{
@@ -253,7 +274,7 @@
     /* ============ בס"ד + בר הכרזה עליון ============ */
     .regrow-page .besd{text-align:center;font-size:13px;color:var(--muted);padding:5px 0 0;letter-spacing:.02em}
     .regrow-page .announce{
-      background:#E8D8C4;color:var(--ink);text-align:center;font-size:13.5px;font-weight:700;
+      background:var(--black);color:#fff;text-align:center;font-size:13.5px;font-weight:700;
       padding:9px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
     }
     .regrow-page .announce span{display:inline-flex;align-items:center;gap:6px}
@@ -315,7 +336,7 @@
     .regrow-page .addon .buy{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:0 0 auto}
     .regrow-page .addon .ap{font-weight:800;color:var(--terracotta);font-size:18px;white-space:nowrap}
     .regrow-page .addon .add-btn{
-      background:#E3EDE2;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
+      background:#FDE7E9;color:var(--terracotta-dark);border:1.5px solid var(--terracotta);
       border-radius:999px;padding:8px 16px;font-weight:700;font-family:inherit;cursor:pointer;font-size:14px;
       transition:background .15s ease;white-space:nowrap;
     }
@@ -359,16 +380,17 @@
     .regrow-page .ba-slider .ba-img{width:100%;height:100%;object-fit:cover;display:block}
     .regrow-page .ba-split .pair .ba-cell{position:relative;overflow:hidden}
     .regrow-page .ba-split .pair .ba-cell img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5}
-    .regrow-page .ba-split .pair .ba-cell.before-mini{border-inline-end:2px solid #fff}
+    .regrow-page .ba-split .pair .ba-cell.before-mini{border-inline-end:3px solid #fff}
+    .regrow-page .ba-split .cap{padding:11px 14px;font-weight:700;color:var(--ink);text-align:center;font-size:14px}
     .regrow-page .ba-tag{position:absolute;top:10px;font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;z-index:2}
-    .regrow-page .ba-tag.before{inset-inline-start:10px;background:rgba(47,79,53,.92);color:#fff}
-    .regrow-page .ba-tag.after{inset-inline-end:10px;background:var(--gold);color:#2F4F35}
+    .regrow-page .ba-tag.before{inset-inline-start:10px;background:rgba(18,18,18,.88);color:#fff}
+    .regrow-page .ba-tag.after{inset-inline-end:10px;background:var(--terracotta);color:#fff}
     .regrow-page .combo-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
     .regrow-page .bundle.combo{margin-top:0;text-align:center}
-    .regrow-page .bundle.best{border-style:solid;border-color:var(--gold);box-shadow:0 12px 30px rgba(217,164,65,.30)}
+    .regrow-page .bundle.best{border-style:solid;border-color:var(--terracotta);box-shadow:0 12px 30px rgba(232,17,45,.22)}
     .regrow-page .combo-imgs{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 2px;flex-wrap:wrap}
     .regrow-page .combo-imgs img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:12px;border:1px solid var(--line);padding:6px}
-    .regrow-page .badge.gold{background:var(--gold);color:#3a2a00}
+    .regrow-page .badge.gold{background:var(--gold);color:#fff}
     .regrow-page .ba-col .ba-slider{margin:0 auto 6px}
     .regrow-page .ba-cap{text-align:center;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:6px}
     @media(min-width:760px){
@@ -381,7 +403,7 @@
       .regrow-page{--maxw:920px}
       .regrow-page{padding-bottom:0;font-size:18px}
       .regrow-page{padding-bottom:0}
-      .regrow-page section{padding:84px 24px}
+      .regrow-page section{padding:64px 24px}
       .regrow-page .hero h1{font-size:42px}
       .regrow-page .hero .lead{font-size:21px}
       .regrow-page .hero-img{max-width:440px}
@@ -530,33 +552,23 @@
     <div class="wrap center">
       <span class="eyebrow">לפני / אחרי</span>
       <h2>תוצאות אמיתיות — גברים ונשים</h2>
-      <p class="lead">גרור/י את הידית בכל תמונה כדי להשוות בין "לפני" ל"אחרי".</p>
+      <p class="lead">לפני ואחרי שימוש עקבי במכשיר.</p>
 
       <!-- שתי השוואות לפני/אחרי — גבר ואישה, זו לצד זו (במובייל אחת מתחת לשנייה) -->
       <div class="ba-extra">
-        <div class="ba-col">
-          <div class="ba-slider" aria-label="השוואת לפני ואחרי — גבר">
-            <div class="layer after"><img class="ba-img" src="{{ 'ba-after-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לאחר השימוש בצומחים מחדש" loading="lazy"></div>
-            <div class="layer before"><img class="ba-img" src="{{ 'ba-before-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לפני השימוש בצומחים מחדש" loading="lazy"></div>
-            <span class="tag b">לפני</span>
-            <span class="tag a">אחרי</span>
-            <div class="divider"></div>
-            <div class="knob">⇆</div>
-            <input type="range" min="0" max="100" value="50" aria-label="גרור/י להשוואה — גבר">
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ba-cell before-mini"><img src="{{ 'ba-before-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לפני השימוש" loading="lazy"><span class="ba-tag before">לפני</span></div>
+            <div class="ba-cell"><img src="{{ 'ba-after-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לאחר השימוש" loading="lazy"><span class="ba-tag after">אחרי</span></div>
           </div>
-          <div class="ba-cap">גבר · גרור/י את הידית</div>
+          <div class="cap">גבר — תוצאה לאחר שימוש עקבי</div>
         </div>
-        <div class="ba-col">
-          <div class="ba-slider" aria-label="השוואת לפני ואחרי — אישה">
-            <div class="layer after"><img class="ba-img" src="{{ 'ba-after-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לאחר השימוש בצומחים מחדש" loading="lazy"></div>
-            <div class="layer before"><img class="ba-img" src="{{ 'ba-before-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לפני השימוש בצומחים מחדש" loading="lazy"></div>
-            <span class="tag b">לפני</span>
-            <span class="tag a">אחרי</span>
-            <div class="divider"></div>
-            <div class="knob">⇆</div>
-            <input type="range" min="0" max="100" value="50" aria-label="גרור/י להשוואה — אישה">
+        <div class="ba-split">
+          <div class="pair">
+            <div class="ba-cell before-mini"><img src="{{ 'ba-before-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לפני השימוש" loading="lazy"><span class="ba-tag before">לפני</span></div>
+            <div class="ba-cell"><img src="{{ 'ba-after-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לאחר השימוש" loading="lazy"><span class="ba-tag after">אחרי</span></div>
           </div>
-          <div class="ba-cap">אישה · גרור/י את הידית</div>
+          <div class="cap">אישה — תוצאה לאחר שימוש עקבי</div>
         </div>
       </div>
 
@@ -640,8 +652,19 @@
         </div>
         {%- if product.compare_at_price > product.price -%}<div class="save">חוסך/ת {{ product.compare_at_price | minus: product.price | money }}</div>{%- endif -%}
         {%- else -%}
-        <div class="price-row"><span class="price-old">₪219</span><span class="price-now">₪148</span></div>
-        <div class="save">חיסכון 32% · 71 ₪</div>
+        <div class="price-row"><span class="price-old">₪199</span><span class="price-now">₪148</span></div>
+        <div class="save">חיסכון 26% · 51 ₪</div>
+        {%- endif -%}
+        {%- if section.settings.timer_end != blank -%}
+        <div class="rg-timer" data-rg-timer data-end="{{ section.settings.timer_end }}">
+          <div class="rg-timer-label">⏳ מחיר ההשקה ננעל בעוד:</div>
+          <div class="rg-timer-clock">
+            <div class="rg-tbox"><span data-d>00</span><small>ימים</small></div><span class="rg-tsep">:</span>
+            <div class="rg-tbox"><span data-h>00</span><small>שעות</small></div><span class="rg-tsep">:</span>
+            <div class="rg-tbox"><span data-m>00</span><small>דקות</small></div><span class="rg-tsep">:</span>
+            <div class="rg-tbox"><span data-s>00</span><small>שניות</small></div>
+          </div>
+        </div>
         {%- endif -%}
         <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
         {%- if product -%}
@@ -667,6 +690,10 @@
         <div class="trustbar">
           <span>🚚 משלוח חינם</span>
           <span>🔒 תשלום מאובטח</span>
+        </div>
+        <div class="guarantee-row">
+          <span class="gr-seal">30<small>יום</small></span>
+          <div class="gr-text"><b>אחריות 30 יום — כספך חזרה</b><span>לא מרוצה? מחזירים לך את הכסף, בלי שאלות.</span></div>
         </div>
         <div class="pay" aria-label="אמצעי תשלום">
           <span class="lbl">תשלום מאובטח באמצעות</span>
@@ -699,12 +726,12 @@
           </div>
           <h3 style="font-size:20px;margin:8px 0 4px">מסרק + סרום</h3>
           <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
-          <div class="price-row"><span class="price-old">₪278</span><span class="price-now">₪207</span></div>
-          <div class="save">חוסך/ת 71 ₪ · 26%</div>
+          <div class="price-row"><span class="price-old">₪258</span><span class="price-now">₪219</span></div>
+          <div class="save">חוסך/ת 39 ₪ · 15%</div>
           {%- assign cc = section.settings.combo_comb -%}
           {%- assign cse = section.settings.addon_serum -%}
           {%- assign csh = section.settings.addon_shampoo -%}
-          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪207 <span class="arrow">←</span></a>{%- endif -%}
+          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></a>{%- endif -%}
         </div>
 
         <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
@@ -719,9 +746,9 @@
           </div>
           <h3 style="font-size:20px;margin:8px 0 4px">הערכה המלאה — מסרק + סרום + שמפו</h3>
           <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
-          <div class="price-row"><span class="price-old">₪327</span><span class="price-now">₪239</span></div>
-          <div class="save">חוסך/ת 88 ₪ · 27%</div>
-          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪239 <span class="arrow">←</span></a>{%- endif -%}
+          <div class="price-row"><span class="price-old">₪307</span><span class="price-now">₪249</span></div>
+          <div class="save">חוסך/ת 58 ₪ · 19%</div>
+          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></a>{%- endif -%}
         </div>
       </div>
     </div>
@@ -845,6 +872,23 @@
           .catch(function(){ window.location.href = '{{ routes.cart_url }}'; });
       });
     });
+
+    // טיימר ספירה לאחור — תאריך סיום קבוע מהגדרות הסקשן (נעלם בחן כשעובר)
+    document.querySelectorAll('[data-rg-timer]').forEach(function(t){
+      var end = new Date((t.getAttribute('data-end') || '').replace(' ', 'T')).getTime();
+      if(isNaN(end)){ t.style.display = 'none'; return; }
+      var dEl=t.querySelector('[data-d]'), hEl=t.querySelector('[data-h]'), mEl=t.querySelector('[data-m]'), sEl=t.querySelector('[data-s]');
+      var pad=function(n){ return ('0'+n).slice(-2); };
+      function tick(){
+        var diff = end - Date.now();
+        if(diff <= 0){ t.style.display='none'; clearInterval(iv); return; }
+        dEl.textContent = Math.floor(diff/86400000);
+        hEl.textContent = pad(Math.floor(diff%86400000/3600000));
+        mEl.textContent = pad(Math.floor(diff%3600000/60000));
+        sEl.textContent = pad(Math.floor(diff%60000/1000));
+      }
+      tick(); var iv=setInterval(tick,1000);
+    });
   </script>
 </div>
 {% schema %}
@@ -859,6 +903,8 @@
     { "type": "video", "id": "video_file", "label": "סרטון (העלאה לשופיפיי) — מומלץ" },
     { "type": "text", "id": "video_asset", "label": "חלופה: שם קובץ סרטון ב-assets", "default": "tz-video.mp4", "info": "משמש רק אם לא נבחר סרטון למעלה." },
     { "type": "image_picker", "id": "video_poster", "label": "תמונת תצוגה לסרטון (poster) — אופציונלי" },
+    { "type": "header", "content": "טיימר השקה (ספירה לאחור)", "info": "ויזואלי בלבד — שינוי המחיר בפועל (148→199) נעשה ידנית בניהול בתום השבוע. השאירו ריק כדי להסתיר את הטיימר." },
+    { "type": "text", "id": "timer_end", "label": "תאריך וזמן סיום המבצע", "info": "פורמט: YYYY-MM-DD HH:MM (למשל 2026-07-01 23:59). כשעובר — הטיימר נעלם אוטומטית." },
     { "type": "header", "content": "טקסטים" },
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
     { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
@@ -867,8 +913,8 @@
     { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
     { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
     { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "שתי דרכים: (א) חברו מוצר 'ערכה' ייעודי במחיר המבצע למטה; או (ב) חברו את מוצרי הרכיבים (מסרק/סרום/שמפו) — הכפתור יוסיף את כולם לסל וה-Automatic Discount יחיל את מחיר הקומבו. אם ריק — הכפתור מפנה בבטחה אל ההצעה הראשית." },
-    { "type": "product", "id": "combo_serum", "label": "מבצע 1 — מוצר 'ערכה' ייעודי (₪207), אופציונלי" },
-    { "type": "product", "id": "combo_brush", "label": "מבצע 2 — מוצר 'ערכה' ייעודי (₪239), אופציונלי" },
+    { "type": "product", "id": "combo_serum", "label": "מבצע 1 — מוצר 'ערכה' ייעודי (₪219), אופציונלי" },
+    { "type": "product", "id": "combo_brush", "label": "מבצע 2 — מוצר 'ערכה' ייעודי (₪249), אופציונלי" },
     { "type": "paragraph", "content": "או — חיבור לפי רכיבים (עם Automatic Discount):" },
     { "type": "product", "id": "combo_comb", "label": "רכיב: מסרק (מוצר הדגל)" }
   ],
