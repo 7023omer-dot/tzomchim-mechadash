@@ -602,6 +602,51 @@
     </div>
   </section>
 
+  <!-- ===================== מוצרים משלימים + באנדל ===================== -->
+  <section class="addons">
+    <div class="wrap">
+      <span class="eyebrow">מבצעי קומבו</span>
+      <h2>המסרק לבד — או חוסכים עם קומבו</h2>
+      <p class="lead">המסרק לבד נשאר ב-219 ש"ח. ההנחה נפתחת ברגע שמוסיפים מוצר — ככל שמשלבים יותר, חוסכים יותר.</p>
+
+      <div class="combo-grid">
+        <!-- מבצע 1 — מסרק + סרום -->
+        <div class="bundle combo">
+          <span class="badge">הקומבו המנצח 🔥</span>
+          <div class="combo-imgs">
+            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
+          </div>
+          <h3 style="font-size:20px;margin:8px 0 4px">מסרק + סרום</h3>
+          <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
+          <div class="price-row"><span class="price-old">258 ש"ח</span><span class="price-now">219 ש"ח</span></div>
+          <div class="save">חוסך/ת 39 ש"ח · 15%</div>
+          {%- assign cse = section.settings.addon_serum -%}
+          {%- assign csh = section.settings.addon_shampoo -%}
+          {%- if main_p != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — 219 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — 219 ש"ח <span class="arrow">←</span></a>{%- endif -%}
+        </div>
+
+        <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
+        <div class="bundle combo best">
+          <span class="badge gold">הכי משתלם ⭐</span>
+          <div class="combo-imgs">
+            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
+            <span class="plus">+</span>
+            <img src="{{ 'tz-spartan.webp' | asset_url }}" alt="שמפו Spartan" loading="lazy">
+          </div>
+          <h3 style="font-size:20px;margin:8px 0 4px">הערכה המלאה — מסרק + סרום + שמפו</h3>
+          <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
+          <div class="price-row"><span class="price-old">307 ש"ח</span><span class="price-now">249 ש"ח</span></div>
+          <div class="save">חוסך/ת 58 ש"ח · 19%</div>
+          {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — 249 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — 249 ש"ח <span class="arrow">←</span></a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== SOCIAL PROOF ===================== -->
   <section class="reviews">
     <div class="wrap center">
@@ -654,7 +699,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td>אלפי ₪</td><td>הוצאה חודשית מתמשכת</td></tr>
+            <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td>אלפי ש"ח</td><td>הוצאה חודשית מתמשכת</td></tr>
             <tr><td>כאב</td><td class="us"><span class="yes">ללא</span></td><td>אפשרי</td><td><span class="yes">ללא</span></td></tr>
             <tr><td>נוחות</td><td class="us">מהבית, 10 דק'</td><td>תורים ונסיעות</td><td>נטילה יומית קבועה</td></tr>
             <tr><td>תופעות לוואי</td><td class="us"><span class="yes">מינימליות</span></td><td>אפשריות</td><td>אפשריות</td></tr>
@@ -679,8 +724,8 @@
         </div>
         {%- if main_p.compare_at_price > main_p.price -%}<div class="save">חוסך/ת {{ main_p.compare_at_price | minus: main_p.price | money }}</div>{%- endif -%}
         {%- else -%}
-        <div class="price-row"><span class="price-old">₪199</span><span class="price-now">₪148</span></div>
-        <div class="save">חיסכון 26% · 51 ₪</div>
+        <div class="price-row"><span class="price-old">199 ש"ח</span><span class="price-now">148 ש"ח</span></div>
+        <div class="save">חיסכון 26% · 51 ש"ח</div>
         {%- endif -%}
         {%- if section.settings.timer_end != blank -%}
         <div class="rg-timer" data-rg-timer data-end="{{ section.settings.timer_end }}">
@@ -730,51 +775,6 @@
           <span class="chip">bit</span>
           <span class="chip">PayPal</span>
           <span class="chip">Apple&nbsp;Pay</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== מוצרים משלימים + באנדל ===================== -->
-  <section class="addons">
-    <div class="wrap">
-      <span class="eyebrow">מבצעי קומבו</span>
-      <h2>המסרק לבד — או חוסכים עם קומבו</h2>
-      <p class="lead">המסרק לבד נשאר ב-219 ₪. ההנחה נפתחת ברגע שמוסיפים מוצר — ככל שמשלבים יותר, חוסכים יותר.</p>
-
-      <div class="combo-grid">
-        <!-- מבצע 1 — מסרק + סרום -->
-        <div class="bundle combo">
-          <span class="badge">הקומבו המנצח 🔥</span>
-          <div class="combo-imgs">
-            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
-          </div>
-          <h3 style="font-size:20px;margin:8px 0 4px">מסרק + סרום</h3>
-          <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
-          <div class="price-row"><span class="price-old">₪258</span><span class="price-now">₪219</span></div>
-          <div class="save">חוסך/ת 39 ₪ · 15%</div>
-          {%- assign cse = section.settings.addon_serum -%}
-          {%- assign csh = section.settings.addon_shampoo -%}
-          {%- if main_p != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></a>{%- endif -%}
-        </div>
-
-        <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
-        <div class="bundle combo best">
-          <span class="badge gold">הכי משתלם ⭐</span>
-          <div class="combo-imgs">
-            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-spartan.webp' | asset_url }}" alt="שמפו Spartan" loading="lazy">
-          </div>
-          <h3 style="font-size:20px;margin:8px 0 4px">הערכה המלאה — מסרק + סרום + שמפו</h3>
-          <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
-          <div class="price-row"><span class="price-old">₪307</span><span class="price-now">₪249</span></div>
-          <div class="save">חוסך/ת 58 ₪ · 19%</div>
-          {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></a>{%- endif -%}
         </div>
       </div>
     </div>
@@ -835,7 +835,7 @@
           {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
           <span class="price-now">{{ main_p.price | money }}</span>
         {%- else -%}
-          <span class="price-old">₪199</span><span class="price-now">₪148</span>
+          <span class="price-old">199 ש"ח</span><span class="price-now">148 ש"ח</span>
         {%- endif -%}
       </div>
       <a href="#offer" class="cta" style="margin-top:14px">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
@@ -860,7 +860,7 @@
         <b>{{ main_p.price | money }}</b>
         {%- if main_p.compare_at_price > main_p.price -%}<s>{{ main_p.compare_at_price | money }}</s>{%- endif -%}
       {%- else -%}
-        <b>₪148</b><s>₪199</s>
+        <b>148 ש"ח</b><s>199 ש"ח</s>
       {%- endif -%}
     </div>
     <a href="#offer" class="cta">הוסף/י לעגלה <span class="arrow">←</span></a>
