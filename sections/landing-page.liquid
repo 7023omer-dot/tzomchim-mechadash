@@ -37,7 +37,7 @@
       line-height:1.6;
       font-size:17px;
       -webkit-font-smoothing:antialiased;
-      padding-bottom:84px; /* מקום ל-CTA דביק במובייל */
+      padding-bottom:0;
     }
     .regrow-page img{max-width:100%;display:block}
     .regrow-page svg{max-width:100%;max-height:44px}            /* בטיחות: מונע אייקונים ענקיים */
@@ -432,12 +432,13 @@
     }
   
     /* ---- תוספות לגרסת שופיפיי ---- */
-    .regrow-page{padding-bottom:84px}
+    .regrow-page{padding-bottom:0}
+    .regrow-page.has-sticky{padding-bottom:84px}
     .regrow-page .variant-select{width:100%;max-width:420px;margin:0 auto 12px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:#fff}
     .regrow-page .addon form, .regrow-page .bundle form{margin:0}
     .regrow-page .hero-img img, .regrow-page .solution .card .solpic{width:100%;height:auto;display:block}
   </style>
-<div dir="rtl" class="regrow-page">
+<div dir="rtl" class="regrow-page{% if section.settings.show_sticky_cta %} has-sticky{% endif %}">
 {%- comment -%} מוצר ראשי: מההגדרות אם הוגדר, אחרת מוצר העמוד (בתבנית מוצר) {%- endcomment -%}
 {%- assign main_p = product -%}
 {%- if section.settings.main_product != blank -%}{%- assign main_p = section.settings.main_product -%}{%- endif -%}
@@ -809,7 +810,8 @@
     © <span id="yr"></span> צומחים מחדש <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
   </footer>
 
-  <!-- ===================== CTA דביק במובייל ===================== -->
+  <!-- ===================== CTA דביק במובייל (אופציונלי) ===================== -->
+  {%- if section.settings.show_sticky_cta -%}
   <div class="sticky-cta" aria-label="קנייה מהירה">
     <div class="sp">
       <span style="font-size:13px;font-weight:700;color:#111">{{ main_p.title | default: 'מסרק צומחים מחדש' }}</span>
@@ -822,6 +824,7 @@
     </div>
     <a href="#offer" class="cta">הוסף/י לעגלה <span class="arrow">←</span></a>
   </div>
+  {%- endif -%}
 
   <script>
     // שנה נוכחית ב-footer (ללא localStorage/sessionStorage)
@@ -906,6 +909,7 @@
     { "type": "header", "content": "טקסטים" },
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
     { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
+    { "type": "checkbox", "id": "show_sticky_cta", "label": "הצג סרגל קנייה דביק בתחתית", "default": false },
     { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "המסרק כבר מחובר ב'מוצר ראשי' למעלה. כאן בחרו רק את הסרום והשמפו — והכפתורים יוסיפו את כל הרכיבים לסל. ה-Automatic Discount בניהול מחיל את מחיר הקומבו (219 / 249). אם ריק — הכפתור מפנה אל ההצעה הראשית (ללא שגיאה)." },
     { "type": "product", "id": "addon_serum", "label": "סרום GHK-CU (לקומבו 1 ו-2)" },
     { "type": "product", "id": "addon_shampoo", "label": "שמפו ספרטן (לקומבו 2)" }
