@@ -29,16 +29,17 @@
     border-radius:18px;overflow:hidden;background:#000;
     box-shadow:0 16px 48px rgba(43,38,34,.18);line-height:0;
   }
-  .rgv-{{ section.id }} .rgv-wrap video{width:100%;height:auto;display:block;background:#000}
-  .rgv-{{ section.id }} .rgv-unmute{
-    position:absolute;bottom:12px;inset-inline-start:12px;z-index:3;
-    display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;
-    background:rgba(20,30,22,.62);color:#fff;border-radius:999px;padding:8px 14px 8px 10px;
-    font-family:inherit;font-size:13px;font-weight:700;transition:background .2s ease;
+  .rgv-{{ section.id }} .rgv-wrap video{width:100%;height:auto;max-height:56vh;object-fit:contain;display:block;background:#000;margin:0 auto}
+  .rgv-{{ section.id }} .rgv-btns{position:absolute;bottom:12px;inset-inline-start:12px;z-index:3;display:flex;gap:8px;align-items:center}
+  .rgv-{{ section.id }} .rgv-unmute,.rgv-{{ section.id }} .rgv-fs{
+    border:0;cursor:pointer;background:rgba(20,20,20,.66);color:#fff;
+    font-family:inherit;font-weight:700;transition:background .2s ease;display:inline-flex;align-items:center;justify-content:center;
   }
-  .rgv-{{ section.id }} .rgv-unmute:hover{background:rgba(20,30,22,.82)}
-  .rgv-{{ section.id }} .rgv-unmute.is-on{background:rgba(47,79,53,.92)}
-  .rgv-{{ section.id }} .rgv-unmute svg{width:18px;height:18px;fill:#fff}
+  .rgv-{{ section.id }} .rgv-unmute{gap:6px;border-radius:999px;padding:8px 14px 8px 10px;font-size:13px}
+  .rgv-{{ section.id }} .rgv-fs{border-radius:999px;width:38px;height:38px}
+  .rgv-{{ section.id }} .rgv-unmute:hover,.rgv-{{ section.id }} .rgv-fs:hover{background:rgba(20,20,20,.88)}
+  .rgv-{{ section.id }} .rgv-unmute.is-on{background:var(--rgv-red,#E8112D)}
+  .rgv-{{ section.id }} .rgv-unmute svg,.rgv-{{ section.id }} .rgv-fs svg{width:18px;height:18px;fill:#fff}
 {%- endstyle -%}
 
 <div class="rgv-{{ section.id }}" data-rgv>
@@ -54,10 +55,15 @@
     {%- else -%}
       {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
     {%- endif -%}
-    <button type="button" class="rgv-unmute" data-rgv-unmute aria-label="הפעל/י קול">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg>
-      <span class="utext">הקש/י לקול</span>
-    </button>
+    <div class="rgv-btns">
+      <button type="button" class="rgv-unmute" data-rgv-unmute aria-label="הפעל/י קול">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg>
+        <span class="utext">הקש/י לקול</span>
+      </button>
+      <button type="button" class="rgv-fs" data-rgv-fs aria-label="הגדל למסך מלא" title="מסך מלא">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -65,7 +71,7 @@
 (function(){
   var root=document.currentScript.previousElementSibling;
   if(!root)return;
-  var v=root.querySelector('video'), u=root.querySelector('[data-rgv-unmute]');
+  var v=root.querySelector('video'), u=root.querySelector('[data-rgv-unmute]'), fs=root.querySelector('[data-rgv-fs]');
   if(!v)return;
   var p=v.play(); if(p&&p.catch){p.catch(function(){});}
   if(u){
@@ -74,6 +80,16 @@
       u.classList.toggle('is-on',!v.muted);
       var t=u.querySelector('.utext'); if(t){t.textContent=v.muted?'הקש/י לקול':'קול פעיל';}
       if(!v.muted){v.play();}
+    });
+  }
+  if(fs){
+    fs.addEventListener('click',function(){
+      var w=root.querySelector('.rgv-wrap');
+      if(v.requestFullscreen){v.requestFullscreen();}
+      else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}      /* iPhone */
+      else if(v.webkitRequestFullscreen){v.webkitRequestFullscreen();}
+      else if(w&&w.requestFullscreen){w.requestFullscreen();}
+      else if(w&&w.webkitRequestFullscreen){w.webkitRequestFullscreen();}
     });
   }
 })();
@@ -91,7 +107,7 @@
     { "type": "text", "id": "video_asset", "label": "שם קובץ הסרטון ב-assets", "default": "tz-video.mp4", "info": "הקובץ התקין כבר הועלה (tz-video.mp4). זו האופציה המומלצת." },
     { "type": "video", "id": "video_file", "label": "חלופה: סרטון מאוחסן-שופיפיי (אם לא משתמשים ב-assets)" },
     { "type": "image_picker", "id": "poster", "label": "תמונת תצוגה (poster) — אופציונלי" },
-    { "type": "range", "id": "max_width", "min": 280, "max": 900, "step": 20, "unit": "px", "label": "רוחב מקסימלי לסרטון", "default": 380 },
+    { "type": "range", "id": "max_width", "min": 180, "max": 720, "step": 10, "unit": "px", "label": "רוחב מקסימלי לסרטון", "default": 260, "info": "הסרטון גם מוגבל בגובה (עד 56% מגובה המסך) כדי שייראה במלואו." },
     { "type": "header", "content": "צבעים וריווח" },
     { "type": "color", "id": "bg_color", "label": "רקע", "default": "#F3E8D8" },
     { "type": "color", "id": "text_color", "label": "טקסט", "default": "#2F4F35" },
