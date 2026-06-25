@@ -713,10 +713,9 @@
           <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
           <div class="price-row"><span class="price-old">₪258</span><span class="price-now">₪219</span></div>
           <div class="save">חוסך/ת 39 ₪ · 15%</div>
-          {%- assign cc = section.settings.combo_comb -%}
           {%- assign cse = section.settings.addon_serum -%}
           {%- assign csh = section.settings.addon_shampoo -%}
-          {%- if section.settings.combo_serum != blank -%}{%- assign cs = section.settings.combo_serum -%}{%- form 'product', cs -%}<input type="hidden" name="id" value="{{ cs.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — {{ cs.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></a>{%- endif -%}
+          {%- if main_p != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — ₪219 <span class="arrow">←</span></a>{%- endif -%}
         </div>
 
         <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
@@ -733,7 +732,7 @@
           <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
           <div class="price-row"><span class="price-old">₪307</span><span class="price-now">₪249</span></div>
           <div class="save">חוסך/ת 58 ₪ · 19%</div>
-          {%- if section.settings.combo_brush != blank -%}{%- assign cb = section.settings.combo_brush -%}{%- form 'product', cb -%}<input type="hidden" name="id" value="{{ cb.selected_or_first_available_variant.id }}"><button type="submit" name="add" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — {{ cb.price | money }} <span class="arrow">←</span></button>{%- endform -%}{%- elsif cc != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ cc.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></a>{%- endif -%}
+          {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — ₪249 <span class="arrow">←</span></a>{%- endif -%}
         </div>
       </div>
     </div>
@@ -907,15 +906,9 @@
     { "type": "header", "content": "טקסטים" },
     { "type": "text", "id": "cta_text", "label": "טקסט כפתור הקנייה", "default": "הוסף/י לעגלה" },
     { "type": "text", "id": "urgency_text", "label": "שורת דחיפות", "default": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי" },
-    { "type": "header", "content": "מוצרים משלימים — קישור לעגלה" },
-    { "type": "product", "id": "addon_serum", "label": "מוצר: סרום לצמיחת שיער" },
-    { "type": "product", "id": "addon_shampoo", "label": "מוצר: שמפו / מרכך" },
-    { "type": "product", "id": "addon_brush", "label": "מוצר: מברשת עיסוי קרקפת" },
-    { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "שתי דרכים: (א) חברו מוצר 'ערכה' ייעודי במחיר המבצע למטה; או (ב) חברו את מוצרי הרכיבים (מסרק/סרום/שמפו) — הכפתור יוסיף את כולם לסל וה-Automatic Discount יחיל את מחיר הקומבו. אם ריק — הכפתור מפנה בבטחה אל ההצעה הראשית." },
-    { "type": "product", "id": "combo_serum", "label": "מבצע 1 — מוצר 'ערכה' ייעודי (₪219), אופציונלי" },
-    { "type": "product", "id": "combo_brush", "label": "מבצע 2 — מוצר 'ערכה' ייעודי (₪249), אופציונלי" },
-    { "type": "paragraph", "content": "או — חיבור לפי רכיבים (עם Automatic Discount):" },
-    { "type": "product", "id": "combo_comb", "label": "רכיב: מסרק (מוצר הדגל)" }
+    { "type": "header", "content": "מבצעי קומבו — חיבור לעגלה", "info": "המסרק כבר מחובר ב'מוצר ראשי' למעלה. כאן בחרו רק את הסרום והשמפו — והכפתורים יוסיפו את כל הרכיבים לסל. ה-Automatic Discount בניהול מחיל את מחיר הקומבו (219 / 249). אם ריק — הכפתור מפנה אל ההצעה הראשית (ללא שגיאה)." },
+    { "type": "product", "id": "addon_serum", "label": "סרום GHK-CU (לקומבו 1 ו-2)" },
+    { "type": "product", "id": "addon_shampoo", "label": "שמפו ספרטן (לקומבו 2)" }
   ],
   "presets": [ { "name": "צומחים מחדש — דף מוצר" } ]
 }
