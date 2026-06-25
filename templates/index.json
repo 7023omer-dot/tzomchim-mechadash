@@ -60,23 +60,9 @@
         "custom_gradient_background": "",
         "custom_colors_text": "#2E2A39"
       }
-    },
-    "regrow_video": {
-      "type": "regrow-video",
-      "settings": {
-        "heading": "צפו במכשיר בפעולה",
-        "subheading": "",
-        "video_asset": "tz-video.mp4",
-        "max_width": 240,
-        "bg_color": "#F4EBDD",
-        "text_color": "#2B2B2B",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
-    "regrow_video",
     "landing-page",
     "ds_horizontal_ticker_zYtjnk"
   ]

@@ -437,6 +437,14 @@
     .regrow-page .variant-select{width:100%;max-width:420px;margin:0 auto 12px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:#fff}
     .regrow-page .addon form, .regrow-page .bundle form{margin:0}
     .regrow-page .hero-img img, .regrow-page .solution .card .solpic{width:100%;height:auto;display:block}
+    /* ---- סרטון תדמית קומפקטי ---- */
+    .regrow-page .promo-video{background:var(--cream-soft)}
+    .regrow-page .pv-btns{position:absolute;bottom:10px;inset-inline-start:10px;display:flex;gap:7px;z-index:3}
+    .regrow-page .pv-btn{border:0;cursor:pointer;background:rgba(20,20,20,.66);color:#fff;font-family:inherit;font-weight:700;font-size:13px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;padding:7px 12px;transition:background .2s ease}
+    .regrow-page .pv-btn:hover{background:rgba(20,20,20,.88)}
+    .regrow-page .pv-btn.is-on{background:var(--terracotta)}
+    .regrow-page .pv-fs{padding:7px;width:34px;height:34px;justify-content:center}
+    .regrow-page .pv-btn svg{width:17px;height:17px}
   </style>
 <div dir="rtl" class="regrow-page{% if section.settings.show_sticky_cta %} has-sticky{% endif %}">
 {%- comment -%} מוצר ראשי: מההגדרות אם הוגדר, אחרת מוצר העמוד (בתבנית מוצר) {%- endcomment -%}
@@ -480,6 +488,36 @@
       </div>
     </div>
   </header>
+
+  <!-- ===================== סרטון תדמית קומפקטי ===================== -->
+  {%- assign lp_video = section.settings.video_asset | default: 'tz-video.mp4' -%}
+  {%- if lp_video != blank or section.settings.video_file != blank -%}
+  <section class="promo-video">
+    <div class="wrap center">
+      <span class="eyebrow">המכשיר בפעולה</span>
+      <h2>צפו בסרטון התדמית</h2>
+      <div class="pv-wrap" data-rg-video style="position:relative;max-width:{{ section.settings.video_width | default: 240 }}px;width:100%;margin:14px auto 0">
+        {%- if lp_video != blank -%}
+          <video autoplay muted loop playsinline preload="auto" style="width:100%;height:auto;max-height:52vh;object-fit:contain;display:block;background:#000;border-radius:16px">
+            <source src="{{ lp_video | asset_url }}" type="video/mp4">
+            הדפדפן שלך אינו תומך בהצגת וידאו.
+          </video>
+        {%- else -%}
+          {{ section.settings.video_file | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false }}
+        {%- endif -%}
+        <div class="pv-btns">
+          <button type="button" class="pv-btn" data-rg-unmute aria-label="הפעל/י קול">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg>
+            <span class="utext">קול</span>
+          </button>
+          <button type="button" class="pv-btn pv-fs" data-rg-fs aria-label="הגדל למסך מלא" title="מסך מלא">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
 
   <!-- ===================== PROBLEM / AGITATE ===================== -->
   <section class="problem">
@@ -839,18 +877,27 @@
       update();
     });
 
-    // סרטון — מתנגן אוטומטית מושתק; כפתור 'הקש/י לקול' מפעיל סאונד
+    // סרטון — מתנגן אוטומטית מושתק; כפתור קול + כפתור מסך מלא
     document.querySelectorAll('[data-rg-video]').forEach(function(w){
       var v = w.querySelector('video');
       var u = w.querySelector('[data-rg-unmute]');
+      var fs = w.querySelector('[data-rg-fs]');
       if(!v) return;
       var p = v.play(); if(p && p.catch){ p.catch(function(){}); }
       if(u){
         u.addEventListener('click', function(){
           v.muted = !v.muted;
           u.classList.toggle('is-on', !v.muted);
-          var t = u.querySelector('.utext'); if(t){ t.textContent = v.muted ? 'הקש/י לקול' : 'קול פעיל'; }
+          var t = u.querySelector('.utext'); if(t){ t.textContent = v.muted ? 'קול' : 'קול ✓'; }
           if(!v.muted){ v.play(); }
+        });
+      }
+      if(fs){
+        fs.addEventListener('click', function(){
+          if(v.requestFullscreen){ v.requestFullscreen(); }
+          else if(v.webkitEnterFullscreen){ v.webkitEnterFullscreen(); }
+          else if(v.webkitRequestFullscreen){ v.webkitRequestFullscreen(); }
+          else if(w.requestFullscreen){ w.requestFullscreen(); }
         });
       }
     });
@@ -900,7 +947,8 @@
     { "type": "header", "content": "תמונות" },
     { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
     { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
-    { "type": "header", "content": "סרטון תדמית (ליד תמונת המוצר)", "info": "מומלץ: העלו את הסרטון ב-'סרטון (העלאה לשופיפיי)' למטה — שופיפיי ממיר אותו לפורמט שמתנגן בכל הדפדפנים." },
+    { "type": "header", "content": "סרטון תדמית קומפקטי", "info": "מוצג מתחת לאזור הפתיחה, בגודל קטן + כפתור מסך מלא. השאירו 'שם קובץ' ריק ובלי סרטון כדי להסתיר." },
+    { "type": "range", "id": "video_width", "min": 180, "max": 480, "step": 10, "unit": "px", "label": "רוחב הסרטון", "default": 240, "info": "הסרטון מוגבל גם בגובה (52% מהמסך) כדי שייראה במלואו." },
     { "type": "video", "id": "video_file", "label": "סרטון (העלאה לשופיפיי) — מומלץ" },
     { "type": "text", "id": "video_asset", "label": "חלופה: שם קובץ סרטון ב-assets", "default": "tz-video.mp4", "info": "משמש רק אם לא נבחר סרטון למעלה." },
     { "type": "image_picker", "id": "video_poster", "label": "תמונת תצוגה לסרטון (poster) — אופציונלי" },
