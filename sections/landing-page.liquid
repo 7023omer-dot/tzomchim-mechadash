@@ -496,9 +496,21 @@
     <div class="wrap center">
       <span class="eyebrow">המכשיר בפעולה</span>
       <h2>צפו בסרטון התדמית</h2>
-      <div class="pv-wrap" style="max-width:{{ section.settings.video_width | default: 300 }}px;width:100%;margin:14px auto 0">
+      {%- liquid
+        assign pv_poster = ''
+        if section.settings.video_poster != blank
+          assign pv_poster = section.settings.video_poster | image_url: width: 800
+        elsif main_p != blank and main_p.featured_image
+          assign pv_poster = main_p.featured_image | image_url: width: 800
+        elsif section.settings.hero_image != blank
+          assign pv_poster = section.settings.hero_image | image_url: width: 800
+        else
+          assign pv_poster = 'tz-comb.webp' | asset_url
+        endif
+      -%}
+      <div class="pv-wrap" style="max-width:{{ section.settings.video_width | default: 440 }}px;width:100%;margin:14px auto 0">
         {%- if lp_video != blank -%}
-          <video controls playsinline preload="metadata" style="width:100%;height:auto;display:block;border-radius:14px;background:#000"{% if section.settings.video_poster != blank %} poster="{{ section.settings.video_poster | image_url: width: 700 }}"{% endif %}>
+          <video controls playsinline preload="metadata" poster="{{ pv_poster }}" style="width:100%;height:auto;display:block;border-radius:14px;background:#000">
             <source src="{{ lp_video | asset_url }}" type="video/mp4">
             הדפדפן שלך אינו תומך בהצגת וידאו.
           </video>
@@ -939,7 +951,7 @@
     { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
     { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
     { "type": "header", "content": "סרטון תדמית קומפקטי", "info": "מוצג מתחת לאזור הפתיחה, בגודל קטן + כפתור מסך מלא. השאירו 'שם קובץ' ריק ובלי סרטון כדי להסתיר." },
-    { "type": "range", "id": "video_width", "min": 200, "max": 560, "step": 10, "unit": "px", "label": "רוחב הסרטון", "default": 300, "info": "נגן רגיל עם פקדים (הרצה/ווליום/מסך מלא). הקטינו/הגדילו לפי הצורך." },
+    { "type": "range", "id": "video_width", "min": 240, "max": 680, "step": 10, "unit": "px", "label": "רוחב הסרטון", "default": 440, "info": "נגן רגיל עם פקדים (הרצה/ווליום/מסך מלא). תמונת המוצר מוצגת לפני ההפעלה." },
     { "type": "video", "id": "video_file", "label": "סרטון (העלאה לשופיפיי) — מומלץ" },
     { "type": "text", "id": "video_asset", "label": "חלופה: שם קובץ סרטון ב-assets", "default": "tz-video.mp4", "info": "משמש רק אם לא נבחר סרטון למעלה." },
     { "type": "image_picker", "id": "video_poster", "label": "תמונת תצוגה לסרטון (poster) — אופציונלי" },
