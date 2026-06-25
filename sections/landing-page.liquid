@@ -438,6 +438,9 @@
     .regrow-page .hero-img img, .regrow-page .solution .card .solpic{width:100%;height:auto;display:block}
   </style>
 <div dir="rtl" class="regrow-page">
+{%- comment -%} מוצר ראשי: מההגדרות אם הוגדר, אחרת מוצר העמוד (בתבנית מוצר) {%- endcomment -%}
+{%- assign main_p = product -%}
+{%- if section.settings.main_product != blank -%}{%- assign main_p = section.settings.main_product -%}{%- endif -%}
 
 
 
@@ -627,12 +630,12 @@
       <h2>התחל/י את המסע לשיער מלא יותר היום</h2>
       <div class="price-card">
         <div class="offer-head">🔥 מבצע מיוחד — מחיר השקה</div>
-        {%- if product -%}
+        {%- if main_p -%}
         <div class="price-row">
-          {%- if product.compare_at_price > product.price -%}<span class="price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
-          <span class="price-now">{{ product.price | money }}</span>
+          {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
+          <span class="price-now">{{ main_p.price | money }}</span>
         </div>
-        {%- if product.compare_at_price > product.price -%}<div class="save">חוסך/ת {{ product.compare_at_price | minus: product.price | money }}</div>{%- endif -%}
+        {%- if main_p.compare_at_price > main_p.price -%}<div class="save">חוסך/ת {{ main_p.compare_at_price | minus: main_p.price | money }}</div>{%- endif -%}
         {%- else -%}
         <div class="price-row"><span class="price-old">₪199</span><span class="price-now">₪148</span></div>
         <div class="save">חיסכון 26% · 51 ₪</div>
@@ -649,19 +652,19 @@
         </div>
         {%- endif -%}
         <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
-        {%- if product -%}
-        {%- form 'product', product -%}
-          {%- unless product.has_only_default_variant -%}
+        {%- if main_p -%}
+        {%- form 'product', main_p -%}
+          {%- unless main_p.has_only_default_variant -%}
             <select name="id" class="variant-select" aria-label="בחר/י אפשרות">
-              {%- for v in product.variants -%}
+              {%- for v in main_p.variants -%}
                 <option value="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
               {%- endfor -%}
             </select>
           {%- else -%}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="id" value="{{ main_p.selected_or_first_available_variant.id }}">
           {%- endunless -%}
-          <button type="submit" name="add" class="cta" {% unless product.available %}disabled{% endunless %}>
-            {%- if product.available -%}{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} — {{ product.price | money }}{%- else -%}אזל מהמלאי{%- endif -%}
+          <button type="submit" name="add" class="cta" {% unless main_p.available %}disabled{% endunless %}>
+            {%- if main_p.available -%}{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} — {{ main_p.price | money }}{%- else -%}אזל מהמלאי{%- endif -%}
             <span class="arrow">←</span>
           </button>
           {{ form | payment_button }}
@@ -787,8 +790,12 @@
       <h2>השיער שלך מחכה — בוא/י נתחיל</h2>
       <p class="lead">מבצע לזמן מוגבל. הצטרף/י לאלפי לקוחות מרוצים.</p>
       <div class="price-row">
-        {%- if product.compare_at_price > product.price -%}<span class="price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
-        <span class="price-now">{{ product.price | money }}</span>
+        {%- if main_p -%}
+          {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
+          <span class="price-now">{{ main_p.price | money }}</span>
+        {%- else -%}
+          <span class="price-old">₪199</span><span class="price-now">₪148</span>
+        {%- endif -%}
       </div>
       <a href="#offer" class="cta" style="margin-top:14px">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
     </div>
@@ -806,11 +813,14 @@
   <!-- ===================== CTA דביק במובייל ===================== -->
   <div class="sticky-cta" aria-label="קנייה מהירה">
     <div class="sp">
-      <span style="font-size:13px;font-weight:700;color:#111">מסרק צומחים מחדש</span>
-      <b>{{ product.price | money }}</b>
-      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
+      <span style="font-size:13px;font-weight:700;color:#111">{{ main_p.title | default: 'מסרק צומחים מחדש' }}</span>
+      {%- if main_p -%}
+        <b>{{ main_p.price | money }}</b>
+        {%- if main_p.compare_at_price > main_p.price -%}<s>{{ main_p.compare_at_price | money }}</s>{%- endif -%}
+      {%- else -%}
+        <b>₪148</b><s>₪199</s>
+      {%- endif -%}
     </div>
-    <!-- // ADD-TO-CART -->
     <a href="#offer" class="cta">הוסף/י לעגלה <span class="arrow">←</span></a>
   </div>
 
@@ -883,6 +893,8 @@
   "name": "צומחים מחדש — דף מוצר",
   "tag": "section",
   "settings": [
+    { "type": "header", "content": "מוצר ראשי (חיבור לעגלה)", "info": "בחרו כאן את המסרק — וכל כפתורי הקנייה הראשיים בעמוד (הצעה, סרגל דביק, CTA סופי) יוסיפו אותו לסל אוטומטית, עם המחיר האמיתי. חובה כדי שאפשר יהיה לקנות מעמוד הבית." },
+    { "type": "product", "id": "main_product", "label": "המסרק (מוצר הדגל)" },
     { "type": "header", "content": "תמונות" },
     { "type": "image_picker", "id": "hero_image", "label": "תמונת HERO (אם ריק — תמונת המוצר)" },
     { "type": "image_picker", "id": "applicator_image", "label": "תמונת אפליקטור (סקשן הפתרון)" },
