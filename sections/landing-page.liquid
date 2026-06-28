@@ -447,6 +447,11 @@
     .regrow-page .pv-btn svg{width:17px;height:17px}
     /* ---- חנות: המוצר + 2 מבצעים בכרטיסים ---- */
     .regrow-page .shop{background:var(--cream)}
+    .regrow-page .story{background:var(--white)}
+    .regrow-page .story .wrap{max-width:720px}
+    .regrow-page .story h2{text-align:center;margin-bottom:18px}
+    .regrow-page .story p{font-size:17px;color:var(--ink);line-height:1.85;margin-bottom:16px}
+    .regrow-page .story p:last-child{margin-bottom:0;font-weight:700}
     .regrow-page .shop-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:20px 0}
     .regrow-page .shop-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center}
     .regrow-page .shop-card.best{border:2px solid var(--terracotta);box-shadow:0 12px 30px rgba(232,17,45,.18)}
@@ -467,6 +472,47 @@
 
 
 
+  {%- comment -%} ===== Schema.org JSON-LD — לגוגל ולמנועי AI ===== {%- endcomment -%}
+  {%- if main_p != blank and main_p.featured_image -%}{%- assign ld_img = main_p.featured_image | image_url: width: 900 -%}{%- else -%}{%- assign ld_img = 'tz-comb.webp' | asset_url -%}{%- endif -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "צומחים מחדש",
+        "url": "{{ shop.url }}",
+        "logo": "https:{{ 'brand-logo.png' | asset_url }}"
+      },
+      {
+        "@type": "Product",
+        "name": "{% if main_p != blank %}{{ main_p.title | escape }}{% else %}מסרק אינפרא אדום לצמיחת שיער — צומחים מחדש{% endif %}",
+        "image": "https:{{ ld_img }}",
+        "description": "מכשיר 3-ב-1 לקרקפת: אור אדום בעוצמה נמוכה (LLLT), עיסוי קרקפת ואפליקטור סרום. 10 דקות ביום מהבית, לעידוד צמיחת שיער ובריאות הקרקפת.",
+        "brand": { "@type": "Brand", "name": "צומחים מחדש" },
+        "offers": {
+          "@type": "Offer",
+          "price": "{% if main_p != blank %}{{ main_p.price | money_without_currency | replace: ',', '' }}{% else %}148{% endif %}",
+          "priceCurrency": "ILS",
+          "availability": "https://schema.org/InStock",
+          "url": "{{ shop.url }}"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "כמה זמן לוקח לראות תוצאות?", "acceptedAnswer": { "@type": "Answer", "text": "התוצאות הדרגתיות ומשתנות מאדם לאדם. רוב המשתמשים מתחילים לשים לב לשינוי לאחר מספר שבועות של שימוש עקבי. המפתח הוא שימוש קבוע — כמה דקות ביום." } },
+          { "@type": "Question", "name": "כמה זמן לוקח המשלוח?", "acceptedAnswer": { "@type": "Answer", "text": "זמן האספקה המשוער הוא 14–21 ימי עסקים. אנו מעדכנים אותך במספר מעקב ברגע שההזמנה יוצאת, כדי שתוכל לעקוב אחריה בכל שלב." } },
+          { "@type": "Question", "name": "האם המוצר מתאים לגברים וגם לנשים?", "acceptedAnswer": { "@type": "Answer", "text": "כן. הפתרון מתאים לכל מי שמעוניין לעודד צמיחת שיער ולשפר את בריאות הקרקפת, ללא קשר למגדר." } },
+          { "@type": "Question", "name": "האם זה בטוח לשימוש יומיומי?", "acceptedAnswer": { "@type": "Answer", "text": "המכשיר תוכנן לשימוש ביתי נוח. אם יש לך רגישות עורית, מצב רפואי או שאת/ה נוטל/ת תרופות — מומלץ להתייעץ עם רופא לפני השימוש. אנא קרא/י גם את ההצהרה לגבי רכיבים אלרגניים בעמוד התקנון." } },
+          { "@type": "Question", "name": "מה מדיניות ההחזרות?", "acceptedAnswer": { "@type": "Answer", "text": "אנו מציעים אחריות 30 יום. ניתן להחזיר מוצר שהגיע פגום, תקול או שגוי — ונדאג להחלפה או החזר כספי. הפרטים המלאים מופיעים בעמוד התקנון." } },
+          { "@type": "Question", "name": "האם המחיר כולל הכל?", "acceptedAnswer": { "@type": "Answer", "text": "המחיר באתר כולל מע\"מ. ככל שיחולו מסי יבוא בנסיבות מסוימות — הם אינם כלולים במחיר, ויחולו בהתאם לכללי היבוא האישי בישראל." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <!-- ===================== בר הכרזה עליון ===================== -->
   <div class="announce" role="region" aria-label="הטבות">
     <span>🚚 משלוח חינם לכל הארץ</span>
@@ -482,7 +528,7 @@
         </div>
         <div class="hero-copy">
           <span class="eyebrow">מכשיר 3-ב-1 לקרקפת · צומחים מחדש</span>
-          <h1>שיער מלא יותר <em>מתחיל בקרקפת בריאה</em></h1>
+          <h1>צומחים מחדש — <em>פתרון מתקדם לצמיחת שיער</em></h1>
           <p class="lead">מכשיר 3-ב-1: אור אדום, עיסוי ואפליקטור סרום. 10 דקות ביום, מהבית — הטכנולוגיה מהקליניקות, עכשיו אצלך.</p>
           <ul class="hero-benefits">
             <li><span class="hb-ic">✓</span>חוסך אלפי שקלים בטיפולים</li>
@@ -614,56 +660,16 @@
     </div>
   </section>
 
-  <!-- ===================== PROBLEM / AGITATE ===================== -->
-  <section class="problem">
+  <!-- ===================== סיפור רגשי ===================== -->
+  <section class="story">
     <div class="wrap">
-      <span class="eyebrow">מוכר/ת לך?</span>
-      <h2>השיער כבר לא מה שהיה — ואת/ה מרגיש/ה את זה כל בוקר</h2>
-      <p class="lead">זה לא רק "אסתטיקה". זו הדרך שבה את/ה מרגיש/ה מול המראה, בעבודה, בתמונות.</p>
-      <ul class="pain-list">
-        <li><span class="dot">●</span><div>שערות נושרות על הכרית ובמקלחת, והקרקפת מציצה יותר מבעבר.</div></li>
-        <li><span class="dot">●</span><div>מסרקים, שמפו "מעבה" ותוספים — הוצאת הון, וההבדל בקושי נראה.</div></li>
-        <li><span class="dot">●</span><div>טיפול בקליניקה נשמע מפתה, אבל אלפי שקלים וזמן שאין לך פשוט לא מסתדרים.</div></li>
-      </ul>
+      <h2>זה מתחיל בבוקר אחד מול המראה</h2>
+      <p>כולנו מכירים את הרגע הזה. עומדים מול המראה, מסתכלים, ופתאום שמים לב — השיער דליל יותר מפעם. הקרקפת מציצה במקומות שפעם היו מלאים. וזה לא רק שיער. זו תחושת הביטחון שמתחילה להישחק, המבט שנמנע מהמצלמה, הכובע שהפך לחבר קבוע.</p>
+      <p>אנחנו הקמנו את "צומחים מחדש" בדיוק בשביל הרגע הזה. כי האמנו שמגיע לכל אחד ואחת פתרון אמיתי, ביתי, פשוט — בלי טיפולים יקרים, בלי מחטים, בלי כאב. רק כמה דקות ביום, בנוחות הבית.</p>
+      <p>המסרק שלנו משלב טכנולוגיית אור אדום (LLLT) שנחקרה בהקשר של עידוד זקיקי השיער, יחד עם עיסוי קרקפת עדין וסרומים מפעילים. הכל במכשיר אחד. הכל פשוט להפעלה.</p>
+      <p>אנחנו לא מבטיחים קסם בן לילה — אנחנו מאמינים בתהליך. אבל אלפי אנשים כבר התחילו את המסע הזה, ורואים את ההבדל מול אותה מראה. עכשיו תורך.</p>
     </div>
   </section>
-
-  <!-- ===================== SOLUTION ===================== -->
-  <section class="solution">
-    <div class="wrap">
-      <span class="eyebrow">הפתרון</span>
-      <h2>שלוש פעולות שעובדות יחד על הקרקפת שלך</h2>
-      <div class="card">
-        {%- if section.settings.applicator_image != blank -%}<img class="solpic" src="{{ section.settings.applicator_image | image_url: width: 700 }}" alt="אפליקטור הסרום של צומחים מחדש" loading="lazy">{%- endif -%}
-        <p>מסרק <strong>צומחים מחדש</strong> משלב שלוש פעולות במכשיר אחד: <strong>אור אדום בעוצמה נמוכה</strong> שנחקר בהקשר של עידוד זקיקי השיער, <strong>זיפי עיסוי</strong> שמעוררים את הקרקפת ומשפרים את תחושת זרימת הדם, ו<strong>אפליקטור סרום מובנה</strong> שמחדיר את חומרי הטיפוח ישירות לשורש. את/ה פשוט מעביר/ה אותו על הקרקפת — בלי כאב ובלי כימיקלים אגרסיביים.</p>
-        <p style="margin-top:12px;color:var(--muted);font-size:15px">אור אדום בעוצמה נמוכה (LLLT) הוא טיפול לא-פולשני שנחקר במחקרים בהקשר של עידוד פעילות זקיקי השיער. התוצאות משתנות מאדם לאדם.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== HOW IT WORKS ===================== -->
-  <section class="how">
-    <div class="wrap center">
-      <span class="eyebrow">פשוט עד כדי גיחוך</span>
-      <h2>שלושה צעדים, 10 דקות ביום</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <div><h3>מטפטפים סרום ומפעילים</h3><p>כמה טיפות לאפליקטור המובנה, ולוחצים על כפתור ההפעלה.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <div><h3>מעבירים על הקרקפת 10 דק'</h3><p>3 פעמים בשבוע, בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <div><h3>עוקבים אחרי ההבדל</h3><p>רוב המשתמשים מתחילים לשים לב לשינוי תוך מספר שבועות.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BENEFITS הוסרו מכאן — עברו לאזור הפתיחה (הירו) כרשימת יתרונות -->
 
   <!-- ===================== BEFORE / AFTER ===================== -->
   <section class="ba">
@@ -696,71 +702,6 @@
 
   <!-- המבצעים עברו לסקשן 'חנות' מתחת לסרטון -->
 
-  <!-- ===================== SOCIAL PROOF ===================== -->
-  <section class="reviews">
-    <div class="wrap center">
-      <span class="eyebrow">מה אומרים הלקוחות</span>
-      <div class="rating-top">
-        <span class="big">4.8</span>
-        <span class="stars" aria-label="דירוג 4.8 מתוך 5">★★★★★</span>
-      </div>
-      <p class="lead">מתוך 1,300+ ביקורות <!-- החלף במספר אמיתי --></p>
-
-      <div class="review-grid">
-        <!-- ⚠️ ביקורות לדוגמה — החלף בביקורות אמיתיות לפני העלייה לאוויר (פרסום מטעה אסור בחוק) -->
-        <div class="review">
-          <div class="who"><div class="av">מ</div><div><div class="name">מיכל ל.</div><div class="stars">★★★★★</div></div></div>
-          <p>"אחרי כמה שבועות של שימוש קבוע הרגשתי שהשיער נראה מלא יותר באזורים שהדאיגו אותי. נעים לשימוש וקל להתמיד — 10 דקות וזהו."</p>
-          <span class="verified">✓ רכישה מאומתת</span>
-        </div>
-        <div class="review">
-          <div class="who"><div class="av">ד</div><div><div class="name">דנה כ.</div><div class="stars">★★★★★</div></div></div>
-          <p>"קניתי בעיקר בשביל הנוחות — 10 דקות מול הטלוויזיה. העיסוי מרגיש מצוין והקרקפת פחות יבשה. שמחה שהזמנתי."</p>
-          <span class="verified">✓ רכישה מאומתת</span>
-        </div>
-        <div class="review">
-          <div class="who"><div class="av">י</div><div><div class="name">יוסי א.</div><div class="stars">★★★★☆</div></div></div>
-          <p>"התחלתי בספקנות, אבל ההתמדה השתלמה — קו השיער מרגיש מאוזן יותר. לקח כמה שבועות לראות שינוי, אז כדאי להיות סבלני."</p>
-          <span class="verified">✓ רכישה מאומתת</span>
-        </div>
-        <div class="review">
-          <div class="who"><div class="av">ר</div><div><div class="name">רונית ש.</div><div class="stars">★★★★★</div></div></div>
-          <p>"האפליקטור לסרום פשוט גאוני, לא מבזבזת טיפה. המשלוח הגיע מהר והשירות היה אדיב. ממליצה בחום."</p>
-          <span class="verified">✓ רכישה מאומתת</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== COMPARISON ===================== -->
-  <section class="compare">
-    <div class="wrap">
-      <span class="eyebrow">השוואה הוגנת</span>
-      <h2>צומחים מחדש מול שאר האפשרויות</h2>
-      <div class="table-scroll">
-        <table class="cmp">
-          <thead>
-            <tr>
-              <th></th>
-              <th class="us">צומחים מחדש</th>
-              <th>טיפול בקליניקה</th>
-              <th>תרופות / תוספים</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td>אלפי ש"ח</td><td>הוצאה חודשית מתמשכת</td></tr>
-            <tr><td>כאב</td><td class="us"><span class="yes">ללא</span></td><td>אפשרי</td><td><span class="yes">ללא</span></td></tr>
-            <tr><td>נוחות</td><td class="us">מהבית, 10 דק'</td><td>תורים ונסיעות</td><td>נטילה יומית קבועה</td></tr>
-            <tr><td>תופעות לוואי</td><td class="us"><span class="yes">מינימליות</span></td><td>אפשריות</td><td>אפשריות</td></tr>
-            <tr><td>מתאים לכולם</td><td class="us"><span class="yes">כן</span></td><td>לא תמיד</td><td>לא תמיד</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ההצעה עברה לסקשן 'חנות' מתחת לסרטון -->
-
   <!-- ===================== FAQ ===================== -->
   <section class="faq">
     <div class="wrap">
@@ -768,69 +709,31 @@
       <h2>כל מה שרצית לשאול</h2>
 
       <details>
-        <summary>תוך כמה זמן רואים תוצאות?</summary>
-        <div class="ans">רוב המשתמשים מתחילים לשים לב לשינוי בתחושת המלאות תוך מספר שבועות של שימוש עקבי. התוצאות משתנות מאדם לאדם, ולכן אנחנו ממליצים על שימוש רציף לאורך זמן.</div>
-      </details>
-      <details>
-        <summary>האם השימוש כואב?</summary>
-        <div class="ans">לא. האור האדום בעוצמה נמוכה אינו מחמם ואינו כואב — רוב האנשים מתארים תחושה נעימה ורגועה.</div>
-      </details>
-      <details>
-        <summary>מתאים גם לגברים וגם לנשים?</summary>
-        <div class="ans">בהחלט. צומחים מחדש מתאים לכל סוגי השיער והקרקפת, לנשים עם דילול ולגברים עם נסיגת קו השיער כאחד.</div>
-      </details>
-      <details>
-        <summary>מתאים גם לקרחת מתקדמת?</summary>
-        <div class="ans">המכשיר עובד הכי טוב כשיש עדיין זקיקים פעילים — כלומר בדילול ובהקלשה. במצב של קרחת מתקדמת לאורך שנים התוצאות מוגבלות יותר, ומומלץ להיוועץ עם איש מקצוע לפני רכישה.</div>
-      </details>
-      <details>
-        <summary>איך מנקים את המסרק?</summary>
-        <div class="ans">פשוט מנגבים את שיני המסרק במטלית יבשה או לחה מעט. אין לשטוף תחת מים זורמים.</div>
-      </details>
-      <details>
-        <summary>מה כוללת האחריות?</summary>
-        <div class="ans">כל מסרק מגיע עם אחריות יצרן, וניתן להחזיר בהתאם למדיניות ההחזרות שלנו.</div>
+        <summary>כמה זמן לוקח לראות תוצאות?</summary>
+        <div class="ans">התוצאות הדרגתיות ומשתנות מאדם לאדם. רוב המשתמשים מתחילים לשים לב לשינוי לאחר מספר שבועות של שימוש עקבי. המפתח הוא שימוש קבוע — כמה דקות ביום.</div>
       </details>
       <details>
         <summary>כמה זמן לוקח המשלוח?</summary>
-        <div class="ans">המשלוח חינם ומגיע בדרך כלל תוך 2-4 ימי עסקים לכל הארץ.</div>
+        <div class="ans">זמן האספקה המשוער הוא 14–21 ימי עסקים. אנו מעדכנים אותך במספר מעקב ברגע שההזמנה יוצאת, כדי שתוכל לעקוב אחריה בכל שלב.</div>
       </details>
       <details>
-        <summary>מה מדיניות ההחזרות?</summary>
-        <div class="ans">ניתן להחזיר את המוצר בהתאם למדיניות ההחזרות שלנו, כל עוד הוא במצב תקין.</div>
+        <summary>האם המוצר מתאים לגברים וגם לנשים?</summary>
+        <div class="ans">כן. הפתרון מתאים לכל מי שמעוניין לעודד צמיחת שיער ולשפר את בריאות הקרקפת, ללא קשר למגדר.</div>
       </details>
       <details>
         <summary>האם זה בטוח לשימוש יומיומי?</summary>
-        <div class="ans">כן. השימוש המומלץ הוא כ-3 פעמים בשבוע, 10 דקות בכל פעם. מומלץ להיוועץ ברופא אם יש לך מצב רפואי רלוונטי.</div>
+        <div class="ans">המכשיר תוכנן לשימוש ביתי נוח. עם זאת, אם יש לך רגישות עורית, מצב רפואי או שאת/ה נוטל/ת תרופות — מומלץ להתייעץ עם רופא לפני השימוש. אנא קרא/י גם את ההצהרה לגבי רכיבים אלרגניים בעמוד התקנון.</div>
+      </details>
+      <details>
+        <summary>מה מדיניות ההחזרות?</summary>
+        <div class="ans">אנו מציעים אחריות 30 יום. ניתן להחזיר מוצר שהגיע פגום, תקול או שגוי — ונדאג להחלפה או החזר כספי. הפרטים המלאים מופיעים בעמוד התקנון.</div>
+      </details>
+      <details>
+        <summary>האם המחיר כולל הכל?</summary>
+        <div class="ans">המחיר באתר כולל מע"מ. ככל שיחולו מסי יבוא בנסיבות מסוימות — הם אינם כלולים במחיר, ויחולו בהתאם לכללי היבוא האישי בישראל.</div>
       </details>
     </div>
   </section>
-
-  <!-- ===================== FINAL CTA ===================== -->
-  <section class="final">
-    <div class="wrap center">
-      <h2>השיער שלך מחכה — בוא/י נתחיל</h2>
-      <p class="lead">מבצע לזמן מוגבל. הצטרף/י לאלפי לקוחות מרוצים.</p>
-      <div class="price-row">
-        {%- if main_p -%}
-          {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
-          <span class="price-now">{{ main_p.price | money }}</span>
-        {%- else -%}
-          <span class="price-old">199 ש"ח</span><span class="price-now">148 ש"ח</span>
-        {%- endif -%}
-      </div>
-      <a href="#offer" class="cta" style="margin-top:14px">אני רוצה שיער מלא יותר <span class="arrow">←</span></a>
-    </div>
-  </section>
-
-  <footer>
-    <nav class="foot-links" aria-label="קישורי תחתית">
-      <a href="/pages/terms">תקנון ומדיניות החזרות</a>
-      <a href="/pages/contact">צור קשר</a>
-      <a href="/pages/faq">שאלות נפוצות</a>
-    </nav>
-    © <span id="yr"></span> צומחים מחדש <!-- BRAND -->. כל הזכויות שמורות. · המידע באתר אינו מהווה ייעוץ רפואי.
-  </footer>
 
   <!-- ===================== CTA דביק במובייל (אופציונלי) ===================== -->
   {%- if section.settings.show_sticky_cta -%}
