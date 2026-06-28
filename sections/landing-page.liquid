@@ -445,6 +445,20 @@
     .regrow-page .pv-btn.is-on{background:var(--terracotta)}
     .regrow-page .pv-fs{padding:7px;width:34px;height:34px;justify-content:center}
     .regrow-page .pv-btn svg{width:17px;height:17px}
+    /* ---- חנות: המוצר + 2 מבצעים בכרטיסים ---- */
+    .regrow-page .shop{background:var(--cream)}
+    .regrow-page .shop-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:20px 0}
+    .regrow-page .shop-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center}
+    .regrow-page .shop-card.best{border:2px solid var(--terracotta);box-shadow:0 12px 30px rgba(232,17,45,.18)}
+    .regrow-page .shop-card .badge{margin-bottom:8px}
+    .regrow-page .shop-card h3{font-size:18px;margin:6px 0 4px;color:var(--ink)}
+    .regrow-page .sc-img{height:120px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+    .regrow-page .sc-img img{max-height:118px;width:auto;object-fit:contain}
+    .regrow-page .sc-imgs img{max-height:84px}
+    .regrow-page .sc-img .plus{color:var(--terracotta);font-weight:900;font-size:18px}
+    .regrow-page .shop-card .cta{margin-top:14px}
+    .regrow-page .shop-card .variant-select{margin-bottom:10px}
+    @media(min-width:760px){.regrow-page .shop-grid{grid-template-columns:1fr 1fr 1fr;align-items:stretch}}
   </style>
 <div dir="rtl" class="regrow-page{% if section.settings.show_sticky_cta %} has-sticky{% endif %}">
 {%- comment -%} מוצר ראשי: מההגדרות אם הוגדר, אחרת מוצר העמוד (בתבנית מוצר) {%- endcomment -%}
@@ -521,6 +535,88 @@
     </div>
   </section>
   {%- endif -%}
+
+  <!-- ===================== חנות: המוצר + 2 מבצעים ===================== -->
+  <section class="shop" id="offer">
+    <div class="wrap center">
+      <span class="eyebrow">ההצעה שלך</span>
+      <h2>בחרו את הערכה שלכם</h2>
+      {%- if section.settings.timer_end != blank -%}
+      <div class="rg-timer" data-rg-timer data-end="{{ section.settings.timer_end }}">
+        <div class="rg-timer-label">⏳ מחיר ההשקה ננעל בעוד:</div>
+        <div class="rg-timer-clock">
+          <div class="rg-tbox"><span data-d>00</span><small>ימים</small></div><span class="rg-tsep">:</span>
+          <div class="rg-tbox"><span data-h>00</span><small>שעות</small></div><span class="rg-tsep">:</span>
+          <div class="rg-tbox"><span data-m>00</span><small>דקות</small></div><span class="rg-tsep">:</span>
+          <div class="rg-tbox"><span data-s>00</span><small>שניות</small></div>
+        </div>
+      </div>
+      {%- endif -%}
+
+      {%- assign cse = section.settings.addon_serum -%}
+      {%- assign csh = section.settings.addon_shampoo -%}
+      {%- if main_p != blank and main_p.featured_image -%}{%- assign comb_img = main_p.featured_image | image_url: width: 460 -%}{%- else -%}{%- assign comb_img = 'tz-comb.webp' | asset_url -%}{%- endif -%}
+
+      <div class="shop-grid">
+        <!-- כרטיס 1: המסרק -->
+        <div class="shop-card">
+          <span class="badge">🔥 מבצע השקה</span>
+          <div class="sc-img"><img src="{{ comb_img }}" alt="מסרק אינפרא אדום לצמיחת שיער" loading="lazy"></div>
+          <h3>מסרק אינפרא אדום</h3>
+          <div class="price-row">
+            {%- if main_p -%}
+              {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
+              <span class="price-now">{{ main_p.price | money }}</span>
+            {%- else -%}
+              <span class="price-old">199 ש"ח</span><span class="price-now">148 ש"ח</span>
+            {%- endif -%}
+          </div>
+          <div class="save">חיסכון 51 ש"ח · 26%</div>
+          {%- if main_p -%}
+            {%- form 'product', main_p -%}
+              {%- unless main_p.has_only_default_variant -%}
+                <select name="id" class="variant-select" aria-label="בחר/י אפשרות">{%- for v in main_p.variants -%}<option value="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>{%- endfor -%}</select>
+              {%- else -%}
+                <input type="hidden" name="id" value="{{ main_p.selected_or_first_available_variant.id }}">
+              {%- endunless -%}
+              <button type="submit" name="add" class="cta"{% unless main_p.available %} disabled{% endunless %}>{% if main_p.available %}הוספה לסל{% else %}אזל מהמלאי{% endif %} <span class="arrow">←</span></button>
+            {%- endform -%}
+          {%- else -%}
+            <a href="#offer" class="cta">הוספה לסל <span class="arrow">←</span></a>
+          {%- endif -%}
+        </div>
+
+        <!-- כרטיס 2: מסרק + סרום -->
+        <div class="shop-card">
+          <span class="badge">הקומבו המנצח</span>
+          <div class="sc-img sc-imgs"><img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק" loading="lazy"><span class="plus">+</span><img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy"></div>
+          <h3>מסרק + סרום</h3>
+          <div class="price-row"><span class="price-old">258 ש"ח</span><span class="price-now">219 ש"ח</span></div>
+          <div class="save">חוסך/ת 39 ש"ח · 15%</div>
+          {%- if main_p != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}">הוספה לסל — 219 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta">הוספה לסל — 219 ש"ח <span class="arrow">←</span></a>{%- endif -%}
+        </div>
+
+        <!-- כרטיס 3: הערכה המלאה -->
+        <div class="shop-card best">
+          <span class="badge gold">הכי משתלם ⭐</span>
+          <div class="sc-img sc-imgs"><img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק" loading="lazy"><span class="plus">+</span><img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום" loading="lazy"><span class="plus">+</span><img src="{{ 'tz-spartan.webp' | asset_url }}" alt="שמפו" loading="lazy"></div>
+          <h3>הערכה המלאה</h3>
+          <div class="price-row"><span class="price-old">307 ש"ח</span><span class="price-now">249 ש"ח</span></div>
+          <div class="save">חוסך/ת 58 ש"ח · 19%</div>
+          {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}">הוספה לסל — 249 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta">הוספה לסל — 249 ש"ח <span class="arrow">←</span></a>{%- endif -%}
+        </div>
+      </div>
+
+      <div class="guarantee-row">
+        <span class="gr-seal">30<small>יום</small></span>
+        <div class="gr-text"><b>אחריות 30 יום — כספך חזרה</b><span>לא מרוצה? מחזירים לך את הכסף, בלי שאלות.</span></div>
+      </div>
+      <div class="pay" aria-label="אמצעי תשלום">
+        <span class="lbl">תשלום מאובטח באמצעות</span>
+        <span class="chip">VISA</span><span class="chip">Mastercard</span><span class="chip">American Express</span><span class="chip">bit</span><span class="chip">PayPal</span><span class="chip">Apple&nbsp;Pay</span>
+      </div>
+    </div>
+  </section>
 
   <!-- ===================== PROBLEM / AGITATE ===================== -->
   <section class="problem">
@@ -602,50 +698,7 @@
     </div>
   </section>
 
-  <!-- ===================== מוצרים משלימים + באנדל ===================== -->
-  <section class="addons">
-    <div class="wrap">
-      <span class="eyebrow">מבצעי קומבו</span>
-      <h2>המסרק לבד — או חוסכים עם קומבו</h2>
-      <p class="lead">המסרק לבד נשאר ב-219 ש"ח. ההנחה נפתחת ברגע שמוסיפים מוצר — ככל שמשלבים יותר, חוסכים יותר.</p>
-
-      <div class="combo-grid">
-        <!-- מבצע 1 — מסרק + סרום -->
-        <div class="bundle combo">
-          <span class="badge">הקומבו המנצח 🔥</span>
-          <div class="combo-imgs">
-            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
-          </div>
-          <h3 style="font-size:20px;margin:8px 0 4px">מסרק + סרום</h3>
-          <div class="items"><span>מסרק אינפרא אדום</span><span class="plus">+</span><span>סרום GHK-CU</span></div>
-          <div class="price-row"><span class="price-old">258 ש"ח</span><span class="price-now">219 ש"ח</span></div>
-          <div class="save">חוסך/ת 39 ש"ח · 15%</div>
-          {%- assign cse = section.settings.addon_serum -%}
-          {%- assign csh = section.settings.addon_shampoo -%}
-          {%- if main_p != blank and cse != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הקומבו לסל — 219 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הקומבו לסל — 219 ש"ח <span class="arrow">←</span></a>{%- endif -%}
-        </div>
-
-        <!-- מבצע 2 — מסרק + סרום + שמפו (הכי משתלם) -->
-        <div class="bundle combo best">
-          <span class="badge gold">הכי משתלם ⭐</span>
-          <div class="combo-imgs">
-            <img src="{{ 'tz-comb.webp' | asset_url }}" alt="מסרק אינפרא אדום" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-ghkcu.webp' | asset_url }}" alt="סרום GHK-CU" loading="lazy">
-            <span class="plus">+</span>
-            <img src="{{ 'tz-spartan.webp' | asset_url }}" alt="שמפו Spartan" loading="lazy">
-          </div>
-          <h3 style="font-size:20px;margin:8px 0 4px">הערכה המלאה — מסרק + סרום + שמפו</h3>
-          <div class="items"><span>מסרק</span><span class="plus">+</span><span>סרום GHK-CU</span><span class="plus">+</span><span>שמפו Spartan</span></div>
-          <div class="price-row"><span class="price-old">307 ש"ח</span><span class="price-now">249 ש"ח</span></div>
-          <div class="save">חוסך/ת 58 ש"ח · 19%</div>
-          {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}" style="margin-top:14px">הוסיפו את הערכה לסל — 249 ש"ח <span class="arrow">←</span></button>{%- else -%}<a href="#offer" class="cta" style="margin-top:14px">הוסיפו את הערכה לסל — 249 ש"ח <span class="arrow">←</span></a>{%- endif -%}
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- המבצעים עברו לסקשן 'חנות' מתחת לסרטון -->
 
   <!-- ===================== SOCIAL PROOF ===================== -->
   <section class="reviews">
@@ -710,75 +763,7 @@
     </div>
   </section>
 
-  <!-- ===================== OFFER / PRICING ===================== -->
-  <section class="offer" id="offer">
-    <div class="wrap center">
-      <span class="eyebrow">ההצעה שלך</span>
-      <h2>התחל/י את המסע לשיער מלא יותר היום</h2>
-      <div class="price-card">
-        <div class="offer-head">🔥 מבצע מיוחד — מחיר השקה</div>
-        {%- if main_p -%}
-        <div class="price-row">
-          {%- if main_p.compare_at_price > main_p.price -%}<span class="price-old">{{ main_p.compare_at_price | money }}</span>{%- endif -%}
-          <span class="price-now">{{ main_p.price | money }}</span>
-        </div>
-        {%- if main_p.compare_at_price > main_p.price -%}<div class="save">חוסך/ת {{ main_p.compare_at_price | minus: main_p.price | money }}</div>{%- endif -%}
-        {%- else -%}
-        <div class="price-row"><span class="price-old">199 ש"ח</span><span class="price-now">148 ש"ח</span></div>
-        <div class="save">חיסכון 26% · 51 ש"ח</div>
-        {%- endif -%}
-        {%- if section.settings.timer_end != blank -%}
-        <div class="rg-timer" data-rg-timer data-end="{{ section.settings.timer_end }}">
-          <div class="rg-timer-label">⏳ מחיר ההשקה ננעל בעוד:</div>
-          <div class="rg-timer-clock">
-            <div class="rg-tbox"><span data-d>00</span><small>ימים</small></div><span class="rg-tsep">:</span>
-            <div class="rg-tbox"><span data-h>00</span><small>שעות</small></div><span class="rg-tsep">:</span>
-            <div class="rg-tbox"><span data-m>00</span><small>דקות</small></div><span class="rg-tsep">:</span>
-            <div class="rg-tbox"><span data-s>00</span><small>שניות</small></div>
-          </div>
-        </div>
-        {%- endif -%}
-        <div class="urgency">{{ section.settings.urgency_text | default: '⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי' }}</div>
-        {%- if main_p -%}
-        {%- form 'product', main_p -%}
-          {%- unless main_p.has_only_default_variant -%}
-            <select name="id" class="variant-select" aria-label="בחר/י אפשרות">
-              {%- for v in main_p.variants -%}
-                <option value="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
-              {%- endfor -%}
-            </select>
-          {%- else -%}
-            <input type="hidden" name="id" value="{{ main_p.selected_or_first_available_variant.id }}">
-          {%- endunless -%}
-          <button type="submit" name="add" class="cta" {% unless main_p.available %}disabled{% endunless %}>
-            {%- if main_p.available -%}{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} — {{ main_p.price | money }}{%- else -%}אזל מהמלאי{%- endif -%}
-            <span class="arrow">←</span>
-          </button>
-          {{ form | payment_button }}
-        {%- endform -%}
-        {%- else -%}
-        <a href="/pages/catalog" class="cta">{{ section.settings.cta_text | default: 'הוסף/י לעגלה' }} <span class="arrow">←</span></a>
-        {%- endif -%}
-        <div class="trustbar">
-          <span>🚚 משלוח חינם</span>
-          <span>🔒 תשלום מאובטח</span>
-        </div>
-        <div class="guarantee-row">
-          <span class="gr-seal">30<small>יום</small></span>
-          <div class="gr-text"><b>אחריות 30 יום — כספך חזרה</b><span>לא מרוצה? מחזירים לך את הכסף, בלי שאלות.</span></div>
-        </div>
-        <div class="pay" aria-label="אמצעי תשלום">
-          <span class="lbl">תשלום מאובטח באמצעות</span>
-          <span class="chip">VISA</span>
-          <span class="chip">Mastercard</span>
-          <span class="chip">American Express</span>
-          <span class="chip">bit</span>
-          <span class="chip">PayPal</span>
-          <span class="chip">Apple&nbsp;Pay</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ההצעה עברה לסקשן 'חנות' מתחת לסרטון -->
 
   <!-- ===================== FAQ ===================== -->
   <section class="faq">
