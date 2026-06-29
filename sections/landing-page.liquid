@@ -59,6 +59,9 @@
   .scm-page .cta.ghost{background:rgba(244,236,225,.1);border:1px solid rgba(244,236,225,.18);color:var(--light);box-shadow:none}
   .scm-page .cta.ghost:hover{background:rgba(244,236,225,.18)}
 
+  /* בס״ד — עדין, מימין למעלה */
+  .scm-page .scm-bsd{background:var(--cream);color:var(--g3);text-align:right;font-size:12px;font-weight:500;letter-spacing:1px;padding:5px clamp(18px,5vw,40px) 4px}
+
   /* מרקיזות */
   @keyframes scm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scm-glow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}
@@ -272,6 +275,9 @@
   }
   </script>
 
+  <!-- בס״ד -->
+  <div class="scm-bsd">בס״ד</div>
+
   <!-- 1. מרקיזת הכרזות -->
   <div class="marq" role="region" aria-label="הטבות">
     <div class="track">
@@ -350,7 +356,7 @@
           <h3>מסרק אינפרא אדום</h3>
           <p class="desc">המכשיר 3-ב-1 — אור אדום, עיסוי וסרום.</p>
           <div class="prow"><span class="now">{% if main_p != blank %}{{ main_p.price | money }}{% else %}148 ש"ח{% endif %}</span><span class="was">199 ש"ח</span></div>
-          <div class="save">חיסכון 51 ש"ח · 26%</div>
+          <div class="save">חיסכון 51 ש"ח</div>
           {%- if main_p != blank -%}
             {%- form 'product', main_p -%}
               <input type="hidden" name="id" value="{{ main_p.selected_or_first_available_variant.id }}">
@@ -365,7 +371,7 @@
           <h3>מסרק + סרום</h3>
           <p class="desc">המכשיר + סרום GHK-Cu לחיזוק השורש.</p>
           <div class="prow"><span class="now">219 ש"ח</span><span class="was">258 ש"ח</span></div>
-          <div class="save">חיסכון 39 ש"ח · 15%</div>
+          <div class="save">חיסכון 39 ש"ח</div>
           {%- if main_p != blank and cse != blank -%}<button type="button" class="cta ghost full" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }}">הוספה לסל</button>{%- else -%}<a href="#offer" class="cta ghost full">הוספה לסל</a>{%- endif -%}
         </div>
         <!-- כרטיס 3 (מומלץ) -->
@@ -376,7 +382,7 @@
           <h3>הערכה המלאה</h3>
           <p class="desc">מסרק + סרום + שמפו לחיזוק — הטיפול השלם.</p>
           <div class="prow"><span class="now">249 ש"ח</span><span class="was">307 ש"ח</span></div>
-          <div class="save">חיסכון 58 ש"ח · 19%</div>
+          <div class="save">חיסכון 58 ש"ח</div>
           {%- if main_p != blank and cse != blank and csh != blank -%}<button type="button" class="cta full" data-combo-add="{{ main_p.selected_or_first_available_variant.id }},{{ cse.selected_or_first_available_variant.id }},{{ csh.selected_or_first_available_variant.id }}">הוספה לסל</button>{%- else -%}<a href="#offer" class="cta full">הוספה לסל</a>{%- endif -%}
         </div>
       </div>
