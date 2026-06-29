@@ -107,8 +107,8 @@
 
   /* וידאו */
   .scm-page .video-sec{background:var(--cream);text-align:center}
-  .scm-page .video-sec .box{max-width:980px;margin:18px auto 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(28,23,20,.18);background:#000}
-  .scm-page .video-sec video{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#000}
+  .scm-page .video-sec .box{max-width:380px;margin:18px auto 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(28,23,20,.18);background:#000}
+  .scm-page .video-sec video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
 
   /* OFFER */
   .scm-page .offer{background:var(--dark2);color:var(--light)}
@@ -331,7 +331,7 @@
       <span class="eyebrow">המכשיר בפעולה</span>
       <h2>צפו בסרטון התדמית</h2>
       <div class="box">
-        <video controls playsinline preload="metadata" poster="{{ hero_img }}">
+        <video controls playsinline preload="metadata">
           <source src="{{ vsrc | asset_url }}" type="video/mp4">
           הדפדפן שלך אינו תומך בהצגת וידאו.
         </video>
