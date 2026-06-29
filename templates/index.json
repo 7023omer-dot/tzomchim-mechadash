@@ -24,46 +24,9 @@
         "combo_brush": "",
         "combo_comb": ""
       }
-    },
-    "ds_horizontal_ticker_zYtjnk": {
-      "type": "ds-horizontal-ticker",
-      "blocks": {
-        "text_UERPYh": {
-          "type": "text",
-          "settings": {
-            "title": "מבצע מיוחד 249 ש\"ח בלבד !!!"
-          }
-        },
-        "text_xQxxGC": {
-          "type": "text",
-          "settings": {
-            "title": "מסרק אינפרה אדום +סרום טבעי + שמפו לחיזוק שיער"
-          }
-        }
-      },
-      "block_order": [
-        "text_UERPYh",
-        "text_xQxxGC"
-      ],
-      "name": "Horizontal Ticker",
-      "settings": {
-        "speed": 3,
-        "text_spacing": 3,
-        "text_size": "1.75",
-        "italic_text": false,
-        "uppercase_text": false,
-        "bold_text": false,
-        "color_scheme": "accent-1",
-        "padding_top": 16,
-        "padding_bottom": 16,
-        "custom_colors_background": "#FFFFFF",
-        "custom_gradient_background": "",
-        "custom_colors_text": "#2E2A39"
-      }
     }
   },
   "order": [
-    "landing-page",
-    "ds_horizontal_ticker_zYtjnk"
+    "landing-page"
   ]
 }
