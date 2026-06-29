@@ -215,6 +215,33 @@
   .scm-page .ft a:hover{color:var(--light)}
   .scm-page .ft .copy{border-top:1px solid rgba(244,236,225,.08);margin-top:32px;padding:20px 0;text-align:center;font-size:13px;color:var(--g3)}
 
+  /* שורת דחיפות */
+  .scm-page .urg{display:inline-flex;align-items:center;gap:8px;background:rgba(214,57,43,.14);border:1px solid rgba(214,57,43,.32);color:var(--accent-card);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;margin-top:8px}
+  .scm-page .urg .gd{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:scm-glow 2s ease-in-out infinite}
+
+  /* התראת נרכש עכשיו (צף) */
+  .scm-page .scm-toast{position:fixed;bottom:24px;inset-inline-end:24px;z-index:85;width:300px;max-width:calc(100vw - 32px);display:flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(28,23,20,.08);border-radius:14px;padding:14px;box-shadow:0 18px 44px rgba(28,23,20,.22);font-size:14px;color:#1C1714;opacity:0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease}
+  .scm-page .scm-toast.show{opacity:1;transform:none}
+  .scm-page .scm-toast[hidden]{display:none}
+  .scm-page .scm-toast .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;background:#FDE7E4;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .scm-page .scm-toast .tx{line-height:1.45}
+  .scm-page .scm-toast .tx b{font-weight:800}
+  .scm-page .scm-toast .prod{display:block;color:var(--gl1);font-size:13px}
+  .scm-page .scm-toast .ago{display:block;color:var(--green);font-size:12.5px;font-weight:700}
+
+  /* כפתור מייל צף + טופס */
+  .scm-page .scm-contact{position:fixed;bottom:24px;inset-inline-start:24px;z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+  .scm-page .scm-cbtn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:13px 20px;font-family:var(--sans);font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 14px 34px rgba(214,57,43,.4)}
+  .scm-page .scm-cbtn svg{width:19px;height:19px}
+  .scm-page .scm-cform{width:330px;max-width:calc(100vw - 32px);background:#fff;border:1px solid rgba(28,23,20,.08);border-radius:16px;padding:20px;box-shadow:0 22px 54px rgba(28,23,20,.26)}
+  .scm-page .scm-cform[hidden]{display:none}
+  .scm-page .scm-cform h4{font-family:var(--serif);font-weight:700;font-size:19px;color:#1C1714;margin-bottom:4px}
+  .scm-page .scm-cform p{color:var(--gl1);font-size:14px;margin-bottom:14px}
+  .scm-page .scm-cform input,.scm-page .scm-cform textarea{width:100%;border:1px solid rgba(28,23,20,.14);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:15px;margin-bottom:10px;background:#fff;color:#1C1714}
+  .scm-page .scm-cform textarea{resize:vertical}
+  .scm-page .scm-cform .cfoot{margin-top:8px;font-size:13px;color:var(--gl1);text-align:center}
+  .scm-page .scm-cform .cfoot a{color:var(--accent);text-decoration:none;font-weight:700}
+
   /* רספונסיב */
   @media(max-width:768px){
     .scm-page .nav-links{display:none}
@@ -313,6 +340,7 @@
         <span class="eyebrow">🔥 מבצע השקה</span>
         <h2>בחרו את הערכה שלכם</h2>
         <p>משלוח חינם לכל הארץ · תשלום מאובטח</p>
+        <div class="urg"><span class="gd"></span> המלאי במבצע ההשקה מוגבל — מתחדש בכל תחילת חודש</div>
       </div>
       <div class="grid">
         <!-- כרטיס 1 -->
@@ -487,11 +515,34 @@
         <p>המרכז לצמיחת שיער. פיתחנו מסרק 3-ב-1 שמשלב אור אדום, עיסוי קרקפת ואפליקטור סרום — פתרון ביתי פשוט לשיער שמרגיש מלא יותר.</p>
         <div class="badges"><span class="badge">🏠 פתרון ביתי</span><span class="badge">🔬 מבוסס מחקר</span></div>
       </div>
-      <div><h4>קישורים</h4><ul><li><a href="#offer">הערכות</a></li><li><a href="#reviews">ביקורות</a></li><li><a href="/pages/contact">צור קשר</a></li></ul></div>
+      <div><h4>קישורים</h4><ul><li><a href="#offer">הערכות</a></li><li><a href="#reviews">ביקורות</a></li><li><a href="mailto:growagain18@gmail.com">צור קשר</a></li></ul></div>
       <div><h4>מדיניות</h4><ul><li><a href="/pages/terms">תקנון</a></li><li><a href="/pages/terms">מדיניות החזרות</a></li><li><a href="/pages/terms">מדיניות פרטיות</a></li></ul></div>
     </div>
     <div class="copy">© 2026 צומחים מחדש · כל הזכויות שמורות. המידע באתר אינו מהווה ייעוץ רפואי.</div>
   </footer>
+
+  <!-- אלמנט צף: התראת "נרכש עכשיו" -->
+  <div class="scm-toast" data-toast hidden>
+    <span class="ic">🛍️</span>
+    <div class="tx"><b data-tname></b> רכש/ה זה עתה<span class="prod" data-tprod></span><span class="ago" data-tago></span></div>
+  </div>
+
+  <!-- אלמנט צף: כפתור מייל + טופס יצירת קשר -->
+  <div class="scm-contact" data-contact>
+    <div class="scm-cform" hidden>
+      <h4>יש שאלה? נשמח לעזור</h4>
+      <p>כתבו לנו והצוות יחזור אליכם במייל.</p>
+      <input type="text" data-cname placeholder="שם" aria-label="שם">
+      <input type="email" data-cemail placeholder="מייל לחזרה" aria-label="מייל לחזרה">
+      <textarea data-cmsg rows="3" placeholder="הודעה" aria-label="הודעה"></textarea>
+      <button type="button" class="cta full" data-csend>שליחת הודעה ←</button>
+      <div class="cfoot">או כתבו ישירות ל־<a href="mailto:growagain18@gmail.com">growagain18@gmail.com</a></div>
+    </div>
+    <button type="button" class="scm-cbtn" data-ctoggle aria-label="צרו קשר">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span class="ctxt">צרו קשר</span>
+    </button>
+  </div>
 
   <script>
   (function(){
@@ -516,6 +567,49 @@
         e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'});
       });
     });
+
+    // התראת "נרכש עכשיו" — מחזורית (רכישות לדוגמה)
+    var toast = root.querySelector('[data-toast]');
+    if(toast){
+      var buys = [
+        ['מיכל מתל אביב','הערכה המלאה','לפני 4 דקות'],
+        ['יוסי מחיפה','מסרק + סרום','לפני 11 דקות'],
+        ['דנה מראשון לציון','הערכה המלאה','לפני 17 דקות'],
+        ['אבי מירושלים','מסרק אינפרא אדום','לפני 23 דקות'],
+        ['רונית מנתניה','מסרק + סרום','לפני 31 דקות'],
+        ['שיר מבאר שבע','הערכה המלאה','לפני 38 דקות']
+      ];
+      var nm=toast.querySelector('[data-tname]'), pr=toast.querySelector('[data-tprod]'), ag=toast.querySelector('[data-tago]'), bi=0;
+      function showToast(){
+        var b=buys[bi % buys.length]; bi++;
+        nm.textContent=b[0]; pr.textContent=b[1]; ag.textContent='✓ '+b[2];
+        toast.hidden=false; requestAnimationFrame(function(){ toast.classList.add('show'); });
+        setTimeout(function(){ toast.classList.remove('show'); setTimeout(function(){ toast.hidden=true; }, 400); }, 5200);
+      }
+      setTimeout(function(){ showToast(); setInterval(showToast, 11000); }, 3500);
+    }
+
+    // כפתור מייל צף + טופס
+    var contact = root.querySelector('[data-contact]');
+    if(contact){
+      var form = contact.querySelector('.scm-cform');
+      var toggle = contact.querySelector('[data-ctoggle]');
+      var txt = toggle.querySelector('.ctxt');
+      toggle.addEventListener('click', function(){
+        var open = form.hidden;
+        form.hidden = !open;
+        if(txt) txt.textContent = open ? 'סגירה' : 'צרו קשר';
+      });
+      var send = contact.querySelector('[data-csend]');
+      send.addEventListener('click', function(){
+        var name=(contact.querySelector('[data-cname]').value||'').trim();
+        var email=(contact.querySelector('[data-cemail]').value||'').trim();
+        var msg=(contact.querySelector('[data-cmsg]').value||'').trim();
+        var subj='פנייה מהאתר — צומחים מחדש'+(name?' · '+name:'');
+        var body='שם: '+name+'\nמייל לחזרה: '+email+'\n\n'+msg;
+        window.location.href='mailto:growagain18@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+      });
+    }
   })();
   </script>
 </div>
