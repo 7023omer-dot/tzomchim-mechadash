@@ -107,8 +107,12 @@
 
   /* וידאו */
   .scm-page .video-sec{background:var(--cream);text-align:center}
-  .scm-page .video-sec .box{max-width:380px;margin:18px auto 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(28,23,20,.18);background:#000}
+  .scm-page .video-sec .box{position:relative;max-width:440px;margin:18px auto 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(28,23,20,.18);background:#000}
   .scm-page .video-sec video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
+  .scm-page .video-sec .vid-cta{position:absolute;bottom:16px;inset-inline-start:16px;z-index:4;display:none;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:inherit;font-weight:800;font-size:16px;padding:12px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(214,57,43,.5);text-decoration:none;animation:scm-pulse 1.4s ease-in-out infinite}
+  .scm-page .video-sec .vid-cta.show{display:inline-flex}
+  .scm-page .video-sec .vid-cta span{font-size:18px;line-height:1}
+  @keyframes scm-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
   /* OFFER */
   .scm-page .offer{background:var(--dark2);color:var(--light)}
@@ -330,11 +334,12 @@
     <div class="wrap w980">
       <span class="eyebrow">המכשיר בפעולה</span>
       <h2>צפו בסרטון התדמית</h2>
-      <div class="box">
+      <div class="box" data-vbox>
         <video controls playsinline preload="metadata">
           <source src="{{ vsrc | asset_url }}" type="video/mp4">
           הדפדפן שלך אינו תומך בהצגת וידאו.
         </video>
+        <a class="vid-cta" href="#offer" data-vcta>לחצו כאן <span>←</span></a>
       </div>
     </div>
   </section>
@@ -573,6 +578,19 @@
         e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'});
       });
     });
+
+    // כפתור "לחצו כאן ←" שמופיע בסוף הסרטון ומפנה לכרטיסי הקנייה
+    var vbox = root.querySelector('[data-vbox]');
+    if(vbox){
+      var vid = vbox.querySelector('video'), vcta = vbox.querySelector('[data-vcta]');
+      if(vid && vcta){
+        vid.addEventListener('ended', function(){ vcta.classList.add('show'); });
+        vid.addEventListener('play',  function(){ vcta.classList.remove('show'); });
+        vid.addEventListener('timeupdate', function(){
+          if(vid.duration && (vid.duration - vid.currentTime) <= 2.5){ vcta.classList.add('show'); }
+        });
+      }
+    }
 
     // התראת "נרכש עכשיו" — מחזורית (רכישות לדוגמה)
     var toast = root.querySelector('[data-toast]');
