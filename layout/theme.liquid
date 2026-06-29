@@ -327,13 +327,14 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {%- comment -%} בעמוד הבית דף הנחיתה כולל ניווט+פוטר משלו — מסתירים את אלו של הת'מה {%- endcomment -%}
+    {%- unless request.page_type == 'index' -%}{% sections 'header-group' %}{%- endunless -%}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
     {% section 'promo-popup' %}
-    {% sections 'footer-group' %}
+    {%- unless request.page_type == 'index' -%}{% sections 'footer-group' %}{%- endunless -%}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
