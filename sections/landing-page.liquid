@@ -1,6 +1,6 @@
 {%- comment -%}
-  צומחים מחדש — דף נחיתה (עיצוב מאושר, RTL מלא)
-  פלטה קרם/אדום/כהה · פונטים Frank Ruhl Libre + Heebo · 14 סקשנים · אנימציות.
+  צומחים מחדש — דף נחיתה (סבב 5: פלטת אדום/לבן פרימיום, RTL מלא)
+  לבן/שמנת דומיננטי · אדום מעודן אחד כאקסנט · טקסט כמעט-שחור · פונט Heebo.
   הכל מתוחם תחת .scm-page כדי לא לדלוף לשאר הת'מה.
 {%- endcomment -%}
 
@@ -23,233 +23,242 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
   .scm-page{
-    --accent:#D6392B; --accent-light:#FF5A3C; --accent-card:#FF8B72;
-    --cream:#FAF5EE; --dark:#15110F; --dark2:#1C1714; --card-dark:#23201D; --footer:#0F0C0B;
-    --light:#F4ECE1; --g1:#C9BEB2; --g2:#A99D90; --g3:#8A7E72; --gl1:#6B5F57; --gl2:#3A332E;
-    --gold:#E8A33D; --green:#2E7D5B; --green2:#6BCB8E;
-    --serif:'Frank Ruhl Libre',Georgia,serif; --sans:'Heebo',system-ui,Arial,sans-serif;
-    direction:rtl; text-align:right; background:var(--cream); color:#1C1714;
-    font-family:var(--sans); line-height:1.55; overflow-x:hidden;
+    --red:#D11F2D; --red-dark:#B11825; --red-soft:#F7E6E7; --red-tint:#FCF1F1;
+    --canvas:#FAFAF8; --white:#FFFFFF; --panel:#F3F1EB; --panel2:#EEEBE3;
+    --ink:#1A1A1A; --ink2:#3A3A38; --muted:#6B6B66; --faint:#9A9A93;
+    --line:#E7E4DD; --line2:#DEDAD1;
+    --gold:#E0A93B; --green:#2E7D5B;
+    --sans:'Heebo',system-ui,Arial,sans-serif;
+    direction:rtl; text-align:right; background:var(--canvas); color:var(--ink);
+    font-family:var(--sans); line-height:1.6; overflow-x:hidden;
   }
   .scm-page *{box-sizing:border-box;margin:0;padding:0}
   .scm-page img{max-width:100%;display:block}
-  .scm-page h1,.scm-page h2,.scm-page h3,.scm-page .num,.scm-page .big-price{font-family:var(--serif);letter-spacing:-.4px}
+  .scm-page h1,.scm-page h2,.scm-page h3{font-family:var(--sans);font-weight:800;letter-spacing:-.3px;color:var(--ink)}
   .scm-page .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
   .scm-page .wrap.w1080{max-width:1080px}.scm-page .wrap.w980{max-width:980px}
   .scm-page .wrap.w920{max-width:920px}.scm-page .wrap.w820{max-width:820px}.scm-page .wrap.w720{max-width:720px}
-  .scm-page section{padding:clamp(56px,7vw,96px) 0}
-  .scm-page .eyebrow{display:inline-block;font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:14px}
-  .scm-page .on-dark .eyebrow,.scm-page .dark .eyebrow{color:var(--accent-light)}
-  .scm-page h2{font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.12;margin-bottom:14px}
+  .scm-page section{padding:clamp(58px,7vw,98px) 0}
+  .scm-page .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--red);margin-bottom:14px}
+  .scm-page h2{font-size:clamp(27px,4vw,44px);font-weight:800;line-height:1.14;margin-bottom:14px}
   .scm-page .sec-head{text-align:center;margin-bottom:clamp(30px,4vw,52px)}
-  .scm-page .sec-head p{color:var(--gl1);font-size:17px;max-width:640px;margin:0 auto}
-  .scm-page .dark .sec-head p,.scm-page .dark2 .sec-head p{color:var(--g1)}
+  .scm-page .sec-head p{color:var(--muted);font-size:17px;font-weight:400;max-width:640px;margin:0 auto}
 
   /* כפתורים */
-  .scm-page .cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;
-    font-family:var(--sans);font-weight:800;font-size:17px;padding:15px 30px;border:0;border-radius:999px;cursor:pointer;
-    text-decoration:none;box-shadow:0 14px 34px rgba(214,57,43,.4);transition:transform .15s ease,filter .2s ease}
-  .scm-page .cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
-  .scm-page .cta.sm{padding:11px 22px;font-size:15px;box-shadow:0 8px 20px rgba(214,57,43,.32)}
+  .scm-page .cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--red);color:#fff;
+    font-family:var(--sans);font-weight:700;font-size:16.5px;padding:14px 30px;border:0;border-radius:10px;cursor:pointer;
+    text-decoration:none;box-shadow:0 8px 22px rgba(209,31,45,.22);transition:transform .15s ease,background .2s ease,box-shadow .2s ease}
+  .scm-page .cta:hover{transform:translateY(-1px);background:var(--red-dark);box-shadow:0 10px 26px rgba(209,31,45,.28)}
+  .scm-page .cta.sm{padding:10px 20px;font-size:14.5px;box-shadow:0 6px 16px rgba(209,31,45,.18)}
   .scm-page .cta.full{width:100%}
-  .scm-page .cta.ghost{background:rgba(244,236,225,.1);border:1px solid rgba(244,236,225,.18);color:var(--light);box-shadow:none}
-  .scm-page .cta.ghost:hover{background:rgba(244,236,225,.18)}
+  .scm-page .cta.ghost{background:#fff;border:1.5px solid var(--red);color:var(--red);box-shadow:none}
+  .scm-page .cta.ghost:hover{background:var(--red-tint);color:var(--red-dark)}
 
   /* בס״ד — עדין, מימין למעלה */
-  .scm-page .scm-bsd{background:var(--cream);color:var(--g3);text-align:right;font-size:12px;font-weight:500;letter-spacing:1px;padding:5px clamp(18px,5vw,40px) 4px}
+  .scm-page .scm-bsd{background:var(--canvas);color:var(--faint);text-align:right;font-size:12px;font-weight:500;letter-spacing:1px;padding:5px clamp(18px,5vw,40px) 4px}
+
+  /* הודעת אזהרה בכניסה */
+  .scm-page .scm-warn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red-soft);color:#7A1119;border-bottom:1px solid #EFCCCF;padding:9px 18px;font-size:13.5px;font-weight:600;text-align:center}
+  .scm-page .scm-warn[hidden]{display:none}
+  .scm-page .scm-warn svg{width:18px;height:18px;flex:0 0 auto;color:var(--red)}
+  .scm-page .scm-warn .x{margin-inline-start:6px;background:none;border:0;color:#7A1119;cursor:pointer;font-size:19px;line-height:1;opacity:.65;padding:0 2px}
+  .scm-page .scm-warn .x:hover{opacity:1}
 
   /* מרקיזות */
   @keyframes scm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scm-glow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}
-  @keyframes scm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  .scm-page .marq{overflow:hidden;white-space:nowrap;background:var(--dark);color:var(--light);padding:11px 0;font-size:14.5px;font-weight:500}
+  @keyframes scm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .scm-page .marq{overflow:hidden;white-space:nowrap;background:var(--panel);color:var(--ink2);border-block:1px solid var(--line);padding:10px 0;font-size:14px;font-weight:600}
   .scm-page .marq .track{display:inline-flex;align-items:center;animation:scm-marquee 30s linear infinite}
   .scm-page .marq .track span{display:inline-flex;align-items:center;gap:46px;padding-inline-start:46px}
-  .scm-page .marq .dia{color:var(--accent)}
-  .scm-page .marq.promo{background:var(--accent);color:#fff;font-weight:700}
+  .scm-page .marq .dia{color:var(--red)}
+  .scm-page .marq.promo{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}
   .scm-page .marq.promo .track{animation-duration:24s}
-  .scm-page .marq.promo .dia{color:#fff}
+  .scm-page .marq.promo .dia{color:rgba(255,255,255,.8)}
 
   /* ניווט */
-  .scm-page .nav{position:sticky;top:0;z-index:60;background:rgba(250,245,238,.88);backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(28,23,20,.07)}
-  .scm-page .nav .in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
-  .scm-page .logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#1C1714}
-  .scm-page .logo .dot{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;font-size:17px}
-  .scm-page .logo b{font-family:var(--serif);font-weight:700;font-size:23px}
-  .scm-page .nav-links{display:flex;gap:26px}
-  .scm-page .nav-links a{color:#3A332E;text-decoration:none;font-size:15.5px;font-weight:500}
-  .scm-page .nav-links a:hover{color:var(--accent)}
+  .scm-page .nav{position:sticky;top:0;z-index:60;background:rgba(250,250,248,.9);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .scm-page .nav .in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:66px}
+  .scm-page .brand-group{display:inline-flex;align-items:center;gap:14px}
+  .scm-page .logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .scm-page .logo .dot{width:30px;height:30px;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
+  .scm-page .logo b{font-weight:800;font-size:21px;letter-spacing:-.4px}
+  .scm-page .nav-links{display:flex;gap:24px}
+  .scm-page .nav-links a{color:var(--ink2);text-decoration:none;font-size:15px;font-weight:600;cursor:pointer}
+  .scm-page .nav-links a:hover{color:var(--red)}
 
   /* HERO */
-  .scm-page .hero{position:relative;background:var(--dark);color:var(--light);overflow:hidden}
-  .scm-page .hero .glow{position:absolute;border-radius:50%;filter:blur(70px);z-index:0;pointer-events:none}
-  .scm-page .hero .glow.a{width:420px;height:420px;background:rgba(214,57,43,.34);top:-90px;inset-inline-start:-80px;animation:scm-glow 6s ease-in-out infinite}
-  .scm-page .hero .glow.b{width:360px;height:360px;background:rgba(255,90,60,.22);bottom:-100px;inset-inline-end:-60px}
+  .scm-page .hero{position:relative;background:linear-gradient(180deg,#fff,var(--canvas));color:var(--ink);overflow:hidden}
+  .scm-page .hero .glow{position:absolute;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none}
+  .scm-page .hero .glow.a{width:380px;height:380px;background:rgba(209,31,45,.1);top:-90px;inset-inline-start:-70px;animation:scm-glow 7s ease-in-out infinite}
+  .scm-page .hero .glow.b{width:320px;height:320px;background:rgba(209,31,45,.07);bottom:-90px;inset-inline-end:-50px}
   .scm-page .hero .in{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
-  .scm-page .hero .pill{display:inline-flex;align-items:center;gap:9px;background:rgba(244,236,225,.08);border:1px solid rgba(244,236,225,.16);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600;color:var(--light);margin-bottom:22px}
-  .scm-page .hero .pill .gd{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:scm-glow 2s ease-in-out infinite}
-  .scm-page .hero h1{font-size:clamp(38px,5.6vw,68px);font-weight:900;line-height:1.06;margin-bottom:20px}
-  .scm-page .hero h1 em{display:block;color:var(--accent-light);font-style:italic}
-  .scm-page .hero .lead{color:var(--g1);font-size:clamp(16px,2vw,20px);margin-bottom:26px;max-width:560px}
-  .scm-page .hero .checks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
-  .scm-page .hero .checks li{list-style:none;display:flex;align-items:center;gap:10px;font-size:15.5px;color:var(--light)}
-  .scm-page .hero .checks .ck{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  .scm-page .hero .pill{display:inline-flex;align-items:center;gap:9px;background:var(--white);border:1px solid var(--line2);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:22px;box-shadow:0 4px 14px rgba(26,26,26,.04)}
+  .scm-page .hero .pill .gd{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 9px rgba(209,31,45,.7);animation:scm-glow 2s ease-in-out infinite}
+  .scm-page .hero h1{font-size:clamp(31px,4.7vw,54px);font-weight:800;line-height:1.12;margin-bottom:20px;color:var(--ink)}
+  .scm-page .hero h1 em{display:block;color:var(--red);font-style:normal}
+  .scm-page .hero .lead{color:var(--muted);font-size:clamp(16px,2vw,19px);font-weight:400;margin-bottom:26px;max-width:560px}
+  .scm-page .hero .checks{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:30px}
+  .scm-page .hero .checks li{list-style:none;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:var(--ink)}
+  .scm-page .hero .checks .ck{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
   .scm-page .hero .cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .scm-page .hero .rating{font-size:14px;color:var(--g1)}.scm-page .hero .rating .st{color:var(--gold)}
+  .scm-page .hero .rating{font-size:14px;color:var(--muted)}.scm-page .hero .rating .st{color:var(--gold)}
   .scm-page .hero .media{position:relative}
-  .scm-page .hero .media .halo{position:absolute;inset:6% 8%;background:radial-gradient(circle,rgba(214,57,43,.4),transparent 70%);filter:blur(46px);z-index:0}
-  .scm-page .hero .media img{position:relative;z-index:1;width:100%;border-radius:22px;box-shadow:0 40px 80px rgba(0,0,0,.5);animation:scm-float 6s ease-in-out infinite}
+  .scm-page .hero .media .halo{position:absolute;inset:8% 10%;background:radial-gradient(circle,rgba(209,31,45,.16),transparent 70%);filter:blur(40px);z-index:0}
+  .scm-page .hero .media img{position:relative;z-index:1;width:100%;border-radius:16px;box-shadow:0 30px 60px rgba(26,26,26,.16);animation:scm-float 6s ease-in-out infinite}
 
-  /* וידאו */
-  .scm-page .video-sec{background:var(--cream);text-align:center}
-  .scm-page .video-sec .box{position:relative;max-width:440px;margin:18px auto 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(28,23,20,.18);background:#000}
+  /* וידאו + טקסט רגשי */
+  .scm-page .video-sec{background:var(--white)}
+  .scm-page .video-sec .vrow{display:grid;grid-template-columns:1fr 420px;gap:clamp(28px,4vw,56px);align-items:center;margin-top:8px}
+  .scm-page .video-sec .vtext p{color:var(--ink2);font-size:16.5px;line-height:1.85;margin-bottom:15px}
+  .scm-page .video-sec .vtext p:first-child{font-size:19px;font-weight:700;color:var(--ink)}
+  .scm-page .video-sec .vtext p:last-child{margin-bottom:0;color:var(--red);font-weight:700}
+  .scm-page .video-sec .box{position:relative;width:100%;max-width:420px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(26,26,26,.18);background:#000}
   .scm-page .video-sec video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
-  .scm-page .video-sec .vid-cta{position:absolute;bottom:16px;inset-inline-start:16px;z-index:4;display:none;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:inherit;font-weight:800;font-size:16px;padding:12px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(214,57,43,.5);text-decoration:none;animation:scm-pulse 1.4s ease-in-out infinite}
+  .scm-page .video-sec .vid-cta{position:absolute;bottom:16px;inset-inline-start:16px;z-index:4;display:none;align-items:center;gap:8px;background:var(--red);color:#fff;font-family:inherit;font-weight:800;font-size:16px;padding:11px 19px;border-radius:999px;box-shadow:0 8px 22px rgba(209,31,45,.5);text-decoration:none;animation:scm-pulse 1.4s ease-in-out infinite}
   .scm-page .video-sec .vid-cta.show{display:inline-flex}
   .scm-page .video-sec .vid-cta span{font-size:18px;line-height:1}
   @keyframes scm-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
-  /* OFFER */
-  .scm-page .offer{background:var(--dark2);color:var(--light)}
-  .scm-page .offer .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;margin-top:8px}
-  .scm-page .ocard{position:relative;display:flex;flex-direction:column;background:var(--card-dark);border:1px solid rgba(244,236,225,.08);border-radius:20px;padding:28px}
-  .scm-page .ocard.best{background:linear-gradient(180deg,#2A1512,#1C1714);border:1.5px solid var(--accent);box-shadow:0 28px 62px rgba(214,57,43,.4);transform:scale(1.05);z-index:2}
-  .scm-page .ocard .tag{align-self:flex-start;font-size:12.5px;font-weight:800;letter-spacing:.5px;color:var(--accent-light);margin-bottom:12px}
-  .scm-page .ocard.best .hot{position:absolute;top:-13px;inset-inline-start:50%;transform:translateX(50%);background:var(--accent);color:#fff;font-size:12.5px;font-weight:800;padding:6px 16px;border-radius:999px;white-space:nowrap}
-  .scm-page .ocard .imgs{display:flex;align-items:center;justify-content:center;gap:8px;height:96px;margin-bottom:14px}
-  .scm-page .ocard .imgs img{max-height:96px;width:auto;object-fit:contain}
-  .scm-page .ocard .imgs .plus{color:var(--accent-light);font-weight:900;font-size:18px}
-  .scm-page .ocard h3{font-size:21px;font-weight:700;margin-bottom:6px}
-  .scm-page .ocard .desc{color:var(--g1);font-size:14px;min-height:42px;margin-bottom:14px}
-  .scm-page .ocard .prow{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-  .scm-page .ocard .now{font-family:var(--serif);font-size:30px;font-weight:800}
-  .scm-page .ocard .was{font-size:15px;color:var(--g3);text-decoration:line-through}
-  .scm-page .ocard .save{color:var(--accent-light);font-size:13.5px;font-weight:700;margin-bottom:18px}
-  .scm-page .ocard form{margin:0;margin-top:auto}
-  .scm-page .ocard .cta{margin-top:auto}
-  .scm-page .offer .pay{text-align:center;color:var(--g2);font-size:13.5px;margin-top:26px}
-
-  /* PROBLEM */
-  .scm-page .problem{background:var(--cream)}
-  .scm-page .problem .rows{display:grid;gap:14px;margin-top:8px}
-  .scm-page .problem .row{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid rgba(28,23,20,.07);border-radius:16px;padding:18px 20px;box-shadow:0 8px 24px rgba(28,23,20,.05)}
-  .scm-page .problem .row .emo{width:28px;height:28px;flex:0 0 auto;color:var(--accent)}
-  .scm-page .problem .row .emo svg{width:100%;height:100%;display:block}
-  .scm-page .problem .row p{color:var(--gl2);font-size:16px}
-
-  /* SOLUTION */
-  .scm-page .solution{position:relative;background:var(--dark);color:var(--light);overflow:hidden}
-  .scm-page .solution .glow{position:absolute;width:480px;height:480px;border-radius:50%;background:rgba(214,57,43,.2);filter:blur(80px);top:-120px;inset-inline-end:-100px;z-index:0}
-  .scm-page .solution .in{position:relative;z-index:2}
-  .scm-page .solution .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
-  .scm-page .solution .card{background:rgba(244,236,225,.05);border:1px solid rgba(244,236,225,.12);border-radius:18px;padding:26px}
-  .scm-page .solution .card .ic{width:34px;height:34px;margin-bottom:14px;color:var(--accent-light)}
-  .scm-page .solution .card .ic svg{width:100%;height:100%;display:block}
-  .scm-page .solution .card h3{font-size:20px;font-weight:700;margin-bottom:8px}
-  .scm-page .solution .card p{color:var(--g1);font-size:15px}
-  .scm-page .solution .legal{color:var(--g3);font-size:13px;text-align:center;margin-top:26px;max-width:760px;margin-inline:auto}
-
-  /* HOW */
-  .scm-page .how{background:var(--cream);text-align:center}
-  .scm-page .how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
-  .scm-page .how .step .num{width:62px;height:62px;border-radius:50%;background:var(--accent);color:#fff;font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 12px 28px rgba(214,57,43,.34)}
-  .scm-page .how .step h3{font-size:19px;font-weight:700;margin-bottom:6px}
-  .scm-page .how .step p{color:var(--gl1);font-size:15px}
-
   /* BEFORE/AFTER */
-  .scm-page .ba{background:var(--dark2);color:var(--light)}
+  .scm-page .ba{background:var(--canvas)}
   .scm-page .ba .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
-  .scm-page .ba .card{background:var(--card-dark);border-radius:18px;overflow:hidden;border:1px solid rgba(244,236,225,.08)}
+  .scm-page .ba .card{background:var(--white);border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 24px rgba(26,26,26,.05)}
   .scm-page .ba .pair{display:grid;grid-template-columns:1fr 1fr}
   .scm-page .ba .cell{position:relative}
   .scm-page .ba .cell img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
-  .scm-page .ba .cell.b{border-inline-end:2px solid var(--card-dark)}
+  .scm-page .ba .cell.b{border-inline-end:2px solid var(--white)}
   .scm-page .ba .lbl{position:absolute;top:10px;font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;z-index:2}
-  .scm-page .ba .lbl.before{inset-inline-start:10px;background:rgba(0,0,0,.6);color:#fff}
-  .scm-page .ba .lbl.after{inset-inline-end:10px;background:var(--accent);color:#fff}
-  .scm-page .ba .cap{padding:12px 16px;text-align:center;font-weight:600;font-size:14.5px}
-  .scm-page .ba .legal{color:var(--g3);font-size:13px;text-align:center;margin-top:20px}
+  .scm-page .ba .lbl.before{inset-inline-start:10px;background:rgba(26,26,26,.62);color:#fff}
+  .scm-page .ba .lbl.after{inset-inline-end:10px;background:var(--red);color:#fff}
+  .scm-page .ba .cap{padding:13px 16px;text-align:center;font-weight:600;font-size:14.5px;color:var(--ink)}
+  .scm-page .ba .legal{color:var(--faint);font-size:13px;text-align:center;margin-top:20px}
+
+  /* OFFER */
+  .scm-page .offer{background:var(--panel)}
+  .scm-page .terms-gate{display:flex;justify-content:center;margin:0 0 22px}
+  .scm-page .tcheck{display:inline-flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink2);cursor:pointer;max-width:540px;line-height:1.5}
+  .scm-page .tcheck input{margin-top:2px;width:17px;height:17px;accent-color:var(--red);flex:0 0 auto;cursor:pointer}
+  .scm-page .tcheck a{color:var(--red);font-weight:700;text-decoration:underline}
+  .scm-page .terms-gate.warn .tcheck{color:var(--red);font-weight:600}
+  @keyframes scm-shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+  .scm-page .terms-gate.warn{animation:scm-shake .42s}
+  .scm-page .offer .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;align-items:stretch;margin-top:8px}
+  .scm-page .ocard{position:relative;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:0 8px 24px rgba(26,26,26,.05)}
+  .scm-page .ocard.best{border:1.5px solid var(--red);box-shadow:0 20px 46px rgba(209,31,45,.16);transform:scale(1.05);z-index:2}
+  .scm-page .ocard .tag{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--red);margin-bottom:12px}
+  .scm-page .ocard.best .hot{position:absolute;top:-13px;inset-inline-start:50%;transform:translateX(50%);background:var(--red);color:#fff;font-size:12px;font-weight:800;padding:6px 16px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(209,31,45,.3)}
+  .scm-page .ocard .imgs{display:flex;align-items:center;justify-content:center;gap:8px;height:96px;margin-bottom:14px}
+  .scm-page .ocard .imgs img{max-height:96px;width:auto;object-fit:contain}
+  .scm-page .ocard .imgs .plus{color:var(--red);font-weight:900;font-size:18px}
+  .scm-page .ocard h3{font-size:20px;font-weight:800;margin-bottom:6px;color:var(--ink)}
+  .scm-page .ocard .desc{color:var(--muted);font-size:14px;min-height:42px;margin-bottom:14px}
+  .scm-page .ocard .prow{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .scm-page .ocard .now{font-size:29px;font-weight:800;color:var(--red)}
+  .scm-page .ocard .was{font-size:15px;color:var(--faint);text-decoration:line-through}
+  .scm-page .ocard .save{color:var(--green);font-size:13.5px;font-weight:700;margin-bottom:18px}
+  .scm-page .ocard form{margin:0;margin-top:auto}
+  .scm-page .ocard .cta{margin-top:auto}
+  .scm-page .offer .pay{text-align:center;color:var(--muted);font-size:13.5px;margin-top:26px}
+
+  /* HOW */
+  .scm-page .how{background:var(--white);text-align:center}
+  .scm-page .how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  .scm-page .how .step .num{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 10px 24px rgba(209,31,45,.26)}
+  .scm-page .how .step h3{font-size:19px;font-weight:800;margin-bottom:6px}
+  .scm-page .how .step p{color:var(--muted);font-size:15px}
 
   /* REVIEWS */
-  .scm-page .reviews{background:var(--cream);text-align:center}
+  .scm-page .reviews{background:var(--canvas);text-align:center}
   .scm-page .reviews .top{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px}
-  .scm-page .reviews .top .n{font-family:var(--serif);font-size:54px;font-weight:900;color:#1C1714}
+  .scm-page .reviews .top .n{font-size:52px;font-weight:900;color:var(--ink)}
   .scm-page .reviews .top .st{color:var(--gold);font-size:24px;letter-spacing:2px}
-  .scm-page .reviews .sub{color:var(--gl1);margin-bottom:30px}
+  .scm-page .reviews .sub{color:var(--muted);margin-bottom:30px}
   .scm-page .reviews .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:right}
-  .scm-page .rcard{background:#fff;border:1px solid rgba(28,23,20,.07);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(28,23,20,.05)}
+  .scm-page .rcard{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 8px 24px rgba(26,26,26,.05)}
   .scm-page .rcard .who{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-  .scm-page .rcard .av{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .scm-page .rcard .av{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
   .scm-page .rcard .name{font-weight:700}.scm-page .rcard .st{color:var(--gold);font-size:14px}
-  .scm-page .rcard p{color:var(--gl2);font-size:15px;margin-bottom:10px}
+  .scm-page .rcard p{color:var(--ink2);font-size:15px;margin-bottom:10px}
   .scm-page .rcard .vf{color:var(--green);font-size:12.5px;font-weight:700}
 
+  /* FAQ */
+  .scm-page .faq{background:var(--white)}
+  .scm-page .faq .list{max-width:820px;margin:8px auto 0;display:grid;gap:10px}
+  .scm-page .faq details{background:var(--canvas);border:1px solid var(--line);border-radius:12px;padding:0 18px}
+  .scm-page .faq details[open]{border-color:var(--line2);box-shadow:0 6px 18px rgba(26,26,26,.05)}
+  .scm-page .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;font-weight:700;font-size:16px;color:var(--ink)}
+  .scm-page .faq summary::-webkit-details-marker{display:none}
+  .scm-page .faq summary .ic{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;transition:transform .2s ease}
+  .scm-page .faq details[open] summary .ic{transform:rotate(45deg)}
+  .scm-page .faq details p{color:var(--muted);font-size:15px;line-height:1.75;padding:0 0 18px}
+
   /* COMPARISON */
-  .scm-page .compare{background:var(--dark);color:var(--light)}
+  .scm-page .compare{background:var(--canvas)}
   .scm-page .compare .scroll{overflow-x:auto;margin-top:8px}
-  .scm-page .compare table{width:100%;border-collapse:collapse;min-width:560px}
-  .scm-page .compare th,.scm-page .compare td{padding:15px 14px;text-align:center;border-bottom:1px solid rgba(244,236,225,.1);font-size:15px}
-  .scm-page .compare thead th{font-weight:800}
-  .scm-page .compare thead th.us{color:var(--accent-light)}
-  .scm-page .compare td:first-child,.scm-page .compare th:first-child{text-align:right;color:var(--g1)}
-  .scm-page .compare td.us{color:var(--green2);font-weight:700}
-  .scm-page .compare td.other{color:var(--g3)}
+  .scm-page .compare table{width:100%;border-collapse:collapse;min-width:560px;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .scm-page .compare th,.scm-page .compare td{padding:15px 14px;text-align:center;border-bottom:1px solid var(--line);font-size:15px}
+  .scm-page .compare thead th{font-weight:800;color:var(--ink);background:var(--panel)}
+  .scm-page .compare thead th.us{color:var(--red)}
+  .scm-page .compare td:first-child,.scm-page .compare th:first-child{text-align:right;color:var(--muted);font-weight:600}
+  .scm-page .compare td.us{color:var(--green);font-weight:700}
+  .scm-page .compare td.other{color:var(--faint)}
 
   /* FINAL */
-  .scm-page .final{position:relative;background:var(--dark);color:var(--light);text-align:center;overflow:hidden;padding:clamp(64px,8vw,110px) 0}
-  .scm-page .final .glow{position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(214,57,43,.22);filter:blur(90px);top:50%;inset-inline-start:50%;transform:translate(50%,-50%);z-index:0}
+  .scm-page .final{position:relative;background:var(--red-tint);text-align:center;overflow:hidden;padding:clamp(64px,8vw,108px) 0}
+  .scm-page .final .glow{position:absolute;width:460px;height:460px;border-radius:50%;background:rgba(209,31,45,.08);filter:blur(90px);top:50%;inset-inline-start:50%;transform:translate(50%,-50%);z-index:0}
   .scm-page .final .in{position:relative;z-index:2}
   .scm-page .final h2{margin-bottom:14px}
-  .scm-page .final .lead{color:var(--g1);margin-bottom:20px}
+  .scm-page .final .lead{color:var(--muted);margin-bottom:20px}
   .scm-page .final .prow{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:24px}
-  .scm-page .final .now{font-family:var(--serif);font-size:46px;font-weight:900}
-  .scm-page .final .was{font-size:20px;color:var(--g3);text-decoration:line-through}
-  .scm-page .final .trust{margin-top:20px;color:var(--g1);font-size:14px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+  .scm-page .final .now{font-size:44px;font-weight:900;color:var(--red)}
+  .scm-page .final .was{font-size:20px;color:var(--faint);text-decoration:line-through}
+  .scm-page .final .trust{margin-top:20px;color:var(--muted);font-size:14px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
 
   /* FOOTER */
-  .scm-page .ft{background:var(--footer);color:var(--g2)}
+  .scm-page .ft{background:var(--panel);color:var(--muted);border-top:1px solid var(--line)}
   .scm-page .ft .in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding:clamp(40px,5vw,64px) 0 0}
-  .scm-page .ft .logo b{color:var(--light)}
+  .scm-page .ft .logo b{color:var(--ink)}
   .scm-page .ft .brand p{margin:14px 0;font-size:14.5px;max-width:380px;line-height:1.7}
   .scm-page .ft .badges{display:flex;gap:10px;flex-wrap:wrap}
-  .scm-page .ft .badge{background:rgba(244,236,225,.06);border:1px solid rgba(244,236,225,.12);border-radius:999px;padding:6px 14px;font-size:13px}
-  .scm-page .ft h4{color:var(--light);font-size:15px;font-weight:700;margin-bottom:14px;font-family:var(--sans)}
+  .scm-page .ft .badge{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--ink2)}
+  .scm-page .ft h4{color:var(--ink);font-size:15px;font-weight:700;margin-bottom:14px}
   .scm-page .ft ul{list-style:none;display:grid;gap:9px}
-  .scm-page .ft a{color:var(--g2);text-decoration:none;font-size:14.5px}
-  .scm-page .ft a:hover{color:var(--light)}
-  .scm-page .ft .copy{border-top:1px solid rgba(244,236,225,.08);margin-top:32px;padding:20px 0;text-align:center;font-size:13px;color:var(--g3)}
+  .scm-page .ft a{color:var(--muted);text-decoration:none;font-size:14.5px}
+  .scm-page .ft a:hover{color:var(--red)}
+  .scm-page .ft .copy{border-top:1px solid var(--line);margin-top:32px;padding:20px 0;text-align:center;font-size:13px;color:var(--faint)}
 
   /* שורת דחיפות */
-  .scm-page .urg{display:inline-flex;align-items:center;gap:8px;background:rgba(214,57,43,.14);border:1px solid rgba(214,57,43,.32);color:var(--accent-card);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;margin-top:8px}
-  .scm-page .urg .gd{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:scm-glow 2s ease-in-out infinite}
+  .scm-page .urg{display:inline-flex;align-items:center;gap:8px;background:var(--red-soft);border:1px solid #EFCCCF;color:var(--red-dark);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;margin-top:8px}
+  .scm-page .urg .gd{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 9px rgba(209,31,45,.7);animation:scm-glow 2s ease-in-out infinite}
 
   /* התראת נרכש עכשיו (צף) */
-  .scm-page .scm-toast{position:fixed;bottom:24px;inset-inline-end:24px;z-index:85;width:300px;max-width:calc(100vw - 32px);display:flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(28,23,20,.08);border-radius:14px;padding:14px;box-shadow:0 18px 44px rgba(28,23,20,.22);font-size:14px;color:#1C1714;opacity:0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease}
+  .scm-page .scm-toast{position:fixed;bottom:24px;inset-inline-end:24px;z-index:85;width:300px;max-width:calc(100vw - 32px);display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 18px 44px rgba(26,26,26,.18);font-size:14px;color:var(--ink);opacity:0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease}
   .scm-page .scm-toast.show{opacity:1;transform:none}
   .scm-page .scm-toast[hidden]{display:none}
-  .scm-page .scm-toast .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;background:#FDE7E4;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .scm-page .scm-toast .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;font-size:20px}
   .scm-page .scm-toast .tx{line-height:1.45}
   .scm-page .scm-toast .tx b{font-weight:800}
-  .scm-page .scm-toast .prod{display:block;color:var(--gl1);font-size:13px}
+  .scm-page .scm-toast .prod{display:block;color:var(--muted);font-size:13px}
   .scm-page .scm-toast .ago{display:block;color:var(--green);font-size:12.5px;font-weight:700}
 
   /* כפתור מייל צף + טופס */
   .scm-page .scm-contact{position:fixed;bottom:24px;inset-inline-start:24px;z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-  .scm-page .scm-cbtn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:13px 20px;font-family:var(--sans);font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 14px 34px rgba(214,57,43,.4)}
+  .scm-page .scm-cbtn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;border:0;border-radius:999px;padding:12px 19px;font-family:var(--sans);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 10px 26px rgba(209,31,45,.3)}
   .scm-page .scm-cbtn svg{width:19px;height:19px}
-  .scm-page .scm-cform{width:330px;max-width:calc(100vw - 32px);background:#fff;border:1px solid rgba(28,23,20,.08);border-radius:16px;padding:20px;box-shadow:0 22px 54px rgba(28,23,20,.26)}
+  .scm-page .scm-cform{width:330px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 22px 54px rgba(26,26,26,.2)}
   .scm-page .scm-cform[hidden]{display:none}
-  .scm-page .scm-cform h4{font-family:var(--serif);font-weight:700;font-size:19px;color:#1C1714;margin-bottom:4px}
-  .scm-page .scm-cform p{color:var(--gl1);font-size:14px;margin-bottom:14px}
-  .scm-page .scm-cform input,.scm-page .scm-cform textarea{width:100%;border:1px solid rgba(28,23,20,.14);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:15px;margin-bottom:10px;background:#fff;color:#1C1714}
+  .scm-page .scm-cform h4{font-weight:800;font-size:18px;color:var(--ink);margin-bottom:4px}
+  .scm-page .scm-cform p{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .scm-page .scm-cform input,.scm-page .scm-cform textarea{width:100%;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:15px;margin-bottom:10px;background:#fff;color:var(--ink)}
   .scm-page .scm-cform textarea{resize:vertical}
-  .scm-page .scm-cform .cfoot{margin-top:8px;font-size:13px;color:var(--gl1);text-align:center}
-  .scm-page .scm-cform .cfoot a{color:var(--accent);text-decoration:none;font-weight:700}
+  .scm-page .scm-cform .cfoot{margin-top:8px;font-size:13px;color:var(--muted);text-align:center}
+  .scm-page .scm-cform .cfoot a{color:var(--red);text-decoration:none;font-weight:700}
 
   /* חשיפה בגלילה (scroll-reveal) */
   .scm-page .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
@@ -257,11 +266,15 @@
   @media(prefers-reduced-motion:reduce){.scm-page .reveal{opacity:1!important;transform:none!important;transition:none}}
 
   /* רספונסיב */
+  @media(max-width:860px){
+    .scm-page .video-sec .vrow{grid-template-columns:1fr;gap:26px}
+    .scm-page .video-sec .vtext{order:-1;text-align:center}
+  }
   @media(max-width:768px){
     .scm-page .nav-links{display:none}
     .scm-page .hero .in{grid-template-columns:1fr;gap:32px}
     .scm-page .hero .media{order:-1}
-    .scm-page .offer .grid,.scm-page .solution .cards,.scm-page .how .steps,.scm-page .ba .grid,.scm-page .reviews .grid{grid-template-columns:1fr}
+    .scm-page .offer .grid,.scm-page .how .steps,.scm-page .ba .grid,.scm-page .reviews .grid{grid-template-columns:1fr}
     .scm-page .ft .in{grid-template-columns:1fr}
     .scm-page .ocard.best{transform:none}
     .scm-page .ocard.best .hot{inset-inline-start:auto;inset-inline-end:16px;transform:none}
@@ -279,10 +292,24 @@
       {"@type":"Product",
         "name":"{% if main_p != blank %}{{ main_p.title | escape }}{% else %}מסרק אינפרא אדום לצמיחת שיער — צומחים מחדש{% endif %}",
         "image":"https:{{ hero_img }}",
-        "description":"מכשיר 3-ב-1 לקרקפת: אור אדום בעוצמה נמוכה (LLLT), עיסוי קרקפת ואפליקטור סרום. 10 דקות ביום מהבית, לעידוד צמיחת שיער ובריאות הקרקפת.",
+        "description":"מכשיר 3-ב-1 לקרקפת: אור אדום בעוצמה נמוכה (LLLT), עיסוי קרקפת ואפליקטור סרום. 5 דקות ביום מהבית, לעידוד צמיחת שיער ובריאות הקרקפת.",
         "brand":{"@type":"Brand","name":"צומחים מחדש"},
         "offers":{"@type":"Offer","price":"{% if main_p != blank %}{{ main_p.price | money_without_currency | replace: ',', '' }}{% else %}148{% endif %}","priceCurrency":"ILS","availability":"https://schema.org/InStock","url":"{{ shop.url }}"}
-      }
+      },
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"איך משתמשים במסרק?","acceptedAnswer":{"@type":"Answer","text":"יש להשתמש במסרק על קרקפת נקייה במשך כ-5 דקות ביום, בהתאם להוראות השימוש המצורפות."}},
+        {"@type":"Question","name":"תוך כמה זמן אפשר לראות שינוי?","acceptedAnswer":{"@type":"Answer","text":"התוצאות משתנות מאדם לאדם. שימוש עקבי לאורך זמן הוא המפתח לשגרת טיפוח יעילה."}},
+        {"@type":"Question","name":"האם השימוש כואב?","acceptedAnswer":{"@type":"Answer","text":"לא. המסרק מיועד לשימוש נוח ועדין על הקרקפת."}},
+        {"@type":"Question","name":"למי המסרק מתאים?","acceptedAnswer":{"@type":"Answer","text":"המסרק מתאים לנשים ולגברים המעוניינים לשלב שגרת טיפוח לקרקפת ולשיער."}},
+        {"@type":"Question","name":"האם אפשר להשתמש במסרק כל יום?","acceptedAnswer":{"@type":"Answer","text":"כן. המסרק מיועד לשימוש יומיומי בהתאם להוראות השימוש."}},
+        {"@type":"Question","name":"כמה זמן נמשך כל טיפול?","acceptedAnswer":{"@type":"Answer","text":"כ-5 דקות בלבד בכל שימוש."}},
+        {"@type":"Question","name":"האם צריך כבלים בזמן השימוש?","acceptedAnswer":{"@type":"Answer","text":"לא. המסרק נטען מראש וניתן להשתמש בו באופן אלחוטי לאחר הטעינה."}},
+        {"@type":"Question","name":"איך מטעינים את המסרק?","acceptedAnswer":{"@type":"Answer","text":"באמצעות כבל הטעינה המצורף לערכה."}},
+        {"@type":"Question","name":"האם המשלוח מגיע לכל הארץ?","acceptedAnswer":{"@type":"Answer","text":"כן, אנו מספקים משלוחים לכל רחבי הארץ."}},
+        {"@type":"Question","name":"כמה זמן לוקח למשלוח להגיע?","acceptedAnswer":{"@type":"Answer","text":"זמן האספקה משתנה בהתאם לכתובת היעד, ובדרך כלל נע בין 14 ל-30 ימי עסקים. תקבלו מספר מעקב ברגע שההזמנה יוצאת."}},
+        {"@type":"Question","name":"איך אפשר ליצור קשר עם שירות הלקוחות?","acceptedAnswer":{"@type":"Answer","text":"ניתן לפנות אלינו דרך עמוד צור קשר או במייל ונשמח לעזור."}},
+        {"@type":"Question","name":"האם יש אחריות על המוצר?","acceptedAnswer":{"@type":"Answer","text":"כן. האחריות ותנאיה מפורטים בעמוד מדיניות האחריות באתר."}}
+      ]}
     ]
   }
   </script>
@@ -290,39 +317,48 @@
   <!-- בס״ד -->
   <div class="scm-bsd">בס״ד</div>
 
+  <!-- הודעת אזהרה בכניסה -->
+  <div class="scm-warn" data-warn>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>שימו לב: המכשיר אינו מיועד למי שאיבד/ה את שיערו לחלוטין.</span>
+    <button type="button" class="x" data-warn-x aria-label="סגירה">×</button>
+  </div>
+
   <!-- 1. מרקיזת הכרזות -->
   <div class="marq" role="region" aria-label="הטבות">
     <div class="track">
-      <span>🚚 משלוח חינם לכל הארץ<i class="dia">◆</i>🔒 תשלום מאובטח<i class="dia">◆</i>⭐ 1,300+ לקוחות מרוצים<i class="dia">◆</i></span>
-      <span>🚚 משלוח חינם לכל הארץ<i class="dia">◆</i>🔒 תשלום מאובטח<i class="dia">◆</i>⭐ 1,300+ לקוחות מרוצים<i class="dia">◆</i></span>
+      <span>משלוח חינם לכל הארץ<i class="dia">◆</i>תשלום מאובטח<i class="dia">◆</i>1,300+ לקוחות מרוצים<i class="dia">◆</i></span>
+      <span>משלוח חינם לכל הארץ<i class="dia">◆</i>תשלום מאובטח<i class="dia">◆</i>1,300+ לקוחות מרוצים<i class="dia">◆</i></span>
     </div>
   </div>
 
   <!-- 2. ניווט -->
   <nav class="nav">
     <div class="wrap in">
-      <a href="#" class="logo"><span class="dot">צ</span><b>צומחים מחדש</b></a>
       <div class="nav-links">
-        <a href="#offer">הערכות</a>
+        <a href="/pages/terms">תקנון</a>
         <a href="#how">איך זה עובד</a>
-        <a href="#reviews">ביקורות</a>
+        <a href="#" data-open-contact>דברו איתנו</a>
       </div>
-      <a href="#offer" class="cta sm">לרכישה</a>
+      <div class="brand-group">
+        <a href="#" class="logo"><span class="dot">צ</span><b>צומחים מחדש</b></a>
+        <a href="#offer" class="cta sm">לרכישה</a>
+      </div>
     </div>
   </nav>
 
   <!-- 3. HERO -->
-  <header class="hero on-dark">
+  <header class="hero">
     <span class="glow a"></span><span class="glow b"></span>
     <div class="wrap in">
       <div class="copy">
         <span class="pill"><span class="gd"></span> מכשיר 3-ב-1 לקרקפת · הטכנולוגיה מהקליניקות</span>
-        <h1>שיער מלא יותר<em>מתחיל בקרקפת בריאה</em></h1>
-        <p class="lead">אור אדום, עיסוי ואפליקטור סרום — הכל במכשיר אחד. 10 דקות ביום מהבית, בלי כאב ובלי פולשנות.</p>
+        <h1>אל תשלמו אלפי שקלים בקליניקות<em>לפני שניסיתם את זה.</em></h1>
+        <p class="lead">אור אדום, עיסוי ואפליקטור סרום — הכל במכשיר אחד. 5 דקות ביום מהבית, בנוחות מלאה.</p>
         <ul class="checks">
           <li><span class="ck">✓</span> חוסך אלפי שקלים בטיפולים</li>
           <li><span class="ck">✓</span> שימוש ביתי פשוט ונוח</li>
-          <li><span class="ck">✓</span> ללא כאבים וללא פולשנות</li>
+          <li><span class="ck">✓</span> ללא כאבים</li>
           <li><span class="ck">✓</span> מתאים לגברים ולנשים</li>
         </ul>
         <div class="cta-row">
@@ -337,29 +373,67 @@
     </div>
   </header>
 
-  <!-- 4. סרטון תדמית -->
+  <!-- 4. סרטון המוצר + טקסט רגשי -->
   <section class="video-sec">
     <div class="wrap w980">
-      <span class="eyebrow">המכשיר בפעולה</span>
-      <h2>צפו בסרטון המוצר</h2>
-      <div class="box" data-vbox>
-        <video controls playsinline preload="metadata">
-          <source src="{{ vsrc | asset_url }}" type="video/mp4">
-          הדפדפן שלך אינו תומך בהצגת וידאו.
-        </video>
-        <a class="vid-cta" href="#offer" data-vcta>לחצו כאן <span>←</span></a>
+      <div class="sec-head">
+        <span class="eyebrow">המכשיר בפעולה</span>
+        <h2>צפו בסרטון המוצר</h2>
+      </div>
+      <div class="vrow">
+        <div class="vtext">
+          <p>הסתכלת פעם במראה וחשבת לעצמך... "מתי זה התחיל?"</p>
+          <p>עוד כמה שיערות על הכרית. עוד כמה על המסרק. פתאום אתה מוצא את עצמך בודק את קו השיער בכל תמונה ובכל מראה.</p>
+          <p>לא ביום אחד זה קרה. אבל יום אחד החלטת שנמאס רק להסתכל מהצד.</p>
+          <p>אנחנו מאמינים שלא צריך לחכות עד שיהיה מאוחר מדי. לפעמים מספיקות כמה דקות ביום כדי להתחיל להחזיר לעצמך את תחושת הביטחון.</p>
+          <p>ברוכים הבאים לצעד הראשון בדרך לטיפוח השיער שלך.</p>
+        </div>
+        <div class="box" data-vbox>
+          <video controls playsinline preload="metadata">
+            <source src="{{ vsrc | asset_url }}" type="video/mp4">
+            הדפדפן שלך אינו תומך בהצגת וידאו.
+          </video>
+          <a class="vid-cta" href="#offer" data-vcta>לחצו כאן <span>←</span></a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. OFFER -->
-  <section class="offer dark2" id="offer">
+  <!-- 5. BEFORE/AFTER (מתחת לסרטון) -->
+  <section class="ba">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">לפני / אחרי</span><h2>תוצאות אמיתיות — גברים ונשים</h2><p>לפני ואחרי שימוש עקבי במכשיר.</p></div>
+      <div class="grid">
+        <div class="card">
+          <div class="pair">
+            <div class="cell b"><img src="{{ 'ba-before-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לפני השימוש" loading="lazy"><span class="lbl before">לפני</span></div>
+            <div class="cell"><img src="{{ 'ba-after-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לאחר השימוש" loading="lazy"><span class="lbl after">אחרי</span></div>
+          </div>
+          <div class="cap">גבר — תוצאה לאחר שימוש עקבי</div>
+        </div>
+        <div class="card">
+          <div class="pair">
+            <div class="cell b"><img src="{{ 'ba-before-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לפני השימוש" loading="lazy"><span class="lbl before">לפני</span></div>
+            <div class="cell"><img src="{{ 'ba-after-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לאחר השימוש" loading="lazy"><span class="lbl after">אחרי</span></div>
+          </div>
+          <div class="cap">אישה — תוצאה לאחר שימוש עקבי</div>
+        </div>
+      </div>
+      <p class="legal">התוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+    </div>
+  </section>
+
+  <!-- 6. OFFER -->
+  <section class="offer" id="offer">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">🔥 מבצע השקה</span>
+        <span class="eyebrow">מבצע השקה</span>
         <h2>בחרו את הערכה שלכם</h2>
         <p>משלוח חינם לכל הארץ · תשלום מאובטח</p>
         <div class="urg"><span class="gd"></span> המלאי במבצע ההשקה מוגבל — מתחדש בכל תחילת חודש</div>
+      </div>
+      <div class="terms-gate" data-terms-wrap>
+        <label class="tcheck"><input type="checkbox" data-terms> <span>קראתי ואני מאשר/ת את <a href="/pages/terms" target="_blank" rel="noopener">התקנון ומדיניות ההחזרות</a></span></label>
       </div>
       <div class="grid">
         <!-- כרטיס 1 -->
@@ -403,92 +477,56 @@
     </div>
   </section>
 
-  <!-- 6. PROBLEM -->
-  <section class="problem">
-    <div class="wrap w920">
-      <div class="sec-head">
-        <span class="eyebrow">מוכר/ת לך?</span>
-        <h2>השיער כבר לא מה שהיה — ואת/ה מרגיש/ה את זה כל בוקר</h2>
-        <p>זה לא רק "אסתטיקה". זו הדרך שבה את/ה מרגיש/ה מול המראה, בעבודה, בתמונות.</p>
-      </div>
-      <div class="rows">
-        <div class="row"><span class="emo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M21 17v-6h-6"/></svg></span><p>שערות נושרות על הכרית ובמקלחת, והקרקפת מציצה יותר מבעבר.</p></div>
-        <div class="row"><span class="emo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></span><p>מסרקים, שמפו "מעבה" ותוספים — הוצאת הון, וההבדל בקושי נראה.</p></div>
-        <div class="row"><span class="emo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><p>טיפול בקליניקה מפתה — אבל אלפי שקלים וזמן שאין לך פשוט לא מסתדרים.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. SOLUTION -->
-  <section class="solution dark">
-    <span class="glow"></span>
-    <div class="wrap in">
-      <div class="sec-head">
-        <span class="eyebrow">הפתרון</span>
-        <h2>שלוש פעולות שעובדות יחד על הקרקפת שלך</h2>
-      </div>
-      <div class="cards">
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><h3>אור אדום בעוצמה נמוכה</h3><p>טכנולוגיית LLLT שנחקרה בהקשר של עידוד פעילות זקיקי השיער — לא-פולשנית ולא מחממת.</p></div>
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.6 1.8L21.5 17.5l-1.9.6L19 20l-.6-1.9L16.5 17.5l1.9-.7z"/></svg></div><h3>זיפי עיסוי</h3><p>מעוררים את הקרקפת ומשפרים את תחושת זרימת הדם בזמן השימוש.</p></div>
-        <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div><h3>אפליקטור סרום מובנה</h3><p>מחדיר את חומרי הטיפוח ישירות לשורש — בלי בזבוז ובלי ידיים מלוכלכות.</p></div>
-      </div>
-      <p class="legal">אור אדום בעוצמה נמוכה (LLLT) הוא טיפול לא-פולשני שנחקר בהקשר של עידוד פעילות זקיקי השיער. התוצאות משתנות מאדם לאדם.</p>
-    </div>
-  </section>
-
-  <!-- 8. HOW -->
+  <!-- 7. HOW -->
   <section class="how" id="how">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">פשוט עד כדי גיחוך</span><h2>שלושה צעדים, 10 דקות ביום</h2></div>
+      <div class="sec-head"><span class="eyebrow">קל ופשוט</span><h2>שלושה צעדים, 5 דקות ביום</h2></div>
       <div class="steps">
         <div class="step"><div class="num">1</div><h3>מטפטפים סרום ומפעילים</h3><p>כמה טיפות לאפליקטור המובנה, ולוחצים על כפתור ההפעלה.</p></div>
-        <div class="step"><div class="num">2</div><h3>מעבירים על הקרקפת 10 דק'</h3><p>3 פעמים בשבוע, בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
+        <div class="step"><div class="num">2</div><h3>מעבירים על הקרקפת 5 דק'</h3><p>3 פעמים בשבוע, בזמן שאת/ה צופה בטלוויזיה או גולש/ת בטלפון.</p></div>
         <div class="step"><div class="num">3</div><h3>עוקבים אחרי ההבדל</h3><p>רוב המשתמשים מתחילים לשים לב לשינוי תוך מספר שבועות.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 9. BEFORE/AFTER -->
-  <section class="ba dark2">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">לפני / אחרי</span><h2>תוצאות אמיתיות — גברים ונשים</h2><p>לפני ואחרי שימוש עקבי במכשיר.</p></div>
-      <div class="grid">
-        <div class="card">
-          <div class="pair">
-            <div class="cell b"><img src="{{ 'ba-before-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לפני השימוש" loading="lazy"><span class="lbl before">לפני</span></div>
-            <div class="cell"><img src="{{ 'ba-after-man.jpeg' | asset_url }}" alt="גבר — הקרקפת לאחר השימוש" loading="lazy"><span class="lbl after">אחרי</span></div>
-          </div>
-          <div class="cap">גבר — תוצאה לאחר שימוש עקבי</div>
-        </div>
-        <div class="card">
-          <div class="pair">
-            <div class="cell b"><img src="{{ 'ba-before-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לפני השימוש" loading="lazy"><span class="lbl before">לפני</span></div>
-            <div class="cell"><img src="{{ 'ba-after-woman.jpeg' | asset_url }}" alt="אישה — הקרקפת לאחר השימוש" loading="lazy"><span class="lbl after">אחרי</span></div>
-          </div>
-          <div class="cap">אישה — תוצאה לאחר שימוש עקבי</div>
-        </div>
-      </div>
-      <p class="legal">התוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
-    </div>
-  </section>
-
-  <!-- 10. REVIEWS -->
+  <!-- 8. REVIEWS -->
   <section class="reviews" id="reviews">
     <div class="wrap">
       <span class="eyebrow">מה אומרים הלקוחות</span>
       <div class="top"><span class="n">4.8</span><span class="st">★★★★★</span></div>
       <p class="sub">מתוך 1,300+ ביקורות</p>
       <div class="grid">
-        <div class="rcard"><div class="who"><span class="av">מ</span><div><div class="name">מיכל ל.</div><div class="st">★★★★★</div></div></div><p>אחרי כמה שבועות של שימוש קבוע הרגשתי שהשיער נראה מלא יותר באזורים שהדאיגו אותי. נעים לשימוש וקל להתמיד — 10 דקות וזהו.</p><span class="vf">✓ רכישה מאומתת</span></div>
-        <div class="rcard"><div class="who"><span class="av">ד</span><div><div class="name">דנה כ.</div><div class="st">★★★★★</div></div></div><p>קניתי בעיקר בשביל הנוחות — 10 דקות מול הטלוויזיה. העיסוי מרגיש מצוין והקרקפת פחות יבשה. שמחה שהזמנתי.</p><span class="vf">✓ רכישה מאומתת</span></div>
-        <div class="rcard"><div class="who"><span class="av">י</span><div><div class="name">יוסי א.</div><div class="st">★★★★☆</div></div></div><p>התחלתי בספקנות, אבל ההתמדה השתלמה — קו השיער מרגיש מאוזן יותר. לקח כמה שבועות לראות שינוי, אז כדאי להיות סבלני.</p><span class="vf">✓ רכישה מאומתת</span></div>
-        <div class="rcard"><div class="who"><span class="av">ר</span><div><div class="name">רונית ש.</div><div class="st">★★★★★</div></div></div><p>האפליקטור לסרום פשוט גאוני, לא מבזבזת טיפה. המשלוח הגיע מהר והשירות היה אדיב. ממליצה בחום.</p><span class="vf">✓ רכישה מאומתת</span></div>
+        <div class="rcard"><div class="who"><span class="av">ש</span><div><div class="name">שירה ביטון</div><div class="st">★★★★★</div></div></div><p>אחרי כמה שבועות של שימוש קבוע הרגשתי שהשיער נראה מלא יותר באזורים שהדאיגו אותי. נעים לשימוש וקל להתמיד — 5 דקות וזהו.</p><span class="vf">✓ רכישה מאומתת</span></div>
+        <div class="rcard"><div class="who"><span class="av">ד</span><div><div class="name">דנה כהן</div><div class="st">★★★★★</div></div></div><p>קניתי בעיקר בשביל הנוחות — 5 דקות מול הטלוויזיה. העיסוי מרגיש מצוין והקרקפת פחות יבשה. שמחה שהזמנתי.</p><span class="vf">✓ רכישה מאומתת</span></div>
+        <div class="rcard"><div class="who"><span class="av">י</span><div><div class="name">יוסי אברהם</div><div class="st">★★★★☆</div></div></div><p>התחלתי בספקנות, אבל ההתמדה השתלמה — קו השיער מרגיש מאוזן יותר. לקח כמה שבועות לראות שינוי, אז כדאי להיות סבלני.</p><span class="vf">✓ רכישה מאומתת</span></div>
+        <div class="rcard"><div class="who"><span class="av">ר</span><div><div class="name">רונית שרעבי</div><div class="st">★★★★★</div></div></div><p>האפליקטור לסרום פשוט גאוני, לא מבזבזת טיפה. המשלוח הגיע מהר והשירות היה אדיב. ממליצה בחום.</p><span class="vf">✓ רכישה מאומתת</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 11. COMPARISON -->
-  <section class="compare dark">
+  <!-- 9. FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">שאלות נפוצות</span><h2>כל מה שרציתם לדעת</h2></div>
+      <div class="list">
+        <details><summary>איך משתמשים במסרק?<span class="ic">+</span></summary><p>יש להשתמש במסרק על קרקפת נקייה במשך כ-5 דקות ביום, בהתאם להוראות השימוש המצורפות.</p></details>
+        <details><summary>תוך כמה זמן אפשר לראות שינוי?<span class="ic">+</span></summary><p>התוצאות משתנות מאדם לאדם. שימוש עקבי לאורך זמן הוא המפתח לשגרת טיפוח יעילה.</p></details>
+        <details><summary>האם השימוש כואב?<span class="ic">+</span></summary><p>לא. המסרק מיועד לשימוש נוח ועדין על הקרקפת.</p></details>
+        <details><summary>למי המסרק מתאים?<span class="ic">+</span></summary><p>המסרק מתאים לנשים ולגברים המעוניינים לשלב שגרת טיפוח לקרקפת ולשיער.</p></details>
+        <details><summary>האם אפשר להשתמש במסרק כל יום?<span class="ic">+</span></summary><p>כן. המסרק מיועד לשימוש יומיומי בהתאם להוראות השימוש.</p></details>
+        <details><summary>כמה זמן נמשך כל טיפול?<span class="ic">+</span></summary><p>כ-5 דקות בלבד בכל שימוש.</p></details>
+        <details><summary>האם צריך כבלים בזמן השימוש?<span class="ic">+</span></summary><p>לא. המסרק נטען מראש וניתן להשתמש בו באופן אלחוטי לאחר הטעינה.</p></details>
+        <details><summary>איך מטעינים את המסרק?<span class="ic">+</span></summary><p>באמצעות כבל הטעינה המצורף לערכה.</p></details>
+        <details><summary>האם המשלוח מגיע לכל הארץ?<span class="ic">+</span></summary><p>כן, אנו מספקים משלוחים לכל רחבי הארץ.</p></details>
+        <details><summary>כמה זמן לוקח למשלוח להגיע?<span class="ic">+</span></summary><p>זמן האספקה משתנה בהתאם לכתובת היעד, ובדרך כלל נע בין 14 ל-30 ימי עסקים. תקבלו מספר מעקב ברגע שההזמנה יוצאת.</p></details>
+        <details><summary>איך אפשר ליצור קשר עם שירות הלקוחות?<span class="ic">+</span></summary><p>ניתן לפנות אלינו דרך עמוד "צור קשר" או במייל ונשמח לעזור.</p></details>
+        <details><summary>האם יש אחריות על המוצר?<span class="ic">+</span></summary><p>כן. האחריות ותנאיה מפורטים בעמוד מדיניות האחריות באתר.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. COMPARISON -->
+  <section class="compare">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">השוואה הוגנת</span><h2>צומחים מחדש מול שאר האפשרויות</h2></div>
       <div class="scroll">
@@ -497,7 +535,7 @@
           <tbody>
             <tr><td>עלות</td><td class="us">חד-פעמית, נמוכה</td><td class="other">אלפי ש"ח</td><td class="other">הוצאה חודשית</td></tr>
             <tr><td>כאב</td><td class="us">ללא</td><td class="other">אפשרי</td><td class="other">ללא</td></tr>
-            <tr><td>נוחות</td><td class="us">מהבית, 10 דק'</td><td class="other">תורים ונסיעות</td><td class="other">נטילה יומית</td></tr>
+            <tr><td>נוחות</td><td class="us">מהבית, 5 דק'</td><td class="other">תורים ונסיעות</td><td class="other">נטילה יומית</td></tr>
             <tr><td>תופעות לוואי</td><td class="us">מינימליות</td><td class="other">אפשריות</td><td class="other">אפשריות</td></tr>
             <tr><td>מתאים לכולם</td><td class="us">כן</td><td class="other">לא תמיד</td><td class="other">לא תמיד</td></tr>
           </tbody>
@@ -506,7 +544,7 @@
     </div>
   </section>
 
-  <!-- 12. מרקיזת מבצע -->
+  <!-- 11. מרקיזת מבצע -->
   <div class="marq promo" role="region" aria-label="מבצע">
     <div class="track">
       <span>מבצע מיוחד — הערכה המלאה ב-249 ש"ח בלבד!<i class="dia">✦</i>מסרק אינפרא אדום + סרום טבעי + שמפו לחיזוק<i class="dia">✦</i></span>
@@ -514,7 +552,7 @@
     </div>
   </div>
 
-  <!-- 13. FINAL CTA -->
+  <!-- 12. FINAL CTA -->
   <section class="final">
     <span class="glow"></span>
     <div class="wrap w720 in">
@@ -522,19 +560,19 @@
       <p class="lead">מבצע לזמן מוגבל · הצטרפו לאלפי לקוחות מרוצים.</p>
       <div class="prow"><span class="now">{% if main_p != blank %}{{ main_p.price | money }}{% else %}148 ש"ח{% endif %}</span><span class="was">199 ש"ח</span></div>
       <a href="#offer" class="cta">מתחילים היום ←</a>
-      <div class="trust"><span>🚚 משלוח חינם</span><span>🔒 תשלום מאובטח</span></div>
+      <div class="trust"><span>משלוח חינם</span><span>תשלום מאובטח</span></div>
     </div>
   </section>
 
-  <!-- 14. FOOTER -->
+  <!-- 13. FOOTER -->
   <footer class="ft">
     <div class="wrap in">
       <div class="brand">
         <a href="#" class="logo"><span class="dot">צ</span><b>צומחים מחדש</b></a>
         <p>המרכז לצמיחת שיער. פיתחנו מסרק 3-ב-1 שמשלב אור אדום, עיסוי קרקפת ואפליקטור סרום — פתרון ביתי פשוט לשיער שמרגיש מלא יותר.</p>
-        <div class="badges"><span class="badge">🏠 פתרון ביתי</span><span class="badge">🔬 מבוסס מחקר</span></div>
+        <div class="badges"><span class="badge">פתרון ביתי</span><span class="badge">מבוסס מחקר</span></div>
       </div>
-      <div><h4>קישורים</h4><ul><li><a href="#offer">הערכות</a></li><li><a href="#reviews">ביקורות</a></li><li><a href="mailto:growagain18@gmail.com">צור קשר</a></li></ul></div>
+      <div><h4>קישורים</h4><ul><li><a href="#offer">הערכות</a></li><li><a href="#reviews">ביקורות</a></li><li><a href="#faq">שאלות נפוצות</a></li><li><a href="mailto:growagain18@gmail.com">דברו איתנו</a></li></ul></div>
       <div><h4>מדיניות</h4><ul><li><a href="/pages/terms">תקנון</a></li><li><a href="/pages/terms">מדיניות החזרות</a></li><li><a href="/pages/terms">מדיניות פרטיות</a></li></ul></div>
     </div>
     <div class="copy">© 2026 צומחים מחדש · כל הזכויות שמורות. המידע באתר אינו מהווה ייעוץ רפואי.</div>
@@ -543,7 +581,7 @@
   <!-- אלמנט צף: התראת "נרכש עכשיו" -->
   <div class="scm-toast" data-toast hidden>
     <span class="ic">🛍️</span>
-    <div class="tx"><b data-tname></b> רכש/ה זה עתה<span class="prod" data-tprod></span><span class="ago" data-tago></span></div>
+    <div class="tx"><b data-tname></b> <span data-tverb></span> כעת<span class="prod" data-tprod></span><span class="ago" data-tago></span></div>
   </div>
 
   <!-- אלמנט צף: כפתור מייל + טופס יצירת קשר -->
@@ -567,9 +605,38 @@
   (function(){
     var root = document.currentScript.closest('.scm-page');
     if(!root) return;
+
+    // הודעת אזהרה — סגירה ושמירה
+    var warn = root.querySelector('[data-warn]');
+    if(warn){
+      try{ if(localStorage.getItem('scm-warn-closed')==='1'){ warn.hidden = true; } }catch(e){}
+      var wx = warn.querySelector('[data-warn-x]');
+      if(wx){ wx.addEventListener('click', function(){ warn.hidden = true; try{ localStorage.setItem('scm-warn-closed','1'); }catch(e){} }); }
+    }
+
+    // צ'קבוקס אישור תקנון — חוסם רכישה
+    var termsBox = root.querySelector('[data-terms]');
+    var termsWrap = root.querySelector('[data-terms-wrap]');
+    function termsOK(){
+      if(!termsBox || termsBox.checked) return true;
+      if(termsWrap){
+        termsWrap.classList.remove('warn');
+        void termsWrap.offsetWidth;
+        termsWrap.classList.add('warn');
+        termsWrap.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+      return false;
+    }
+    if(termsBox){ termsBox.addEventListener('change', function(){ if(termsBox.checked && termsWrap) termsWrap.classList.remove('warn'); }); }
+    // חסימת טופס "הוספה לסל" של הכרטיס הבסיסי
+    root.querySelectorAll('form[action*="/cart/add"]').forEach(function(f){
+      f.addEventListener('submit', function(e){ if(!termsOK()){ e.preventDefault(); } });
+    });
+
     // הוספת קומבו לסל
     root.querySelectorAll('[data-combo-add]').forEach(function(btn){
       btn.addEventListener('click', function(){
+        if(!termsOK()) return;
         var items = btn.getAttribute('data-combo-add').split(',').map(function(x){return {id:parseInt(x,10),quantity:1};}).filter(function(i){return i.id;});
         if(!items.length) return;
         btn.setAttribute('aria-busy','true');
@@ -578,6 +645,7 @@
           .catch(function(){window.location.href='{{ routes.cart_url }}';});
       });
     });
+
     // גלילה חלקה לעוגנים
     root.querySelectorAll('a[href^="#"]').forEach(function(a){
       a.addEventListener('click',function(e){
@@ -603,28 +671,33 @@
     // חשיפה עדינה בגלילה (scroll-reveal)
     var rmq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     if((!rmq || !rmq.matches) && 'IntersectionObserver' in window){
-      var revs = root.querySelectorAll('.sec-head, .solution .card, .how .step, .ba .card, .rcard, .problem .row, .compare .scroll, .hero .copy, .hero .media');
+      var revs = root.querySelectorAll('.sec-head, .ba .card, .ocard, .how .step, .rcard, .faq details, .compare .scroll, .video-sec .vtext, .video-sec .box, .hero .copy, .hero .media');
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-      },{threshold:.12, rootMargin:'0px 0px -7% 0px'});
-      revs.forEach(function(el,i){ el.classList.add('reveal'); el.style.transitionDelay=((i%3)*0.08)+'s'; io.observe(el); });
+      },{threshold:.1, rootMargin:'0px 0px -7% 0px'});
+      revs.forEach(function(el,i){
+        if(el.classList.contains('best')) return; /* לא לפגוע בהגדלת הכרטיס המומלץ */
+        el.classList.add('reveal'); el.style.transitionDelay=((i%3)*0.08)+'s'; io.observe(el);
+      });
     }
 
-    // התראת "נרכש עכשיו" — מחזורית (רכישות לדוגמה)
+    // התראת "נרכש עכשיו" — מחזורית (שמות לדוגמה)
     var toast = root.querySelector('[data-toast]');
     if(toast){
       var buys = [
-        ['מיכל מתל אביב','הערכה המלאה','לפני 4 דקות'],
-        ['יוסי מחיפה','מסרק + סרום','לפני 11 דקות'],
-        ['דנה מראשון לציון','הערכה המלאה','לפני 17 דקות'],
-        ['אבי מירושלים','מסרק אינפרא אדום','לפני 23 דקות'],
-        ['רונית מנתניה','מסרק + סרום','לפני 31 דקות'],
-        ['שיר מבאר שבע','הערכה המלאה','לפני 38 דקות']
+        ['שיר ביטון','רכשה','הערכה המלאה','לפני 4 דקות'],
+        ['עידו דגן','רכש','מסרק + סרום','לפני 9 דקות'],
+        ['נועה פרץ','רכשה','הערכה המלאה','לפני 14 דקות'],
+        ['אורי כהן','רכש','מסרק אינפרא אדום','לפני 19 דקות'],
+        ['מאיה לוי','רכשה','מסרק + סרום','לפני 27 דקות'],
+        ['רן אזולאי','רכש','הערכה המלאה','לפני 33 דקות'],
+        ['טל שרעבי','רכשה','מסרק + סרום','לפני 41 דקות'],
+        ['יונתן מלכה','רכש','הערכה המלאה','לפני 52 דקות']
       ];
-      var nm=toast.querySelector('[data-tname]'), pr=toast.querySelector('[data-tprod]'), ag=toast.querySelector('[data-tago]'), bi=0;
+      var nm=toast.querySelector('[data-tname]'), vb=toast.querySelector('[data-tverb]'), pr=toast.querySelector('[data-tprod]'), ag=toast.querySelector('[data-tago]'), bi=0;
       function showToast(){
         var b=buys[bi % buys.length]; bi++;
-        nm.textContent=b[0]; pr.textContent=b[1]; ag.textContent='✓ '+b[2];
+        nm.textContent=b[0]; vb.textContent=b[1]; pr.textContent=b[2]; ag.textContent='✓ '+b[3];
         toast.hidden=false; requestAnimationFrame(function(){ toast.classList.add('show'); });
         setTimeout(function(){ toast.classList.remove('show'); setTimeout(function(){ toast.hidden=true; }, 400); }, 5200);
       }
@@ -637,10 +710,10 @@
       var form = contact.querySelector('.scm-cform');
       var toggle = contact.querySelector('[data-ctoggle]');
       var txt = toggle.querySelector('.ctxt');
-      toggle.addEventListener('click', function(){
-        var open = form.hidden;
-        form.hidden = !open;
-        if(txt) txt.textContent = open ? 'סגירה' : 'צרו קשר';
+      function openForm(open){ form.hidden = !open; if(txt) txt.textContent = open ? 'סגירה' : 'צרו קשר'; }
+      toggle.addEventListener('click', function(){ openForm(form.hidden); });
+      root.querySelectorAll('[data-open-contact]').forEach(function(el){
+        el.addEventListener('click', function(e){ e.preventDefault(); openForm(true); });
       });
       var send = contact.querySelector('[data-csend]');
       send.addEventListener('click', function(){

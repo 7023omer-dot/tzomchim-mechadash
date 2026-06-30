@@ -1,31 +1,32 @@
 {%- comment -%}
   צומחים מחדש — תקנון ומדיניות החזרות (עמוד מעוצב, RTL)
-  משובץ דרך תבנית page.terms.json. עיצוב נקי תואם לפלטת השמנת.
+  משובץ דרך תבנית page.terms.json. פלטת אדום/לבן פרימיום · פונט Heebo.
 {%- endcomment -%}
 
 <div class="rg-terms" dir="rtl">
   {%- style -%}
-    .rg-terms{--cream:#F4EBDD;--soft:#FBF6EE;--ink:#2B2B2B;--muted:#5F5F5F;--red:#E8112D;--line:#E7DECF;
-      background:var(--cream);color:var(--ink);direction:rtl;text-align:right;
-      font-family:'Heebo',system-ui,Arial,sans-serif;line-height:1.7;
+    .rg-terms{--red:#D11F2D;--red-soft:#F7E6E7;--canvas:#FAFAF8;--ink:#1A1A1A;--muted:#6B6B66;--line:#E7E4DD;
+      background:var(--canvas);color:var(--ink);direction:rtl;text-align:right;
+      font-family:'Heebo',system-ui,Arial,sans-serif;line-height:1.75;
       padding:{{ section.settings.padding_top }}px 18px {{ section.settings.padding_bottom }}px;}
     .rg-terms *{box-sizing:border-box}
     .rg-terms .tw{max-width:820px;margin:0 auto}
-    .rg-terms .t-head{text-align:center;margin-bottom:26px}
-    .rg-terms .t-head h1{font-size:clamp(26px,5vw,38px);font-weight:900;margin:0 0 8px;color:var(--ink)}
-    .rg-terms .t-head .brand{color:var(--red);font-weight:800;font-size:16px}
+    .rg-terms .t-head{text-align:center;margin-bottom:24px}
+    .rg-terms .t-head h1{font-size:clamp(26px,5vw,38px);font-weight:800;margin:0 0 8px;color:var(--ink);letter-spacing:-.3px}
+    .rg-terms .t-head .brand{color:var(--red);font-weight:700;font-size:16px}
     .rg-terms .t-head .upd{color:var(--muted);font-size:13px;margin-top:6px}
-    .rg-terms .t-intro{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px;color:var(--muted);font-size:15.5px}
-    .rg-terms .t-block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px;margin-bottom:16px;box-shadow:0 6px 18px rgba(60,45,30,.05)}
-    .rg-terms .t-block h2{font-size:20px;font-weight:800;margin:0 0 12px;color:var(--ink);display:flex;align-items:center;gap:10px}
-    .rg-terms .t-block h2 .n{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}
+    .rg-terms .t-warn{display:flex;align-items:flex-start;gap:11px;background:var(--red-soft);border:1px solid #EFCCCF;border-radius:12px;padding:15px 18px;margin-bottom:20px;color:#7A1119;font-size:14.5px;font-weight:600;line-height:1.6}
+    .rg-terms .t-warn svg{width:22px;height:22px;flex:0 0 auto;color:var(--red);margin-top:1px}
+    .rg-terms .t-intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px;color:var(--muted);font-size:15.5px}
+    .rg-terms .t-block{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 6px 18px rgba(26,26,26,.04)}
+    .rg-terms .t-block h2{font-size:19px;font-weight:800;margin:0 0 12px;color:var(--ink);display:flex;align-items:center;gap:10px}
+    .rg-terms .t-block h2 .n{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
     .rg-terms .t-block p{margin:0 0 9px;font-size:15.5px;color:var(--ink)}
     .rg-terms .t-block p:last-child{margin-bottom:0}
-    .rg-terms .t-block ul{margin:4px 0 12px;padding-inline-start:0;list-style:none;display:grid;gap:7px}
+    .rg-terms .t-block ul{margin:4px 0 10px;padding-inline-start:0;list-style:none;display:grid;gap:7px}
     .rg-terms .t-block li{position:relative;padding-inline-start:24px;font-size:15px;color:var(--ink)}
     .rg-terms .t-block li::before{content:"•";position:absolute;inset-inline-start:6px;color:var(--red);font-weight:900}
-    .rg-terms .t-block.hl{border:2px solid var(--red);box-shadow:0 10px 26px rgba(232,17,45,.10)}
-    .rg-terms .t-block .lead-note{font-weight:800;color:var(--red);font-size:14px;margin-bottom:10px}
+    .rg-terms .t-block.hl{border:1.5px solid var(--red);box-shadow:0 10px 26px rgba(209,31,45,.08)}
     .rg-terms strong{color:var(--ink);font-weight:800}
     .rg-terms .t-foot{text-align:center;color:var(--muted);font-size:12.5px;font-style:italic;margin-top:18px}
   {%- endstyle -%}
@@ -37,94 +38,89 @@
       <div class="upd">עודכן לאחרונה: יוני 2026</div>
     </div>
 
+    <div class="t-warn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>שימו לב: המכשיר אינו מיועד למי שאיבד/ה את שיערו לחלוטין. המוצרים מיועדים לעידוד וטיפוח שיער קיים ולשיפור בריאות הקרקפת.</span>
+    </div>
+
     <div class="t-intro">
-      ברוכים הבאים לאתר "צומחים מחדש". השימוש באתר ורכישת מוצרים בו כפופים לתנאים המפורטים בתקנון זה. אנא קראו אותו בעיון לפני ביצוע הזמנה. ביצוע הזמנה מהווה הסכמה מלאה לכל התנאים שלהלן.
+      ברוכים הבאים לאתר "צומחים מחדש". אנא קראו תקנון זה בעיון לפני ביצוע הזמנה. ביצוע הזמנה מהווה הסכמה מלאה לכל התנאים שלהלן.
     </div>
 
     <div class="t-block">
       <h2><span class="n">1</span> כללי</h2>
-      <p>1.1. תקנון זה מנוסח בלשון זכר מטעמי נוחות בלבד, ומתייחס לכל המגדרים כאחד.</p>
-      <p>1.2. האתר משמש כפלטפורמה למכירת מוצרים לטיפוח ולעידוד צמיחת שיער, לרבות מסרקי אור אדום, סרומים, שמפו ושמנים.</p>
-      <p>1.3. החברה רשאית לעדכן תקנון זה מעת לעת, ועדכון כאמור ייכנס לתוקף עם פרסומו באתר.</p>
+      <p>השימוש באתר ורכישת המוצרים מהווים הסכמה מלאה לתקנון זה. אם אינך מסכים לאחד מתנאי התקנון, הנך מתבקש להימנע משימוש באתר או מרכישת המוצרים. התקנון מנוסח בלשון זכר מטעמי נוחות בלבד ומתייחס לכל המגדרים כאחד.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">2</span> ביצוע הזמנה</h2>
-      <p>2.1. ההזמנה תיחשב כמושלמת רק לאחר אישור התשלום וקבלת אישור הזמנה במייל.</p>
-      <p>2.2. במקרה של טעות בתיאור מוצר, במחיר או בזמינות, החברה רשאית לבטל את ההזמנה ולהשיב את התשלום במלואו.</p>
-      <p>2.3. המחירים באתר כוללים מע"מ אלא אם צוין אחרת.</p>
+      <h2><span class="n">2</span> מטרת המוצר</h2>
+      <p>המסרק והסרומים הנמכרים באתר מיועדים לטיפוח השיער והקרקפת בלבד. הם אינם מהווים טיפול רפואי, אינם תרופה ואינם מיועדים לאבחון, טיפול, ריפוי או מניעה של מחלה כלשהי.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">3</span> אספקה ומשלוח</h2>
-      <p>3.1. זמן האספקה המשוער יצוין בעמוד המוצר ובסיום ההזמנה.</p>
-      <p>3.2. החברה אינה אחראית לעיכובים הנובעים מגורמים שאינם בשליטתה (חברת השילוח, עומסים, כוח עליון וכד').</p>
-      <p>3.3. באחריות הלקוח לוודא כי פרטי המשלוח שמסר נכונים ומלאים.</p>
+      <h2><span class="n">3</span> תוצאות השימוש</h2>
+      <p>השפעת השימוש במוצר עשויה להשתנות מאדם לאדם ותלויה בגורמים רבים, לרבות גיל, גנטיקה, מצב רפואי, אורח חיים, תזונה, שימוש עקבי וגורמים נוספים. החברה אינה מתחייבת לצמיחת שיער, לעצירת נשירה, לעיבוי השיער או לכל תוצאה מסוימת.</p>
     </div>
 
     <div class="t-block hl">
-      <h2><span class="n">4</span> מדיניות אחריות והחזרות — 30 יום</h2>
-      <p class="lead-note">זהו לב מדיניות ההחזרות שלנו, אנא קראו בעיון.</p>
-      <p>4.1. אנו עומדים מאחורי המוצרים שלנו ומציעים <strong>אחריות של 30 יום ממועד קבלת המוצר</strong>.</p>
-      <p>4.2. <strong>החזר כספי יינתן במקרים הבאים בלבד:</strong></p>
+      <h2><span class="n">4</span> רגישויות ותגובות אישיות</h2>
+      <p>לפני השימוש בסרומים או בכל מוצר אחר מומלץ לבצע בדיקת רגישות על אזור קטן בעור. במקרה של גירוי, אדמומיות, אי־נוחות או כל תגובה חריגה, יש להפסיק את השימוש ולהתייעץ עם איש מקצוע מתאים. המשתמש אחראי לוודא שהמוצר מתאים לו מבחינת רגישויות או אלרגיות ידועות. ייתכן שהמוצרים מכילים רכיבים פעילים טבעיים העלולים לגרום לרגישות אצל אנשים מסוימים.</p>
+    </div>
+
+    <div class="t-block">
+      <h2><span class="n">5</span> התייעצות רפואית</h2>
+      <p>במקרים של נשירת שיער משמעותית, מחלות עור, היריון, הנקה או כל מצב רפואי אחר, מומלץ להתייעץ עם רופא או איש מקצוע מוסמך לפני השימוש.</p>
+    </div>
+
+    <div class="t-block">
+      <h2><span class="n">6</span> הוראות שימוש</h2>
+      <p>יש להשתמש במוצר בהתאם להוראות השימוש בלבד. שימוש שלא בהתאם להוראות, שינוי המוצר, שימוש בלתי סביר או שימוש למטרה שאינה ייעודו נעשים באחריות המשתמש בלבד.</p>
+    </div>
+
+    <div class="t-block">
+      <h2><span class="n">7</span> תמונות, סרטונים והמלצות</h2>
+      <p>התמונות, הסרטונים, הביקורות וההמלצות המופיעים באתר נועדו להמחשה בלבד. הם משקפים חוויות אישיות או הדגמות ואינם מהווים התחייבות לתוצאות זהות אצל כל משתמש.</p>
+    </div>
+
+    <div class="t-block">
+      <h2><span class="n">8</span> מידע באתר</h2>
+      <p>המידע באתר נועד למטרות מידע כללי בלבד ואינו מהווה ייעוץ רפואי, מקצועי או אישי.</p>
+    </div>
+
+    <div class="t-block hl">
+      <h2><span class="n">9</span> מדיניות אחריות והחזרות — 30 יום</h2>
+      <p>9.1. אנו מציעים אחריות של <strong>30 יום</strong> ממועד קבלת המוצר.</p>
+      <p>9.2. החזר כספי או החלפה יינתנו במקרים הבאים בלבד:</p>
       <ul>
         <li>המוצר הגיע <strong>פגום, תקול או שבור</strong>.</li>
-        <li>המוצר הגיע <strong>שונה מהותית</strong> מהמתואר באתר.</li>
-        <li>התקבל <strong>מוצר שגוי</strong> (שונה מזה שהוזמן).</li>
+        <li>המוצר הגיע <strong>שונה מהותית</strong> מהמתואר.</li>
+        <li>התקבל <strong>מוצר שגוי</strong>.</li>
       </ul>
-      <p>4.3. במקרים אלו, נחליף את המוצר או נשיב את מלוא התשלום — לפי בחירת הלקוח — ללא עלות נוספת.</p>
-      <p>4.4. <strong>מקרים שבהם לא יינתן החזר כספי:</strong></p>
-      <ul>
-        <li>חוסר שביעות רצון מקצב התוצאות. מוצרים לעידוד צמיחת שיער פועלים באופן הדרגתי ותלויי-משתמש, והתוצאות משתנות מאדם לאדם.</li>
-        <li>שימוש שאינו תואם להוראות היצרן.</li>
-        <li>נזק שנגרם כתוצאה משימוש לא נכון, הזנחה או בלאי סביר.</li>
-        <li>מוצרים מתכלים (סרום, שמפו, שמן) שנפתחו ונעשה בהם שימוש, מטעמי היגיינה — אלא אם הגיעו פגומים.</li>
-      </ul>
-      <p>4.5. <strong>כיצד לממש את האחריות:</strong> פנו אלינו תוך 30 יום מקבלת המוצר דרך עמוד "צור קשר" או במייל, וצרפו:</p>
-      <ul>
-        <li>מספר הזמנה.</li>
-        <li>תיאור קצר של הבעיה.</li>
-        <li>תמונה או סרטון הממחישים את הפגם (במקרה של מוצר תקול).</li>
-      </ul>
-      <p>נחזור אליכם תוך עד 3 ימי עסקים עם הנחיות להמשך.</p>
-      <p>4.6. במקרה של החזרת מוצר תקול — עלות המשלוח חזרה תחול על החברה. בכל מקרה אחר שאושר לפי שיקול דעת החברה, עלות המשלוח עשויה לחול על הלקוח.</p>
+      <p>9.3. לא יינתן החזר בגין חוסר שביעות רצון מקצב התוצאות, שימוש שלא לפי ההוראות, או מוצרים מתכלים שנפתחו (מטעמי היגיינה) — אלא אם הגיעו פגומים.</p>
+      <p>9.4. למימוש: פנו אלינו תוך 30 יום דרך עמוד "צור קשר", צרפו מספר הזמנה ותיאור/תמונה של הבעיה. נחזור אליכם תוך עד 3 ימי עסקים.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">5</span> ביטול עסקה לפי חוק</h2>
-      <p>5.1. בהתאם לחוק הגנת הצרכן, התשמ"א-1981, רשאי הצרכן לבטל עסקה בתוך 14 יום מקבלת המוצר או ממסמך הגילוי, לפי המאוחר.</p>
-      <p>5.2. ביטול עסקה ייעשה בכתב. במקרה של ביטול שאינו עקב פגם, החברה רשאית לגבות דמי ביטול בשיעור 5% ממחיר העסקה או 100 ₪, לפי הנמוך מביניהם, והמוצר יוחזר באריזתו המקורית כשלא נעשה בו שימוש.</p>
-      <p>5.3. מוצרים מתכלים שנפתחו אינם ניתנים לביטול לאחר פתיחתם, מטעמי היגיינה ובהתאם לחריגים שבחוק.</p>
+      <h2><span class="n">10</span> זמני אספקה</h2>
+      <p>זמן האספקה משתנה בהתאם לכתובת היעד ובדרך כלל נע בין 14 ל-30 ימי עסקים. תקבלו מספר מעקב ברגע שההזמנה יוצאת. ייתכנו עיכובים הנובעים מגורמים שאינם בשליטת החברה.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">6</span> שירות לקוחות ויצירת קשר</h2>
-      <p>לכל שאלה, בקשה או מימוש אחריות — צרו קשר דרך עמוד "צור קשר" באתר. אנו כאן בשבילכם ונשתדל לסייע במהירות וביעילות.</p>
+      <h2><span class="n">11</span> הגבלת אחריות</h2>
+      <p>בכפוף לכל דין, החברה לא תהיה אחראית לנזקים הנובעים משימוש שאינו בהתאם להוראות, משימוש בלתי הולם, מהתעלמות מהאזהרות או מאי-התאמת המוצר לצרכים האישיים של המשתמש. אין באמור כדי לגרוע מזכויות צרכניות או מכל אחריות שלא ניתן להתנות עליה לפי הדין.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">7</span> קניין רוחני</h2>
-      <p>כל התכנים באתר — לרבות טקסטים, תמונות, עיצוב, לוגו וסימני מסחר — הם רכושה של "צומחים מחדש" ואין לעשות בהם שימוש ללא אישור בכתב.</p>
+      <h2><span class="n">12</span> ביטול עסקה לפי חוק</h2>
+      <p>בהתאם לחוק הגנת הצרכן, התשמ"א-1981, ניתן לבטל עסקה בתוך 14 יום מקבלת המוצר. במקרה של ביטול שאינו עקב פגם, החברה רשאית לגבות דמי ביטול בשיעור 5% או 100 ₪, לפי הנמוך. מוצרים מתכלים שנפתחו אינם ניתנים לביטול מטעמי היגיינה.</p>
     </div>
 
     <div class="t-block">
-      <h2><span class="n">8</span> הגבלת אחריות</h2>
-      <p>8.1. המוצרים נועדו לטיפוח ולעידוד צמיחת שיער ואינם תחליף לייעוץ או טיפול רפואי.</p>
-      <p>8.2. במקרה של רגישות, מצב רפואי או נטילת תרופות — יש להתייעץ עם רופא לפני השימוש.</p>
-      <p>8.3. התוצאות משתנות מאדם לאדם ואינן מובטחות.</p>
+      <h2><span class="n">13</span> עדכון התקנון</h2>
+      <p>החברה רשאית לעדכן תקנון זה מעת לעת, והנוסח המעודכן שיפורסם באתר יהיה הנוסח המחייב.</p>
     </div>
 
-    <div class="t-block hl">
-      <h2><span class="n">9</span> רכיבים, רגישות ותופעות לוואי</h2>
-      <p>אנחנו ב"צומחים מחדש" מאמינים בשקיפות מלאה, ולכן חשוב לנו לשתף אותך בכמה דברים לפני השימוש — מתוך אכפתיות ודאגה אמיתית לבריאותך.</p>
-      <p>9.1. המוצרים שלנו, ובכללם הסרומים, השמנים והשמפו, מכילים רכיבים פעילים טבעיים וצמחיים. כמו בכל מוצר טיפוח, ייתכן שחלק מהרכיבים עלולים לגרום לרגישות או לתגובה אלרגית אצל אנשים מסוימים.</p>
-      <p>9.2. אנו ממליצים בחום לפני שימוש ראשון לבצע <strong>בדיקת רגישות קטנה</strong>: מרחו כמות קטנה על אזור קטן בעור (למשל פנים האמה), והמתינו 24 שעות. אם הופיעה אדמומיות, גירוד או אי-נוחות — הפסיקו את השימוש.</p>
-      <p>9.3. מומלץ לקרוא את רשימת הרכיבים על גבי המוצר, ובמיוחד אם ידועה לך רגישות לרכיב כלשהו.</p>
-      <p>9.4. מתוך שקיפות מלאה — ייתכן שהמוצרים מכילים רכיבים העלולים להיות אלרגניים עבור חלק מהאנשים. השימוש במוצרים הוא באחריות המשתמש בלבד, ו"צומחים מחדש" אינה נושאת באחריות לכל תגובה אלרגית, רגישות, גירוי או תופעת לוואי כלשהי הנובעת מהשימוש במוצרים או ברכיביהם. אנו אומרים זאת מתוך אכפתיות — כדי שתכיר/י את הדברים מראש ותשתמש/י בביטחון. אם את/ה בהיריון, מניק/ה, סובל/ת ממצב עורי או רפואי, או נוטל/ת תרופות — אנא היוועצ/י עם רופא לפני השימוש.</p>
-      <p>9.5. מטרת ההצהרה הזו אינה להרתיע, אלא לאפשר לך להשתמש במוצרים בראש שקט ובבטחה. הבריאות שלך קודמת לכל.</p>
-    </div>
-
-    <p class="t-foot">תקנון זה נכתב כתבנית כללית. מומלץ להעביר אותו לעיון עורך/ת דין לפני פרסום סופי, כדי לוודא התאמה מדויקת לפעילות העסק ולדרישות החוק בישראל.</p>
+    <p class="t-foot">תקנון זה נכתב כתבנית כללית. מומלץ להעבירו לעיון עורך/ת דין לפני פרסום סופי, כדי לוודא התאמה מדויקת לפעילות העסק ולדרישות החוק בישראל.</p>
   </div>
 </div>
 
