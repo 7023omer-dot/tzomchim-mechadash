@@ -12,17 +12,11 @@
     "landing-page": {
       "type": "landing-page",
       "settings": {
+        "main_product": "מסרק-אינפרא-אדום-לצמיחת-שיער",
+        "addon_serum": "סירום-פפטיד-נחושת-לחידוש-השיער",
+        "addon_shampoo": "שמפו-מפעיל-שורשים-spartan",
         "hero_image": "shopify://shop_images/340c074556474d6593db5203f3e5f955.webp",
-        "video_file": "shopify://files/videos/סרטון תדמית מוצר 2.0.mov",
-        "video_asset": "",
-        "cta_text": "הוסף/י לעגלה",
-        "urgency_text": "⏳ מלאי מוגבל — המבצע בתוקף עד גמר המלאי",
-        "addon_serum": "",
-        "addon_shampoo": "",
-        "addon_brush": "",
-        "combo_serum": "",
-        "combo_brush": "",
-        "combo_comb": ""
+        "video_asset": ""
       }
     }
   },
