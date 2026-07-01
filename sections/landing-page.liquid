@@ -260,6 +260,13 @@
   .scm-page .scm-cform .cfoot{margin-top:8px;font-size:13px;color:var(--muted);text-align:center}
   .scm-page .scm-cform .cfoot a{color:var(--red);text-decoration:none;font-weight:700}
 
+  /* חלון תקנון קופץ (ללא תלות בעמוד /pages/terms) */
+  .scm-page .scm-terms-modal{position:fixed;inset:0;z-index:120;display:none;align-items:flex-start;justify-content:center;background:rgba(26,26,26,.55);padding:24px 14px;overflow-y:auto}
+  .scm-page .scm-terms-modal.open{display:flex}
+  .scm-page .scm-terms-modal .panel{position:relative;width:100%;max-width:880px;margin:auto;background:var(--canvas);border-radius:16px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.45)}
+  .scm-page .scm-terms-modal .tclose{position:absolute;top:12px;inset-inline-start:12px;z-index:6;width:40px;height:40px;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(209,31,45,.3)}
+  .scm-page .scm-terms-modal .tclose:hover{background:var(--red-dark)}
+
   /* חשיפה בגלילה (scroll-reveal) */
   .scm-page .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
   .scm-page .reveal.in{opacity:1;transform:none}
@@ -336,7 +343,7 @@
   <nav class="nav">
     <div class="wrap in">
       <div class="nav-links">
-        <a href="/pages/terms">תקנון</a>
+        <a href="#" data-open-terms>תקנון</a>
         <a href="#how">איך זה עובד</a>
         <a href="#" data-open-contact>דברו איתנו</a>
       </div>
@@ -433,7 +440,7 @@
         <div class="urg"><span class="gd"></span> המלאי במבצע ההשקה מוגבל — מתחדש בכל תחילת חודש</div>
       </div>
       <div class="terms-gate" data-terms-wrap>
-        <label class="tcheck"><input type="checkbox" data-terms> <span>קראתי ואני מאשר/ת את <a href="/pages/terms" target="_blank" rel="noopener">התקנון ומדיניות ההחזרות</a></span></label>
+        <label class="tcheck"><input type="checkbox" data-terms> <span>קראתי ואני מאשר/ת את <a href="#" data-open-terms>התקנון ומדיניות ההחזרות</a></span></label>
       </div>
       <div class="grid">
         <!-- כרטיס 1 -->
@@ -573,10 +580,18 @@
         <div class="badges"><span class="badge">פתרון ביתי</span><span class="badge">מבוסס מחקר</span></div>
       </div>
       <div><h4>קישורים</h4><ul><li><a href="#offer">הערכות</a></li><li><a href="#reviews">ביקורות</a></li><li><a href="#faq">שאלות נפוצות</a></li><li><a href="mailto:growagain18@gmail.com">דברו איתנו</a></li></ul></div>
-      <div><h4>מדיניות</h4><ul><li><a href="/pages/terms">תקנון</a></li><li><a href="/pages/terms">מדיניות החזרות</a></li><li><a href="/pages/terms">מדיניות פרטיות</a></li></ul></div>
+      <div><h4>מדיניות</h4><ul><li><a href="#" data-open-terms>תקנון</a></li><li><a href="#" data-open-terms>מדיניות החזרות</a></li><li><a href="#" data-open-terms>מדיניות פרטיות</a></li></ul></div>
     </div>
     <div class="copy">© 2026 צומחים מחדש · כל הזכויות שמורות. המידע באתר אינו מהווה ייעוץ רפואי.</div>
   </footer>
+
+  <!-- חלון תקנון קופץ -->
+  <div class="scm-terms-modal" data-terms-modal>
+    <div class="panel">
+      <button type="button" class="tclose" data-terms-close aria-label="סגירה">×</button>
+      {%- render 'regrow-terms-content' -%}
+    </div>
+  </div>
 
   <!-- אלמנט צף: התראת "נרכש עכשיו" -->
   <div class="scm-toast" data-toast hidden>
@@ -702,6 +717,19 @@
         setTimeout(function(){ toast.classList.remove('show'); setTimeout(function(){ toast.hidden=true; }, 400); }, 5200);
       }
       setTimeout(function(){ showToast(); setInterval(showToast, 11000); }, 3500);
+    }
+
+    // חלון תקנון קופץ
+    var termsModal = root.querySelector('[data-terms-modal]');
+    if(termsModal){
+      function openTerms(){ termsModal.classList.add('open'); document.body.style.overflow='hidden'; termsModal.scrollTop=0; }
+      function closeTerms(){ termsModal.classList.remove('open'); document.body.style.overflow=''; }
+      root.querySelectorAll('[data-open-terms]').forEach(function(el){
+        el.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openTerms(); });
+      });
+      termsModal.querySelectorAll('[data-terms-close]').forEach(function(el){ el.addEventListener('click', closeTerms); });
+      termsModal.addEventListener('click', function(e){ if(e.target===termsModal) closeTerms(); });
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape' && termsModal.classList.contains('open')) closeTerms(); });
     }
 
     // כפתור מייל צף + טופס
