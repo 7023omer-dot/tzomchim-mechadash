@@ -18,14 +18,25 @@
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte">
-    {{ page.content }}
+{%- comment -%}
+  עמוד תקנון: אם ה-handle הוא terms (או שהוקצתה תבנית terms) והגוף ריק —
+  מציגים אוטומטית את תוכן התקנון מהקוד, כדי שלא יופיע עמוד ריק.
+{%- endcomment -%}
+{%- assign is_terms = false -%}
+{%- if page.handle == 'terms' or page.template_suffix == 'terms' -%}{%- assign is_terms = true -%}{%- endif -%}
+
+{%- if is_terms and page.content == blank -%}
+  {%- render 'regrow-terms-content' -%}
+{%- else -%}
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <h1 class="main-page-title page-title h0">
+      {{ page.title | escape }}
+    </h1>
+    <div class="rte">
+      {{ page.content }}
+    </div>
   </div>
-</div>
+{%- endif -%}
 
 {% schema %}
 {
